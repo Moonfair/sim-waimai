@@ -73,30 +73,39 @@ export default function Cart() {
               清空
             </button>
           </div>
-          {items.map(({ menuItem, quantity }) => (
-            <div key={menuItem.id} className="flex items-center gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
-              <div className="text-3xl">{menuItem.emoji}</div>
-              <div className="flex-1">
-                <p className="text-gray-900 text-sm font-medium">{menuItem.name}</p>
-                <p className="text-orange-500 text-sm font-bold mt-0.5">¥{menuItem.price}</p>
+          {items.map(({ key, menuItem, quantity, selectedOptions }) => {
+            const linePrice = menuItem.price + (selectedOptions?.reduce((s, o) => s + o.priceDelta, 0) ?? 0);
+            const optionsSummary = selectedOptions
+              ?.map(o => o.priceDelta > 0 ? `${o.optionName}(+${o.priceDelta}元)` : o.optionName)
+              .join(' · ');
+            return (
+              <div key={key} className="flex items-center gap-3 px-4 py-3 border-b border-gray-50 last:border-0">
+                <div className="text-3xl">{menuItem.emoji}</div>
+                <div className="flex-1">
+                  <p className="text-gray-900 text-sm font-medium">{menuItem.name}</p>
+                  {optionsSummary && (
+                    <p className="text-gray-400 text-xs mt-0.5">{optionsSummary}</p>
+                  )}
+                  <p className="text-orange-500 text-sm font-bold mt-0.5">¥{linePrice}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    className="w-6 h-6 rounded-full border-2 border-orange-400 text-orange-500 flex items-center justify-center text-base font-bold"
+                    onClick={() => updateQuantity(key, quantity - 1)}
+                  >
+                    −
+                  </button>
+                  <span className="text-sm font-bold w-4 text-center">{quantity}</span>
+                  <button
+                    className="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-base font-bold"
+                    onClick={() => updateQuantity(key, quantity + 1)}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <button
-                  className="w-6 h-6 rounded-full border-2 border-orange-400 text-orange-500 flex items-center justify-center text-base font-bold"
-                  onClick={() => updateQuantity(menuItem.id, quantity - 1)}
-                >
-                  −
-                </button>
-                <span className="text-sm font-bold w-4 text-center">{quantity}</span>
-                <button
-                  className="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-base font-bold"
-                  onClick={() => updateQuantity(menuItem.id, quantity + 1)}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Notes */}

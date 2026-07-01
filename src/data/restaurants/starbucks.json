@@ -35,7 +35,115 @@
       "menuCategory": "热销",
       "popular": true,
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 拿铁: 白色杯装浅棕色拿铁，杯面有细腻拉花.",
-      "image": "restaurants/starbucks/items/sbk_nt.jpg"
+      "image": "restaurants/starbucks/items/sbk_nt.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "vanilla_syrup",
+              "name": "加香草糖浆",
+              "priceDelta": 3
+            },
+            {
+              "id": "oat_milk",
+              "name": "换燕麦奶",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_jtmqd",
@@ -47,7 +155,110 @@
       "menuCategory": "热销",
       "popular": true,
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 焦糖玛奇朵: 透明杯装分层拿铁，顶部焦糖酱汁交织纹理.",
-      "image": "restaurants/starbucks/items/sbk_jtmqd.jpg"
+      "image": "restaurants/starbucks/items/sbk_jtmqd.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "toffee_sauce",
+              "name": "加焦糖酱",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_syn",
@@ -59,7 +270,110 @@
       "menuCategory": "热销",
       "popular": true,
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 生椰拿铁: 白色杯装乳白色生椰拿铁，杯面奶泡细腻.",
-      "image": "restaurants/starbucks/items/sbk_syn.jpg"
+      "image": "restaurants/starbucks/items/sbk_syn.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "double_coconut",
+              "name": "双份生椰乳",
+              "priceDelta": 4
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_ms",
@@ -70,7 +384,110 @@
       "emoji": "☕",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 美式咖啡: 白色杯装纯黑色美式咖啡.",
-      "image": "restaurants/starbucks/items/sbk_ms.jpg"
+      "image": "restaurants/starbucks/items/sbk_ms.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "milk",
+              "name": "加牛奶",
+              "priceDelta": 2
+            },
+            {
+              "id": "vanilla_syrup",
+              "name": "加香草糖浆",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_kbqn",
@@ -81,7 +498,110 @@
       "emoji": "☕",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 卡布奇诺: 白色杯装浓缩咖啡，顶部绵密奶泡.",
-      "image": "restaurants/starbucks/items/sbk_kbqn.jpg"
+      "image": "restaurants/starbucks/items/sbk_kbqn.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "cinnamon",
+              "name": "加肉桂粉",
+              "priceDelta": 2
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_mk",
@@ -92,7 +612,110 @@
       "emoji": "🍫",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 摩卡: 透明杯装深棕色摩卡，表面巧克力纹路.",
-      "image": "restaurants/starbucks/items/sbk_mk.jpg"
+      "image": "restaurants/starbucks/items/sbk_mk.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "choco_sauce",
+              "name": "加巧克力酱",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_frb",
@@ -103,7 +726,105 @@
       "emoji": "☕",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 馥芮白: 小号白色杯装细腻奶咖，表面奶泡薄而绵密.",
-      "image": "restaurants/starbucks/items/sbk_frb.jpg"
+      "image": "restaurants/starbucks/items/sbk_frb.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "oat_milk",
+              "name": "换燕麦奶",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_ab",
@@ -114,7 +835,105 @@
       "emoji": "☕",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 澳白: 短笛杯装浓郁咖啡，奶泡细腻.",
-      "image": "restaurants/starbucks/items/sbk_ab.jpg"
+      "image": "restaurants/starbucks/items/sbk_ab.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "oat_milk",
+              "name": "换燕麦奶",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_lc",
@@ -125,7 +944,89 @@
       "emoji": "🧊",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 冷萃咖啡: 透明杯装深棕色冷萃咖啡，杯身有水珠.",
-      "image": "restaurants/starbucks/items/sbk_lc.jpg"
+      "image": "restaurants/starbucks/items/sbk_lc.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "cream_cold_foam",
+              "name": "加奶油冷萃",
+              "priceDelta": 4
+            },
+            {
+              "id": "vanilla_syrup",
+              "name": "加香草糖浆",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_mkxbl",
@@ -136,7 +1037,89 @@
       "emoji": "🥤",
       "menuCategory": "星冰乐",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 摩卡星冰乐: 透明杯装冰沙状摩卡星冰乐，顶部挤着奶油和巧克力碎.",
-      "image": "restaurants/starbucks/items/sbk_mkxbl.jpg"
+      "image": "restaurants/starbucks/items/sbk_mkxbl.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "choco_sauce",
+              "name": "加巧克力酱",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            },
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_mcxbl",
@@ -147,7 +1130,89 @@
       "emoji": "🍵",
       "menuCategory": "星冰乐",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 抹茶星冰乐: 透明杯装绿色冰沙状抹茶星冰乐，顶部挤着奶油.",
-      "image": "restaurants/starbucks/items/sbk_mcxbl.jpg"
+      "image": "restaurants/starbucks/items/sbk_mcxbl.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "matcha_powder",
+              "name": "加抹茶粉",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            },
+            {
+              "id": "condensed_milk",
+              "name": "加炼乳",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_cmxbl",
@@ -158,7 +1223,89 @@
       "emoji": "🍓",
       "menuCategory": "星冰乐",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 草莓星冰乐: 透明杯装粉红色冰沙状草莓星冰乐，可见草莓果肉碎.",
-      "image": "restaurants/starbucks/items/sbk_cmxbl.jpg"
+      "image": "restaurants/starbucks/items/sbk_cmxbl.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "strawberry_sauce",
+              "name": "加草莓酱",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            },
+            {
+              "id": "strawberry_chunks",
+              "name": "加草莓果肉",
+              "priceDelta": 4
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_jtxbl",
@@ -169,7 +1316,89 @@
       "emoji": "🥤",
       "menuCategory": "星冰乐",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 焦糖星冰乐: 透明杯装焦糖色冰沙，顶部挤着奶油和焦糖酱.",
-      "image": "restaurants/starbucks/items/sbk_jtxbl.jpg"
+      "image": "restaurants/starbucks/items/sbk_jtxbl.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "toffee_sauce",
+              "name": "加焦糖酱",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            },
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_ttwl",
@@ -180,7 +1409,110 @@
       "emoji": "🍑",
       "menuCategory": "茶饮",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 桃桃乌龙茶拿铁: 透明杯装分层茶饮，杯口漂浮桃肉丁.",
-      "image": "restaurants/starbucks/items/sbk_ttwl.jpg"
+      "image": "restaurants/starbucks/items/sbk_ttwl.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "honey",
+              "name": "加蜂蜜",
+              "priceDelta": 2
+            },
+            {
+              "id": "oat_milk",
+              "name": "换燕麦奶",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_mcnt",
@@ -191,7 +1523,110 @@
       "emoji": "🍵",
       "menuCategory": "茶饮",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 抹茶拿铁: 透明杯装抹茶与牛奶分层，绿白相间.",
-      "image": "restaurants/starbucks/items/sbk_mcnt.jpg"
+      "image": "restaurants/starbucks/items/sbk_mcnt.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "matcha_powder",
+              "name": "双份抹茶",
+              "priceDelta": 3
+            },
+            {
+              "id": "oat_milk",
+              "name": "换燕麦奶",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_hcnt",
@@ -202,7 +1637,110 @@
       "emoji": "🍵",
       "menuCategory": "茶饮",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 红茶拿铁: 透明杯装红茶与牛奶分层，琥珀色渐变.",
-      "image": "restaurants/starbucks/items/sbk_hcnt.jpg"
+      "image": "restaurants/starbucks/items/sbk_hcnt.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "honey",
+              "name": "加蜂蜜",
+              "priceDelta": 2
+            },
+            {
+              "id": "oat_milk",
+              "name": "换燕麦奶",
+              "priceDelta": 3
+            },
+            {
+              "id": "whipped_cream",
+              "name": "加奶油",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_nmhc",
@@ -213,7 +1751,105 @@
       "emoji": "🍋",
       "menuCategory": "茶饮",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 柠檬红茶: 透明杯装琥珀色红茶，漂浮柠檬片.",
-      "image": "restaurants/starbucks/items/sbk_nmhc.jpg"
+      "image": "restaurants/starbucks/items/sbk_nmhc.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "honey",
+              "name": "加蜂蜜",
+              "priceDelta": 2
+            },
+            {
+              "id": "lemon_slice",
+              "name": "加柠檬片",
+              "priceDelta": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_yxjr",
@@ -225,7 +1861,30 @@
       "menuCategory": "轻食",
       "popular": true,
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 烟熏鸡肉三明治: 三明治剖面，可见烟熏鸡胸片和生菜番茄夹层.",
-      "image": "restaurants/starbucks/items/sbk_yxjr.jpg"
+      "image": "restaurants/starbucks/items/sbk_yxjr.jpg",
+      "optionGroups": [
+        {
+          "id": "heat_preference",
+          "name": "是否加热",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "heated",
+              "name": "加热",
+              "priceDelta": 0
+            },
+            {
+              "id": "room_temp",
+              "name": "常温",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "heated"
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_nyjx",
@@ -236,7 +1895,30 @@
       "emoji": "🥗",
       "menuCategory": "轻食",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 牛油果鸡胸沙拉: 沙拉碗中牛油果片和鸡胸肉片摆放在生菜上.",
-      "image": "restaurants/starbucks/items/sbk_nyjx.jpg"
+      "image": "restaurants/starbucks/items/sbk_nyjx.jpg",
+      "optionGroups": [
+        {
+          "id": "heat_preference",
+          "name": "是否加热",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "heated",
+              "name": "加热",
+              "priceDelta": 0
+            },
+            {
+              "id": "room_temp",
+              "name": "常温",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "heated"
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_bgpn",
@@ -247,7 +1929,30 @@
       "emoji": "🥪",
       "menuCategory": "轻食",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 培根芝士帕尼尼: 帕尼尼剖开，芝士拉丝，可见培根片.",
-      "image": "restaurants/starbucks/items/sbk_bgpn.jpg"
+      "image": "restaurants/starbucks/items/sbk_bgpn.jpg",
+      "optionGroups": [
+        {
+          "id": "heat_preference",
+          "name": "是否加热",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "heated",
+              "name": "加热",
+              "priceDelta": 0
+            },
+            {
+              "id": "room_temp",
+              "name": "常温",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "heated"
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_jqy",
@@ -258,7 +1963,30 @@
       "emoji": "🥪",
       "menuCategory": "轻食",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 金枪鱼三明治: 三明治剖面，可见金枪鱼沙拉夹层.",
-      "image": "restaurants/starbucks/items/sbk_jqy.jpg"
+      "image": "restaurants/starbucks/items/sbk_jqy.jpg",
+      "optionGroups": [
+        {
+          "id": "heat_preference",
+          "name": "是否加热",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "heated",
+              "name": "加热",
+              "priceDelta": 0
+            },
+            {
+              "id": "room_temp",
+              "name": "常温",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "heated"
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_hthk",
@@ -269,7 +1997,30 @@
       "emoji": "🥐",
       "menuCategory": "轻食",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 火腿芝士可颂: 可颂剖开，露出火腿片和芝士.",
-      "image": "restaurants/starbucks/items/sbk_hthk.jpg"
+      "image": "restaurants/starbucks/items/sbk_hthk.jpg",
+      "optionGroups": [
+        {
+          "id": "heat_preference",
+          "name": "是否加热",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "heated",
+              "name": "加热",
+              "priceDelta": 0
+            },
+            {
+              "id": "room_temp",
+              "name": "常温",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "heated"
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_bskzs",
@@ -347,7 +2098,110 @@
       "emoji": "☕",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 燕麦奶拿铁: 白色杯装浅褐色燕麦奶拿铁.",
-      "image": "restaurants/starbucks/items/sbk_ynnt.jpg"
+      "image": "restaurants/starbucks/items/sbk_ynnt.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "vanilla_syrup",
+              "name": "加香草糖浆",
+              "priceDelta": 3
+            },
+            {
+              "id": "cinnamon",
+              "name": "加肉桂粉",
+              "priceDelta": 2
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_yzsms",
@@ -358,7 +2212,105 @@
       "emoji": "🥥",
       "menuCategory": "咖啡",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 椰子水美式: 透明杯装淡褐色美式咖啡与椰子水分层.",
-      "image": "restaurants/starbucks/items/sbk_yzsms.jpg"
+      "image": "restaurants/starbucks/items/sbk_yzsms.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "extra_shot",
+              "name": "加浓缩",
+              "priceDelta": 4
+            },
+            {
+              "id": "coconut_meat",
+              "name": "加椰肉",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "sbk_bynmc",
@@ -369,7 +2321,105 @@
       "emoji": "🍋",
       "menuCategory": "茶饮",
       "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 冰摇柠檬茶: 透明杯装摇制柠檬茶，杯中漂浮柠檬片和冰块.",
-      "image": "restaurants/starbucks/items/sbk_bynmc.jpg"
+      "image": "restaurants/starbucks/items/sbk_bynmc.jpg",
+      "optionGroups": [
+        {
+          "id": "size",
+          "name": "杯型",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "medium",
+              "name": "中杯",
+              "priceDelta": 0
+            },
+            {
+              "id": "large",
+              "name": "大杯",
+              "priceDelta": 3
+            },
+            {
+              "id": "xlarge",
+              "name": "超大杯",
+              "priceDelta": 6
+            }
+          ],
+          "defaultOptionIds": [
+            "medium"
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "温度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "hot",
+              "name": "热",
+              "priceDelta": 0
+            },
+            {
+              "id": "iced",
+              "name": "冰",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "hot"
+          ]
+        },
+        {
+          "id": "sweetness",
+          "name": "糖度",
+          "selectionType": "single",
+          "required": true,
+          "options": [
+            {
+              "id": "full_sugar",
+              "name": "标准糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "less_sugar",
+              "name": "少糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "half_sugar",
+              "name": "半糖",
+              "priceDelta": 0
+            },
+            {
+              "id": "no_sugar",
+              "name": "无糖",
+              "priceDelta": 0
+            }
+          ],
+          "defaultOptionIds": [
+            "full_sugar"
+          ]
+        },
+        {
+          "id": "addons",
+          "name": "加料",
+          "selectionType": "multi",
+          "required": false,
+          "options": [
+            {
+              "id": "honey",
+              "name": "加蜂蜜",
+              "priceDelta": 2
+            },
+            {
+              "id": "passionfruit",
+              "name": "加百香果",
+              "priceDelta": 3
+            }
+          ]
+        }
+      ]
     }
   ],
   "seriesStyle": "精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。",

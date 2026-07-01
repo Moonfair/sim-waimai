@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useCart } from '../context/CartContext';
 import { assetUrl } from '../lib/assetUrl';
+import MenuItemOptionsSheet from './MenuItemOptionsSheet';
 
 interface Props {
   item: MenuItemType;
@@ -9,8 +11,17 @@ interface Props {
 
 export default function MenuItem({ item, restaurant }: Props) {
   const { items, addItem, updateQuantity } = useCart();
-  const cartItem = items.find(i => i.menuItem.id === item.id);
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const hasOptions = !!item.optionGroups?.length;
+  const hasPriceImpact = item.optionGroups?.some(g => g.options.some(o => o.priceDelta > 0)) ?? false;
+
+  const cartItem = !hasOptions ? items.find(i => i.key === item.id) : undefined;
   const quantity = cartItem?.quantity ?? 0;
+
+  const customizedTotalQty = hasOptions
+    ? items.filter(i => i.menuItem.id === item.id).reduce((sum, i) => sum + i.quantity, 0)
+    : 0;
 
   return (
     <div className="flex gap-3 py-3 border-b border-gray-50 last:border-0">
@@ -40,7 +51,9 @@ export default function MenuItem({ item, restaurant }: Props) {
             </div>
             <p className="text-xs text-gray-400 mt-0.5 line-clamp-2 leading-relaxed">{item.description}</p>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-orange-500 font-bold">¥{item.price}</span>
+              <span className="text-orange-500 font-bold">
+                ¥{item.price}{hasOptions && hasPriceImpact ? '起' : ''}
+              </span>
               <span className="text-xs text-gray-300">|</span>
               <span className="text-xs text-gray-400">{item.calories} 千卡</span>
             </div>
@@ -48,7 +61,21 @@ export default function MenuItem({ item, restaurant }: Props) {
         </div>
 
         <div className="flex items-center justify-end mt-1">
-          {quantity > 0 ? (
+          {hasOptions ? (
+            <div className="relative">
+              <button
+                className="px-2.5 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs font-bold leading-none shadow-sm whitespace-nowrap"
+                onClick={() => setSheetOpen(true)}
+              >
+                改规格
+              </button>
+              {customizedTotalQty > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] flex items-center justify-center font-bold">
+                  {customizedTotalQty}
+                </span>
+              )}
+            </div>
+          ) : quantity > 0 ? (
             <div className="flex items-center gap-2">
               <button
                 className="w-6 h-6 rounded-full border-2 border-orange-400 text-orange-500 flex items-center justify-center text-base font-bold leading-none"
@@ -74,6 +101,17 @@ export default function MenuItem({ item, restaurant }: Props) {
           )}
         </div>
       </div>
+
+      {sheetOpen && (
+        <MenuItemOptionsSheet
+          item={item}
+          onClose={() => setSheetOpen(false)}
+          onConfirm={(selectedOptions) => {
+            addItem(item, restaurant, selectedOptions);
+            setSheetOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 }
