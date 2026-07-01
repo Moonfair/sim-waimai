@@ -35,7 +35,9 @@
       "calories": 680,
       "emoji": "🍱",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 黄焖鸡米饭: 深棕色酱汁裹着带皮鸡块，配青红椒圈，盛在白色米饭上.",
+      "image": "restaurants/laoxiangji/items/hfj.jpg"
     },
     {
       "id": "tdj",
@@ -45,7 +47,9 @@
       "calories": 720,
       "emoji": "🍱",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 土豆烩鸡腿饭: 软糯黄色土豆块与香嫩鸡腿肉同炖，酱汁浓稠光亮，盛在米饭上.",
+      "image": "restaurants/laoxiangji/items/tdj.jpg"
     },
     {
       "id": "jrj",
@@ -54,7 +58,9 @@
       "price": 16,
       "calories": 590,
       "emoji": "🍳",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 鸡肉炒饭: 金黄蛋炒饭颗粒分明，混着嫩滑鸡肉粒和葱花，微微油亮.",
+      "image": "restaurants/laoxiangji/items/jrj.jpg"
     },
     {
       "id": "tc1",
@@ -63,7 +69,9 @@
       "price": 34,
       "calories": 1360,
       "emoji": "🎁",
-      "menuCategory": "套餐"
+      "menuCategory": "套餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 双人套餐A: 餐盘里两份黄焖鸡米饭和两碗紫菜蛋花汤并排摆放，套餐组合俯拍.",
+      "image": "restaurants/laoxiangji/items/tc1.jpg"
     },
     {
       "id": "tc2",
@@ -72,7 +80,9 @@
       "price": 24,
       "calories": 820,
       "emoji": "🎁",
-      "menuCategory": "套餐"
+      "menuCategory": "套餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 单人套餐: 一份土豆烩鸡腿饭配一碗紫菜蛋花汤，单人餐盘组合俯拍.",
+      "image": "restaurants/laoxiangji/items/tc2.jpg"
     },
     {
       "id": "tang1",
@@ -81,7 +91,9 @@
       "price": 4,
       "calories": 60,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 紫菜蛋花汤: 清澈汤底里飘着黑色紫菜片和嫩黄蛋花，盛在白色汤碗里.",
+      "image": "restaurants/laoxiangji/items/tang1.jpg"
     },
     {
       "id": "tang2",
@@ -90,7 +102,9 @@
       "price": 5,
       "calories": 80,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 番茄蛋花汤: 橙红色番茄汤底，嫩黄蛋花漂浮，几块番茄块，盛在白色汤碗里.",
+      "image": "restaurants/laoxiangji/items/tang2.jpg"
     },
     {
       "id": "lxj_fqjd",
@@ -99,7 +113,9 @@
       "price": 15,
       "calories": 520,
       "emoji": "🍳",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 番茄鸡蛋饭: 红亮番茄块与嫩黄炒蛋交融，浇在白米饭上，家常色泽.",
+      "image": "restaurants/laoxiangji/items/lxj_fqjd.jpg"
     },
     {
       "id": "lxj_xghj",
@@ -108,7 +124,9 @@
       "price": 19,
       "calories": 580,
       "emoji": "🍄",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 香菇滑鸡饭: 嫩滑鸡肉片与褐色香菇同炒，薄芡微亮，浇在米饭上.",
+      "image": "restaurants/laoxiangji/items/lxj_xghj.jpg"
     },
     {
       "id": "lxj_gljf",
@@ -117,7 +135,9 @@
       "price": 18,
       "calories": 600,
       "emoji": "🍛",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 咖喱鸡饭: 浓稠黄褐色咖喱汁包裹嫩鸡块和胡萝卜土豆丁，浇在米饭上.",
+      "image": "restaurants/laoxiangji/items/lxj_gljf.jpg"
     },
     {
       "id": "lxj_mckr",
@@ -126,7 +146,9 @@
       "price": 20,
       "calories": 650,
       "emoji": "🍖",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 梅菜扣肉饭: 深色梅菜垫底，几片肥瘦相间的扣肉整齐码放，油亮酱色，盖在米饭上.",
+      "image": "restaurants/laoxiangji/items/lxj_mckr.jpg"
     },
     {
       "id": "lxj_njcxr",
@@ -135,7 +157,9 @@
       "price": 19,
       "calories": 610,
       "emoji": "🌶️",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 农家小炒肉饭: 青红椒丝与五花肉片猛火爆炒，微焦边缘，油亮酱色，盖在米饭上.",
+      "image": "restaurants/laoxiangji/items/lxj_njcxr.jpg"
     },
     {
       "id": "lxj_srtc",
@@ -144,7 +168,9 @@
       "price": 52,
       "calories": 2000,
       "emoji": "🎁",
-      "menuCategory": "套餐"
+      "menuCategory": "套餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 三人套餐: 三份主食配汤品排开的大份餐盘俯拍，分量丰盛，多人分享感.",
+      "image": "restaurants/laoxiangji/items/lxj_srtc.jpg"
     },
     {
       "id": "lxj_qltc",
@@ -153,7 +179,9 @@
       "price": 38,
       "calories": 1500,
       "emoji": "🎁",
-      "menuCategory": "套餐"
+      "menuCategory": "套餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 情侣套餐: 两份主食和汤品对称摆放，温馨双人分享感.",
+      "image": "restaurants/laoxiangji/items/lxj_qltc.jpg"
     },
     {
       "id": "lxj_xstc",
@@ -162,7 +190,9 @@
       "price": 16,
       "calories": 600,
       "emoji": "🎁",
-      "menuCategory": "套餐"
+      "menuCategory": "套餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 学生套餐: 一份简单经济的家常饭菜配汤，分量适中的学生餐盘.",
+      "image": "restaurants/laoxiangji/items/lxj_xstc.jpg"
     },
     {
       "id": "lxj_dgpg",
@@ -171,7 +201,9 @@
       "price": 6,
       "calories": 150,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 冬瓜排骨汤: 半透明冬瓜块与排骨块在清汤中，汤色清亮微白.",
+      "image": "restaurants/laoxiangji/items/lxj_dgpg.jpg"
     },
     {
       "id": "lxj_lyt",
@@ -180,7 +212,9 @@
       "price": 8,
       "calories": 220,
       "emoji": "🦆",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 老鸭汤: 深褐色鸭肉块炖煮在浓白汤汁里，几片姜片点缀.",
+      "image": "restaurants/laoxiangji/items/lxj_lyt.jpg"
     },
     {
       "id": "lxj_ymbg",
@@ -189,7 +223,9 @@
       "price": 7,
       "calories": 180,
       "emoji": "🌽",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 玉米棒骨汤: 黄色玉米段与大棒骨在浓白汤汁中炖煮.",
+      "image": "restaurants/laoxiangji/items/lxj_ymbg.jpg"
     },
     {
       "id": "lxj_jzbm",
@@ -198,7 +234,9 @@
       "price": 14,
       "calories": 480,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 鸡汁拌面: 劲道面条裹着淡黄色鸡汁酱料，撒葱花，盛在浅盘里.",
+      "image": "restaurants/laoxiangji/items/lxj_jzbm.jpg"
     },
     {
       "id": "lxj_sgm",
@@ -207,7 +245,9 @@
       "price": 12,
       "calories": 420,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 手擀面: 粗手擀面条配炒菜码，家常朴素装盘.",
+      "image": "restaurants/laoxiangji/items/lxj_sgm.jpg"
     },
     {
       "id": "lxj_ljz",
@@ -216,7 +256,9 @@
       "price": 8,
       "calories": 180,
       "emoji": "🍗",
-      "menuCategory": "卤味"
+      "menuCategory": "卤味",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 卤鸡爪: 深酱色卤鸡爪表皮油亮，摆盘紧凑.",
+      "image": "restaurants/laoxiangji/items/lxj_ljz.jpg"
     },
     {
       "id": "lxj_ljd",
@@ -225,7 +267,9 @@
       "price": 3,
       "calories": 90,
       "emoji": "🥚",
-      "menuCategory": "卤味"
+      "menuCategory": "卤味",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 卤鸡蛋: 对半切开的卤蛋，蛋黄橙黄流沙质感，外皮深酱色.",
+      "image": "restaurants/laoxiangji/items/lxj_ljd.jpg"
     },
     {
       "id": "lxj_ldg",
@@ -234,7 +278,9 @@
       "price": 6,
       "calories": 140,
       "emoji": "🧊",
-      "menuCategory": "卤味"
+      "menuCategory": "卤味",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 卤豆干: 深褐色卤豆干切块，表皮入味，摆盘整齐.",
+      "image": "restaurants/laoxiangji/items/lxj_ldg.jpg"
     },
     {
       "id": "lxj_ssbc",
@@ -243,7 +289,9 @@
       "price": 8,
       "calories": 100,
       "emoji": "🥬",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 手撕包菜: 翠绿手撕包菜叶片，清炒微油亮，点缀干辣椒.",
+      "image": "restaurants/laoxiangji/items/lxj_ssbc.jpg"
     },
     {
       "id": "lxj_srym",
@@ -252,7 +300,9 @@
       "price": 9,
       "calories": 90,
       "emoji": "🥬",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 蒜蓉油麦菜: 翠绿油麦菜叶配蒜蓉碎点缀，清炒油亮.",
+      "image": "restaurants/laoxiangji/items/lxj_srym.jpg"
     },
     {
       "id": "lxj_mld",
@@ -261,7 +311,9 @@
       "price": 8,
       "calories": 120,
       "emoji": "🌶️",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 麻辣藕丁: 白色藕丁切块，裹着红油辣椒和花椒粒.",
+      "image": "restaurants/laoxiangji/items/lxj_mld.jpg"
     },
     {
       "id": "lxj_lbhg",
@@ -270,7 +322,9 @@
       "price": 6,
       "calories": 60,
       "emoji": "🥒",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 凉拌黄瓜: 翠绿黄瓜块拍碎凉拌，点缀蒜末红椒圈，微微油亮.",
+      "image": "restaurants/laoxiangji/items/lxj_lbhg.jpg"
     },
     {
       "id": "lxj_nmfm",
@@ -279,7 +333,9 @@
       "price": 8,
       "calories": 90,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 柠檬蜂蜜水: 透明玻璃杯中黄色柠檬片和蜂蜜水，杯壁凝结水珠.",
+      "image": "restaurants/laoxiangji/items/lxj_nmfm.jpg"
     },
     {
       "id": "lxj_smt",
@@ -288,7 +344,9 @@
       "price": 6,
       "calories": 80,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 酸梅汤: 深红棕色酸梅汤盛在透明玻璃杯里，杯口有冰块.",
+      "image": "restaurants/laoxiangji/items/lxj_smt.jpg"
     },
     {
       "id": "lxj_jhc",
@@ -297,7 +355,9 @@
       "price": 5,
       "calories": 20,
       "emoji": "🍵",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 菊花茶: 透明玻璃杯中淡黄色茶汤，几朵完整菊花浮在水面.",
+      "image": "restaurants/laoxiangji/items/lxj_jhc.jpg"
     },
     {
       "id": "lxj_njyx",
@@ -307,7 +367,9 @@
       "calories": 700,
       "emoji": "🍚",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 农家一碗香: 多种家常浇头（肉丝、豆角、土豆等）铺满米饭，色彩丰富.",
+      "image": "restaurants/laoxiangji/items/lxj_njyx.jpg"
     },
     {
       "id": "lxj_lmjtm",
@@ -317,7 +379,12 @@
       "calories": 650,
       "emoji": "🍜",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 老母鸡汤面: 浓白鸡汤中卧着劲道面条，几片鸡肉丝点缀，撒葱花.",
+      "image": "restaurants/laoxiangji/items/lxj_lmjtm.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 中式家常快餐视觉风格：暖黄褐色调为主，光线温暖柔和，白色瓷质餐具，浅木纹桌面或米白色背景，整体传递家常温暖、朴实但精致的餐厅氛围。 画面主体是老乡鸡的招牌黄焖鸡：深棕色砂锅里带皮鸡块裹着浓稠酱汁咕嘟冒着热气，锅边点缀几片青红椒圈，背景是温暖的厨房/餐厅氛围，暖黄色调灯光，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/laoxiangji/banner.jpg"
 }

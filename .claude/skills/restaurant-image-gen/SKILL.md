@@ -47,21 +47,18 @@ description: |
 
 ### 步骤 4 — 调用工具生成图片
 
-对 banner：
+**批量场景（一个商家的 banner + 全部商品）优先用 `tools/backfill-images.mjs`**，它会自动跳过已有图片的条目、每成功一张就回写 JSON、单张失败会记录后继续、遇到致命错误才整体停止——不需要你手动逐张调用、逐张回填：
+```
+node tools/backfill-images.mjs <id>
+```
+试点/小范围验证时可以先限制数量：`node tools/backfill-images.mjs <id> --limit 5`；只想补 banner 或只想补商品图分别用 `--banner-only` / `--items-only`。跑完看它打印的 Summary（成功/跳过/失败张数，失败的会列出商品名和原因）。
+
+需要单独生成/调试某一张图（比如某张失败了想改改 prompt 重试）时，才用 `tools/generate-image.mjs` 手动跑一张：
 ```
 node tools/generate-image.mjs --kind banner --prompt "<bannerImagePrompt>" --out public/restaurants/<id>/banner.jpg
-```
-对每个商品：
-```
 node tools/generate-image.mjs --kind item --prompt "<该商品 imagePrompt>" --out public/restaurants/<id>/items/<itemId>.jpg
 ```
-
-处理规则：
-- 退出码 `0`：成功，把脚本打印出的相对路径（`public/` 之后的部分，**不带开头斜杠**，如 `restaurants/<id>/banner.jpg`）写回 JSON 对应的 `bannerImage`/`image` 字段。
-- 退出码 `2`：这一张审核不过/生成失败，记录下来（哪个商品失败、失败原因），跳过继续下一张，不要中断整批。
-- 退出码 `1` 或 `3`：致命错误（鉴权/模型配置/网络问题），停下来，把错误信息完整反馈给用户，不要继续重复调用（大概率后面每张都会失败）。
-
-商品数量多（30+ 张 + 1 张 banner），生成过程较长，逐个执行、逐个回填 JSON，不要攒到最后一次性写文件（防止中途失败丢进度）。
+退出码 `0` 成功（把打印出的路径，`public/` 之后的部分、**不带开头斜杠**，手动写回 JSON 的 `bannerImage`/`image` 字段）；`2` 是这一张审核不过/生成失败，可以调整 prompt 后重试；`1`/`3` 是致命错误（鉴权/模型配置/网络问题），需要先排查。
 
 ### 步骤 5 — 收尾校验
 
@@ -70,11 +67,9 @@ node tools/generate-image.mjs --kind item --prompt "<该商品 imagePrompt>" --o
 ## 模式二：补图
 
 1. 读取 `src/data/restaurants/<id>.json`。
-2. 如果 `seriesStyle`/`bannerImagePrompt` 还没有，按步骤 3 的方法先补上（说明这个商家是在本 skill 上线前创建的老数据，或者是新增数据但还没生成过图）。
-3. `bannerImage` 已存在 → 跳过 banner；否则按步骤 4 生成。
-4. 遍历 `menu`，`image` 已存在的商品跳过；没有 `image` 的，先看有没有 `imagePrompt`（没有就先按步骤 3 生成一条），再调用工具生成图片、回填。
-5. 每次成功回填后就落盘保存该 JSON 文件，这样补图过程可以随时中断、下次从断点继续（已有 `image` 的天然会被跳过）。
-6. 完成后同样跑 `npm run build` 收尾校验。
+2. 如果 `seriesStyle`/`bannerImagePrompt`/商品的 `imagePrompt` 还没有，按步骤 3 的方法先补上（说明这个商家是在本 skill 上线前创建的老数据，或者是新增数据但还没生成过图）——这一步必须由你（Claude）逐条撰写，不能靠脚本生成。
+3. prompt 都齐了之后，跑 `node tools/backfill-images.mjs <id>`：它会自动跳过 `bannerImage`/`image` 已存在的条目，只为缺图的部分调用接口、边生成边回填 JSON。中途中断也没关系，已生成的不会重复生成，下次直接重跑同一条命令即可从断点继续。
+4. 完成后同样跑 `npm run build` 收尾校验。
 
 ## 参考文档
 
@@ -88,4 +83,6 @@ node tools/generate-image.mjs --kind item --prompt "<该商品 imagePrompt>" --o
 
 | 脚本 | 用途 | 调用方式 |
 |---|---|---|
-| `tools/generate-image.mjs` | 调用火山引擎 Ark 文生图接口，写出一张图片 | `node tools/generate-image.mjs --kind banner\|item --prompt "..." --out public/restaurants/<id>/...` （加 `--dry-run` 可不联网预览请求体） |
+| `tools/backfill-images.mjs` | 批量生成一个商家缺失的 banner + 商品图，自动跳过已有的、边生成边回填 JSON，可中断续跑 | `node tools/backfill-images.mjs <id> [--limit N] [--banner-only] [--items-only]` |
+| `tools/generate-image.mjs` | 生成单张图片，用于手动调试/重试单张 | `node tools/generate-image.mjs --kind banner\|item --prompt "..." --out public/restaurants/<id>/...` （加 `--dry-run` 可不联网预览请求体） |
+| `tools/ark-client.mjs` | 上面两个脚本共用的请求核心逻辑（.env 读取、调用接口、错误分类），不直接运行 | — |

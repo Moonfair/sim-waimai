@@ -5,10 +5,13 @@
 ## 固定全局规范（每个商品 prompt 都必须包含，逐字或等价改写）
 
 ```
-Top-down or 45-degree angle product photography of a single dish, square 1:1 crop, plain
+Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain
 neutral light-colored background (consistent across the whole app's item photo set), soft
 even studio lighting, consistent color grading and exposure, no text/watermark/logo, no
-hands/utensils holding food, dish centered and fully visible, appetizing and true-to-life.
+hands/utensils holding food, item centered and fully visible, appetizing and true-to-life.
+Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) —
+absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this
+item is a beverage, the entire frame must contain nothing but that single cup/glass.
 ```
 
 这是"统一规范"，保证不同商家、不同商品的缩略图在同一个列表里滚动时观感一致（角度、留白、打光都统一），不会有的图特写有的图俯拍、有的图背景干净有的图背景杂乱。
@@ -16,6 +19,8 @@ hands/utensils holding food, dish centered and fully visible, appetizing and tru
 ## 商家系列风格（`seriesStyle`，与该商家 banner 共用同一段文字）
 
 从对应商家 JSON 的 `seriesStyle` 字段原样取用，保证同一商家的所有商品图有统一的餐具/摆盘/配色倾向（比如同一家火锅店的每张菜品图都用同款铜锅或红油勺子做视觉锚点）。
+
+**踩过的坑**：`seriesStyle` 里**不要点名任何具体食材/配料/garnish**（比如"米饭颗粒分明"、"红椒绿椒葱花点缀"），哪怕本意只是形容质感，模型也会把它当成"每张图都要出现"的元素——连饮品这种图里都会为了塞入这个配料而凭空多画一碗菜出来当"载体"。`seriesStyle` 只准写纯粹抽象的色调/光线/餐具材质/桌面背景，具体食材、配料只出现在每个商品自己的真实特征描述里。饮品类商品尤其容易触发这个问题，全局模板已经加了"如果是饮品，画面里只能有这一杯"的强约束，但 `seriesStyle` 干净与否才是关键。
 
 ## 商品真实特征（req 3c：基于真实特征，不能泛泛而谈）
 

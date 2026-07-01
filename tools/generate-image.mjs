@@ -5,6 +5,9 @@
 // Usage:
 //   node tools/generate-image.mjs --kind banner|item --prompt "<text>" --out <path> [--model <id>] [--size WxH] [--dry-run]
 //
+// For generating a whole restaurant's images in one go, use tools/backfill-images.mjs
+// instead — this script is for single-image manual/debug use.
+//
 // Env (read from process.env, auto-loaded from a .env file in the repo root if present):
 //   ARK_API_KEY       required — Volcengine Ark console API key
 //   ARK_IMAGE_MODEL   required — the Seedream model/endpoint id enabled on the account
@@ -15,36 +18,7 @@
 //   2  this single image failed (e.g. content policy) — safe to skip and continue the batch
 //   3  network/timeout error — retryable
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const ARK_ENDPOINT = 'https://ark.cn-beijing.volces.com/api/v3/images/generations';
-
-const SIZE_PRESETS = {
-  banner: '1600x640', // ~2.5:1, matches the app's restaurant banner aspect (h-36 card / h-48 detail page)
-  item: '1024x1024',  // 1:1 square menu-item thumbnail
-};
-
-const repoRoot = path.resolve(fileURLToPath(import.meta.url), '..', '..');
-
-function loadEnvFile() {
-  const envPath = path.join(repoRoot, '.env');
-  if (!fs.existsSync(envPath)) return;
-  const content = fs.readFileSync(envPath, 'utf8');
-  for (const rawLine of content.split('\n')) {
-    const line = rawLine.trim();
-    if (!line || line.startsWith('#')) continue;
-    const eq = line.indexOf('=');
-    if (eq === -1) continue;
-    const key = line.slice(0, eq).trim();
-    let value = line.slice(eq + 1).trim();
-    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-      value = value.slice(1, -1);
-    }
-    if (!(key in process.env)) process.env[key] = value;
-  }
-}
+import { ARK_ENDPOINT, SIZE_PRESETS, loadEnvFile, generateImage } from './ark-client.mjs';
 
 function parseArgs(argv) {
   const args = { dryRun: false };
@@ -85,15 +59,8 @@ async function main() {
   const model = args.model ?? process.env.ARK_IMAGE_MODEL;
   const apiKey = process.env.ARK_API_KEY;
 
-  const body = {
-    model,
-    prompt: args.prompt,
-    size,
-    response_format: 'b64_json',
-    watermark: false,
-  };
-
   if (args.dryRun) {
+    const body = { model, prompt: args.prompt, size, response_format: 'b64_json', watermark: false };
     console.log(JSON.stringify({ endpoint: ARK_ENDPOINT, out: args.out, body }, null, 2));
     process.exit(0);
   }
@@ -101,57 +68,20 @@ async function main() {
   if (!apiKey) fail('Missing ARK_API_KEY (set it in .env or the environment — see .env.example)');
   if (!model) fail('Missing ARK_IMAGE_MODEL (set it in .env or the environment, or pass --model)');
 
-  let response;
-  try {
-    response = await fetch(ARK_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(body),
-    });
-  } catch (err) {
-    fail(`Network error calling Volcengine Ark: ${err.message}`, 3);
-    return;
-  }
+  const result = await generateImage({ prompt: args.prompt, size, model, apiKey, outPath: args.out });
 
-  let json;
-  try {
-    json = await response.json();
-  } catch (err) {
-    fail(`Failed to parse Volcengine Ark response as JSON: ${err.message}`, 3);
-    return;
-  }
-
-  if (!response.ok || json.error) {
-    fail(`Volcengine Ark request failed: ${json.error?.code ?? response.status} ${json.error?.message ?? response.statusText}`, 1);
-    return;
-  }
-
-  const entry = json.data?.[0];
-  if (!entry) {
-    fail('Volcengine Ark response contained no image data', 1);
-    return;
-  }
-
-  if (entry.error) {
-    console.error(`Image generation failed for this prompt: ${entry.error.code} ${entry.error.message}`);
+  if (result.status === 'ok') {
+    console.log(`Wrote ${result.outPath} (${result.size})`);
+    process.exit(0);
+  } else if (result.status === 'item-failed') {
+    console.error(`Image generation failed for this prompt: ${result.message}`);
     console.error(`Prompt was: ${args.prompt}`);
     process.exit(2);
+  } else if (result.status === 'network-error') {
+    fail(result.message, 3);
+  } else {
+    fail(result.message, 1);
   }
-
-  if (!entry.b64_json) {
-    fail('Volcengine Ark response did not include b64_json data (check response_format)', 1);
-    return;
-  }
-
-  const buffer = Buffer.from(entry.b64_json, 'base64');
-  const outPath = path.resolve(args.out);
-  fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, buffer);
-
-  console.log(`Wrote ${outPath} (${entry.size ?? size})`);
 }
 
 main();
