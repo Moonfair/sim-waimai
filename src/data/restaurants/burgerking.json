@@ -33,7 +33,9 @@
       "calories": 620,
       "emoji": "🍔",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 皇堡: 厚实火烤牛肉饼夹在芝麻面包里，生菜番茄洋葱层层叠加，剖切露出多汁断面.",
+      "image": "restaurants/burgerking/items/hb.jpg"
     },
     {
       "id": "jrb",
@@ -42,7 +44,9 @@
       "price": 28,
       "calories": 480,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 鸡肉皇堡: 香煎鸡肉饼夹在面包里，外皮微焦，配生菜.",
+      "image": "restaurants/burgerking/items/jrb.jpg"
     },
     {
       "id": "ycc",
@@ -52,7 +56,9 @@
       "calories": 420,
       "emoji": "🧅",
       "menuCategory": "小食",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 洋葱圈（大）: 金黄酥脆洋葱圈堆叠，表皮起伏纹理清晰.",
+      "image": "restaurants/burgerking/items/ycc.jpg"
     },
     {
       "id": "bk_ts",
@@ -61,7 +67,9 @@
       "price": 56,
       "calories": 1200,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 双层皇堡套餐: 双层牛肉汉堡配一份薯条和大杯饮料，套餐组合摆盘.",
+      "image": "restaurants/burgerking/items/bk_ts.jpg"
     },
     {
       "id": "bk_jc",
@@ -70,7 +78,9 @@
       "price": 26,
       "calories": 510,
       "emoji": "🌶️",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 辣鸡排堡: 香辣酱汁鸡排夹在汉堡里，切面露出多汁鸡肉.",
+      "image": "restaurants/burgerking/items/bk_jc.jpg"
     },
     {
       "id": "bk_wdws",
@@ -79,7 +89,9 @@
       "price": 34,
       "calories": 650,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 无敌乌苏黑堡: 黑色面包夹双层牛肉饼，色泽浓郁霸气.",
+      "image": "restaurants/burgerking/items/bk_wdws.jpg"
     },
     {
       "id": "bk_zsnrb",
@@ -88,7 +100,9 @@
       "price": 29,
       "calories": 540,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 芝士牛肉堡: 拉丝芝士包裹多汁牛肉饼，夹在汉堡包里.",
+      "image": "restaurants/burgerking/items/bk_zsnrb.jpg"
     },
     {
       "id": "bk_bsjtb",
@@ -97,7 +111,9 @@
       "price": 26,
       "calories": 480,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 板烧鸡腿堡: 照烧酱色鸡腿排夹在汉堡里，酱汁油亮.",
+      "image": "restaurants/burgerking/items/bk_bsjtb.jpg"
     },
     {
       "id": "bk_ssscb",
@@ -106,7 +122,9 @@
       "price": 24,
       "calories": 420,
       "emoji": "🥬",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 蔬菜双层堡: 双层生菜番茄夹在汉堡包里，色彩清新.",
+      "image": "restaurants/burgerking/items/bk_ssscb.jpg"
     },
     {
       "id": "bk_xljk",
@@ -115,7 +133,9 @@
       "price": 20,
       "calories": 400,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 香辣鸡块（6块）: 六块金黄酥脆鸡块整齐摆放.",
+      "image": "restaurants/burgerking/items/bk_xljk.jpg"
     },
     {
       "id": "bk_cpzjc",
@@ -124,7 +144,9 @@
       "price": 22,
       "calories": 420,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 脆皮炸鸡翅（4只）: 四只金黄酥脆炸鸡翅摆放.",
+      "image": "restaurants/burgerking/items/bk_cpzjc.jpg"
     },
     {
       "id": "bk_wgjlt",
@@ -133,7 +155,9 @@
       "price": 18,
       "calories": 350,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 无骨鸡柳条: 金黄酥脆鸡柳条整齐排列.",
+      "image": "restaurants/burgerking/items/bk_wgjlt.jpg"
     },
     {
       "id": "bk_ymnt",
@@ -142,7 +166,9 @@
       "price": 10,
       "calories": 180,
       "emoji": "🌽",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 玉米浓汤: 浓稠黄色玉米汤盛在杯中.",
+      "image": "restaurants/burgerking/items/bk_ymnt.jpg"
     },
     {
       "id": "bk_sg",
@@ -151,7 +177,9 @@
       "price": 12,
       "calories": 300,
       "emoji": "🥔",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 薯格: 金黄色三角形薯格堆叠.",
+      "image": "restaurants/burgerking/items/bk_sg.jpg"
     },
     {
       "id": "bk_jdsl",
@@ -160,7 +188,9 @@
       "price": 14,
       "calories": 200,
       "emoji": "🥗",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 鸡蛋沙拉: 新鲜蔬菜叶配切片水煮蛋.",
+      "image": "restaurants/burgerking/items/bk_jdsl.jpg"
     },
     {
       "id": "bk_zst",
@@ -169,7 +199,9 @@
       "price": 18,
       "calories": 380,
       "emoji": "🧀",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 芝士条（6条）: 金黄芝士条整齐排列，断面拉丝.",
+      "image": "restaurants/burgerking/items/bk_zst.jpg"
     },
     {
       "id": "bk_kl",
@@ -178,7 +210,9 @@
       "price": 10,
       "calories": 200,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one large plastic cup of cola with ice and a straw, centered on a plain gray background, absolutely nothing else in the frame — no burger, no food, no fries, no other cups, no plates, no text, no logo, no watermark. Just the single cup of cola. Soft studio lighting, square crop.",
+      "image": "restaurants/burgerking/items/bk_kl.jpg"
     },
     {
       "id": "bk_xb",
@@ -187,7 +221,9 @@
       "price": 10,
       "calories": 180,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 雪碧（大）: 透明杯装淡绿色雪碧，杯口冒着气泡.",
+      "image": "restaurants/burgerking/items/bk_xb.jpg"
     },
     {
       "id": "bk_bhc",
@@ -196,7 +232,9 @@
       "price": 8,
       "calories": 120,
       "emoji": "🧊",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 冰红茶: 透明杯装琥珀色冰红茶，漂浮冰块.",
+      "image": "restaurants/burgerking/items/bk_bhc.jpg"
     },
     {
       "id": "bk_xcd",
@@ -205,7 +243,9 @@
       "price": 9,
       "calories": 140,
       "emoji": "🍊",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 鲜橙多: 透明杯装橙黄色饮料，杯口漂浮橙肉.",
+      "image": "restaurants/burgerking/items/bk_xcd.jpg"
     },
     {
       "id": "bk_zbsd",
@@ -214,7 +254,9 @@
       "price": 10,
       "calories": 260,
       "emoji": "🍨",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 珍宝圣代: 杯装香草冰淇淋，表面淋着果酱.",
+      "image": "restaurants/burgerking/items/bk_zbsd.jpg"
     },
     {
       "id": "bk_pgp",
@@ -223,7 +265,9 @@
       "price": 8,
       "calories": 220,
       "emoji": "🥧",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 苹果派: 长方形酥皮苹果派，表皮金黄酥脆.",
+      "image": "restaurants/burgerking/items/bk_pgp.jpg"
     },
     {
       "id": "bk_qklms",
@@ -232,7 +276,9 @@
       "price": 12,
       "calories": 320,
       "emoji": "🍫",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 巧克力慕斯: 深棕色巧克力慕斯杯，质地丝滑.",
+      "image": "restaurants/burgerking/items/bk_qklms.jpg"
     },
     {
       "id": "bk_zsdg",
@@ -241,7 +287,9 @@
       "price": 15,
       "calories": 350,
       "emoji": "🍰",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 芝士蛋糕: 浓郁白色芝士蛋糕切块.",
+      "image": "restaurants/burgerking/items/bk_zsdg.jpg"
     },
     {
       "id": "bk_hbtc",
@@ -251,7 +299,9 @@
       "calories": 1050,
       "emoji": "🎁",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 皇堡套餐: 皇堡配薯条和饮料，套餐组合摆盘.",
+      "image": "restaurants/burgerking/items/bk_hbtc.jpg"
     },
     {
       "id": "bk_slzsb",
@@ -261,7 +311,9 @@
       "calories": 600,
       "emoji": "🍔",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 双层芝士堡: 双层牛肉饼夹拉丝芝士，剖切露出多汁断面.",
+      "image": "restaurants/burgerking/items/bk_slzsb.jpg"
     },
     {
       "id": "bk_bgzsb",
@@ -270,7 +322,9 @@
       "price": 28,
       "calories": 560,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 培根芝士堡: 培根片配拉丝芝士夹在汉堡里.",
+      "image": "restaurants/burgerking/items/bk_bgzsb.jpg"
     },
     {
       "id": "bk_xlcpjp",
@@ -279,7 +333,9 @@
       "price": 24,
       "calories": 460,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 香辣脆皮鸡排: 金黄酥脆鸡排整块摆放.",
+      "image": "restaurants/burgerking/items/bk_xlcpjp.jpg"
     },
     {
       "id": "bk_zsyc",
@@ -288,7 +344,9 @@
       "price": 16,
       "calories": 400,
       "emoji": "🧅",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 芝士洋葱圈: 洋葱圈裹着芝士外壳，断面拉丝.",
+      "image": "restaurants/burgerking/items/bk_zsyc.jpg"
     },
     {
       "id": "bk_msks",
@@ -297,7 +355,12 @@
       "price": 12,
       "calories": 15,
       "emoji": "☕",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 美式咖啡: 白色纸杯装黑色美式咖啡.",
+      "image": "restaurants/burgerking/items/bk_msks.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 美式汉堡快餐品牌视觉风格：暖橙红色调灯光，传递厚实解馋、热辣霸气的西式快餐氛围。 画面主体是一个厚实的火烤牛肉汉堡，层层夹着生菜番茄，切面露出多汁肉饼，配薯条摆放一旁，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/burgerking/banner.jpg"
 }
