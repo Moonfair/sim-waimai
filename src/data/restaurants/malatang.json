@@ -34,7 +34,9 @@
       "calories": 400,
       "emoji": "🍲",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 麻辣烫自选（200g）: 一碗红油麻辣烫，汤汁翻滚，混合着蔬菜、丸子、肉片等多种食材.",
+      "image": "restaurants/malatang/items/mlt_zx.jpg"
     },
     {
       "id": "mlt_da",
@@ -43,7 +45,9 @@
       "price": 30,
       "calories": 680,
       "emoji": "🍲",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 麻辣烫大份（350g）: 大碗红油麻辣烫，食材满满，汤汁浓郁.",
+      "image": "restaurants/malatang/items/mlt_da.jpg"
     },
     {
       "id": "mlt_sw",
@@ -52,7 +56,9 @@
       "price": 5,
       "calories": 120,
       "emoji": "⚪",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 素丸（5颗）: 五颗白色素丸整齐排列在小碗中.",
+      "image": "restaurants/malatang/items/mlt_sw.jpg"
     },
     {
       "id": "mlt_nm",
@@ -61,7 +67,9 @@
       "price": 8,
       "calories": 160,
       "emoji": "🟤",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 牛肉丸（5颗）: 五颗浅褐色牛肉丸，表面光滑有弹性.",
+      "image": "restaurants/malatang/items/mlt_nm.jpg"
     },
     {
       "id": "mlt_fm",
@@ -70,7 +78,9 @@
       "price": 4,
       "calories": 200,
       "emoji": "🍝",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 粉丝（份）: 透明晶莹的粉丝盘绕在碗中，吸满红油汤汁.",
+      "image": "restaurants/malatang/items/mlt_fm.jpg"
     },
     {
       "id": "mlt_wwc",
@@ -79,7 +89,9 @@
       "price": 5,
       "calories": 30,
       "emoji": "🥬",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 娃娃菜: 翠绿娃娃菜叶片整齐码放.",
+      "image": "restaurants/malatang/items/mlt_wwc.jpg"
     },
     {
       "id": "mlt_tdp",
@@ -88,7 +100,9 @@
       "price": 5,
       "calories": 100,
       "emoji": "🥔",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 土豆片: 淡黄色土豆薄片整齐码放.",
+      "image": "restaurants/malatang/items/mlt_tdp.jpg"
     },
     {
       "id": "mlt_me",
@@ -97,7 +111,9 @@
       "price": 5,
       "calories": 35,
       "emoji": "🍂",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 木耳: 黑色木耳片堆放在小碗中.",
+      "image": "restaurants/malatang/items/mlt_me.jpg"
     },
     {
       "id": "mlt_dy",
@@ -106,7 +122,9 @@
       "price": 4,
       "calories": 25,
       "emoji": "🌱",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 豆芽: 白色豆芽整齐堆放.",
+      "image": "restaurants/malatang/items/mlt_dy.jpg"
     },
     {
       "id": "mlt_dg",
@@ -115,7 +133,9 @@
       "price": 5,
       "calories": 20,
       "emoji": "🥒",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 冬瓜: 半透明冬瓜片码放.",
+      "image": "restaurants/malatang/items/mlt_dg.jpg"
     },
     {
       "id": "mlt_bc",
@@ -124,7 +144,9 @@
       "price": 4,
       "calories": 20,
       "emoji": "🥬",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 白菜: 翠绿白菜叶片码放.",
+      "image": "restaurants/malatang/items/mlt_bc.jpg"
     },
     {
       "id": "mlt_wcr",
@@ -133,7 +155,9 @@
       "price": 6,
       "calories": 250,
       "emoji": "🥫",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 午餐肉: 粉红色午餐肉切片码放.",
+      "image": "restaurants/malatang/items/mlt_wcr.jpg"
     },
     {
       "id": "mlt_bg",
@@ -142,7 +166,9 @@
       "price": 7,
       "calories": 280,
       "emoji": "🥓",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 培根: 微焦培根片卷曲码放.",
+      "image": "restaurants/malatang/items/mlt_bg.jpg"
     },
     {
       "id": "mlt_jxr",
@@ -151,7 +177,9 @@
       "price": 8,
       "calories": 200,
       "emoji": "🍗",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 鸡胸肉: 白色鸡胸肉片码放.",
+      "image": "restaurants/malatang/items/mlt_jxr.jpg"
     },
     {
       "id": "mlt_fn",
@@ -160,7 +188,9 @@
       "price": 12,
       "calories": 350,
       "emoji": "🥩",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 肥牛: 大理石纹雪花肥牛片卷曲码放.",
+      "image": "restaurants/malatang/items/mlt_fn.jpg"
     },
     {
       "id": "mlt_yw",
@@ -169,7 +199,9 @@
       "price": 5,
       "calories": 100,
       "emoji": "⚪",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 鱼丸: 白色鱼丸整齐排列.",
+      "image": "restaurants/malatang/items/mlt_yw.jpg"
     },
     {
       "id": "mlt_xhw",
@@ -178,7 +210,9 @@
       "price": 8,
       "calories": 150,
       "emoji": "🍤",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 虾滑丸: 浅粉色虾滑丸表面光滑.",
+      "image": "restaurants/malatang/items/mlt_xhw.jpg"
     },
     {
       "id": "mlt_xrb",
@@ -187,7 +221,9 @@
       "price": 6,
       "calories": 120,
       "emoji": "🦀",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 蟹肉棒: 橙白相间蟹肉棒码放.",
+      "image": "restaurants/malatang/items/mlt_xrb.jpg"
     },
     {
       "id": "mlt_zyw",
@@ -196,7 +232,9 @@
       "price": 7,
       "calories": 180,
       "emoji": "🐙",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 章鱼丸: 紫红色章鱼丸整齐排列.",
+      "image": "restaurants/malatang/items/mlt_zyw.jpg"
     },
     {
       "id": "mlt_nyj",
@@ -205,7 +243,9 @@
       "price": 8,
       "calories": 160,
       "emoji": "🟤",
-      "menuCategory": "丸类"
+      "menuCategory": "丸类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 牛筋丸: 浅褐色牛筋丸整齐排列.",
+      "image": "restaurants/malatang/items/mlt_nyj.jpg"
     },
     {
       "id": "mlt_mx",
@@ -214,7 +254,9 @@
       "price": 4,
       "calories": 220,
       "emoji": "🍜",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 米线: 白色米线盘绕在碗中，吸满红油汤汁.",
+      "image": "restaurants/malatang/items/mlt_mx.jpg"
     },
     {
       "id": "mlt_ng",
@@ -223,7 +265,9 @@
       "price": 5,
       "calories": 240,
       "emoji": "🍥",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 年糕: 白色年糕条码放.",
+      "image": "restaurants/malatang/items/mlt_ng.jpg"
     },
     {
       "id": "mlt_kf",
@@ -232,7 +276,9 @@
       "price": 4,
       "calories": 260,
       "emoji": "🍝",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 宽粉: 宽扁透明宽粉盘绕，吸满汤汁.",
+      "image": "restaurants/malatang/items/mlt_kf.jpg"
     },
     {
       "id": "mlt_xia",
@@ -241,7 +287,9 @@
       "price": 10,
       "calories": 120,
       "emoji": "🍤",
-      "menuCategory": "海鲜"
+      "menuCategory": "海鲜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 虾: 整只新鲜大虾，虾壳橙红.",
+      "image": "restaurants/malatang/items/mlt_xia.jpg"
     },
     {
       "id": "mlt_yy",
@@ -250,7 +298,9 @@
       "price": 9,
       "calories": 150,
       "emoji": "🦑",
-      "menuCategory": "海鲜"
+      "menuCategory": "海鲜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 鱿鱼: 白色鱿鱼圈码放.",
+      "image": "restaurants/malatang/items/mlt_yy.jpg"
     },
     {
       "id": "mlt_smt",
@@ -259,7 +309,9 @@
       "price": 5,
       "calories": 80,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 酸梅汤: 深红棕色酸梅汤盛在透明杯中.",
+      "image": "restaurants/malatang/items/mlt_smt.jpg"
     },
     {
       "id": "mlt_nms",
@@ -268,7 +320,9 @@
       "price": 5,
       "calories": 40,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 柠檬水: 透明杯中黄绿色柠檬水，漂浮柠檬片.",
+      "image": "restaurants/malatang/items/mlt_nms.jpg"
     },
     {
       "id": "mlt_wlj",
@@ -277,7 +331,9 @@
       "price": 6,
       "calories": 60,
       "emoji": "🥫",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 王老吉: 红色罐装凉茶.",
+      "image": "restaurants/malatang/items/mlt_wlj.jpg"
     },
     {
       "id": "mlt_hhpp",
@@ -287,7 +343,9 @@
       "calories": 900,
       "emoji": "🍲",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 麻辣烫豪华拼盘: 大份麻辣烫拼盘，多种食材摆满整碗，汤汁红亮.",
+      "image": "restaurants/malatang/items/mlt_hhpp.jpg"
     },
     {
       "id": "mlt_srfx",
@@ -297,7 +355,12 @@
       "calories": 1100,
       "emoji": "🎁",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 双人分享套餐: 超大份麻辣烫，食材丰富，双人共享装.",
+      "image": "restaurants/malatang/items/mlt_srfx.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 麻辣烫小吃视觉风格：热辣鲜亮的红色调，柔和自然光线，传递麻辣鲜香、街头小吃的热闹氛围。 画面主体是一碗红油翻滚的麻辣烫，各种食材浸在红亮汤汁里，热气腾腾，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/malatang/banner.jpg"
 }
