@@ -34,7 +34,9 @@
       "calories": 780,
       "emoji": "🍅",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 番茄牛肉锅: 橙红色浓郁番茄汤锅底翻滚，几片牛肉沉浮其中.",
+      "image": "restaurants/haidilao/items/hdl_fq.jpg"
     },
     {
       "id": "hdl_mlny",
@@ -44,7 +46,9 @@
       "calories": 820,
       "emoji": "🌶️",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 麻辣牛油锅: 红油翻滚的麻辣锅底，表面浮着辣椒和花椒.",
+      "image": "restaurants/haidilao/items/hdl_mlny.jpg"
     },
     {
       "id": "hdl_yy",
@@ -54,7 +58,9 @@
       "calories": 1500,
       "emoji": "🍲",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 鸳鸯锅套餐: 双格锅具，一侧红油辣汤一侧清汤，中间分隔.",
+      "image": "restaurants/haidilao/items/hdl_yy.jpg"
     },
     {
       "id": "hdl_jg",
@@ -63,7 +69,9 @@
       "price": 45,
       "calories": 400,
       "emoji": "🍄",
-      "menuCategory": "锅底"
+      "menuCategory": "锅底",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 菌菇养生锅: 浅褐色菌菇汤底，飘着多种菌菇.",
+      "image": "restaurants/haidilao/items/hdl_jg.jpg"
     },
     {
       "id": "hdl_qt",
@@ -72,7 +80,9 @@
       "price": 30,
       "calories": 200,
       "emoji": "🥣",
-      "menuCategory": "锅底"
+      "menuCategory": "锅底",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 清汤锅: 清澈透明汤底，几片姜片和葱段.",
+      "image": "restaurants/haidilao/items/hdl_qt.jpg"
     },
     {
       "id": "hdl_scy",
@@ -81,7 +91,9 @@
       "price": 55,
       "calories": 600,
       "emoji": "🐟",
-      "menuCategory": "锅底"
+      "menuCategory": "锅底",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 酸菜鱼锅: 浅黄色酸菜鱼汤，漂着酸菜丝和鱼片.",
+      "image": "restaurants/haidilao/items/hdl_scy.jpg"
     },
     {
       "id": "hdl_fn",
@@ -91,7 +103,9 @@
       "calories": 450,
       "emoji": "🥩",
       "menuCategory": "肉类",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 肥牛卷: 大理石纹雪花肥牛片卷曲码放.",
+      "image": "restaurants/haidilao/items/hdl_fn.jpg"
     },
     {
       "id": "hdl_yr",
@@ -100,7 +114,9 @@
       "price": 42,
       "calories": 480,
       "emoji": "🐑",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 羊肉卷: 粉红色羊肉片卷曲码放.",
+      "image": "restaurants/haidilao/items/hdl_yr.jpg"
     },
     {
       "id": "hdl_znh",
@@ -109,7 +125,9 @@
       "price": 25,
       "calories": 320,
       "emoji": "🧠",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 猪脑花: 白色猪脑花整块盛在小碗中.",
+      "image": "restaurants/haidilao/items/hdl_znh.jpg"
     },
     {
       "id": "hdl_wcr",
@@ -118,7 +136,9 @@
       "price": 15,
       "calories": 280,
       "emoji": "🥫",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 午餐肉: 粉红色午餐肉切片码放.",
+      "image": "restaurants/haidilao/items/hdl_wcr.jpg"
     },
     {
       "id": "hdl_bgj",
@@ -127,7 +147,9 @@
       "price": 22,
       "calories": 300,
       "emoji": "🥓",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 培根卷金针菇: 培根片包裹着金针菇，卷成小捆.",
+      "image": "restaurants/haidilao/items/hdl_bgj.jpg"
     },
     {
       "id": "hdl_xh",
@@ -137,7 +159,9 @@
       "calories": 260,
       "emoji": "🍤",
       "menuCategory": "丸滑类",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 虾滑: 浅粉色虾滑，表面光滑，盛在小碗中.",
+      "image": "restaurants/haidilao/items/hdl_xh.jpg"
     },
     {
       "id": "hdl_xrb",
@@ -146,7 +170,9 @@
       "price": 18,
       "calories": 150,
       "emoji": "🦀",
-      "menuCategory": "丸滑类"
+      "menuCategory": "丸滑类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 蟹肉棒: 橙白相间蟹肉棒码放.",
+      "image": "restaurants/haidilao/items/hdl_xrb.jpg"
     },
     {
       "id": "hdl_ydf",
@@ -155,7 +181,9 @@
       "price": 12,
       "calories": 180,
       "emoji": "🧊",
-      "menuCategory": "丸滑类"
+      "menuCategory": "丸滑类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 鱼豆腐: 白色鱼豆腐块码放.",
+      "image": "restaurants/haidilao/items/hdl_ydf.jpg"
     },
     {
       "id": "hdl_nrw",
@@ -164,7 +192,9 @@
       "price": 20,
       "calories": 220,
       "emoji": "🟤",
-      "menuCategory": "丸滑类"
+      "menuCategory": "丸滑类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 牛肉丸: 浅褐色牛肉丸整齐排列.",
+      "image": "restaurants/haidilao/items/hdl_nrw.jpg"
     },
     {
       "id": "hdl_myh",
@@ -173,7 +203,9 @@
       "price": 28,
       "calories": 210,
       "emoji": "🦑",
-      "menuCategory": "丸滑类"
+      "menuCategory": "丸滑类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 墨鱼滑: 白色墨鱼滑，表面光滑Q弹.",
+      "image": "restaurants/haidilao/items/hdl_myh.jpg"
     },
     {
       "id": "hdl_jzg",
@@ -182,7 +214,9 @@
       "price": 8,
       "calories": 40,
       "emoji": "🍄",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 金针菇: 淡黄色金针菇成捆码放.",
+      "image": "restaurants/haidilao/items/hdl_jzg.jpg"
     },
     {
       "id": "hdl_wwc",
@@ -191,7 +225,9 @@
       "price": 8,
       "calories": 30,
       "emoji": "🥬",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 娃娃菜: 翠绿娃娃菜叶片码放.",
+      "image": "restaurants/haidilao/items/hdl_wwc.jpg"
     },
     {
       "id": "hdl_tdp",
@@ -200,7 +236,9 @@
       "price": 6,
       "calories": 120,
       "emoji": "🥔",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 土豆片: 淡黄色土豆薄片码放.",
+      "image": "restaurants/haidilao/items/hdl_tdp.jpg"
     },
     {
       "id": "hdl_dg",
@@ -209,7 +247,9 @@
       "price": 6,
       "calories": 25,
       "emoji": "🥒",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 冬瓜: 半透明冬瓜片码放.",
+      "image": "restaurants/haidilao/items/hdl_dg.jpg"
     },
     {
       "id": "hdl_op",
@@ -218,7 +258,9 @@
       "price": 8,
       "calories": 90,
       "emoji": "🪷",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 藕片: 白色藕片，孔洞清晰可见.",
+      "image": "restaurants/haidilao/items/hdl_op.jpg"
     },
     {
       "id": "hdl_me",
@@ -227,7 +269,9 @@
       "price": 7,
       "calories": 35,
       "emoji": "🍂",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 木耳: 黑色木耳片堆放.",
+      "image": "restaurants/haidilao/items/hdl_me.jpg"
     },
     {
       "id": "hdl_sglm",
@@ -236,7 +280,9 @@
       "price": 10,
       "calories": 320,
       "emoji": "🍜",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 手工拉面: 白色手工拉面盘绕在盘中.",
+      "image": "restaurants/haidilao/items/hdl_sglm.jpg"
     },
     {
       "id": "hdl_bmf",
@@ -245,7 +291,9 @@
       "price": 3,
       "calories": 200,
       "emoji": "🍚",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 白米饭: 白色米饭盛在小碗中，颗粒分明.",
+      "image": "restaurants/haidilao/items/hdl_bmf.jpg"
     },
     {
       "id": "hdl_ng",
@@ -254,7 +302,9 @@
       "price": 10,
       "calories": 250,
       "emoji": "🍥",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 年糕: 白色年糕条码放.",
+      "image": "restaurants/haidilao/items/hdl_ng.jpg"
     },
     {
       "id": "hdl_kf",
@@ -263,7 +313,9 @@
       "price": 9,
       "calories": 280,
       "emoji": "🍝",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 宽粉: 宽扁透明宽粉盘绕.",
+      "image": "restaurants/haidilao/items/hdl_kf.jpg"
     },
     {
       "id": "hdl_smt",
@@ -272,7 +324,9 @@
       "price": 8,
       "calories": 90,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 酸梅汤: 深红棕色酸梅汤盛在透明杯中.",
+      "image": "restaurants/haidilao/items/hdl_smt.jpg"
     },
     {
       "id": "hdl_wlj",
@@ -281,7 +335,9 @@
       "price": 7,
       "calories": 60,
       "emoji": "🥫",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 王老吉: 红色罐装凉茶.",
+      "image": "restaurants/haidilao/items/hdl_wlj.jpg"
     },
     {
       "id": "hdl_nmfm",
@@ -290,7 +346,9 @@
       "price": 10,
       "calories": 80,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 柠檬蜂蜜水: 透明杯中黄色柠檬片和蜂蜜水.",
+      "image": "restaurants/haidilao/items/hdl_nmfm.jpg"
     },
     {
       "id": "hdl_mjtl",
@@ -299,7 +357,9 @@
       "price": 5,
       "calories": 150,
       "emoji": "🥣",
-      "menuCategory": "蔬菜"
+      "menuCategory": "蔬菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 捞派麻酱调料: 浅褐色麻酱盛在小碟中，质地浓稠.",
+      "image": "restaurants/haidilao/items/hdl_mjtl.jpg"
     },
     {
       "id": "hdl_blsj",
@@ -308,7 +368,12 @@
       "price": 6,
       "calories": 100,
       "emoji": "🥫",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 捞派拌饭酱: 深红色拌饭酱盛在小碟中.",
+      "image": "restaurants/haidilao/items/hdl_blsj.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 火锅品牌视觉风格：红铜色调，热气升腾的氛围感，柔和暖光，传递热闹欢聚、鲜香浓郁的火锅餐饮氛围。 画面主体是翻滚沸腾的火锅汤底，热气升腾，涮品若隐若现，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/haidilao/banner.jpg"
 }
