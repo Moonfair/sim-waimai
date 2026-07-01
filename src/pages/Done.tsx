@@ -70,7 +70,8 @@ export default function Done() {
 
   const handleShareClick = async () => {
     try {
-      await navigator.clipboard.writeText('我用【吃了嘛外卖】省下了 ¥' + savedPrice.toFixed(2) + ' 元和 ' + savedCalories + ' 千卡！快来试试这款假外卖APP！');
+      const homeUrl = window.location.origin + import.meta.env.BASE_URL;
+      await navigator.clipboard.writeText('我用【吃了嘛外卖】省下了 ¥' + savedPrice.toFixed(2) + ' 元和 ' + savedCalories + ' 千卡！快来试试这款假外卖APP！\n' + homeUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
