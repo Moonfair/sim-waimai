@@ -32,7 +32,9 @@
       "calories": 620,
       "emoji": "🍛",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 番茄牛腩饭: 红亮番茄汁裹着软烂牛腩块，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_fqnn.jpg"
     },
     {
       "id": "zgf_pg",
@@ -42,7 +44,9 @@
       "calories": 680,
       "emoji": "🍖",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 排骨饭: 深酱色卤排骨块，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_pg.jpg"
     },
     {
       "id": "zgf_sgwwc",
@@ -51,7 +55,9 @@
       "price": 18,
       "calories": 480,
       "emoji": "🍄",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 三菇娃娃菜饭: 多种菌菇和翠绿娃娃菜铺在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_sgwwc.jpg"
     },
     {
       "id": "zgf_xghj",
@@ -60,7 +66,9 @@
       "price": 20,
       "calories": 560,
       "emoji": "🍗",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 香菇滑鸡饭: 嫩滑鸡肉片与香菇同炒，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_xghj.jpg"
     },
     {
       "id": "zgf_glnn",
@@ -69,7 +77,9 @@
       "price": 23,
       "calories": 640,
       "emoji": "🍛",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 咖喱牛腩饭: 浓稠黄褐色咖喱汁裹着牛腩块，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_glnn.jpg"
     },
     {
       "id": "zgf_szpg",
@@ -78,7 +88,9 @@
       "price": 22,
       "calories": 600,
       "emoji": "🍖",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 豉汁蒸排骨饭: 豉汁蒸排骨块，油亮酱色，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_szpg.jpg"
     },
     {
       "id": "zgf_sgss",
@@ -87,7 +99,9 @@
       "price": 16,
       "calories": 420,
       "emoji": "🥦",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 双菇时蔬饭: 菌菇和时令蔬菜清炒，铺在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_sgss.jpg"
     },
     {
       "id": "zgf_lrf",
@@ -96,7 +110,9 @@
       "price": 18,
       "calories": 550,
       "emoji": "🍚",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 卤肉饭: 肥瘦相间卤肉块，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_lrf.jpg"
     },
     {
       "id": "zgf_zdnr",
@@ -105,7 +121,9 @@
       "price": 21,
       "calories": 580,
       "emoji": "🍳",
-      "menuCategory": "饭类"
+      "menuCategory": "饭类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 蒸蛋牛肉饭: 嫩滑黄色蒸蛋配牛肉粒，浇在米饭上.",
+      "image": "restaurants/zhengongfu/items/zgf_zdnr.jpg"
     },
     {
       "id": "zgf_ympg",
@@ -114,7 +132,9 @@
       "price": 8,
       "calories": 220,
       "emoji": "🌽",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 玉米排骨汤: 浓白汤中炖着玉米段和排骨.",
+      "image": "restaurants/zhengongfu/items/zgf_ympg.jpg"
     },
     {
       "id": "zgf_dgym",
@@ -123,7 +143,9 @@
       "price": 7,
       "calories": 150,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 冬瓜薏米汤: 清汤中漂着冬瓜片和薏米.",
+      "image": "restaurants/zhengongfu/items/zgf_dgym.jpg"
     },
     {
       "id": "zgf_ftd",
@@ -132,7 +154,9 @@
       "price": 6,
       "calories": 120,
       "emoji": "🍅",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 番茄蛋汤: 橙红番茄汤，嫩黄蛋花漂浮.",
+      "image": "restaurants/zhengongfu/items/zgf_ftd.jpg"
     },
     {
       "id": "zgf_zchd",
@@ -141,7 +165,9 @@
       "price": 6,
       "calories": 100,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 紫菜蛋花汤: 清汤中漂着黑色紫菜和嫩黄蛋花.",
+      "image": "restaurants/zhengongfu/items/zgf_zchd.jpg"
     },
     {
       "id": "zgf_ld",
@@ -150,7 +176,9 @@
       "price": 3,
       "calories": 90,
       "emoji": "🥚",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 卤蛋: 对半切开的卤蛋，蛋黄橙黄.",
+      "image": "restaurants/zhengongfu/items/zgf_ld.jpg"
     },
     {
       "id": "zgf_xldg",
@@ -159,7 +187,9 @@
       "price": 6,
       "calories": 130,
       "emoji": "🧊",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 香卤豆干: 深褐色卤豆干切块.",
+      "image": "restaurants/zhengongfu/items/zgf_xldg.jpg"
     },
     {
       "id": "zgf_ssbc",
@@ -168,7 +198,9 @@
       "price": 8,
       "calories": 110,
       "emoji": "🥬",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 手撕包菜: 翠绿手撕包菜叶片.",
+      "image": "restaurants/zhengongfu/items/zgf_ssbc.jpg"
     },
     {
       "id": "zgf_qcss",
@@ -177,7 +209,9 @@
       "price": 9,
       "calories": 100,
       "emoji": "🥦",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 清炒时蔬: 翠绿时令蔬菜清炒.",
+      "image": "restaurants/zhengongfu/items/zgf_qcss.jpg"
     },
     {
       "id": "zgf_zym",
@@ -186,7 +220,9 @@
       "price": 5,
       "calories": 140,
       "emoji": "🌽",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 蒸玉米: 整根黄色蒸玉米.",
+      "image": "restaurants/zhengongfu/items/zgf_zym.jpg"
     },
     {
       "id": "zgf_mldf",
@@ -195,7 +231,9 @@
       "price": 8,
       "calories": 160,
       "emoji": "🌶️",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 麻辣豆腐: 白色嫩豆腐块裹着红油麻辣汁.",
+      "image": "restaurants/zhengongfu/items/zgf_mldf.jpg"
     },
     {
       "id": "zgf_lbme",
@@ -204,7 +242,9 @@
       "price": 7,
       "calories": 80,
       "emoji": "🍂",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 凉拌木耳: 黑色木耳丝凉拌，点缀红椒丝.",
+      "image": "restaurants/zhengongfu/items/zgf_lbme.jpg"
     },
     {
       "id": "zgf_smt",
@@ -213,7 +253,9 @@
       "price": 6,
       "calories": 90,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 酸梅汤: 深红棕色酸梅汤盛在透明杯中.",
+      "image": "restaurants/zhengongfu/items/zgf_smt.jpg"
     },
     {
       "id": "zgf_jhc",
@@ -222,7 +264,9 @@
       "price": 5,
       "calories": 20,
       "emoji": "🍵",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 菊花茶: 透明杯中淡黄色茶汤，几朵菊花.",
+      "image": "restaurants/zhengongfu/items/zgf_jhc.jpg"
     },
     {
       "id": "zgf_nmfmc",
@@ -231,7 +275,9 @@
       "price": 8,
       "calories": 110,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 柠檬蜂蜜茶: 透明杯中黄色柠檬片和蜂蜜茶.",
+      "image": "restaurants/zhengongfu/items/zgf_nmfmc.jpg"
     },
     {
       "id": "zgf_ds",
@@ -240,7 +286,9 @@
       "price": 5,
       "calories": 90,
       "emoji": "🥛",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 豆浆: 白色杯装乳白色豆浆.",
+      "image": "restaurants/zhengongfu/items/zgf_ds.jpg"
     },
     {
       "id": "zgf_srtc",
@@ -249,7 +297,9 @@
       "price": 42,
       "calories": 1200,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 双人套餐: 两份主食配汤品摆盘.",
+      "image": "restaurants/zhengongfu/items/zgf_srtc.jpg"
     },
     {
       "id": "zgf_etctc",
@@ -258,7 +308,9 @@
       "price": 20,
       "calories": 480,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 儿童套餐: 小份主食配菜摆盘.",
+      "image": "restaurants/zhengongfu/items/zgf_etctc.jpg"
     },
     {
       "id": "zgf_drzgftc",
@@ -267,7 +319,9 @@
       "price": 28,
       "calories": 750,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 单人蒸功夫套餐: 一份主食配汤和小吃摆盘.",
+      "image": "restaurants/zhengongfu/items/zgf_drzgftc.jpg"
     },
     {
       "id": "zgf_jtsrc",
@@ -276,7 +330,9 @@
       "price": 88,
       "calories": 2400,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 家庭四人餐: 多份主食摆满餐桌.",
+      "image": "restaurants/zhengongfu/items/zgf_jtsrc.jpg"
     },
     {
       "id": "zgf_ssctc",
@@ -285,7 +341,9 @@
       "price": 22,
       "calories": 500,
       "emoji": "🥗",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 素食套餐: 全素菜品摆盘，清淡健康.",
+      "image": "restaurants/zhengongfu/items/zgf_ssctc.jpg"
     },
     {
       "id": "zgf_zgfpp",
@@ -294,7 +352,9 @@
       "price": 35,
       "calories": 900,
       "emoji": "🍱",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 蒸功夫拼盘: 多种小吃拼盘摆放.",
+      "image": "restaurants/zhengongfu/items/zgf_zgfpp.jpg"
     },
     {
       "id": "zgf_yycztc",
@@ -303,7 +363,12 @@
       "price": 15,
       "calories": 400,
       "emoji": "🍳",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 营养早餐套餐: 包子配一杯豆浆的早餐组合.",
+      "image": "restaurants/zhengongfu/items/zgf_yycztc.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 中式健康快餐视觉风格：清淡温暖的橙黄色调，柔和自然光线，传递健康营养、蒸煮清淡的餐饮氛围。 画面主体是一份热气腾腾的蒸功夫套餐，主食配汤品摆放整齐，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/zhengongfu/banner.jpg"
 }
