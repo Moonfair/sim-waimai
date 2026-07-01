@@ -4,10 +4,14 @@ import { restaurants, CATEGORIES } from '../data/restaurants';
 import type { Category } from '../data/restaurants';
 import RestaurantCard from '../components/RestaurantCard';
 import { useCart } from '../context/CartContext';
+import { useAddress } from '../context/AddressContext';
+import AddressEditSheet from '../components/AddressEditSheet';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<Category>('全部');
   const { totalItems, totalPrice, restaurant: cartRestaurant } = useCart();
+  const { addressInfo } = useAddress();
+  const [addressSheetOpen, setAddressSheetOpen] = useState(false);
   const navigate = useNavigate();
 
   const filtered = activeCategory === '全部'
@@ -27,16 +31,13 @@ export default function Home() {
         </div>
 
         {/* Address bar */}
-        <div className="bg-white/20 rounded-xl mt-3 px-3 py-2.5 flex items-center gap-2">
+        <div
+          className="bg-white/20 rounded-xl mt-3 px-3 py-2.5 flex items-center gap-2 cursor-pointer"
+          onClick={() => setAddressSheetOpen(true)}
+        >
           <span className="text-white text-sm">📍</span>
-          <span className="text-white text-sm font-medium">北京市朝阳区三里屯</span>
+          <span className="text-white text-sm font-medium">{addressInfo.address}</span>
           <span className="text-white/60 text-xs ml-auto">预计25-40分钟</span>
-        </div>
-
-        {/* Search */}
-        <div className="bg-white rounded-xl mt-2 px-3 py-2.5 flex items-center gap-2">
-          <span className="text-gray-400">🔍</span>
-          <span className="text-gray-400 text-sm">搜索餐厅或菜品</span>
         </div>
       </div>
 
@@ -107,6 +108,10 @@ export default function Home() {
             </button>
           </div>
         </div>
+      )}
+
+      {addressSheetOpen && (
+        <AddressEditSheet onClose={() => setAddressSheetOpen(false)} />
       )}
     </div>
   );
