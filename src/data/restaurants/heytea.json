@@ -33,7 +33,9 @@
       "calories": 280,
       "emoji": "🍇",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 多肉葡萄: 透明杯中沉着满满紫色葡萄果肉，奶白色茶汤，插透明吸管.",
+      "image": "restaurants/heytea/items/dpg.jpg"
     },
     {
       "id": "zzmm",
@@ -43,7 +45,9 @@
       "calories": 320,
       "emoji": "🍓",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芝芝莓莓: 深红色草莓果茶，杯口覆盖一层绵密奶盖，杯壁能看到草莓果肉块.",
+      "image": "restaurants/heytea/items/zzmm.jpg"
     },
     {
       "id": "bbk",
@@ -52,7 +56,9 @@
       "price": 28,
       "calories": 150,
       "emoji": "🧊",
-      "menuCategory": "果茶"
+      "menuCategory": "果茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 冰博克: 透明杯中浓缩深琥珀色冰茶，杯口漂浮几颗冰块.",
+      "image": "restaurants/heytea/items/bbk.jpg"
     },
     {
       "id": "jbk",
@@ -61,7 +67,9 @@
       "price": 22,
       "calories": 100,
       "emoji": "🍵",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 金凤茶王: 透明杯中橙黄色清澈茶汤，杯身简洁.",
+      "image": "restaurants/heytea/items/jbk.jpg"
     },
     {
       "id": "scly",
@@ -70,7 +78,9 @@
       "price": 25,
       "calories": 120,
       "emoji": "🍋",
-      "menuCategory": "季节限定"
+      "menuCategory": "季节限定",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 四季春柠檬: 透明杯中黄绿色茶汤，漂浮着新鲜柠檬薄片.",
+      "image": "restaurants/heytea/items/scly.jpg"
     },
     {
       "id": "ht_nac",
@@ -79,7 +89,9 @@
       "price": 30,
       "calories": 380,
       "emoji": "🧋",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 奶茶布丁: 杯底一层焦糖色布丁，上层丝滑奶茶分层明显，插着粗吸管.",
+      "image": "restaurants/heytea/items/ht_nac.jpg"
     },
     {
       "id": "ht_mbhy",
@@ -88,7 +100,9 @@
       "price": 28,
       "calories": 200,
       "emoji": "🍊",
-      "menuCategory": "果茶"
+      "menuCategory": "果茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 满杯红柚: 透明杯中粉红色果茶，塞满大颗红柚果肉粒.",
+      "image": "restaurants/heytea/items/ht_mbhy.jpg"
     },
     {
       "id": "ht_zzmm2",
@@ -97,7 +111,9 @@
       "price": 33,
       "calories": 300,
       "emoji": "🥭",
-      "menuCategory": "果茶"
+      "menuCategory": "果茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芝芝芒芒: 橙黄色芒果奶盖茶，杯壁能看到芒果果肉块.",
+      "image": "restaurants/heytea/items/ht_zzmm2.jpg"
     },
     {
       "id": "ht_pt",
@@ -106,7 +122,9 @@
       "price": 30,
       "calories": 260,
       "emoji": "🍇",
-      "menuCategory": "果茶"
+      "menuCategory": "果茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 葡萄妃: 深紫色葡萄果茶，杯中漂浮着整颗葡萄果肉.",
+      "image": "restaurants/heytea/items/ht_pt.jpg"
     },
     {
       "id": "ht_mgbql",
@@ -115,7 +133,9 @@
       "price": 32,
       "calories": 280,
       "emoji": "🍨",
-      "menuCategory": "果茶"
+      "menuCategory": "果茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芒果冰淇淋: 橙黄色芒果果茶上放着一球奶白色冰淇淋.",
+      "image": "restaurants/heytea/items/ht_mgbql.jpg"
     },
     {
       "id": "ht_bbnc",
@@ -124,7 +144,9 @@
       "price": 24,
       "calories": 320,
       "emoji": "🧋",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 波波奶茶: 杯底沉着黑色珍珠波波，上层浅棕色奶茶.",
+      "image": "restaurants/heytea/items/ht_bbnc.jpg"
     },
     {
       "id": "ht_znnc",
@@ -133,7 +155,9 @@
       "price": 22,
       "calories": 300,
       "emoji": "🧋",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 珍珠奶茶: 经典浅棕色奶茶，杯底满满黑色珍珠.",
+      "image": "restaurants/heytea/items/ht_znnc.jpg"
     },
     {
       "id": "ht_ynnc",
@@ -142,7 +166,9 @@
       "price": 26,
       "calories": 250,
       "emoji": "🧋",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 燕麦奶茶: 浅褐色燕麦奶茶，质地略显颗粒感，杯口无奶盖.",
+      "image": "restaurants/heytea/items/ht_ynnc.jpg"
     },
     {
       "id": "ht_qklnc",
@@ -151,7 +177,9 @@
       "price": 28,
       "calories": 350,
       "emoji": "🍫",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 巧克力奶茶: 深棕色巧克力奶茶，杯口有细腻奶泡.",
+      "image": "restaurants/heytea/items/ht_qklnc.jpg"
     },
     {
       "id": "ht_ymbc",
@@ -160,7 +188,9 @@
       "price": 26,
       "calories": 140,
       "emoji": "🍒",
-      "menuCategory": "季节限定"
+      "menuCategory": "季节限定",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 杨梅冰茶: 透明杯中深红色杨梅茶，漂浮着几颗完整杨梅.",
+      "image": "restaurants/heytea/items/ht_ymbc.jpg"
     },
     {
       "id": "ht_lzxl",
@@ -169,7 +199,9 @@
       "price": 30,
       "calories": 220,
       "emoji": "🍈",
-      "menuCategory": "季节限定"
+      "menuCategory": "季节限定",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 荔枝仙露: 透明杯中淡黄色茶汤，漂浮着几颗剥皮荔枝果肉.",
+      "image": "restaurants/heytea/items/ht_lzxl.jpg"
     },
     {
       "id": "ht_ghmn",
@@ -178,7 +210,9 @@
       "price": 27,
       "calories": 240,
       "emoji": "🌸",
-      "menuCategory": "季节限定"
+      "menuCategory": "季节限定",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 桂花米酿: 米白色米酿汤底，点缀几朵金黄桂花.",
+      "image": "restaurants/heytea/items/ht_ghmn.jpg"
     },
     {
       "id": "ht_ly",
@@ -187,7 +221,9 @@
       "price": 18,
       "calories": 30,
       "emoji": "🍵",
-      "menuCategory": "纯茶"
+      "menuCategory": "纯茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 绿妍: 透明杯中清澈黄绿色绿茶，杯身干净无配料.",
+      "image": "restaurants/heytea/items/ht_ly.jpg"
     },
     {
       "id": "ht_qplc",
@@ -196,7 +232,9 @@
       "price": 16,
       "calories": 20,
       "emoji": "🍵",
-      "menuCategory": "纯茶"
+      "menuCategory": "纯茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 清瓶绿茶: 透明玻璃瓶装的清澈黄绿色茶汤.",
+      "image": "restaurants/heytea/items/ht_qplc.jpg"
     },
     {
       "id": "ht_dhp",
@@ -205,7 +243,9 @@
       "price": 20,
       "calories": 15,
       "emoji": "🍵",
-      "menuCategory": "纯茶"
+      "menuCategory": "纯茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 大红袍: 透明杯中琥珀红色乌龙茶，茶汤清澈.",
+      "image": "restaurants/heytea/items/ht_dhp.jpg"
     },
     {
       "id": "ht_mlcx",
@@ -214,7 +254,9 @@
       "price": 22,
       "calories": 40,
       "emoji": "🍵",
-      "menuCategory": "纯茶"
+      "menuCategory": "纯茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 茉莉初雪: 透明杯中淡黄色茉莉花茶，杯口点缀一朵茉莉花.",
+      "image": "restaurants/heytea/items/ht_mlcx.jpg"
     },
     {
       "id": "ht_zsbbj",
@@ -223,7 +265,9 @@
       "price": 15,
       "calories": 280,
       "emoji": "🧁",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芝士波波卷: 奶油色蛋糕卷切片，表面挤着芝士奶油，点缀黑色波波珍珠.",
+      "image": "restaurants/heytea/items/ht_zsbbj.jpg"
     },
     {
       "id": "ht_ynbbj",
@@ -232,7 +276,9 @@
       "price": 15,
       "calories": 260,
       "emoji": "🧁",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芋泥波波卷: 紫色芋泥蛋糕卷切片，卷心可见绵密芋泥纹理.",
+      "image": "restaurants/heytea/items/ht_ynbbj.jpg"
     },
     {
       "id": "ht_mcdgj",
@@ -241,7 +287,9 @@
       "price": 18,
       "calories": 300,
       "emoji": "🍰",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 抹茶蛋糕卷: 绿色抹茶蛋糕卷切片，卷心奶油清晰可见.",
+      "image": "restaurants/heytea/items/ht_mcdgj.jpg"
     },
     {
       "id": "ht_zst",
@@ -250,7 +298,9 @@
       "price": 12,
       "calories": 220,
       "emoji": "🥧",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芝士挞: 圆形挞皮盛着浓郁焦黄芝士馅，表面微微烤焦.",
+      "image": "restaurants/heytea/items/ht_zst.jpg"
     },
     {
       "id": "ht_zztt",
@@ -260,7 +310,9 @@
       "calories": 300,
       "emoji": "🍑",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 芝芝桃桃: 粉白色水蜜桃果茶，杯口覆盖一层奶盖.",
+      "image": "restaurants/heytea/items/ht_zztt.jpg"
     },
     {
       "id": "ht_htbbnr",
@@ -270,7 +322,9 @@
       "calories": 340,
       "emoji": "🧋",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 黑糖波波牛乳: 透明杯中黑糖色波波珍珠沉底，上层白色牛乳分层明显.",
+      "image": "restaurants/heytea/items/ht_htbbnr.jpg"
     },
     {
       "id": "ht_bdnc",
@@ -279,7 +333,9 @@
       "price": 25,
       "calories": 310,
       "emoji": "🍮",
-      "menuCategory": "奶茶"
+      "menuCategory": "奶茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 布丁奶茶: 杯中焦糖布丁块与浅棕色奶茶交融.",
+      "image": "restaurants/heytea/items/ht_bdnc.jpg"
     },
     {
       "id": "ht_flfqc",
@@ -288,7 +344,9 @@
       "price": 22,
       "calories": 60,
       "emoji": "🍍",
-      "menuCategory": "纯茶"
+      "menuCategory": "纯茶",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 凤梨福气茶: 透明杯中金黄色凤梨茶，漂浮着凤梨果肉块.",
+      "image": "restaurants/heytea/items/ht_flfqc.jpg"
     },
     {
       "id": "ht_htznms",
@@ -297,7 +355,12 @@
       "price": 20,
       "calories": 320,
       "emoji": "🍮",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 黑糖珍珠慕斯: 杯口一层绵密白色慕斯，杯身黑糖珍珠清晰可见.",
+      "image": "restaurants/heytea/items/ht_htznms.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 现代茶饮品牌视觉风格：清新明亮的白色或浅木色背景，柔和自然光，透明玻璃杯或牛皮纸杯盛装，杯身干净无过多装饰，整体传递年轻、清爽、精致的新式茶饮氛围。 画面主体是一杯喜茶招牌果茶：透明杯中装满新鲜水果果肉，杯壁挂着清凉水珠，插着透明吸管，桌面简洁干净，自然光下呈现清新解暑的氛围，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/heytea/banner.jpg"
 }
