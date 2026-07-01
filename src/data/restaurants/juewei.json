@@ -33,7 +33,9 @@
       "calories": 320,
       "emoji": "🦆",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 麻辣鸭脖: 深酱色鸭脖，表面裹着红油辣椒，摆放整齐.",
+      "image": "restaurants/juewei/items/jw_mlyb.jpg"
     },
     {
       "id": "jw_xlyc",
@@ -43,7 +45,9 @@
       "calories": 380,
       "emoji": "🍗",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 香辣鸭翅: 深酱色鸭翅，表皮油亮，撒着辣椒碎.",
+      "image": "restaurants/juewei/items/jw_xlyc.jpg"
     },
     {
       "id": "jw_yss",
@@ -53,7 +57,9 @@
       "calories": 280,
       "emoji": "🦴",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸭锁骨: 深酱色鸭锁骨块，纹理清晰.",
+      "image": "restaurants/juewei/items/jw_yss.jpg"
     },
     {
       "id": "jw_yz",
@@ -62,7 +68,9 @@
       "price": 24,
       "calories": 260,
       "emoji": "🦶",
-      "menuCategory": "鸭货"
+      "menuCategory": "鸭货",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸭掌: 深酱色鸭掌，表皮油亮饱满.",
+      "image": "restaurants/juewei/items/jw_yz.jpg"
     },
     {
       "id": "jw_ys",
@@ -71,7 +79,9 @@
       "price": 30,
       "calories": 240,
       "emoji": "👅",
-      "menuCategory": "鸭货"
+      "menuCategory": "鸭货",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸭舌: 小巧深酱色鸭舌整齐排列.",
+      "image": "restaurants/juewei/items/jw_ys.jpg"
     },
     {
       "id": "jw_yc",
@@ -80,7 +90,9 @@
       "price": 18,
       "calories": 220,
       "emoji": "🍢",
-      "menuCategory": "鸭货"
+      "menuCategory": "鸭货",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸭肠: 深酱色鸭肠打卷码放.",
+      "image": "restaurants/juewei/items/jw_yc.jpg"
     },
     {
       "id": "jw_yz2",
@@ -89,7 +101,9 @@
       "price": 16,
       "calories": 200,
       "emoji": "🍖",
-      "menuCategory": "鸭货"
+      "menuCategory": "鸭货",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸭胗: 深酱色鸭胗切片.",
+      "image": "restaurants/juewei/items/jw_yz2.jpg"
     },
     {
       "id": "jw_yt",
@@ -98,7 +112,9 @@
       "price": 12,
       "calories": 180,
       "emoji": "🦆",
-      "menuCategory": "鸭货"
+      "menuCategory": "鸭货",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 整只鸭头: 整只深酱色卤鸭头.",
+      "image": "restaurants/juewei/items/jw_yt.jpg"
     },
     {
       "id": "jw_op",
@@ -107,7 +123,9 @@
       "price": 8,
       "calories": 100,
       "emoji": "🪷",
-      "menuCategory": "素菜"
+      "menuCategory": "素菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 藕片: 白色藕片切块，裹着卤汁，孔洞清晰.",
+      "image": "restaurants/juewei/items/jw_op.jpg"
     },
     {
       "id": "jw_dfg",
@@ -116,7 +134,9 @@
       "price": 6,
       "calories": 150,
       "emoji": "🧊",
-      "menuCategory": "素菜"
+      "menuCategory": "素菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 豆腐干: 深褐色豆腐干切块.",
+      "image": "restaurants/juewei/items/jw_dfg.jpg"
     },
     {
       "id": "jw_hs",
@@ -125,7 +145,9 @@
       "price": 7,
       "calories": 280,
       "emoji": "🥜",
-      "menuCategory": "素菜"
+      "menuCategory": "素菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 花生: 红褐色卤花生颗粒堆放.",
+      "image": "restaurants/juewei/items/jw_hs.jpg"
     },
     {
       "id": "jw_hdj",
@@ -134,7 +156,9 @@
       "price": 6,
       "calories": 60,
       "emoji": "🎋",
-      "menuCategory": "素菜"
+      "menuCategory": "素菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 海带结: 深绿色海带结整齐码放.",
+      "image": "restaurants/juewei/items/jw_hdj.jpg"
     },
     {
       "id": "jw_jzg",
@@ -143,7 +167,9 @@
       "price": 8,
       "calories": 50,
       "emoji": "🍄",
-      "menuCategory": "素菜"
+      "menuCategory": "素菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 金针菇: 淡黄色金针菇卤味码放.",
+      "image": "restaurants/juewei/items/jw_jzg.jpg"
     },
     {
       "id": "jw_me",
@@ -152,7 +178,9 @@
       "price": 7,
       "calories": 40,
       "emoji": "🍂",
-      "menuCategory": "素菜"
+      "menuCategory": "素菜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 木耳: 黑色木耳片堆放.",
+      "image": "restaurants/juewei/items/jw_me.jpg"
     },
     {
       "id": "jw_xlxw",
@@ -161,7 +189,9 @@
       "price": 35,
       "calories": 320,
       "emoji": "🦞",
-      "menuCategory": "海鲜"
+      "menuCategory": "海鲜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 小龙虾尾: 红亮小龙虾尾整齐码放.",
+      "image": "restaurants/juewei/items/jw_xlxw.jpg"
     },
     {
       "id": "jw_yys",
@@ -170,7 +200,9 @@
       "price": 28,
       "calories": 220,
       "emoji": "🦑",
-      "menuCategory": "海鲜"
+      "menuCategory": "海鲜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鱿鱼须: 深褐色鱿鱼须卷曲码放.",
+      "image": "restaurants/juewei/items/jw_yys.jpg"
     },
     {
       "id": "jw_bs",
@@ -179,7 +211,9 @@
       "price": 22,
       "calories": 180,
       "emoji": "🐟",
-      "menuCategory": "海鲜"
+      "menuCategory": "海鲜",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 basa鱼片: 白色嫩滑鱼片码放.",
+      "image": "restaurants/juewei/items/jw_bs.jpg"
     },
     {
       "id": "jw_lzt",
@@ -188,7 +222,9 @@
       "price": 26,
       "calories": 420,
       "emoji": "🍖",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 卤猪蹄: 整只深酱色卤猪蹄，胶质油亮.",
+      "image": "restaurants/juewei/items/jw_lzt.jpg"
     },
     {
       "id": "jw_nrl",
@@ -197,7 +233,9 @@
       "price": 30,
       "calories": 260,
       "emoji": "🥩",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 牛肉粒: 深褐色牛肉粒码放.",
+      "image": "restaurants/juewei/items/jw_nrl.jpg"
     },
     {
       "id": "jw_jz",
@@ -206,7 +244,9 @@
       "price": 15,
       "calories": 240,
       "emoji": "🍗",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸡爪: 深酱色鸡爪码放.",
+      "image": "restaurants/juewei/items/jw_jz.jpg"
     },
     {
       "id": "jw_zed",
@@ -215,7 +255,9 @@
       "price": 18,
       "calories": 250,
       "emoji": "🐷",
-      "menuCategory": "肉类"
+      "menuCategory": "肉类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 猪耳朵: 深褐色猪耳朵切片.",
+      "image": "restaurants/juewei/items/jw_zed.jpg"
     },
     {
       "id": "jw_ld",
@@ -224,7 +266,9 @@
       "price": 3,
       "calories": 90,
       "emoji": "🥚",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 卤蛋: 对半切开的卤蛋，蛋黄橙黄流沙.",
+      "image": "restaurants/juewei/items/jw_ld.jpg"
     },
     {
       "id": "jw_xgft",
@@ -233,7 +277,9 @@
       "price": 8,
       "calories": 220,
       "emoji": "🍙",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 香菇饭团: 白色饭团，表面镶嵌香菇丁.",
+      "image": "restaurants/juewei/items/jw_xgft.jpg"
     },
     {
       "id": "jw_lrf",
@@ -242,7 +288,9 @@
       "price": 15,
       "calories": 480,
       "emoji": "🍚",
-      "menuCategory": "主食"
+      "menuCategory": "主食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 卤肉饭: 深酱色卤肉块浇在白米饭上.",
+      "image": "restaurants/juewei/items/jw_lrf.jpg"
     },
     {
       "id": "jw_zhpp",
@@ -252,7 +300,9 @@
       "calories": 850,
       "emoji": "🍱",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 综合拼盘（小）: 多种卤味拼盘整齐摆放.",
+      "image": "restaurants/juewei/items/jw_zhpp.jpg"
     },
     {
       "id": "jw_zhpp2",
@@ -261,7 +311,9 @@
       "price": 88,
       "calories": 1600,
       "emoji": "🍱",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 综合拼盘（大）: 大份多种卤味拼盘满满摆放.",
+      "image": "restaurants/juewei/items/jw_zhpp2.jpg"
     },
     {
       "id": "jw_qltc",
@@ -270,7 +322,9 @@
       "price": 68,
       "calories": 1200,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 情侣套餐: 精选卤味组合双人份摆盘.",
+      "image": "restaurants/juewei/items/jw_qltc.jpg"
     },
     {
       "id": "jw_drcx",
@@ -279,7 +333,9 @@
       "price": 35,
       "calories": 600,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 单人尝鲜装: 小份多样卤味摆盘.",
+      "image": "restaurants/juewei/items/jw_drcx.jpg"
     },
     {
       "id": "jw_ybst",
@@ -288,7 +344,9 @@
       "price": 42,
       "calories": 750,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 鸭脖三件套: 鸭脖鸭翅鸭掌三种卤味组合摆盘.",
+      "image": "restaurants/juewei/items/jw_ybst.jpg"
     },
     {
       "id": "jw_mlpp",
@@ -297,7 +355,9 @@
       "price": 55,
       "calories": 900,
       "emoji": "🌶️",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 麻辣拼盘: 红油辣椒覆盖的麻辣卤味拼盘.",
+      "image": "restaurants/juewei/items/jw_mlpp.jpg"
     },
     {
       "id": "jw_wgyb",
@@ -306,7 +366,12 @@
       "price": 26,
       "calories": 300,
       "emoji": "🦆",
-      "menuCategory": "鸭货"
+      "menuCategory": "鸭货",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 无骨鸭脖: 去骨鸭脖肉，深酱色码放.",
+      "image": "restaurants/juewei/items/jw_wgyb.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 卤味小吃视觉风格：深红酱色调，柔和暖光，传递卤香浓郁、街头卤味的诱人氛围。 画面主体是一份色泽酱红的卤味拼盘，摆放在盘中，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/juewei/banner.jpg"
 }
