@@ -32,7 +32,9 @@
       "calories": 280,
       "emoji": "🧀",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 半熟芝士: 一块方形半熟芝士蛋糕，表层微焦，内芯浅黄绵密.",
+      "image": "restaurants/holiland/items/hll_bsz.jpg"
     },
     {
       "id": "hll_tls",
@@ -42,7 +44,9 @@
       "calories": 380,
       "emoji": "🍰",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 提拉米苏: 一块提拉米苏，层次分明，表面撒可可粉.",
+      "image": "restaurants/holiland/items/hll_tls.jpg"
     },
     {
       "id": "hll_hsl",
@@ -52,7 +56,9 @@
       "calories": 1800,
       "emoji": "🎂",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 黑森林蛋糕（6寸）: 圆形黑森林蛋糕，表面点缀樱桃和巧克力碎.",
+      "image": "restaurants/holiland/items/hll_hsl.jpg"
     },
     {
       "id": "hll_cmdg",
@@ -61,7 +67,9 @@
       "price": 98,
       "calories": 1600,
       "emoji": "🍓",
-      "menuCategory": "蛋糕"
+      "menuCategory": "蛋糕",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 草莓蛋糕（6寸）: 圆形蛋糕，表面铺满新鲜草莓，奶油裱花.",
+      "image": "restaurants/holiland/items/hll_cmdg.jpg"
     },
     {
       "id": "hll_mgms",
@@ -70,7 +78,9 @@
       "price": 92,
       "calories": 1500,
       "emoji": "🥭",
-      "menuCategory": "蛋糕"
+      "menuCategory": "蛋糕",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 芒果慕斯蛋糕: 黄色芒果慕斯蛋糕，表面点缀芒果丁.",
+      "image": "restaurants/holiland/items/hll_mgms.jpg"
     },
     {
       "id": "hll_qklms",
@@ -79,7 +89,9 @@
       "price": 85,
       "calories": 1550,
       "emoji": "🍫",
-      "menuCategory": "蛋糕"
+      "menuCategory": "蛋糕",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 巧克力慕斯: 深棕色巧克力慕斯蛋糕，表面光泽淋面.",
+      "image": "restaurants/holiland/items/hll_qklms.jpg"
     },
     {
       "id": "hll_ldql",
@@ -88,7 +100,9 @@
       "price": 105,
       "calories": 1700,
       "emoji": "🥞",
-      "menuCategory": "蛋糕"
+      "menuCategory": "蛋糕",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 榴莲千层: 多层千层皮蛋糕，切面可见奶油和榴莲层次.",
+      "image": "restaurants/holiland/items/hll_ldql.jpg"
     },
     {
       "id": "hll_hsred",
@@ -97,7 +111,9 @@
       "price": 90,
       "calories": 1650,
       "emoji": "🎂",
-      "menuCategory": "蛋糕"
+      "menuCategory": "蛋糕",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 红丝绒蛋糕: 红色蛋糕体，白色奶油霜夹层.",
+      "image": "restaurants/holiland/items/hll_hsred.jpg"
     },
     {
       "id": "hll_mchd",
@@ -106,7 +122,9 @@
       "price": 95,
       "calories": 1580,
       "emoji": "🍵",
-      "menuCategory": "蛋糕"
+      "menuCategory": "蛋糕",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 抹茶红豆蛋糕: 绿色抹茶蛋糕，可见红豆颗粒.",
+      "image": "restaurants/holiland/items/hll_mchd.jpg"
     },
     {
       "id": "hll_fg",
@@ -115,7 +133,9 @@
       "price": 12,
       "calories": 280,
       "emoji": "🥖",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 法棍: 金黄色长条法棍面包，表皮开裂纹理.",
+      "image": "restaurants/holiland/items/hll_fg.jpg"
     },
     {
       "id": "hll_qmts",
@@ -124,7 +144,9 @@
       "price": 16,
       "calories": 320,
       "emoji": "🍞",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 全麦吐司: 浅褐色全麦吐司切片.",
+      "image": "restaurants/holiland/items/hll_qmts.jpg"
     },
     {
       "id": "hll_rsb",
@@ -133,7 +155,9 @@
       "price": 8,
       "calories": 260,
       "emoji": "🍞",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 肉松包: 圆形面包表面覆盖着肉松和沙拉酱.",
+      "image": "restaurants/holiland/items/hll_rsb.jpg"
     },
     {
       "id": "hll_nlb",
@@ -142,7 +166,9 @@
       "price": 10,
       "calories": 300,
       "emoji": "🧀",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 奶酪包: 圆形面包，表面撒着奶酪碎.",
+      "image": "restaurants/holiland/items/hll_nlb.jpg"
     },
     {
       "id": "hll_bl",
@@ -151,7 +177,9 @@
       "price": 7,
       "calories": 250,
       "emoji": "🍍",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 菠萝包: 金黄色菠萝包，表皮龟裂纹理.",
+      "image": "restaurants/holiland/items/hll_bl.jpg"
     },
     {
       "id": "hll_njb",
@@ -160,7 +188,9 @@
       "price": 9,
       "calories": 270,
       "emoji": "🥐",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 牛角包: 金黄色牛角包，层次分明的酥皮.",
+      "image": "restaurants/holiland/items/hll_njb.jpg"
     },
     {
       "id": "hll_hdb",
@@ -169,7 +199,9 @@
       "price": 6,
       "calories": 240,
       "emoji": "🍞",
-      "menuCategory": "面包"
+      "menuCategory": "面包",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 红豆包: 圆形面包，表面点缀红豆.",
+      "image": "restaurants/holiland/items/hll_hdb.jpg"
     },
     {
       "id": "hll_dt",
@@ -179,7 +211,9 @@
       "calories": 480,
       "emoji": "🥧",
       "menuCategory": "点心",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 蛋挞（4个装）: 四个金黄色蛋挞，挞皮层次分明.",
+      "image": "restaurants/holiland/items/hll_dt.jpg"
     },
     {
       "id": "hll_pf",
@@ -188,7 +222,9 @@
       "price": 20,
       "calories": 400,
       "emoji": "🧁",
-      "menuCategory": "点心"
+      "menuCategory": "点心",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 泡芙（4个装）: 四个圆形泡芙，表面撒着糖粉.",
+      "image": "restaurants/holiland/items/hll_pf.jpg"
     },
     {
       "id": "hll_qq",
@@ -197,7 +233,9 @@
       "price": 25,
       "calories": 550,
       "emoji": "🍪",
-      "menuCategory": "点心"
+      "menuCategory": "点心",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 曲奇饼干（盒）: 金黄色曲奇饼干整齐排列.",
+      "image": "restaurants/holiland/items/hll_qq.jpg"
     },
     {
       "id": "hll_mkl",
@@ -206,7 +244,9 @@
       "price": 45,
       "calories": 380,
       "emoji": "🍬",
-      "menuCategory": "点心"
+      "menuCategory": "点心",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 马卡龙（6个装）: 六个色彩缤纷的马卡龙整齐排列.",
+      "image": "restaurants/holiland/items/hll_mkl.jpg"
     },
     {
       "id": "hll_ts",
@@ -215,7 +255,9 @@
       "price": 14,
       "calories": 320,
       "emoji": "🍪",
-      "menuCategory": "点心"
+      "menuCategory": "点心",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 桃酥: 金黄色圆形桃酥，表面裂纹.",
+      "image": "restaurants/holiland/items/hll_ts.jpg"
     },
     {
       "id": "hll_ldg",
@@ -224,7 +266,9 @@
       "price": 16,
       "calories": 280,
       "emoji": "🍡",
-      "menuCategory": "点心"
+      "menuCategory": "点心",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 绿豆糕: 淡绿色绿豆糕块，表面印花纹理.",
+      "image": "restaurants/holiland/items/hll_ldg.jpg"
     },
     {
       "id": "hll_lpb",
@@ -233,7 +277,9 @@
       "price": 12,
       "calories": 260,
       "emoji": "🥮",
-      "menuCategory": "点心"
+      "menuCategory": "点心",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 老婆饼: 金黄色老婆饼，表皮多层酥脆.",
+      "image": "restaurants/holiland/items/hll_lpb.jpg"
     },
     {
       "id": "hll_xnc",
@@ -242,7 +288,9 @@
       "price": 18,
       "calories": 220,
       "emoji": "🧋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one cup of milk tea, centered on a plain background, absolutely nothing else in frame — no bread, no pastry, no food, no plates, no watermark. Just the single cup. Soft studio lighting, square crop.",
+      "image": "restaurants/holiland/items/hll_xnc.jpg"
     },
     {
       "id": "hll_nms",
@@ -251,7 +299,9 @@
       "price": 12,
       "calories": 60,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one clear glass of lemon water with lemon slices, centered on a plain background, absolutely nothing else in frame — no bread, no pastry, no food, no plates, no watermark. Just the single glass. Soft studio lighting, square crop.",
+      "image": "restaurants/holiland/items/hll_nms.jpg"
     },
     {
       "id": "hll_ds",
@@ -260,7 +310,9 @@
       "price": 8,
       "calories": 90,
       "emoji": "🥛",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one cup of soy milk, centered on a plain background, absolutely nothing else in frame — no bread, no pastry, no food, no plates, no watermark. Just the single cup. Soft studio lighting, square crop.",
+      "image": "restaurants/holiland/items/hll_ds.jpg"
     },
     {
       "id": "hll_rms",
@@ -269,7 +321,9 @@
       "price": 20,
       "calories": 15,
       "emoji": "☕",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one white ceramic cup of black americano coffee, centered on a plain background, absolutely nothing else in frame — no bread, no pastry, no food, no plates, no watermark. Just the single cup of coffee. Soft studio lighting, square crop.",
+      "image": "restaurants/holiland/items/hll_rms.jpg"
     },
     {
       "id": "hll_xwctc",
@@ -278,7 +332,9 @@
       "price": 68,
       "calories": 1100,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 下午茶双人套餐: 蛋糕和面包搭配茶具摆放的下午茶组合.",
+      "image": "restaurants/holiland/items/hll_xwctc.jpg"
     },
     {
       "id": "hll_srdgtc",
@@ -287,7 +343,9 @@
       "price": 128,
       "calories": 2200,
       "emoji": "🎂",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 生日蛋糕套餐（8寸）: 一整个大尺寸生日蛋糕，奶油裱花精美.",
+      "image": "restaurants/holiland/items/hll_srdgtc.jpg"
     },
     {
       "id": "hll_zcz",
@@ -296,7 +354,9 @@
       "price": 22,
       "calories": 480,
       "emoji": "🍳",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 早餐组合: 面包配一杯豆浆的早餐组合.",
+      "image": "restaurants/holiland/items/hll_zcz.jpg"
     },
     {
       "id": "hll_jrlh",
@@ -305,7 +365,12 @@
       "price": 158,
       "calories": 2600,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 节日礼盒: 精美糕点礼盒，多种糕点整齐摆放.",
+      "image": "restaurants/holiland/items/hll_jrlh.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 烘焙甜点品牌视觉风格：温暖金黄色调，柔和自然光线，传递精致香甜、下午茶惬意的烘焙氛围。 画面主体是一块精致蛋糕，奶油裱花细腻，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/holiland/banner.jpg"
 }
