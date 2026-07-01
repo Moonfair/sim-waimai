@@ -35,7 +35,9 @@
       "calories": 480,
       "emoji": "🍔",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 香辣鸡腿堡: 金黄酥脆炸鸡腿夹在芝麻汉堡包里，配生菜和红色酱料，侧面剖切露出多汁鸡肉.",
+      "image": "restaurants/kfc/items/xlb.jpg"
     },
     {
       "id": "ywj",
@@ -45,7 +47,9 @@
       "calories": 520,
       "emoji": "🍗",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 原味鸡（2块）: 两块金黄酥脆炸鸡块，表皮凹凸有致，摆在纸托盘里.",
+      "image": "restaurants/kfc/items/ywj.jpg"
     },
     {
       "id": "xts",
@@ -54,7 +58,9 @@
       "price": 16,
       "calories": 450,
       "emoji": "🍟",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 薯条（大）: 金黄薯条堆满红色纸质薯条盒，微微冒着热气.",
+      "image": "restaurants/kfc/items/xts.jpg"
     },
     {
       "id": "jxb",
@@ -63,7 +69,9 @@
       "price": 27,
       "calories": 490,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 劲辣鸡腿堡: 深红色辣酱汁的炸鸡腿堡，夹层生菜若隐若现，剖切露出多汁鸡肉.",
+      "image": "restaurants/kfc/items/jxb.jpg"
     },
     {
       "id": "popcorn",
@@ -72,7 +80,9 @@
       "price": 18,
       "calories": 380,
       "emoji": "🍿",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 爆米花鸡（大）: 小块金黄酥脆爆米花鸡堆满纸盒，颗粒分明.",
+      "image": "restaurants/kfc/items/popcorn.jpg"
     },
     {
       "id": "cola",
@@ -81,7 +91,9 @@
       "price": 8,
       "calories": 150,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 可口可乐（中）: 红色纸杯装可乐，杯口插着吸管，杯身有水珠.",
+      "image": "restaurants/kfc/items/cola.jpg"
     },
     {
       "id": "tc_kfc",
@@ -90,7 +102,9 @@
       "price": 85,
       "calories": 2200,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 双人全家桶套餐: 红色全家桶里装满炸鸡块，配薯条和可乐杯，套餐组合摆盘.",
+      "image": "restaurants/kfc/items/tc_kfc.jpg"
     },
     {
       "id": "kfc_lswcb",
@@ -99,7 +113,9 @@
       "price": 30,
       "calories": 650,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 辣味双层牛堡: 双层牛肉饼汉堡，夹层生菜番茄，剖切露出多汁牛肉层.",
+      "image": "restaurants/kfc/items/kfc_lswcb.jpg"
     },
     {
       "id": "kfc_tjjtb",
@@ -108,7 +124,9 @@
       "price": 26,
       "calories": 500,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 藤椒鸡腿堡: 金黄炸鸡腿堡夹青花椒酱料，微微泛绿的酱汁.",
+      "image": "restaurants/kfc/items/kfc_tjjtb.jpg"
     },
     {
       "id": "kfc_bsjtb",
@@ -117,7 +135,9 @@
       "price": 24,
       "calories": 470,
       "emoji": "🍔",
-      "menuCategory": "汉堡"
+      "menuCategory": "汉堡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 板烧鸡腿堡: 照烧酱色泽的鸡腿排夹在汉堡里，酱汁油亮.",
+      "image": "restaurants/kfc/items/kfc_bsjtb.jpg"
     },
     {
       "id": "kfc_xgj",
@@ -126,7 +146,9 @@
       "price": 26,
       "calories": 480,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 香骨鸡（2块）: 两块带骨酥炸鸡块，表皮金黄酥脆.",
+      "image": "restaurants/kfc/items/kfc_xgj.jpg"
     },
     {
       "id": "kfc_wgjl",
@@ -135,7 +157,9 @@
       "price": 22,
       "calories": 420,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 无骨鸡柳（4条）: 四条金黄酥脆鸡柳整齐摆放，无骨易食.",
+      "image": "restaurants/kfc/items/kfc_wgjl.jpg"
     },
     {
       "id": "kfc_kzctg",
@@ -144,7 +168,9 @@
       "price": 20,
       "calories": 400,
       "emoji": "🍗",
-      "menuCategory": "炸鸡"
+      "menuCategory": "炸鸡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 咔滋脆鸡腿: 一整只金黄酥脆炸鸡腿，表皮凹凸带有酥脆纹理.",
+      "image": "restaurants/kfc/items/kfc_kzctg.jpg"
     },
     {
       "id": "kfc_jmh",
@@ -153,7 +179,9 @@
       "price": 15,
       "calories": 380,
       "emoji": "🍗",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 鸡米花（中）: 一堆金黄酥脆小颗粒鸡米花装在纸盒里.",
+      "image": "restaurants/kfc/items/kfc_jmh.jpg"
     },
     {
       "id": "kfc_ymsl",
@@ -162,7 +190,9 @@
       "price": 10,
       "calories": 150,
       "emoji": "🌽",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 玉米沙拉: 黄色玉米粒沙拉盛在小杯中，点缀些许沙拉酱.",
+      "image": "restaurants/kfc/items/kfc_ymsl.jpg"
     },
     {
       "id": "kfc_tdn",
@@ -171,7 +201,9 @@
       "price": 8,
       "calories": 180,
       "emoji": "🥔",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 土豆泥: 绵密顺滑白色土豆泥盛在小杯中，表面浇有肉汁.",
+      "image": "restaurants/kfc/items/kfc_tdn.jpg"
     },
     {
       "id": "kfc_dt",
@@ -180,7 +212,9 @@
       "price": 8,
       "calories": 220,
       "emoji": "🥧",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 蛋挞: 金黄色蛋挞，挞皮层次分明，蛋馅微微焦糖色.",
+      "image": "restaurants/kfc/items/kfc_dt.jpg"
     },
     {
       "id": "kfc_lbjjq",
@@ -190,7 +224,9 @@
       "calories": 320,
       "emoji": "🌯",
       "menuCategory": "卷类",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 老北京鸡肉卷: 卷饼皮包裹炸鸡丝和葱丝，酱色酱汁，卷成圆柱状.",
+      "image": "restaurants/kfc/items/kfc_lbjjq.jpg"
     },
     {
       "id": "kfc_mxgjrq",
@@ -199,7 +235,9 @@
       "price": 13,
       "calories": 340,
       "emoji": "🌯",
-      "menuCategory": "卷类"
+      "menuCategory": "卷类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 墨西哥鸡肉卷: 卷饼皮包裹鸡肉粒和蔬菜丝，卷成圆柱状，剖面可见馅料.",
+      "image": "restaurants/kfc/items/kfc_mxgjrq.jpg"
     },
     {
       "id": "kfc_xltjq",
@@ -208,7 +246,9 @@
       "price": 14,
       "calories": 360,
       "emoji": "🌯",
-      "menuCategory": "卷类"
+      "menuCategory": "卷类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 香辣鸡腿卷: 卷饼皮包裹香辣鸡腿肉，卷成圆柱状.",
+      "image": "restaurants/kfc/items/kfc_xltjq.jpg"
     },
     {
       "id": "kfc_kfnt",
@@ -217,7 +257,9 @@
       "price": 15,
       "calories": 180,
       "emoji": "☕",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple product photo of one paper cup of latte coffee with milk foam on top, centered on a plain white background, nothing else in frame, no food, no chicken, no box, no plate, no text, no logo, no watermark, just the single coffee cup, soft studio lighting, square crop.",
+      "image": "restaurants/kfc/items/kfc_kfnt.jpg"
     },
     {
       "id": "kfc_hc",
@@ -226,7 +268,9 @@
       "price": 8,
       "calories": 60,
       "emoji": "🍵",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 红茶: 透明杯装琥珀色红茶，杯身简洁.",
+      "image": "restaurants/kfc/items/kfc_hc.jpg"
     },
     {
       "id": "kfc_mtscc",
@@ -235,7 +279,9 @@
       "price": 12,
       "calories": 130,
       "emoji": "🍑",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 蜜桃四季春: 透明杯装浅黄色茶饮，杯中可见蜜桃果肉.",
+      "image": "restaurants/kfc/items/kfc_mtscc.jpg"
     },
     {
       "id": "kfc_cz",
@@ -244,7 +290,9 @@
       "price": 10,
       "calories": 110,
       "emoji": "🍊",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 橙汁: 透明杯装橙黄色鲜榨橙汁，杯口漂浮橙肉.",
+      "image": "restaurants/kfc/items/kfc_cz.jpg"
     },
     {
       "id": "kfc_tt",
@@ -253,7 +301,9 @@
       "price": 5,
       "calories": 150,
       "emoji": "🍦",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 甜筒: 白色螺旋形香草冰淇淋筒，蛋筒纹理清晰.",
+      "image": "restaurants/kfc/items/kfc_tt.jpg"
     },
     {
       "id": "kfc_xdsd",
@@ -262,7 +312,9 @@
       "price": 12,
       "calories": 280,
       "emoji": "🍨",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 新地圣代: 杯装香草冰淇淋，表面淋着焦糖酱.",
+      "image": "restaurants/kfc/items/kfc_xdsd.jpg"
     },
     {
       "id": "kfc_qklxd",
@@ -271,7 +323,9 @@
       "price": 12,
       "calories": 300,
       "emoji": "🍫",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 巧克力新地: 杯装香草冰淇淋，表面淋着浓稠巧克力酱.",
+      "image": "restaurants/kfc/items/kfc_qklxd.jpg"
     },
     {
       "id": "kfc_xnymz",
@@ -280,7 +334,9 @@
       "price": 8,
       "calories": 150,
       "emoji": "🥣",
-      "menuCategory": "早餐"
+      "menuCategory": "早餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 香浓玉米粥: 碗装淡黄色玉米粥，质地浓稠.",
+      "image": "restaurants/kfc/items/kfc_xnymz.jpg"
     },
     {
       "id": "kfc_yt",
@@ -289,7 +345,9 @@
       "price": 4,
       "calories": 200,
       "emoji": "🥖",
-      "menuCategory": "早餐"
+      "menuCategory": "早餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 油条: 金黄色长条油条，表皮酥脆有气泡纹理.",
+      "image": "restaurants/kfc/items/kfc_yt.jpg"
     },
     {
       "id": "kfc_ds",
@@ -298,7 +356,9 @@
       "price": 5,
       "calories": 90,
       "emoji": "🥛",
-      "menuCategory": "早餐"
+      "menuCategory": "早餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 豆浆: 白色纸杯装乳白色豆浆.",
+      "image": "restaurants/kfc/items/kfc_ds.jpg"
     },
     {
       "id": "kfc_pgdb",
@@ -307,7 +367,9 @@
       "price": 12,
       "calories": 320,
       "emoji": "🍔",
-      "menuCategory": "早餐"
+      "menuCategory": "早餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 培根蛋堡: 汉堡包夹培根和煎蛋，蛋黄微微流出.",
+      "image": "restaurants/kfc/items/kfc_pgdb.jpg"
     },
     {
       "id": "kfc_sb",
@@ -316,7 +378,12 @@
       "price": 8,
       "calories": 200,
       "emoji": "🥔",
-      "menuCategory": "早餐"
+      "menuCategory": "早餐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 薯饼: 金黄色长方形薯饼，表皮酥脆.",
+      "image": "restaurants/kfc/items/kfc_sb.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 美式炸鸡快餐品牌视觉风格：红白撞色为主的暖黄色调灯光，明快活力的西式快餐氛围。 画面主体是金黄酥脆的炸鸡块和薯条摆放在红白撞色餐盘里，微微冒着热气，背景简洁明快，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/kfc/banner.jpg"
 }
