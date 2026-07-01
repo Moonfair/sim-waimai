@@ -33,7 +33,9 @@
       "calories": 1200,
       "emoji": "🍕",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 至尊比萨（9寸）: 圆形披萨饼，铺满培根香肠青椒洋葱等多种配料，芝士融化.",
+      "image": "restaurants/pizzahut/items/ph_zz.jpg"
     },
     {
       "id": "ph_ld",
@@ -43,7 +45,9 @@
       "calories": 1350,
       "emoji": "🍕",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 榴莲比萨: 圆形披萨饼，表面铺着黄色榴莲果肉，芝士拉丝.",
+      "image": "restaurants/pizzahut/items/ph_ld.jpg"
     },
     {
       "id": "ph_pgmg",
@@ -52,7 +56,9 @@
       "price": 62,
       "calories": 1100,
       "emoji": "🍕",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 培根蘑菇比萨: 圆形披萨饼，铺着培根片和蘑菇片，芝士融化.",
+      "image": "restaurants/pizzahut/items/ph_pgmg.jpg"
     },
     {
       "id": "ph_xwy",
@@ -61,7 +67,9 @@
       "price": 58,
       "calories": 1000,
       "emoji": "🍕",
-      "menuCategory": "披萨"
+      "menuCategory": "披萨",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 夏威夷比萨: 圆形披萨饼，铺着菠萝块和火腿片.",
+      "image": "restaurants/pizzahut/items/ph_xwy.jpg"
     },
     {
       "id": "ph_hx",
@@ -70,7 +78,9 @@
       "price": 72,
       "calories": 1150,
       "emoji": "🍕",
-      "menuCategory": "披萨"
+      "menuCategory": "披萨",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 海鲜比萨: 圆形披萨饼，铺着虾仁鱿鱼圈和蟹柳.",
+      "image": "restaurants/pizzahut/items/ph_hx.jpg"
     },
     {
       "id": "ph_mgl",
@@ -79,7 +89,9 @@
       "price": 48,
       "calories": 900,
       "emoji": "🍕",
-      "menuCategory": "披萨"
+      "menuCategory": "披萨",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 玛格丽特比萨: 圆形披萨饼，铺着番茄片和罗勒叶，芝士简单.",
+      "image": "restaurants/pizzahut/items/ph_mgl.jpg"
     },
     {
       "id": "ph_zx",
@@ -88,7 +100,9 @@
       "price": 66,
       "calories": 1250,
       "emoji": "🍕",
-      "menuCategory": "披萨"
+      "menuCategory": "披萨",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 芝心比萨: 圆形披萨饼，切开一角露出拉丝芝士.",
+      "image": "restaurants/pizzahut/items/ph_zx.jpg"
     },
     {
       "id": "ph_nr",
@@ -97,7 +111,9 @@
       "price": 65,
       "calories": 1180,
       "emoji": "🍕",
-      "menuCategory": "披萨"
+      "menuCategory": "披萨",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 牛肉比萨: 圆形披萨饼，铺满牛肉粒和芝士.",
+      "image": "restaurants/pizzahut/items/ph_nr.jpg"
     },
     {
       "id": "ph_hjnl",
@@ -106,7 +122,9 @@
       "price": 32,
       "calories": 620,
       "emoji": "🍝",
-      "menuCategory": "意面"
+      "menuCategory": "意面",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 黑椒牛柳意面: 意面裹着黑椒酱汁，几片嫩牛柳点缀.",
+      "image": "restaurants/pizzahut/items/ph_hjnl.jpg"
     },
     {
       "id": "ph_ftj",
@@ -115,7 +133,9 @@
       "price": 28,
       "calories": 580,
       "emoji": "🍝",
-      "menuCategory": "意面"
+      "menuCategory": "意面",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 番茄肉酱意面: 意面裹着红色番茄肉酱.",
+      "image": "restaurants/pizzahut/items/ph_ftj.jpg"
     },
     {
       "id": "ph_nybg",
@@ -124,7 +144,9 @@
       "price": 30,
       "calories": 650,
       "emoji": "🍝",
-      "menuCategory": "意面"
+      "menuCategory": "意面",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 奶油培根意面: 意面裹着乳白色奶油酱，几片培根点缀.",
+      "image": "restaurants/pizzahut/items/ph_nybg.jpg"
     },
     {
       "id": "ph_hx2",
@@ -133,7 +155,9 @@
       "price": 36,
       "calories": 600,
       "emoji": "🍝",
-      "menuCategory": "意面"
+      "menuCategory": "意面",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 海鲜意面: 意面混着虾仁和蛤蜊.",
+      "image": "restaurants/pizzahut/items/ph_hx2.jpg"
     },
     {
       "id": "ph_jc",
@@ -143,7 +167,9 @@
       "calories": 480,
       "emoji": "🍗",
       "menuCategory": "小食",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 鸡翅（6只）: 六只金黄酥脆鸡翅整齐摆放.",
+      "image": "restaurants/pizzahut/items/ph_jc.jpg"
     },
     {
       "id": "ph_st",
@@ -152,7 +178,9 @@
       "price": 15,
       "calories": 380,
       "emoji": "🍟",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 薯条（中）: 金黄薯条堆放.",
+      "image": "restaurants/pizzahut/items/ph_st.jpg"
     },
     {
       "id": "ph_yc",
@@ -161,7 +189,9 @@
       "price": 16,
       "calories": 400,
       "emoji": "🧅",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 洋葱圈: 金黄酥脆洋葱圈堆叠.",
+      "image": "restaurants/pizzahut/items/ph_yc.jpg"
     },
     {
       "id": "ph_zst",
@@ -170,7 +200,9 @@
       "price": 20,
       "calories": 420,
       "emoji": "🧀",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 芝士条: 金黄芝士条，断面拉丝.",
+      "image": "restaurants/pizzahut/items/ph_zst.jpg"
     },
     {
       "id": "ph_smb",
@@ -179,7 +211,9 @@
       "price": 12,
       "calories": 300,
       "emoji": "🥖",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 蒜香面包: 金黄色蒜香面包片，表面撒着香草碎.",
+      "image": "restaurants/pizzahut/items/ph_smb.jpg"
     },
     {
       "id": "ph_jmh",
@@ -188,7 +222,9 @@
       "price": 18,
       "calories": 350,
       "emoji": "🍗",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 鸡米花: 金黄酥脆鸡米花颗粒堆放.",
+      "image": "restaurants/pizzahut/items/ph_jmh.jpg"
     },
     {
       "id": "ph_bfsl",
@@ -197,7 +233,9 @@
       "price": 22,
       "calories": 180,
       "emoji": "🥗",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 缤纷沙拉: 新鲜生菜番茄玉米粒混合沙拉.",
+      "image": "restaurants/pizzahut/items/ph_bfsl.jpg"
     },
     {
       "id": "ph_bs",
@@ -206,7 +244,9 @@
       "price": 8,
       "calories": 150,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one plastic cup of cola with ice and a straw, centered on a plain background, absolutely nothing else in frame — no pizza, no food, no plates, no other cups, no text except the drink logo, no watermark. Just the single cup of cola. Soft studio lighting, square crop.",
+      "image": "restaurants/pizzahut/items/ph_bs.jpg"
     },
     {
       "id": "ph_xb",
@@ -215,7 +255,9 @@
       "price": 8,
       "calories": 140,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one plastic cup of lemon-lime soda (Sprite-style) with ice, centered on a plain background, absolutely nothing else in frame — no pizza, no food, no plates, no other cups, no watermark. Just the single cup of soda. Soft studio lighting, square crop.",
+      "image": "restaurants/pizzahut/items/ph_xb.jpg"
     },
     {
       "id": "ph_xzcz",
@@ -224,7 +266,9 @@
       "price": 14,
       "calories": 120,
       "emoji": "🍊",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one clear glass cup of fresh orange juice with pulp floating, centered on a plain background, absolutely nothing else in frame — no pizza, no food, no plates, no other cups, no watermark. Just the single glass of juice. Soft studio lighting, square crop.",
+      "image": "restaurants/pizzahut/items/ph_xzcz.jpg"
     },
     {
       "id": "ph_nmhc",
@@ -233,7 +277,9 @@
       "price": 12,
       "calories": 100,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Simple isolated product photo of one clear glass cup of amber lemon black tea with a lemon slice floating, centered on a plain background, absolutely nothing else in frame — no pizza, no food, no plates, no other cups, no watermark. Just the single glass of tea. Soft studio lighting, square crop.",
+      "image": "restaurants/pizzahut/items/ph_nmhc.jpg"
     },
     {
       "id": "ph_rjqk",
@@ -243,7 +289,9 @@
       "calories": 450,
       "emoji": "🍫",
       "menuCategory": "甜品",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 熔岩巧克力蛋糕: 巧克力蛋糕切开，深棕色浓浆缓缓流出.",
+      "image": "restaurants/pizzahut/items/ph_rjqk.jpg"
     },
     {
       "id": "ph_tls",
@@ -252,7 +300,9 @@
       "price": 22,
       "calories": 380,
       "emoji": "🍰",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 提拉米苏: 方形提拉米苏，表面撒着可可粉.",
+      "image": "restaurants/pizzahut/items/ph_tls.jpg"
     },
     {
       "id": "ph_mgms",
@@ -261,7 +311,9 @@
       "price": 18,
       "calories": 320,
       "emoji": "🥭",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 芒果慕斯: 黄色芒果慕斯杯，顶部点缀芒果丁.",
+      "image": "restaurants/pizzahut/items/ph_mgms.jpg"
     },
     {
       "id": "ph_bql",
@@ -270,7 +322,9 @@
       "price": 10,
       "calories": 200,
       "emoji": "🍦",
-      "menuCategory": "甜品"
+      "menuCategory": "甜品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 冰淇淋: 白色香草冰淇淋球.",
+      "image": "restaurants/pizzahut/items/ph_bql.jpg"
     },
     {
       "id": "ph_srt",
@@ -279,7 +333,9 @@
       "price": 128,
       "calories": 2400,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 双人餐套餐: 一整个披萨配意面和小食摆满桌面，双人餐组合.",
+      "image": "restaurants/pizzahut/items/ph_srt.jpg"
     },
     {
       "id": "ph_jtht",
@@ -288,7 +344,9 @@
       "price": 158,
       "calories": 3000,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 家庭欢乐桶: 多种小食装满大桶，丰盛拼盘.",
+      "image": "restaurants/pizzahut/items/ph_jtht.jpg"
     },
     {
       "id": "ph_drt",
@@ -297,7 +355,12 @@
       "price": 45,
       "calories": 850,
       "emoji": "🎁",
-      "menuCategory": "热销"
+      "menuCategory": "热销",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 单人比萨套餐: 一块披萨配一杯饮料，单人套餐组合.",
+      "image": "restaurants/pizzahut/items/ph_drt.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 西式快餐品牌视觉风格：温暖红色调灯光，浓郁诱人的意式风情，传递丰盛欢聚的餐厅氛围。 画面主体是一整个刚出炉的披萨，芝士拉丝，配料丰富，微微冒着热气，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/pizzahut/banner.jpg"
 }
