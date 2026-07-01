@@ -33,7 +33,9 @@
       "calories": 180,
       "emoji": "☕",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 拿铁: 白色杯装浅棕色拿铁，杯面有细腻拉花.",
+      "image": "restaurants/starbucks/items/sbk_nt.jpg"
     },
     {
       "id": "sbk_jtmqd",
@@ -43,7 +45,9 @@
       "calories": 250,
       "emoji": "☕",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 焦糖玛奇朵: 透明杯装分层拿铁，顶部焦糖酱汁交织纹理.",
+      "image": "restaurants/starbucks/items/sbk_jtmqd.jpg"
     },
     {
       "id": "sbk_syn",
@@ -53,7 +57,9 @@
       "calories": 220,
       "emoji": "🥥",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 生椰拿铁: 白色杯装乳白色生椰拿铁，杯面奶泡细腻.",
+      "image": "restaurants/starbucks/items/sbk_syn.jpg"
     },
     {
       "id": "sbk_ms",
@@ -62,7 +68,9 @@
       "price": 28,
       "calories": 15,
       "emoji": "☕",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 美式咖啡: 白色杯装纯黑色美式咖啡.",
+      "image": "restaurants/starbucks/items/sbk_ms.jpg"
     },
     {
       "id": "sbk_kbqn",
@@ -71,7 +79,9 @@
       "price": 32,
       "calories": 150,
       "emoji": "☕",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 卡布奇诺: 白色杯装浓缩咖啡，顶部绵密奶泡.",
+      "image": "restaurants/starbucks/items/sbk_kbqn.jpg"
     },
     {
       "id": "sbk_mk",
@@ -80,7 +90,9 @@
       "price": 36,
       "calories": 300,
       "emoji": "🍫",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 摩卡: 透明杯装深棕色摩卡，表面巧克力纹路.",
+      "image": "restaurants/starbucks/items/sbk_mk.jpg"
     },
     {
       "id": "sbk_frb",
@@ -89,7 +101,9 @@
       "price": 34,
       "calories": 190,
       "emoji": "☕",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 馥芮白: 小号白色杯装细腻奶咖，表面奶泡薄而绵密.",
+      "image": "restaurants/starbucks/items/sbk_frb.jpg"
     },
     {
       "id": "sbk_ab",
@@ -98,7 +112,9 @@
       "price": 33,
       "calories": 175,
       "emoji": "☕",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 澳白: 短笛杯装浓郁咖啡，奶泡细腻.",
+      "image": "restaurants/starbucks/items/sbk_ab.jpg"
     },
     {
       "id": "sbk_lc",
@@ -107,7 +123,9 @@
       "price": 30,
       "calories": 20,
       "emoji": "🧊",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 冷萃咖啡: 透明杯装深棕色冷萃咖啡，杯身有水珠.",
+      "image": "restaurants/starbucks/items/sbk_lc.jpg"
     },
     {
       "id": "sbk_mkxbl",
@@ -116,7 +134,9 @@
       "price": 38,
       "calories": 420,
       "emoji": "🥤",
-      "menuCategory": "星冰乐"
+      "menuCategory": "星冰乐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 摩卡星冰乐: 透明杯装冰沙状摩卡星冰乐，顶部挤着奶油和巧克力碎.",
+      "image": "restaurants/starbucks/items/sbk_mkxbl.jpg"
     },
     {
       "id": "sbk_mcxbl",
@@ -125,7 +145,9 @@
       "price": 40,
       "calories": 400,
       "emoji": "🍵",
-      "menuCategory": "星冰乐"
+      "menuCategory": "星冰乐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 抹茶星冰乐: 透明杯装绿色冰沙状抹茶星冰乐，顶部挤着奶油.",
+      "image": "restaurants/starbucks/items/sbk_mcxbl.jpg"
     },
     {
       "id": "sbk_cmxbl",
@@ -134,7 +156,9 @@
       "price": 38,
       "calories": 380,
       "emoji": "🍓",
-      "menuCategory": "星冰乐"
+      "menuCategory": "星冰乐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 草莓星冰乐: 透明杯装粉红色冰沙状草莓星冰乐，可见草莓果肉碎.",
+      "image": "restaurants/starbucks/items/sbk_cmxbl.jpg"
     },
     {
       "id": "sbk_jtxbl",
@@ -143,7 +167,9 @@
       "price": 39,
       "calories": 410,
       "emoji": "🥤",
-      "menuCategory": "星冰乐"
+      "menuCategory": "星冰乐",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 焦糖星冰乐: 透明杯装焦糖色冰沙，顶部挤着奶油和焦糖酱.",
+      "image": "restaurants/starbucks/items/sbk_jtxbl.jpg"
     },
     {
       "id": "sbk_ttwl",
@@ -152,7 +178,9 @@
       "price": 34,
       "calories": 240,
       "emoji": "🍑",
-      "menuCategory": "茶饮"
+      "menuCategory": "茶饮",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 桃桃乌龙茶拿铁: 透明杯装分层茶饮，杯口漂浮桃肉丁.",
+      "image": "restaurants/starbucks/items/sbk_ttwl.jpg"
     },
     {
       "id": "sbk_mcnt",
@@ -161,7 +189,9 @@
       "price": 35,
       "calories": 260,
       "emoji": "🍵",
-      "menuCategory": "茶饮"
+      "menuCategory": "茶饮",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 抹茶拿铁: 透明杯装抹茶与牛奶分层，绿白相间.",
+      "image": "restaurants/starbucks/items/sbk_mcnt.jpg"
     },
     {
       "id": "sbk_hcnt",
@@ -170,7 +200,9 @@
       "price": 32,
       "calories": 220,
       "emoji": "🍵",
-      "menuCategory": "茶饮"
+      "menuCategory": "茶饮",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 红茶拿铁: 透明杯装红茶与牛奶分层，琥珀色渐变.",
+      "image": "restaurants/starbucks/items/sbk_hcnt.jpg"
     },
     {
       "id": "sbk_nmhc",
@@ -179,7 +211,9 @@
       "price": 26,
       "calories": 90,
       "emoji": "🍋",
-      "menuCategory": "茶饮"
+      "menuCategory": "茶饮",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 柠檬红茶: 透明杯装琥珀色红茶，漂浮柠檬片.",
+      "image": "restaurants/starbucks/items/sbk_nmhc.jpg"
     },
     {
       "id": "sbk_yxjr",
@@ -189,7 +223,9 @@
       "calories": 380,
       "emoji": "🥪",
       "menuCategory": "轻食",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 烟熏鸡肉三明治: 三明治剖面，可见烟熏鸡胸片和生菜番茄夹层.",
+      "image": "restaurants/starbucks/items/sbk_yxjr.jpg"
     },
     {
       "id": "sbk_nyjx",
@@ -198,7 +234,9 @@
       "price": 32,
       "calories": 280,
       "emoji": "🥗",
-      "menuCategory": "轻食"
+      "menuCategory": "轻食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 牛油果鸡胸沙拉: 沙拉碗中牛油果片和鸡胸肉片摆放在生菜上.",
+      "image": "restaurants/starbucks/items/sbk_nyjx.jpg"
     },
     {
       "id": "sbk_bgpn",
@@ -207,7 +245,9 @@
       "price": 30,
       "calories": 420,
       "emoji": "🥪",
-      "menuCategory": "轻食"
+      "menuCategory": "轻食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 培根芝士帕尼尼: 帕尼尼剖开，芝士拉丝，可见培根片.",
+      "image": "restaurants/starbucks/items/sbk_bgpn.jpg"
     },
     {
       "id": "sbk_jqy",
@@ -216,7 +256,9 @@
       "price": 27,
       "calories": 350,
       "emoji": "🥪",
-      "menuCategory": "轻食"
+      "menuCategory": "轻食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 金枪鱼三明治: 三明治剖面，可见金枪鱼沙拉夹层.",
+      "image": "restaurants/starbucks/items/sbk_jqy.jpg"
     },
     {
       "id": "sbk_hthk",
@@ -225,7 +267,9 @@
       "price": 22,
       "calories": 320,
       "emoji": "🥐",
-      "menuCategory": "轻食"
+      "menuCategory": "轻食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 火腿芝士可颂: 可颂剖开，露出火腿片和芝士.",
+      "image": "restaurants/starbucks/items/sbk_hthk.jpg"
     },
     {
       "id": "sbk_bskzs",
@@ -235,7 +279,9 @@
       "calories": 380,
       "emoji": "🍰",
       "menuCategory": "甜点",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 巴斯克芝士蛋糕: 一块巴斯克芝士蛋糕，表层焦黑，内芯浅黄绵密.",
+      "image": "restaurants/starbucks/items/sbk_bskzs.jpg"
     },
     {
       "id": "sbk_bl",
@@ -244,7 +290,9 @@
       "price": 20,
       "calories": 340,
       "emoji": "🍫",
-      "menuCategory": "甜点"
+      "menuCategory": "甜点",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 布朗尼: 一块深褐色布朗尼，切面湿润浓郁.",
+      "image": "restaurants/starbucks/items/sbk_bl.jpg"
     },
     {
       "id": "sbk_kc",
@@ -253,7 +301,9 @@
       "price": 16,
       "calories": 280,
       "emoji": "🥐",
-      "menuCategory": "甜点"
+      "menuCategory": "甜点",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 可颂: 金黄色可颂，层次分明的酥皮.",
+      "image": "restaurants/starbucks/items/sbk_kc.jpg"
     },
     {
       "id": "sbk_mf",
@@ -262,7 +312,9 @@
       "price": 18,
       "calories": 300,
       "emoji": "🧁",
-      "menuCategory": "甜点"
+      "menuCategory": "甜点",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 玛芬蛋糕: 玛芬蛋糕顶部露出蓝莓，纹理蓬松.",
+      "image": "restaurants/starbucks/items/sbk_mf.jpg"
     },
     {
       "id": "sbk_sk",
@@ -271,7 +323,9 @@
       "price": 20,
       "calories": 310,
       "emoji": "🍞",
-      "menuCategory": "甜点"
+      "menuCategory": "甜点",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 司康饼: 三角形司康饼，表皮微裂纹.",
+      "image": "restaurants/starbucks/items/sbk_sk.jpg"
     },
     {
       "id": "sbk_tlsb",
@@ -280,7 +334,9 @@
       "price": 24,
       "calories": 350,
       "emoji": "🍮",
-      "menuCategory": "甜点"
+      "menuCategory": "甜点",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 提拉米苏杯: 杯装提拉米苏，层次分明，表面撒可可粉.",
+      "image": "restaurants/starbucks/items/sbk_tlsb.jpg"
     },
     {
       "id": "sbk_ynnt",
@@ -289,7 +345,9 @@
       "price": 34,
       "calories": 160,
       "emoji": "☕",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 燕麦奶拿铁: 白色杯装浅褐色燕麦奶拿铁.",
+      "image": "restaurants/starbucks/items/sbk_ynnt.jpg"
     },
     {
       "id": "sbk_yzsms",
@@ -298,7 +356,9 @@
       "price": 30,
       "calories": 60,
       "emoji": "🥥",
-      "menuCategory": "咖啡"
+      "menuCategory": "咖啡",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 椰子水美式: 透明杯装淡褐色美式咖啡与椰子水分层.",
+      "image": "restaurants/starbucks/items/sbk_yzsms.jpg"
     },
     {
       "id": "sbk_bynmc",
@@ -307,7 +367,12 @@
       "price": 26,
       "calories": 80,
       "emoji": "🍋",
-      "menuCategory": "茶饮"
+      "menuCategory": "茶饮",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 冰摇柠檬茶: 透明杯装摇制柠檬茶，杯中漂浮柠檬片和冰块.",
+      "image": "restaurants/starbucks/items/sbk_bynmc.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 精品咖啡品牌视觉风格：沉稳墨绿色调，简约现代，柔和自然光线，传递温馨惬意的咖啡馆氛围。 画面主体是一杯拉花咖啡，桌面简洁干净，自然光下呈现温馨惬意的咖啡馆氛围，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/starbucks/banner.jpg"
 }
