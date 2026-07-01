@@ -8,7 +8,7 @@
 
 body {
   margin: 0;
-  background-color: #f5f5f5;
+  background-color: #2b2b2c;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -23,6 +23,12 @@ body {
   background: #f5f5f5;
   min-height: 100vh;
   position: relative;
+}
+
+@media (min-width: 481px) {
+  .app-container {
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.35);
+  }
 }
 
 /* Rider animation on tracking page */
