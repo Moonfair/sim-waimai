@@ -25,14 +25,14 @@ export default function Order() {
   const current = steps[step];
 
   return (
-    <div className="app-container flex flex-col items-center justify-center h-screen bg-white">
+    <div className="app-container flex flex-col items-center justify-center h-screen bg-white dark:bg-gray-900">
       {/* Progress dots */}
       <div className="flex gap-2 mb-10">
         {steps.map((_, i) => (
           <div
             key={i}
             className={`h-1.5 rounded-full transition-all duration-500 ${
-              i <= step ? 'bg-orange-500 w-8' : 'bg-gray-200 w-4'
+              i <= step ? 'bg-orange-500 w-8' : 'bg-gray-200 dark:bg-gray-700 w-4'
             }`}
           />
         ))}
@@ -50,24 +50,24 @@ export default function Order() {
       {/* Text */}
       <h2
         key={`text-${step}`}
-        className="text-2xl font-black text-gray-900 fade-in-up"
+        className="text-2xl font-black text-gray-900 dark:text-gray-100 fade-in-up"
         style={{ animation: 'fade-in-up 0.4s ease-out 0.1s both' }}
       >
         {current.text}
       </h2>
       <p
         key={`sub-${step}`}
-        className="text-gray-400 text-sm mt-2 fade-in-up"
+        className="text-gray-400 dark:text-gray-500 text-sm mt-2 fade-in-up"
         style={{ animation: 'fade-in-up 0.4s ease-out 0.2s both' }}
       >
         {current.subtext}
       </p>
 
       {restaurant && (
-        <div className="mt-10 bg-orange-50 rounded-2xl p-4 w-64 text-center">
+        <div className="mt-10 bg-orange-50 dark:bg-orange-500/10 rounded-2xl p-4 w-64 text-center">
           <div className="text-3xl mb-1">{restaurant.emoji}</div>
-          <p className="text-orange-600 font-medium text-sm">{restaurant.name}</p>
-          <p className="text-gray-400 text-xs mt-1">正在准备您的（假）外卖</p>
+          <p className="text-orange-600 dark:text-orange-400 font-medium text-sm">{restaurant.name}</p>
+          <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">正在准备您的（假）外卖</p>
         </div>
       )}
 

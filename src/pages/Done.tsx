@@ -81,7 +81,7 @@ export default function Done() {
   };
 
   return (
-    <div className="app-container bg-white overflow-hidden relative flex flex-col min-h-screen">
+    <div className="app-container bg-white dark:bg-gray-900 overflow-hidden relative flex flex-col min-h-screen">
       {/* Confetti */}
       {confetti.map(c => (
         <div
@@ -113,23 +113,23 @@ export default function Done() {
           🏆
         </div>
 
-        <h1 className="text-2xl font-black text-gray-900 text-center">
+        <h1 className="text-2xl font-black text-gray-900 dark:text-gray-100 text-center">
           恭喜你，成功节省了！
         </h1>
-        <p className="text-gray-400 text-sm text-center mt-1">
+        <p className="text-gray-400 dark:text-gray-500 text-sm text-center mt-1">
           这次假外卖挑战，你超棒！
         </p>
 
         {/* Savings cards */}
         <div className="w-full mt-8 grid grid-cols-2 gap-3">
-          <div className="bg-orange-50 rounded-2xl p-5 text-center border border-orange-100">
+          <div className="bg-orange-50 dark:bg-orange-500/10 rounded-2xl p-5 text-center border border-orange-100 dark:border-orange-500/20">
             <div className="text-3xl mb-2">💰</div>
             <div className="text-orange-500 font-black text-2xl">
               {showContent && <NumberCounter target={savedPrice} prefix="¥" decimals={2} />}
             </div>
             <p className="text-orange-400 text-xs mt-1 font-medium">省下的钱</p>
           </div>
-          <div className="bg-red-50 rounded-2xl p-5 text-center border border-red-100">
+          <div className="bg-red-50 dark:bg-red-500/10 rounded-2xl p-5 text-center border border-red-100 dark:border-red-500/20">
             <div className="text-3xl mb-2">🔥</div>
             <div className="text-red-500 font-black text-2xl">
               {showContent && <NumberCounter target={savedCalories} suffix=" kcal" />}
@@ -139,8 +139,8 @@ export default function Done() {
         </div>
 
         {/* Motivation text */}
-        <div className="bg-gray-50 rounded-2xl p-4 w-full mt-4">
-          <p className="text-gray-600 text-sm text-center leading-relaxed">
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 w-full mt-4">
+          <p className="text-gray-600 dark:text-gray-300 text-sm text-center leading-relaxed">
             省下的 <strong className="text-orange-500">¥{savedPrice.toFixed(2)}</strong> 可以买{' '}
             <strong className="text-blue-500">{waterEquivalent} 瓶矿泉水</strong>
             <br />
@@ -158,7 +158,7 @@ export default function Done() {
             再省一次 💪
           </button>
           <button
-            className="w-full border-2 border-gray-200 text-gray-600 py-3.5 rounded-2xl font-bold text-base active:scale-95 transition-transform relative"
+            className="w-full border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 py-3.5 rounded-2xl font-bold text-base active:scale-95 transition-transform relative"
             onClick={handleShareClick}
           >
             {copied ? '✅ 已复制到剪贴板！' : '分享给朋友 🎉'}
@@ -166,7 +166,7 @@ export default function Done() {
         </div>
 
         {/* Footer */}
-        <p className="text-gray-300 text-xs text-center mt-6 leading-relaxed">
+        <p className="text-gray-300 dark:text-gray-600 text-xs text-center mt-6 leading-relaxed">
           吃了嘛外卖 · 节省外卖费和卡路里的假外卖APP
           <br />
           你的钱包和腰围都感谢你 ❤️

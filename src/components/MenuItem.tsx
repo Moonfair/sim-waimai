@@ -24,7 +24,7 @@ export default function MenuItem({ item, restaurant }: Props) {
     : 0;
 
   return (
-    <div className="flex gap-3 py-3 border-b border-gray-50 last:border-0">
+    <div className="flex gap-3 py-3 border-b border-gray-50 dark:border-gray-700 last:border-0">
       {item.image ? (
         <img
           src={assetUrl(item.image)}
@@ -47,15 +47,15 @@ export default function MenuItem({ item, restaurant }: Props) {
               {item.popular && (
                 <span className="text-xs px-1 py-0.5 bg-red-50 text-red-500 rounded font-medium">热销</span>
               )}
-              <span className="font-medium text-gray-900 text-sm">{item.name}</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100 text-sm">{item.name}</span>
             </div>
-            <p className="text-xs text-gray-400 mt-0.5 line-clamp-2 leading-relaxed">{item.description}</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 line-clamp-2 leading-relaxed">{item.description}</p>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-orange-500 font-bold">
                 ¥{item.price}{hasOptions && hasPriceImpact ? '起' : ''}
               </span>
-              <span className="text-xs text-gray-300">|</span>
-              <span className="text-xs text-gray-400">{item.calories} 千卡</span>
+              <span className="text-xs text-gray-300 dark:text-gray-600">|</span>
+              <span className="text-xs text-gray-400 dark:text-gray-500">{item.calories} 千卡</span>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function MenuItem({ item, restaurant }: Props) {
               >
                 −
               </button>
-              <span className="text-sm font-bold text-gray-800 w-4 text-center">{quantity}</span>
+              <span className="text-sm font-bold text-gray-800 dark:text-gray-100 w-4 text-center">{quantity}</span>
               <button
                 className="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-base font-bold leading-none shadow-sm"
                 onClick={() => addItem(item, restaurant)}

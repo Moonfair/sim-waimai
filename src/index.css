@@ -25,6 +25,10 @@ body {
   position: relative;
 }
 
+html.dark .app-container {
+  background: #18181b;
+}
+
 @media (min-width: 481px) {
   .app-container {
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.35);

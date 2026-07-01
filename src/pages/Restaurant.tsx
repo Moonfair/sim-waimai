@@ -14,7 +14,7 @@ export default function Restaurant() {
   if (!restaurant) {
     return (
       <div className="app-container flex items-center justify-center h-screen">
-        <div className="text-center text-gray-400">
+        <div className="text-center text-gray-400 dark:text-gray-500">
           <div className="text-5xl mb-3">🍽️</div>
           <p>餐厅不存在</p>
           <button className="mt-4 text-orange-500" onClick={() => navigate('/')}>返回首页</button>
@@ -59,25 +59,25 @@ export default function Restaurant() {
       </div>
 
       {/* Tags */}
-      <div className="bg-white px-4 py-2 flex gap-2 overflow-x-auto border-b border-gray-100">
+      <div className="bg-white dark:bg-gray-800 px-4 py-2 flex gap-2 overflow-x-auto border-b border-gray-100 dark:border-gray-700">
         {restaurant.tags.map(tag => (
-          <span key={tag} className="flex-shrink-0 text-xs px-2 py-1 bg-orange-50 text-orange-500 rounded-full border border-orange-100">
+          <span key={tag} className="flex-shrink-0 text-xs px-2 py-1 bg-orange-50 dark:bg-orange-500/10 text-orange-500 rounded-full border border-orange-100 dark:border-orange-500/20">
             {tag}
           </span>
         ))}
       </div>
 
       {/* Menu area */}
-      <div className="flex bg-white" style={{ minHeight: 'calc(100vh - 280px)' }}>
+      <div className="flex bg-white dark:bg-gray-800" style={{ minHeight: 'calc(100vh - 280px)' }}>
         {/* Left category nav */}
-        <div className="w-20 flex-shrink-0 bg-gray-50 border-r border-gray-100">
+        <div className="w-20 flex-shrink-0 bg-gray-50 dark:bg-gray-900 border-r border-gray-100 dark:border-gray-700">
           {restaurant.menuCategories.map(cat => (
             <button
               key={cat}
               className={`w-full py-4 text-center text-xs font-medium transition-colors border-l-2 ${
                 activeMenuCat === cat
-                  ? 'border-orange-500 bg-white text-orange-500'
-                  : 'border-transparent text-gray-500'
+                  ? 'border-orange-500 bg-white dark:bg-gray-800 text-orange-500 dark:text-orange-400'
+                  : 'border-transparent text-gray-500 dark:text-gray-400'
               }`}
               onClick={() => setActiveMenuCat(cat)}
             >
@@ -88,9 +88,9 @@ export default function Restaurant() {
 
         {/* Right menu items */}
         <div className="flex-1 px-3 pb-40">
-          <h3 className="text-gray-500 text-xs font-medium pt-3 pb-1">{activeMenuCat}</h3>
+          <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{activeMenuCat}</h3>
           {filteredMenu.length === 0 ? (
-            <p className="text-gray-300 text-sm text-center py-8">暂无菜品</p>
+            <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
           ) : (
             filteredMenu.map(item => (
               <MenuItemComponent key={item.id} item={item} restaurant={restaurant} />

@@ -60,14 +60,14 @@ export default function MenuItemOptionsSheet({ item, onClose, onConfirm }: Props
   return (
     <>
       <div className="fixed inset-0 z-50 bg-black/40" onClick={onClose} />
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 bg-white rounded-t-2xl max-h-[85vh] flex flex-col">
-        <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-50">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 bg-white dark:bg-gray-800 rounded-t-2xl max-h-[85vh] flex flex-col">
+        <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-50 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <span className="text-2xl">{item.emoji}</span>
-            <span className="font-bold text-gray-900 text-sm">{item.name}</span>
+            <span className="font-bold text-gray-900 dark:text-gray-100 text-sm">{item.name}</span>
           </div>
           <button
-            className="w-7 h-7 flex items-center justify-center text-gray-400 text-lg"
+            className="w-7 h-7 flex items-center justify-center text-gray-400 dark:text-gray-500 text-lg"
             onClick={onClose}
           >
             ×
@@ -76,8 +76,8 @@ export default function MenuItemOptionsSheet({ item, onClose, onConfirm }: Props
 
         <div className="flex-1 overflow-y-auto">
           {groups.map(group => (
-            <div key={group.id} className="px-4 py-3 border-b border-gray-50">
-              <p className="text-sm font-bold text-gray-900 mb-2">{group.name}</p>
+            <div key={group.id} className="px-4 py-3 border-b border-gray-50 dark:border-gray-700">
+              <p className="text-sm font-bold text-gray-900 dark:text-gray-100 mb-2">{group.name}</p>
               <div className="flex flex-wrap gap-2">
                 {group.options.map(opt => {
                   const selected = (selections[group.id] ?? []).includes(opt.id);
@@ -86,8 +86,8 @@ export default function MenuItemOptionsSheet({ item, onClose, onConfirm }: Props
                       key={opt.id}
                       className={`px-3 py-1.5 rounded-xl text-sm border-2 transition-colors ${
                         selected
-                          ? 'border-orange-400 bg-orange-50 text-orange-600 font-medium'
-                          : 'border-gray-100 text-gray-600'
+                          ? 'border-orange-400 bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 font-medium'
+                          : 'border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-300'
                       }`}
                       onClick={() => toggleOption(group.id, group.selectionType, opt.id)}
                     >
@@ -100,9 +100,9 @@ export default function MenuItemOptionsSheet({ item, onClose, onConfirm }: Props
           ))}
         </div>
 
-        <div className="px-4 pb-8 pt-3 border-t border-gray-100">
+        <div className="px-4 pb-8 pt-3 border-t border-gray-100 dark:border-gray-700">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-500 text-sm">小计</span>
+            <span className="text-gray-500 dark:text-gray-400 text-sm">小计</span>
             <span className="text-orange-500 font-bold text-lg">¥{runningTotal.toFixed(2)}</span>
           </div>
           <button

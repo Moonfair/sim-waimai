@@ -5,12 +5,14 @@ import type { Category } from '../data/restaurants';
 import RestaurantCard from '../components/RestaurantCard';
 import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
+import { useTheme } from '../context/ThemeContext';
 import AddressEditSheet from '../components/AddressEditSheet';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<Category>('全部');
   const { totalItems, totalPrice, restaurant: cartRestaurant } = useCart();
   const { addressInfo } = useAddress();
+  const { theme, toggleTheme } = useTheme();
   const [addressSheetOpen, setAddressSheetOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -31,13 +33,22 @@ export default function Home() {
         </div>
 
         {/* Address bar */}
-        <div
-          className="bg-white/20 rounded-xl mt-3 px-3 py-2.5 flex items-center gap-2 cursor-pointer"
-          onClick={() => setAddressSheetOpen(true)}
-        >
-          <span className="text-white text-sm">📍</span>
-          <span className="text-white text-sm font-medium">{addressInfo.address}</span>
-          <span className="text-white/60 text-xs ml-auto">预计25-40分钟</span>
+        <div className="mt-3 flex items-center gap-2">
+          <div
+            className="flex-1 bg-white/20 rounded-xl px-3 py-2.5 flex items-center gap-2 cursor-pointer"
+            onClick={() => setAddressSheetOpen(true)}
+          >
+            <span className="text-white text-sm">📍</span>
+            <span className="text-white text-sm font-medium">{addressInfo.address}</span>
+            <span className="text-white/60 text-xs ml-auto">预计25-40分钟</span>
+          </div>
+          <button
+            className="w-9 h-9 flex-shrink-0 rounded-full bg-white/20 flex items-center justify-center text-base"
+            onClick={toggleTheme}
+            aria-label="切换深色模式"
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
       </div>
 
@@ -59,7 +70,7 @@ export default function Home() {
               className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 activeCategory === cat
                   ? 'bg-orange-500 text-white shadow-sm'
-                  : 'bg-white text-gray-600 border border-gray-100'
+                  : 'bg-white text-gray-600 border border-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700'
               }`}
               onClick={() => setActiveCategory(cat)}
             >
@@ -72,10 +83,10 @@ export default function Home() {
       {/* Restaurant List */}
       <div className="mt-3 px-4 pb-32">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-gray-800 font-bold text-base">
+          <h2 className="text-gray-800 dark:text-gray-100 font-bold text-base">
             {activeCategory === '全部' ? '附近餐厅' : activeCategory}
           </h2>
-          <span className="text-gray-400 text-xs">{filtered.length}家</span>
+          <span className="text-gray-400 dark:text-gray-500 text-xs">{filtered.length}家</span>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {filtered.map(restaurant => (

@@ -18,11 +18,11 @@ export default function AddressEditSheet({ onClose }: Props) {
   return (
     <>
       <div className="fixed inset-0 z-50 bg-black/40" onClick={onClose} />
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 bg-white rounded-t-2xl max-h-[85vh] flex flex-col">
-        <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-50">
-          <span className="font-bold text-gray-900 text-sm">收货信息</span>
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 bg-white dark:bg-gray-800 rounded-t-2xl max-h-[85vh] flex flex-col">
+        <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-50 dark:border-gray-700">
+          <span className="font-bold text-gray-900 dark:text-gray-100 text-sm">收货信息</span>
           <button
-            className="w-7 h-7 flex items-center justify-center text-gray-400 text-lg"
+            className="w-7 h-7 flex items-center justify-center text-gray-400 dark:text-gray-500 text-lg"
             onClick={onClose}
           >
             ×
@@ -31,29 +31,29 @@ export default function AddressEditSheet({ onClose }: Props) {
 
         <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
           <div>
-            <label className="text-xs text-gray-500 block mb-1">收件人</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">收件人</label>
             <input
               type="text"
-              className="w-full border border-gray-100 rounded-lg p-2.5 text-sm text-gray-700 outline-none focus:border-orange-300"
+              className="w-full border border-gray-100 dark:border-gray-700 dark:bg-gray-900 rounded-lg p-2.5 text-sm text-gray-700 dark:text-gray-200 outline-none focus:border-orange-300"
               placeholder="请填写收件人姓名"
               value={draft.recipientName}
               onChange={(e) => setDraft({ ...draft, recipientName: e.target.value })}
             />
           </div>
           <div>
-            <label className="text-xs text-gray-500 block mb-1">手机号</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">手机号</label>
             <input
               type="tel"
-              className="w-full border border-gray-100 rounded-lg p-2.5 text-sm text-gray-700 outline-none focus:border-orange-300"
+              className="w-full border border-gray-100 dark:border-gray-700 dark:bg-gray-900 rounded-lg p-2.5 text-sm text-gray-700 dark:text-gray-200 outline-none focus:border-orange-300"
               placeholder="请填写手机号"
               value={draft.phone}
               onChange={(e) => setDraft({ ...draft, phone: e.target.value })}
             />
           </div>
           <div>
-            <label className="text-xs text-gray-500 block mb-1">收货地址</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1">收货地址</label>
             <textarea
-              className="w-full border border-gray-100 rounded-lg p-2.5 text-sm text-gray-700 resize-none outline-none focus:border-orange-300"
+              className="w-full border border-gray-100 dark:border-gray-700 dark:bg-gray-900 rounded-lg p-2.5 text-sm text-gray-700 dark:text-gray-200 resize-none outline-none focus:border-orange-300"
               rows={2}
               placeholder="请填写详细收货地址"
               value={draft.address}
@@ -62,8 +62,8 @@ export default function AddressEditSheet({ onClose }: Props) {
           </div>
         </div>
 
-        <div className="px-4 pb-8 pt-3 border-t border-gray-100">
-          <p className="text-gray-300 text-xs text-center mb-2">
+        <div className="px-4 pb-8 pt-3 border-t border-gray-100 dark:border-gray-700">
+          <p className="text-gray-300 dark:text-gray-600 text-xs text-center mb-2">
             以上信息仅保存在本机浏览器中，不会上传到任何服务器
           </p>
           <button

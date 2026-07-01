@@ -11,7 +11,7 @@ export default function RestaurantCard({ restaurant }: Props) {
 
   return (
     <div
-      className="bg-white rounded-xl overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform"
+      className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform"
       onClick={() => navigate(`/restaurant/${restaurant.id}`)}
     >
       <div
@@ -38,26 +38,26 @@ export default function RestaurantCard({ restaurant }: Props) {
 
       <div className="p-3">
         <div className="flex items-start justify-between">
-          <h3 className="font-bold text-gray-900 text-base">{restaurant.name}</h3>
-          <span className="text-xs text-gray-400 mt-0.5">{restaurant.deliveryTime}分钟</span>
+          <h3 className="font-bold text-gray-900 dark:text-gray-100 text-base">{restaurant.name}</h3>
+          <span className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{restaurant.deliveryTime}分钟</span>
         </div>
 
         <div className="flex items-center gap-2 mt-1">
           <div className="flex items-center gap-0.5">
             <span className="text-yellow-400 text-xs">★</span>
-            <span className="text-sm font-medium text-gray-700">{restaurant.rating}</span>
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{restaurant.rating}</span>
           </div>
-          <span className="text-gray-300 text-xs">|</span>
-          <span className="text-xs text-gray-400">月售{restaurant.monthlyOrders > 10000 ? `${(restaurant.monthlyOrders / 10000).toFixed(1)}万` : restaurant.monthlyOrders}+</span>
-          <span className="text-gray-300 text-xs">|</span>
-          <span className="text-xs text-gray-400">起送¥{restaurant.minOrder}</span>
+          <span className="text-gray-300 dark:text-gray-600 text-xs">|</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">月售{restaurant.monthlyOrders > 10000 ? `${(restaurant.monthlyOrders / 10000).toFixed(1)}万` : restaurant.monthlyOrders}+</span>
+          <span className="text-gray-300 dark:text-gray-600 text-xs">|</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">起送¥{restaurant.minOrder}</span>
         </div>
 
         <div className="flex items-center justify-between mt-2">
-          <span className="text-xs text-gray-400">
+          <span className="text-xs text-gray-400 dark:text-gray-500">
             配送费 <span className="text-orange-500 font-medium">¥{restaurant.deliveryFee}</span>
           </span>
-          <span className="text-xs px-2 py-0.5 bg-orange-50 text-orange-500 rounded-full border border-orange-100">
+          <span className="text-xs px-2 py-0.5 bg-orange-50 dark:bg-orange-500/10 text-orange-500 rounded-full border border-orange-100 dark:border-orange-500/20">
             {restaurant.category}
           </span>
         </div>
