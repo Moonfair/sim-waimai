@@ -32,7 +32,9 @@
       "calories": 550,
       "emoji": "🍜",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 牛肉拉面: 清汤中盛着手工拉制的细面条，几片酱色牛肉片和香菜点缀.",
+      "image": "restaurants/lanzhou/items/nrm.jpg"
     },
     {
       "id": "jrm",
@@ -41,7 +43,9 @@
       "price": 16,
       "calories": 480,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 鸡肉拉面: 清汤面条上撒着撕好的鸡肉丝和葱花.",
+      "image": "restaurants/lanzhou/items/jrm.jpg"
     },
     {
       "id": "rjm",
@@ -51,7 +55,9 @@
       "calories": 420,
       "emoji": "🥙",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 肉夹馍: 半剖开的白吉馍夹着剁碎的腊汁肉，肉汁微微渗出.",
+      "image": "restaurants/lanzhou/items/rjm.jpg"
     },
     {
       "id": "sjm",
@@ -60,7 +66,9 @@
       "price": 14,
       "calories": 460,
       "emoji": "🌶️",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 双椒肉夹馍: 白吉馍夹着腊汁肉和青红椒碎，色彩鲜艳.",
+      "image": "restaurants/lanzhou/items/sjm.jpg"
     },
     {
       "id": "hpi",
@@ -69,7 +77,9 @@
       "price": 10,
       "calories": 280,
       "emoji": "🥗",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 凉皮: 半透明凉皮切条，浇着红油辣椒和蒜汁，点缀黄瓜丝.",
+      "image": "restaurants/lanzhou/items/hpi.jpg"
     },
     {
       "id": "lz_clm",
@@ -78,7 +88,9 @@
       "price": 17,
       "calories": 520,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 炒拉面: 爆炒过的拉面带焦香边缘，混着青菜丝和肉丝.",
+      "image": "restaurants/lanzhou/items/lz_clm.jpg"
     },
     {
       "id": "lz_xhsjdm",
@@ -87,7 +99,9 @@
       "price": 15,
       "calories": 460,
       "emoji": "🍅",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 西红柿鸡蛋面: 面条上盖着红亮番茄块和嫩黄炒蛋.",
+      "image": "restaurants/lanzhou/items/lz_xhsjdm.jpg"
     },
     {
       "id": "lz_sacnm",
@@ -96,7 +110,9 @@
       "price": 19,
       "calories": 560,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 酸菜牛肉面: 汤面里漂着酸菜丝和几片牛肉.",
+      "image": "restaurants/lanzhou/items/lz_sacnm.jpg"
     },
     {
       "id": "lz_ftnnm",
@@ -105,7 +121,9 @@
       "price": 20,
       "calories": 580,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 番茄牛腩面: 浓稠橙红色番茄汤里炖着软烂牛腩块，面条隐约可见.",
+      "image": "restaurants/lanzhou/items/lz_ftnnm.jpg"
     },
     {
       "id": "lz_mlnrm",
@@ -114,7 +132,9 @@
       "price": 18,
       "calories": 540,
       "emoji": "🌶️",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 麻辣牛肉面: 红油浮面的麻辣汤面，牛肉片沉在汤中.",
+      "image": "restaurants/lanzhou/items/lz_mlnrm.jpg"
     },
     {
       "id": "lz_sxm",
@@ -123,7 +143,9 @@
       "price": 16,
       "calories": 480,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 三鲜面: 清汤面上点缀着虾仁、肉丝和黑木耳.",
+      "image": "restaurants/lanzhou/items/lz_sxm.jpg"
     },
     {
       "id": "lz_mldp",
@@ -132,7 +154,9 @@
       "price": 9,
       "calories": 200,
       "emoji": "🌶️",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 麻辣豆皮: 半透明豆皮切条，裹着红油辣椒.",
+      "image": "restaurants/lanzhou/items/lz_mldp.jpg"
     },
     {
       "id": "lz_zyy",
@@ -141,7 +165,9 @@
       "price": 8,
       "calories": 250,
       "emoji": "🥔",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 炸洋芋: 金黄色炸土豆块，表皮焦脆.",
+      "image": "restaurants/lanzhou/items/lz_zyy.jpg"
     },
     {
       "id": "lz_tclj",
@@ -150,7 +176,9 @@
       "price": 16,
       "calories": 380,
       "emoji": "🍖",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 糖醋里脊: 金黄酥脆里脊肉块，裹着橙红色糖醋芡汁.",
+      "image": "restaurants/lanzhou/items/lz_tclj.jpg"
     },
     {
       "id": "lz_phg",
@@ -159,7 +187,9 @@
       "price": 6,
       "calories": 60,
       "emoji": "🥒",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 拍黄瓜: 拍碎的翠绿黄瓜块，点缀蒜末和红椒圈.",
+      "image": "restaurants/lanzhou/items/lz_phg.jpg"
     },
     {
       "id": "lz_mltds",
@@ -168,7 +198,9 @@
       "price": 7,
       "calories": 150,
       "emoji": "🥔",
-      "menuCategory": "小吃"
+      "menuCategory": "小吃",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 麻辣土豆丝: 细丝状土豆丝，裹着红油辣椒和干辣椒段.",
+      "image": "restaurants/lanzhou/items/lz_mltds.jpg"
     },
     {
       "id": "lz_ngt",
@@ -177,7 +209,9 @@
       "price": 8,
       "calories": 180,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 牛骨汤: 浓白色牛骨汤，碗中漂着葱花.",
+      "image": "restaurants/lanzhou/items/lz_ngt.jpg"
     },
     {
       "id": "lz_sxt",
@@ -186,7 +220,9 @@
       "price": 7,
       "calories": 150,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 三鲜汤: 清汤中漂浮着虾仁、蛋花和青菜.",
+      "image": "restaurants/lanzhou/items/lz_sxt.jpg"
     },
     {
       "id": "lz_slt",
@@ -195,7 +231,9 @@
       "price": 7,
       "calories": 130,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 酸辣汤: 浓稠微红汤汁，漂着豆腐丝和木耳丝.",
+      "image": "restaurants/lanzhou/items/lz_slt.jpg"
     },
     {
       "id": "lz_dgt",
@@ -204,7 +242,9 @@
       "price": 6,
       "calories": 100,
       "emoji": "🥣",
-      "menuCategory": "汤类"
+      "menuCategory": "汤类",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 冬瓜汤: 清汤中漂着半透明冬瓜片.",
+      "image": "restaurants/lanzhou/items/lz_dgt.jpg"
     },
     {
       "id": "lz_smt",
@@ -213,7 +253,9 @@
       "price": 6,
       "calories": 80,
       "emoji": "🥤",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 酸梅汤: 深红棕色酸梅汤，杯口漂浮几颗话梅.",
+      "image": "restaurants/lanzhou/items/lz_smt.jpg"
     },
     {
       "id": "lz_btxl",
@@ -222,7 +264,9 @@
       "price": 8,
       "calories": 100,
       "emoji": "🍐",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 冰糖雪梨: 透明汤水中一整颗炖煮雪梨，色泽微黄.",
+      "image": "restaurants/lanzhou/items/lz_btxl.jpg"
     },
     {
       "id": "lz_bbc",
@@ -231,7 +275,9 @@
       "price": 10,
       "calories": 60,
       "emoji": "🍵",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 八宝茶: 透明玻璃盖碗中琥珀色茶汤，漂浮着枸杞和桂圆.",
+      "image": "restaurants/lanzhou/items/lz_bbc.jpg"
     },
     {
       "id": "lz_lnr",
@@ -241,7 +287,9 @@
       "calories": 380,
       "emoji": "🥩",
       "menuCategory": "卤味",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 卤牛肉（份）: 切片酱色卤牛肉整齐码放，纹理清晰.",
+      "image": "restaurants/lanzhou/items/lz_lnr.jpg"
     },
     {
       "id": "lz_ld",
@@ -250,7 +298,9 @@
       "price": 3,
       "calories": 90,
       "emoji": "🥚",
-      "menuCategory": "卤味"
+      "menuCategory": "卤味",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 卤蛋: 对半切开的卤蛋，蛋黄橙黄，外皮酱色.",
+      "image": "restaurants/lanzhou/items/lz_ld.jpg"
     },
     {
       "id": "lz_ldg",
@@ -259,7 +309,9 @@
       "price": 6,
       "calories": 140,
       "emoji": "🧊",
-      "menuCategory": "卤味"
+      "menuCategory": "卤味",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 卤豆干: 深褐色卤豆干切块.",
+      "image": "restaurants/lanzhou/items/lz_ldg.jpg"
     },
     {
       "id": "lz_ljz",
@@ -268,7 +320,9 @@
       "price": 8,
       "calories": 180,
       "emoji": "🍗",
-      "menuCategory": "卤味"
+      "menuCategory": "卤味",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 卤鸡爪: 深酱色卤鸡爪，表皮油亮.",
+      "image": "restaurants/lanzhou/items/lz_ljz.jpg"
     },
     {
       "id": "lz_dpjbm",
@@ -278,7 +332,9 @@
       "calories": 780,
       "emoji": "🍗",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 大盘鸡拌面: 大块带皮鸡肉与土豆块在浓稠酱汁中，配宽拉面.",
+      "image": "restaurants/lanzhou/items/lz_dpjbm.jpg"
     },
     {
       "id": "lz_hsnrm",
@@ -288,7 +344,9 @@
       "calories": 600,
       "emoji": "🍜",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 红烧牛肉面: 红棕色浓汤中炖着大块牛肉，面条筋道.",
+      "image": "restaurants/lanzhou/items/lz_hsnrm.jpg"
     },
     {
       "id": "lz_dxm",
@@ -297,7 +355,12 @@
       "price": 16,
       "calories": 500,
       "emoji": "🍜",
-      "menuCategory": "面食"
+      "menuCategory": "面食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 刀削面: 厚薄不均的刀削面片，浇着卤汁和配菜.",
+      "image": "restaurants/lanzhou/items/lz_dxm.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 西北面馆视觉风格：质朴温暖的暖棕色调，柔和自然光线，传递手工传统、朴实地道的西北餐饮氛围。 画面主体是一碗热气腾腾的手工拉面，汤色清亮，面条根根分明，暖色调灯光下呈现地道西北风味，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/lanzhou/banner.jpg"
 }
