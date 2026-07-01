@@ -1,0 +1,303 @@
+{
+  "id": "pizzahut",
+  "order": 9,
+  "name": "必胜客",
+  "category": "披萨",
+  "rating": 4.6,
+  "ratingCount": 4200,
+  "monthlyOrders": 9000,
+  "deliveryFee": 6,
+  "deliveryTime": 40,
+  "minOrder": 35,
+  "emoji": "🍕",
+  "bgColor": "#ee2f36",
+  "tags": [
+    "品牌店",
+    "满60减10",
+    "双人套餐"
+  ],
+  "menuCategories": [
+    "热销",
+    "披萨",
+    "意面",
+    "小食",
+    "饮品",
+    "甜品"
+  ],
+  "menu": [
+    {
+      "id": "ph_zz",
+      "name": "至尊比萨（9寸）",
+      "description": "多种配料满满一饼，经典之选",
+      "price": 68,
+      "calories": 1200,
+      "emoji": "🍕",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ph_ld",
+      "name": "榴莲比萨",
+      "description": "真材实料榴莲果肉，香浓惊喜",
+      "price": 78,
+      "calories": 1350,
+      "emoji": "🍕",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ph_pgmg",
+      "name": "培根蘑菇比萨",
+      "description": "培根搭配蘑菇，咸香浓郁",
+      "price": 62,
+      "calories": 1100,
+      "emoji": "🍕",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "ph_xwy",
+      "name": "夏威夷比萨",
+      "description": "菠萝火腿组合，酸甜开胃",
+      "price": 58,
+      "calories": 1000,
+      "emoji": "🍕",
+      "menuCategory": "披萨"
+    },
+    {
+      "id": "ph_hx",
+      "name": "海鲜比萨",
+      "description": "虾仁鱿鱼蟹柳，海味十足",
+      "price": 72,
+      "calories": 1150,
+      "emoji": "🍕",
+      "menuCategory": "披萨"
+    },
+    {
+      "id": "ph_mgl",
+      "name": "玛格丽特比萨",
+      "description": "经典番茄芝士，意式风味",
+      "price": 48,
+      "calories": 900,
+      "emoji": "🍕",
+      "menuCategory": "披萨"
+    },
+    {
+      "id": "ph_zx",
+      "name": "芝心比萨",
+      "description": "芝士拉丝爆浆，浓郁满足",
+      "price": 66,
+      "calories": 1250,
+      "emoji": "🍕",
+      "menuCategory": "披萨"
+    },
+    {
+      "id": "ph_nr",
+      "name": "牛肉比萨",
+      "description": "嫩香牛肉粒，肉感十足",
+      "price": 65,
+      "calories": 1180,
+      "emoji": "🍕",
+      "menuCategory": "披萨"
+    },
+    {
+      "id": "ph_hjnl",
+      "name": "黑椒牛柳意面",
+      "description": "黑椒浓香配嫩滑牛柳",
+      "price": 32,
+      "calories": 620,
+      "emoji": "🍝",
+      "menuCategory": "意面"
+    },
+    {
+      "id": "ph_ftj",
+      "name": "番茄肉酱意面",
+      "description": "经典意式肉酱，酸甜浓郁",
+      "price": 28,
+      "calories": 580,
+      "emoji": "🍝",
+      "menuCategory": "意面"
+    },
+    {
+      "id": "ph_nybg",
+      "name": "奶油培根意面",
+      "description": "丝滑奶油培根酱，浓香醇厚",
+      "price": 30,
+      "calories": 650,
+      "emoji": "🍝",
+      "menuCategory": "意面"
+    },
+    {
+      "id": "ph_hx2",
+      "name": "海鲜意面",
+      "description": "什锦海鲜配意面，鲜美十足",
+      "price": 36,
+      "calories": 600,
+      "emoji": "🍝",
+      "menuCategory": "意面"
+    },
+    {
+      "id": "ph_jc",
+      "name": "鸡翅（6只）",
+      "description": "外酥里嫩，香辣可口",
+      "price": 25,
+      "calories": 480,
+      "emoji": "🍗",
+      "menuCategory": "小食",
+      "popular": true
+    },
+    {
+      "id": "ph_st",
+      "name": "薯条（中）",
+      "description": "金黄酥脆，经典小食",
+      "price": 15,
+      "calories": 380,
+      "emoji": "🍟",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ph_yc",
+      "name": "洋葱圈",
+      "description": "酥脆洋葱圈，香甜可口",
+      "price": 16,
+      "calories": 400,
+      "emoji": "🧅",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ph_zst",
+      "name": "芝士条",
+      "description": "拉丝芝士条，外酥内融",
+      "price": 20,
+      "calories": 420,
+      "emoji": "🧀",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ph_smb",
+      "name": "蒜香面包",
+      "description": "香浓蒜香，外焦里软",
+      "price": 12,
+      "calories": 300,
+      "emoji": "🥖",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ph_jmh",
+      "name": "鸡米花",
+      "description": "一口一个，酥脆多汁",
+      "price": 18,
+      "calories": 350,
+      "emoji": "🍗",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ph_bfsl",
+      "name": "缤纷沙拉",
+      "description": "新鲜蔬果，清爽解腻",
+      "price": 22,
+      "calories": 180,
+      "emoji": "🥗",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ph_bs",
+      "name": "百事可乐（中）",
+      "description": "经典畅爽可乐",
+      "price": 8,
+      "calories": 150,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ph_xb",
+      "name": "雪碧（中）",
+      "description": "清爽柠檬味汽水",
+      "price": 8,
+      "calories": 140,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ph_xzcz",
+      "name": "鲜榨橙汁",
+      "description": "新鲜橙子现榨，维C满满",
+      "price": 14,
+      "calories": 120,
+      "emoji": "🍊",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ph_nmhc",
+      "name": "柠檬红茶",
+      "description": "清新柠檬配红茶，酸甜怡人",
+      "price": 12,
+      "calories": 100,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ph_rjqk",
+      "name": "熔岩巧克力蛋糕",
+      "description": "外层浓郁，内芯流心",
+      "price": 20,
+      "calories": 450,
+      "emoji": "🍫",
+      "menuCategory": "甜品",
+      "popular": true
+    },
+    {
+      "id": "ph_tls",
+      "name": "提拉米苏",
+      "description": "经典意式甜品，口感丝滑",
+      "price": 22,
+      "calories": 380,
+      "emoji": "🍰",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "ph_mgms",
+      "name": "芒果慕斯",
+      "description": "芒果果肉配慕斯，清新香甜",
+      "price": 18,
+      "calories": 320,
+      "emoji": "🥭",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "ph_bql",
+      "name": "冰淇淋",
+      "description": "香草口味，清凉解暑",
+      "price": 10,
+      "calories": 200,
+      "emoji": "🍦",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "ph_srt",
+      "name": "双人餐套餐",
+      "description": "比萨+意面+小食+饮品，双人畅享",
+      "price": 128,
+      "calories": 2400,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "ph_jtht",
+      "name": "家庭欢乐桶",
+      "description": "多种小食组合，全家分享",
+      "price": 158,
+      "calories": 3000,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "ph_drt",
+      "name": "单人比萨套餐",
+      "description": "比萨+饮品，一人享用刚好",
+      "price": 45,
+      "calories": 850,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    }
+  ]
+}

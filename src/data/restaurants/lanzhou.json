@@ -1,0 +1,303 @@
+{
+  "id": "lanzhou",
+  "order": 2,
+  "name": "兰州拉面馆",
+  "category": "中式快餐",
+  "rating": 4.7,
+  "ratingCount": 1560,
+  "monthlyOrders": 4300,
+  "deliveryFee": 3,
+  "deliveryTime": 25,
+  "minOrder": 12,
+  "emoji": "🍜",
+  "bgColor": "#8B4513",
+  "tags": [
+    "减配送费",
+    "特色小吃"
+  ],
+  "menuCategories": [
+    "热销",
+    "面食",
+    "小吃",
+    "汤类",
+    "饮品",
+    "卤味"
+  ],
+  "menu": [
+    {
+      "id": "nrm",
+      "name": "牛肉拉面",
+      "description": "正宗兰州拉面，汤清肉嫩，手工拉制",
+      "price": 18,
+      "calories": 550,
+      "emoji": "🍜",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jrm",
+      "name": "鸡肉拉面",
+      "description": "鲜嫩鸡肉，清香拉面汤底",
+      "price": 16,
+      "calories": 480,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "rjm",
+      "name": "肉夹馍",
+      "description": "外酥内软的馍夹香嫩腊汁肉",
+      "price": 12,
+      "calories": 420,
+      "emoji": "🥙",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "sjm",
+      "name": "双椒肉夹馍",
+      "description": "青椒红椒爆香，肉夹馍升级版",
+      "price": 14,
+      "calories": 460,
+      "emoji": "🌶️",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "hpi",
+      "name": "凉皮",
+      "description": "劲道爽滑，酸辣开胃",
+      "price": 10,
+      "calories": 280,
+      "emoji": "🥗",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lz_clm",
+      "name": "炒拉面",
+      "description": "劲道拉面爆炒，锅气十足",
+      "price": 17,
+      "calories": 520,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lz_xhsjdm",
+      "name": "西红柿鸡蛋面",
+      "description": "家常味道，酸甜开胃",
+      "price": 15,
+      "calories": 460,
+      "emoji": "🍅",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lz_sacnm",
+      "name": "酸菜牛肉面",
+      "description": "酸菜解腻，牛肉软烂",
+      "price": 19,
+      "calories": 560,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lz_ftnnm",
+      "name": "番茄牛腩面",
+      "description": "番茄浓汤配软烂牛腩",
+      "price": 20,
+      "calories": 580,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lz_mlnrm",
+      "name": "麻辣牛肉面",
+      "description": "麻辣鲜香，牛肉入味",
+      "price": 18,
+      "calories": 540,
+      "emoji": "🌶️",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lz_sxm",
+      "name": "三鲜面",
+      "description": "虾仁肉丝木耳，鲜香满满",
+      "price": 16,
+      "calories": 480,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lz_mldp",
+      "name": "麻辣豆皮",
+      "description": "爽滑豆皮，麻辣开胃",
+      "price": 9,
+      "calories": 200,
+      "emoji": "🌶️",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lz_zyy",
+      "name": "炸洋芋",
+      "description": "外焦里嫩，土豆香浓",
+      "price": 8,
+      "calories": 250,
+      "emoji": "🥔",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lz_tclj",
+      "name": "糖醋里脊",
+      "description": "酸甜可口，外酥里嫩",
+      "price": 16,
+      "calories": 380,
+      "emoji": "🍖",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lz_phg",
+      "name": "拍黄瓜",
+      "description": "清爽解腻，蒜香开胃",
+      "price": 6,
+      "calories": 60,
+      "emoji": "🥒",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lz_mltds",
+      "name": "麻辣土豆丝",
+      "description": "爽脆土豆丝，麻辣鲜香",
+      "price": 7,
+      "calories": 150,
+      "emoji": "🥔",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lz_ngt",
+      "name": "牛骨汤",
+      "description": "浓白牛骨汤，滋补暖胃",
+      "price": 8,
+      "calories": 180,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lz_sxt",
+      "name": "三鲜汤",
+      "description": "鲜香浓郁，配料丰富",
+      "price": 7,
+      "calories": 150,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lz_slt",
+      "name": "酸辣汤",
+      "description": "酸辣开胃，暖身驱寒",
+      "price": 7,
+      "calories": 130,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lz_dgt",
+      "name": "冬瓜汤",
+      "description": "清淡爽口，解腻消食",
+      "price": 6,
+      "calories": 100,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lz_smt",
+      "name": "酸梅汤",
+      "description": "解腻消暑，酸甜可口",
+      "price": 6,
+      "calories": 80,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "lz_btxl",
+      "name": "冰糖雪梨",
+      "description": "润喉止咳，清甜爽口",
+      "price": 8,
+      "calories": 100,
+      "emoji": "🍐",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "lz_bbc",
+      "name": "八宝茶",
+      "description": "西北特色茶饮，回甘悠长",
+      "price": 10,
+      "calories": 60,
+      "emoji": "🍵",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "lz_lnr",
+      "name": "卤牛肉（份）",
+      "description": "酱香浓郁，肉质紧实",
+      "price": 25,
+      "calories": 380,
+      "emoji": "🥩",
+      "menuCategory": "卤味",
+      "popular": true
+    },
+    {
+      "id": "lz_ld",
+      "name": "卤蛋",
+      "description": "入味卤蛋，配面必点",
+      "price": 3,
+      "calories": 90,
+      "emoji": "🥚",
+      "menuCategory": "卤味"
+    },
+    {
+      "id": "lz_ldg",
+      "name": "卤豆干",
+      "description": "劲道豆干，卤香十足",
+      "price": 6,
+      "calories": 140,
+      "emoji": "🧊",
+      "menuCategory": "卤味"
+    },
+    {
+      "id": "lz_ljz",
+      "name": "卤鸡爪",
+      "description": "Q弹入味，越嚼越香",
+      "price": 8,
+      "calories": 180,
+      "emoji": "🍗",
+      "menuCategory": "卤味"
+    },
+    {
+      "id": "lz_dpjbm",
+      "name": "大盘鸡拌面",
+      "description": "新疆风味大盘鸡配拉面",
+      "price": 26,
+      "calories": 780,
+      "emoji": "🍗",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "lz_hsnrm",
+      "name": "红烧牛肉面",
+      "description": "经典红烧牛肉，汤浓味厚",
+      "price": 20,
+      "calories": 600,
+      "emoji": "🍜",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "lz_dxm",
+      "name": "刀削面",
+      "description": "筋道刀削面，配料丰富",
+      "price": 16,
+      "calories": 500,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    }
+  ]
+}

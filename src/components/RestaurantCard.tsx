@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { Restaurant } from '../data/restaurants';
+import { assetUrl } from '../lib/assetUrl';
 
 interface Props {
   restaurant: Restaurant;
@@ -15,9 +16,13 @@ export default function RestaurantCard({ restaurant }: Props) {
     >
       <div
         className="h-36 flex items-center justify-center text-6xl relative"
-        style={{ background: `linear-gradient(135deg, ${restaurant.bgColor}dd, ${restaurant.bgColor}88)` }}
+        style={!restaurant.bannerImage ? { background: `linear-gradient(135deg, ${restaurant.bgColor}dd, ${restaurant.bgColor}88)` } : undefined}
       >
-        <span className="drop-shadow-lg">{restaurant.emoji}</span>
+        {restaurant.bannerImage ? (
+          <img src={assetUrl(restaurant.bannerImage)} alt={restaurant.name} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <span className="drop-shadow-lg">{restaurant.emoji}</span>
+        )}
         <div className="absolute bottom-2 left-3 flex gap-1">
           {restaurant.tags.slice(0, 2).map(tag => (
             <span

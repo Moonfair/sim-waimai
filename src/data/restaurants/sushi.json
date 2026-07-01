@@ -1,0 +1,306 @@
+{
+  "id": "sushi",
+  "order": 7,
+  "name": "一番寿司",
+  "category": "日料韩料",
+  "rating": 4.7,
+  "ratingCount": 1820,
+  "monthlyOrders": 4500,
+  "deliveryFee": 6,
+  "deliveryTime": 40,
+  "minOrder": 30,
+  "emoji": "🍣",
+  "bgColor": "#1a1a2e",
+  "tags": [
+    "精选食材",
+    "满50减8",
+    "日式正宗"
+  ],
+  "menuCategories": [
+    "热销",
+    "手卷",
+    "握寿司",
+    "小食",
+    "汤品",
+    "刺身",
+    "饮品"
+  ],
+  "menu": [
+    {
+      "id": "smgj",
+      "name": "三文鱼手卷",
+      "description": "新鲜三文鱼，搭配海苔饭团，鲜嫩香甜",
+      "price": 28,
+      "calories": 320,
+      "emoji": "🌯",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "yzs",
+      "name": "玉子烧（3块）",
+      "description": "日式甜蛋卷，口感细腻，甜咸适中",
+      "price": 18,
+      "calories": 210,
+      "emoji": "🍳",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "wzh",
+      "name": "味噌汤",
+      "description": "暖胃日式味噌汤，豆腐海带香浓",
+      "price": 12,
+      "calories": 80,
+      "emoji": "🍵",
+      "menuCategory": "汤品"
+    },
+    {
+      "id": "jylr",
+      "name": "酱油溜鱼",
+      "description": "精选鱼片，酱油浸泡，鲜嫩入味",
+      "price": 35,
+      "calories": 290,
+      "emoji": "🐟",
+      "menuCategory": "握寿司"
+    },
+    {
+      "id": "edb",
+      "name": "蟹棒手卷",
+      "description": "鲜甜蟹棒搭配蔬菜，清爽可口",
+      "price": 22,
+      "calories": 250,
+      "emoji": "🦀",
+      "menuCategory": "手卷"
+    },
+    {
+      "id": "dc",
+      "name": "章鱼小丸子（6颗）",
+      "description": "外焦里嫩，章鱼鲜美，日式经典小食",
+      "price": 20,
+      "calories": 320,
+      "emoji": "🐙",
+      "menuCategory": "小食",
+      "popular": true
+    },
+    {
+      "id": "ss_lyj",
+      "name": "鳗鱼手卷",
+      "description": "蒲烧鳗鱼，酱香浓郁",
+      "price": 26,
+      "calories": 300,
+      "emoji": "🌯",
+      "menuCategory": "手卷"
+    },
+    {
+      "id": "ss_ttlj",
+      "name": "天妇罗手卷",
+      "description": "酥脆天妇罗，海苔包裹",
+      "price": 24,
+      "calories": 340,
+      "emoji": "🌯",
+      "menuCategory": "手卷"
+    },
+    {
+      "id": "ss_jzj",
+      "name": "加州卷",
+      "description": "蟹柳牛油果，经典反卷",
+      "price": 25,
+      "calories": 310,
+      "emoji": "🌯",
+      "menuCategory": "手卷"
+    },
+    {
+      "id": "ss_nyghsj",
+      "name": "牛油果手卷",
+      "description": "香滑牛油果，清爽健康",
+      "price": 20,
+      "calories": 260,
+      "emoji": "🥑",
+      "menuCategory": "手卷"
+    },
+    {
+      "id": "ss_jqyws",
+      "name": "金枪鱼握寿司",
+      "description": "精选金枪鱼赤身，入口即化",
+      "price": 32,
+      "calories": 220,
+      "emoji": "🍣",
+      "menuCategory": "握寿司"
+    },
+    {
+      "id": "ss_txws",
+      "name": "甜虾握寿司",
+      "description": "北海道甜虾，鲜甜弹牙",
+      "price": 30,
+      "calories": 200,
+      "emoji": "🍣",
+      "menuCategory": "握寿司"
+    },
+    {
+      "id": "ss_bjbws",
+      "name": "北极贝握寿司",
+      "description": "北极贝清甜爽脆",
+      "price": 34,
+      "calories": 210,
+      "emoji": "🍣",
+      "menuCategory": "握寿司"
+    },
+    {
+      "id": "ss_lyws",
+      "name": "鳗鱼握寿司",
+      "description": "蒲烧鳗鱼配醋饭，香甜浓郁",
+      "price": 36,
+      "calories": 250,
+      "emoji": "🍣",
+      "menuCategory": "握寿司"
+    },
+    {
+      "id": "ss_smyc",
+      "name": "三文鱼刺身",
+      "description": "挪威三文鱼，肥美鲜嫩",
+      "price": 42,
+      "calories": 260,
+      "emoji": "🍣",
+      "menuCategory": "刺身",
+      "popular": true
+    },
+    {
+      "id": "ss_jqyc",
+      "name": "金枪鱼刺身",
+      "description": "精选金枪鱼，口感醇厚",
+      "price": 48,
+      "calories": 240,
+      "emoji": "🍣",
+      "menuCategory": "刺身"
+    },
+    {
+      "id": "ss_txc",
+      "name": "甜虾刺身",
+      "description": "北海道甜虾，鲜甜Q弹",
+      "price": 38,
+      "calories": 180,
+      "emoji": "🍤",
+      "menuCategory": "刺身"
+    },
+    {
+      "id": "ss_flbc",
+      "name": "帆立贝刺身",
+      "description": "北海道帆立贝，肉质饱满",
+      "price": 45,
+      "calories": 200,
+      "emoji": "🐚",
+      "menuCategory": "刺身"
+    },
+    {
+      "id": "ss_rsjz",
+      "name": "日式煎饺（5个）",
+      "description": "皮薄馅大，外焦里嫩",
+      "price": 18,
+      "calories": 320,
+      "emoji": "🥟",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ss_ttlpp",
+      "name": "天妇罗拼盘",
+      "description": "什锦天妇罗，酥脆可口",
+      "price": 25,
+      "calories": 400,
+      "emoji": "🍤",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ss_jmzy",
+      "name": "芥末章鱼",
+      "description": "爽脆章鱼，芥末微辣",
+      "price": 16,
+      "calories": 150,
+      "emoji": "🐙",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ss_glt",
+      "name": "蛤蜊汤",
+      "description": "鲜美蛤蜊清汤，暖胃鲜香",
+      "price": 15,
+      "calories": 100,
+      "emoji": "🥣",
+      "menuCategory": "汤品"
+    },
+    {
+      "id": "ss_zrt",
+      "name": "猪肉汤",
+      "description": "日式豚汁，浓郁暖身",
+      "price": 16,
+      "calories": 220,
+      "emoji": "🥣",
+      "menuCategory": "汤品"
+    },
+    {
+      "id": "ss_mcnt",
+      "name": "抹茶拿铁",
+      "description": "日式抹茶配牛奶，香浓顺滑",
+      "price": 20,
+      "calories": 200,
+      "emoji": "🍵",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ss_mj",
+      "name": "梅酒",
+      "description": "日式梅酒，清甜微醺",
+      "price": 25,
+      "calories": 150,
+      "emoji": "🍶",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ss_wlc",
+      "name": "乌龙茶",
+      "description": "清香乌龙，解腻回甘",
+      "price": 10,
+      "calories": 10,
+      "emoji": "🍵",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ss_yzmc",
+      "name": "柚子蜜茶",
+      "description": "柚香清新，酸甜可口",
+      "price": 16,
+      "calories": 160,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "ss_zhsspp",
+      "name": "综合寿司拼盘",
+      "description": "多种寿司精选组合，一次吃遍",
+      "price": 68,
+      "calories": 900,
+      "emoji": "🍱",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ss_smycpp",
+      "name": "三文鱼刺身拼盘",
+      "description": "大份三文鱼刺身，鲜美过瘾",
+      "price": 78,
+      "calories": 850,
+      "emoji": "🍣",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ss_yzjjz",
+      "name": "鱼子酱军舰",
+      "description": "晶莹鱼子酱配军舰卷，口感丰富",
+      "price": 38,
+      "calories": 190,
+      "emoji": "🍣",
+      "menuCategory": "握寿司"
+    }
+  ]
+}

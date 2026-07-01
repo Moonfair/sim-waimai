@@ -1,0 +1,323 @@
+{
+  "id": "laoxiangji",
+  "order": 0,
+  "name": "老乡鸡",
+  "category": "中式快餐",
+  "rating": 4.8,
+  "ratingCount": 3200,
+  "monthlyOrders": 9800,
+  "deliveryFee": 3,
+  "deliveryTime": 28,
+  "minOrder": 15,
+  "emoji": "🍗",
+  "bgColor": "#ff8c00",
+  "tags": [
+    "减配送费",
+    "满20减3",
+    "新客特惠"
+  ],
+  "menuCategories": [
+    "热销",
+    "套餐",
+    "饭类",
+    "汤类",
+    "面食",
+    "卤味",
+    "小吃",
+    "饮品"
+  ],
+  "menu": [
+    {
+      "id": "hfj",
+      "name": "黄焖鸡米饭",
+      "description": "招牌黄焖鸡，鸡肉嫩滑入味，搭配米饭",
+      "price": 18,
+      "calories": 680,
+      "emoji": "🍱",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "tdj",
+      "name": "土豆烩鸡腿饭",
+      "description": "软糯土豆配香嫩鸡腿，家常味道",
+      "price": 20,
+      "calories": 720,
+      "emoji": "🍱",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jrj",
+      "name": "鸡肉炒饭",
+      "description": "蛋炒饭配嫩滑鸡肉粒，香气四溢",
+      "price": 16,
+      "calories": 590,
+      "emoji": "🍳",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "tc1",
+      "name": "双人套餐A",
+      "description": "黄焖鸡米饭×2 + 紫菜蛋花汤×2",
+      "price": 34,
+      "calories": 1360,
+      "emoji": "🎁",
+      "menuCategory": "套餐"
+    },
+    {
+      "id": "tc2",
+      "name": "单人套餐",
+      "description": "土豆烩鸡腿饭 + 紫菜蛋花汤",
+      "price": 24,
+      "calories": 820,
+      "emoji": "🎁",
+      "menuCategory": "套餐"
+    },
+    {
+      "id": "tang1",
+      "name": "紫菜蛋花汤",
+      "description": "清淡鲜美，暖胃暖心",
+      "price": 4,
+      "calories": 60,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "tang2",
+      "name": "番茄蛋花汤",
+      "description": "酸甜开胃，番茄香浓",
+      "price": 5,
+      "calories": 80,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lxj_fqjd",
+      "name": "番茄鸡蛋饭",
+      "description": "家常番茄炒蛋，酸甜下饭",
+      "price": 15,
+      "calories": 520,
+      "emoji": "🍳",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "lxj_xghj",
+      "name": "香菇滑鸡饭",
+      "description": "嫩滑鸡肉配香菇，鲜香入味",
+      "price": 19,
+      "calories": 580,
+      "emoji": "🍄",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "lxj_gljf",
+      "name": "咖喱鸡饭",
+      "description": "浓郁咖喱汁配嫩鸡块",
+      "price": 18,
+      "calories": 600,
+      "emoji": "🍛",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "lxj_mckr",
+      "name": "梅菜扣肉饭",
+      "description": "肥而不腻，梅菜香浓",
+      "price": 20,
+      "calories": 650,
+      "emoji": "🍖",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "lxj_njcxr",
+      "name": "农家小炒肉饭",
+      "description": "青红椒爆炒五花肉，下饭一绝",
+      "price": 19,
+      "calories": 610,
+      "emoji": "🌶️",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "lxj_srtc",
+      "name": "三人套餐",
+      "description": "三份主食配汤，多人分享超值",
+      "price": 52,
+      "calories": 2000,
+      "emoji": "🎁",
+      "menuCategory": "套餐"
+    },
+    {
+      "id": "lxj_qltc",
+      "name": "情侣套餐",
+      "description": "双人主食配汤，甜蜜共享",
+      "price": 38,
+      "calories": 1500,
+      "emoji": "🎁",
+      "menuCategory": "套餐"
+    },
+    {
+      "id": "lxj_xstc",
+      "name": "学生套餐",
+      "description": "经济实惠，营养均衡",
+      "price": 16,
+      "calories": 600,
+      "emoji": "🎁",
+      "menuCategory": "套餐"
+    },
+    {
+      "id": "lxj_dgpg",
+      "name": "冬瓜排骨汤",
+      "description": "清爽排骨汤，冬瓜软糯",
+      "price": 6,
+      "calories": 150,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lxj_lyt",
+      "name": "老鸭汤",
+      "description": "滋补老鸭汤，汤鲜味美",
+      "price": 8,
+      "calories": 220,
+      "emoji": "🦆",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lxj_ymbg",
+      "name": "玉米棒骨汤",
+      "description": "甜玉米炖棒骨，香浓营养",
+      "price": 7,
+      "calories": 180,
+      "emoji": "🌽",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "lxj_jzbm",
+      "name": "鸡汁拌面",
+      "description": "鸡汁浓香拌面，简单美味",
+      "price": 14,
+      "calories": 480,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lxj_sgm",
+      "name": "手擀面",
+      "description": "劲道手擀面，配菜丰富",
+      "price": 12,
+      "calories": 420,
+      "emoji": "🍜",
+      "menuCategory": "面食"
+    },
+    {
+      "id": "lxj_ljz",
+      "name": "卤鸡爪",
+      "description": "Q弹入味，越嚼越香",
+      "price": 8,
+      "calories": 180,
+      "emoji": "🍗",
+      "menuCategory": "卤味"
+    },
+    {
+      "id": "lxj_ljd",
+      "name": "卤鸡蛋",
+      "description": "入味卤蛋，蛋香浓郁",
+      "price": 3,
+      "calories": 90,
+      "emoji": "🥚",
+      "menuCategory": "卤味"
+    },
+    {
+      "id": "lxj_ldg",
+      "name": "卤豆干",
+      "description": "劲道豆干，卤香十足",
+      "price": 6,
+      "calories": 140,
+      "emoji": "🧊",
+      "menuCategory": "卤味"
+    },
+    {
+      "id": "lxj_ssbc",
+      "name": "手撕包菜",
+      "description": "爽脆包菜，清淡开胃",
+      "price": 8,
+      "calories": 100,
+      "emoji": "🥬",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lxj_srym",
+      "name": "蒜蓉油麦菜",
+      "description": "蒜香浓郁，清爽解腻",
+      "price": 9,
+      "calories": 90,
+      "emoji": "🥬",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lxj_mld",
+      "name": "麻辣藕丁",
+      "description": "爽脆藕丁，麻辣开胃",
+      "price": 8,
+      "calories": 120,
+      "emoji": "🌶️",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lxj_lbhg",
+      "name": "凉拌黄瓜",
+      "description": "清爽解腻，酸辣可口",
+      "price": 6,
+      "calories": 60,
+      "emoji": "🥒",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "lxj_nmfm",
+      "name": "柠檬蜂蜜水",
+      "description": "清新解腻，酸甜怡人",
+      "price": 8,
+      "calories": 90,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "lxj_smt",
+      "name": "酸梅汤",
+      "description": "解腻消暑，酸甜可口",
+      "price": 6,
+      "calories": 80,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "lxj_jhc",
+      "name": "菊花茶",
+      "description": "清热去火，清香回甘",
+      "price": 5,
+      "calories": 20,
+      "emoji": "🍵",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "lxj_njyx",
+      "name": "农家一碗香",
+      "description": "招牌浇头拌饭，料足味浓",
+      "price": 21,
+      "calories": 700,
+      "emoji": "🍚",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "lxj_lmjtm",
+      "name": "老母鸡汤面",
+      "description": "老母鸡熬汤配面，鲜香滋补",
+      "price": 22,
+      "calories": 650,
+      "emoji": "🍜",
+      "menuCategory": "热销",
+      "popular": true
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "id": "burgerking",
+  "order": 6,
+  "name": "汉堡王",
+  "category": "汉堡炸鸡",
+  "rating": 4.5,
+  "ratingCount": 5400,
+  "monthlyOrders": 12000,
+  "deliveryFee": 5,
+  "deliveryTime": 38,
+  "minOrder": 20,
+  "emoji": "👑",
+  "bgColor": "#D62300",
+  "tags": [
+    "品牌店",
+    "满40减6",
+    "买一送一"
+  ],
+  "menuCategories": [
+    "热销",
+    "汉堡",
+    "炸鸡",
+    "小食",
+    "饮品",
+    "甜品"
+  ],
+  "menu": [
+    {
+      "id": "hb",
+      "name": "皇堡",
+      "description": "火烤牛肉饼，经典皇堡，厚实解馋",
+      "price": 32,
+      "calories": 620,
+      "emoji": "🍔",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jrb",
+      "name": "鸡肉皇堡",
+      "description": "香嫩鸡肉饼，外酥里嫩，清淡鲜美",
+      "price": 28,
+      "calories": 480,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "ycc",
+      "name": "洋葱圈（大）",
+      "description": "金黄酥脆，洋葱香甜，必点小食",
+      "price": 18,
+      "calories": 420,
+      "emoji": "🧅",
+      "menuCategory": "小食",
+      "popular": true
+    },
+    {
+      "id": "bk_ts",
+      "name": "双层皇堡套餐",
+      "description": "双层皇堡 + 大薯 + 大可乐",
+      "price": 56,
+      "calories": 1200,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "bk_jc",
+      "name": "辣鸡排堡",
+      "description": "香辣爆汁鸡排，重口味首选",
+      "price": 26,
+      "calories": 510,
+      "emoji": "🌶️",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "bk_wdws",
+      "name": "无敌乌苏黑堡",
+      "description": "黑面包配双层牛肉，霸气十足",
+      "price": 34,
+      "calories": 650,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "bk_zsnrb",
+      "name": "芝士牛肉堡",
+      "description": "浓郁芝士配多汁牛肉饼",
+      "price": 29,
+      "calories": 540,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "bk_bsjtb",
+      "name": "板烧鸡腿堡",
+      "description": "照烧酱汁，鸡腿多汁",
+      "price": 26,
+      "calories": 480,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "bk_ssscb",
+      "name": "蔬菜双层堡",
+      "description": "双层蔬菜配特制酱料，清爽健康",
+      "price": 24,
+      "calories": 420,
+      "emoji": "🥬",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "bk_xljk",
+      "name": "香辣鸡块（6块）",
+      "description": "外酥里嫩，香辣过瘾",
+      "price": 20,
+      "calories": 400,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "bk_cpzjc",
+      "name": "脆皮炸鸡翅（4只）",
+      "description": "外皮酥脆，肉质多汁",
+      "price": 22,
+      "calories": 420,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "bk_wgjlt",
+      "name": "无骨鸡柳条",
+      "description": "外酥里嫩，无骨更方便",
+      "price": 18,
+      "calories": 350,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "bk_ymnt",
+      "name": "玉米浓汤",
+      "description": "香甜玉米浓汤，暖胃可口",
+      "price": 10,
+      "calories": 180,
+      "emoji": "🌽",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "bk_sg",
+      "name": "薯格",
+      "description": "外酥内软，经典小食",
+      "price": 12,
+      "calories": 300,
+      "emoji": "🥔",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "bk_jdsl",
+      "name": "鸡蛋沙拉",
+      "description": "新鲜蔬菜配水煮蛋，清爽健康",
+      "price": 14,
+      "calories": 200,
+      "emoji": "🥗",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "bk_zst",
+      "name": "芝士条（6条）",
+      "description": "拉丝芝士条，外酥内融",
+      "price": 18,
+      "calories": 380,
+      "emoji": "🧀",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "bk_kl",
+      "name": "可乐（大）",
+      "description": "经典畅爽可乐",
+      "price": 10,
+      "calories": 200,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "bk_xb",
+      "name": "雪碧（大）",
+      "description": "清爽柠檬味汽水",
+      "price": 10,
+      "calories": 180,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "bk_bhc",
+      "name": "冰红茶",
+      "description": "清凉解暑，茶香浓郁",
+      "price": 8,
+      "calories": 120,
+      "emoji": "🧊",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "bk_xcd",
+      "name": "鲜橙多",
+      "description": "橙香浓郁，酸甜可口",
+      "price": 9,
+      "calories": 140,
+      "emoji": "🍊",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "bk_zbsd",
+      "name": "珍宝圣代",
+      "description": "香草冰淇淋配果酱，经典甜品",
+      "price": 10,
+      "calories": 260,
+      "emoji": "🍨",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "bk_pgp",
+      "name": "苹果派",
+      "description": "外酥内软，苹果馅香甜",
+      "price": 8,
+      "calories": 220,
+      "emoji": "🥧",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "bk_qklms",
+      "name": "巧克力慕斯",
+      "description": "浓郁巧克力，丝滑绵密",
+      "price": 12,
+      "calories": 320,
+      "emoji": "🍫",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "bk_zsdg",
+      "name": "芝士蛋糕",
+      "description": "浓郁芝士，口感细腻",
+      "price": 15,
+      "calories": 350,
+      "emoji": "🍰",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "bk_hbtc",
+      "name": "皇堡套餐",
+      "description": "皇堡+薯条+饮品，超值套餐",
+      "price": 45,
+      "calories": 1050,
+      "emoji": "🎁",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "bk_slzsb",
+      "name": "双层芝士堡",
+      "description": "双层牛肉饼配浓郁芝士",
+      "price": 30,
+      "calories": 600,
+      "emoji": "🍔",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "bk_bgzsb",
+      "name": "培根芝士堡",
+      "description": "香煎培根配浓郁芝士",
+      "price": 28,
+      "calories": 560,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "bk_xlcpjp",
+      "name": "香辣脆皮鸡排",
+      "description": "外皮酥脆，香辣过瘾",
+      "price": 24,
+      "calories": 460,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "bk_zsyc",
+      "name": "芝士洋葱圈",
+      "description": "洋葱圈裹芝士，双重酥脆",
+      "price": 16,
+      "calories": 400,
+      "emoji": "🧅",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "bk_msks",
+      "name": "美式咖啡",
+      "description": "香浓咖啡，提神醒脑",
+      "price": 12,
+      "calories": 15,
+      "emoji": "☕",
+      "menuCategory": "饮品"
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "id": "kfc",
+  "order": 1,
+  "name": "肯德基",
+  "category": "汉堡炸鸡",
+  "rating": 4.6,
+  "ratingCount": 8800,
+  "monthlyOrders": 25000,
+  "deliveryFee": 5,
+  "deliveryTime": 35,
+  "minOrder": 20,
+  "emoji": "🍔",
+  "bgColor": "#e4002b",
+  "tags": [
+    "品牌店",
+    "满39减5",
+    "第二件半价"
+  ],
+  "menuCategories": [
+    "热销",
+    "汉堡",
+    "炸鸡",
+    "小食",
+    "饮品",
+    "卷类",
+    "甜品",
+    "早餐"
+  ],
+  "menu": [
+    {
+      "id": "xlb",
+      "name": "香辣鸡腿堡",
+      "description": "外酥里嫩的炸鸡腿，搭配香辣酱料",
+      "price": 25,
+      "calories": 480,
+      "emoji": "🍔",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ywj",
+      "name": "原味鸡（2块）",
+      "description": "经典配方，外皮酥脆，鸡肉鲜嫩",
+      "price": 28,
+      "calories": 520,
+      "emoji": "🍗",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "xts",
+      "name": "薯条（大）",
+      "description": "外酥内软，金黄薯条，经典搭配",
+      "price": 16,
+      "calories": 450,
+      "emoji": "🍟",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "jxb",
+      "name": "劲辣鸡腿堡",
+      "description": "更辣更过瘾，满足重口味的你",
+      "price": 27,
+      "calories": 490,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "popcorn",
+      "name": "爆米花鸡（大）",
+      "description": "一口一个，酥脆多汁",
+      "price": 18,
+      "calories": 380,
+      "emoji": "🍿",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "cola",
+      "name": "可口可乐（中）",
+      "description": "冰爽可口，经典配餐",
+      "price": 8,
+      "calories": 150,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "tc_kfc",
+      "name": "双人全家桶套餐",
+      "description": "原味鸡×4 + 薯条×2 + 可乐×2",
+      "price": 85,
+      "calories": 2200,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "kfc_lswcb",
+      "name": "辣味双层牛堡",
+      "description": "双层牛肉饼，香辣带劲",
+      "price": 30,
+      "calories": 650,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "kfc_tjjtb",
+      "name": "藤椒鸡腿堡",
+      "description": "藤椒麻香配脆嫩鸡腿",
+      "price": 26,
+      "calories": 500,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "kfc_bsjtb",
+      "name": "板烧鸡腿堡",
+      "description": "照烧酱汁，鸡腿多汁",
+      "price": 24,
+      "calories": 470,
+      "emoji": "🍔",
+      "menuCategory": "汉堡"
+    },
+    {
+      "id": "kfc_xgj",
+      "name": "香骨鸡（2块）",
+      "description": "外酥里嫩，香辣入味",
+      "price": 26,
+      "calories": 480,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "kfc_wgjl",
+      "name": "无骨鸡柳（4条）",
+      "description": "外皮酥脆，鸡肉鲜嫩无骨",
+      "price": 22,
+      "calories": 420,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "kfc_kzctg",
+      "name": "咔滋脆鸡腿",
+      "description": "外皮咔滋作响，肉质鲜嫩",
+      "price": 20,
+      "calories": 400,
+      "emoji": "🍗",
+      "menuCategory": "炸鸡"
+    },
+    {
+      "id": "kfc_jmh",
+      "name": "鸡米花（中）",
+      "description": "一口一个，酥脆多汁",
+      "price": 15,
+      "calories": 380,
+      "emoji": "🍗",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "kfc_ymsl",
+      "name": "玉米沙拉",
+      "description": "香甜玉米粒，清爽可口",
+      "price": 10,
+      "calories": 150,
+      "emoji": "🌽",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "kfc_tdn",
+      "name": "土豆泥",
+      "description": "绵密顺滑，经典配餐",
+      "price": 8,
+      "calories": 180,
+      "emoji": "🥔",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "kfc_dt",
+      "name": "蛋挞",
+      "description": "外酥内嫩，蛋香浓郁",
+      "price": 8,
+      "calories": 220,
+      "emoji": "🥧",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "kfc_lbjjq",
+      "name": "老北京鸡肉卷",
+      "description": "经典京味卷饼，酱香浓郁",
+      "price": 12,
+      "calories": 320,
+      "emoji": "🌯",
+      "menuCategory": "卷类",
+      "popular": true
+    },
+    {
+      "id": "kfc_mxgjrq",
+      "name": "墨西哥鸡肉卷",
+      "description": "墨西哥风味，酸爽开胃",
+      "price": 13,
+      "calories": 340,
+      "emoji": "🌯",
+      "menuCategory": "卷类"
+    },
+    {
+      "id": "kfc_xltjq",
+      "name": "香辣鸡腿卷",
+      "description": "香辣鸡腿肉，卷饼皮软糯",
+      "price": 14,
+      "calories": 360,
+      "emoji": "🌯",
+      "menuCategory": "卷类"
+    },
+    {
+      "id": "kfc_kfnt",
+      "name": "咖啡拿铁",
+      "description": "香浓咖啡配丝滑牛奶",
+      "price": 15,
+      "calories": 180,
+      "emoji": "☕",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "kfc_hc",
+      "name": "红茶",
+      "description": "经典红茶，清香回甘",
+      "price": 8,
+      "calories": 60,
+      "emoji": "🍵",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "kfc_mtscc",
+      "name": "蜜桃四季春",
+      "description": "蜜桃香浓，清新爽口",
+      "price": 12,
+      "calories": 130,
+      "emoji": "🍑",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "kfc_cz",
+      "name": "橙汁",
+      "description": "新鲜橙汁，维C满满",
+      "price": 10,
+      "calories": 110,
+      "emoji": "🍊",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "kfc_tt",
+      "name": "甜筒",
+      "description": "香草味冰淇淋，清凉解暑",
+      "price": 5,
+      "calories": 150,
+      "emoji": "🍦",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "kfc_xdsd",
+      "name": "新地圣代",
+      "description": "香草冰淇淋配果酱，经典甜品",
+      "price": 12,
+      "calories": 280,
+      "emoji": "🍨",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "kfc_qklxd",
+      "name": "巧克力新地",
+      "description": "浓郁巧克力酱，香甜诱人",
+      "price": 12,
+      "calories": 300,
+      "emoji": "🍫",
+      "menuCategory": "甜品"
+    },
+    {
+      "id": "kfc_xnymz",
+      "name": "香浓玉米粥",
+      "description": "香甜玉米粥，早餐首选",
+      "price": 8,
+      "calories": 150,
+      "emoji": "🥣",
+      "menuCategory": "早餐"
+    },
+    {
+      "id": "kfc_yt",
+      "name": "油条",
+      "description": "经典油条，外酥内软",
+      "price": 4,
+      "calories": 200,
+      "emoji": "🥖",
+      "menuCategory": "早餐"
+    },
+    {
+      "id": "kfc_ds",
+      "name": "豆浆",
+      "description": "香浓豆浆，营养早餐搭配",
+      "price": 5,
+      "calories": 90,
+      "emoji": "🥛",
+      "menuCategory": "早餐"
+    },
+    {
+      "id": "kfc_pgdb",
+      "name": "培根蛋堡",
+      "description": "培根煎蛋，营养早餐堡",
+      "price": 12,
+      "calories": 320,
+      "emoji": "🍔",
+      "menuCategory": "早餐"
+    },
+    {
+      "id": "kfc_sb",
+      "name": "薯饼",
+      "description": "外酥内软，经典早餐小食",
+      "price": 8,
+      "calories": 200,
+      "emoji": "🥔",
+      "menuCategory": "早餐"
+    }
+  ]
+}

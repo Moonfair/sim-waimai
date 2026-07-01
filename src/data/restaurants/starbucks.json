@@ -1,0 +1,313 @@
+{
+  "id": "starbucks",
+  "order": 10,
+  "name": "星巴克",
+  "category": "咖啡烘焙",
+  "rating": 4.8,
+  "ratingCount": 7100,
+  "monthlyOrders": 16000,
+  "deliveryFee": 7,
+  "deliveryTime": 35,
+  "minOrder": 25,
+  "emoji": "☕",
+  "bgColor": "#00704A",
+  "tags": [
+    "品牌店",
+    "第二杯半价",
+    "会员专享"
+  ],
+  "menuCategories": [
+    "热销",
+    "咖啡",
+    "星冰乐",
+    "茶饮",
+    "轻食",
+    "甜点"
+  ],
+  "menu": [
+    {
+      "id": "sbk_nt",
+      "name": "拿铁",
+      "description": "香浓咖啡配丝滑牛奶，经典之选",
+      "price": 32,
+      "calories": 180,
+      "emoji": "☕",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "sbk_jtmqd",
+      "name": "焦糖玛奇朵",
+      "description": "香甜焦糖，层次丰富",
+      "price": 35,
+      "calories": 250,
+      "emoji": "☕",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "sbk_syn",
+      "name": "生椰拿铁",
+      "description": "椰香浓郁，清爽不腻",
+      "price": 33,
+      "calories": 220,
+      "emoji": "🥥",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "sbk_ms",
+      "name": "美式咖啡",
+      "description": "纯粹咖啡本味，提神醒脑",
+      "price": 28,
+      "calories": 15,
+      "emoji": "☕",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_kbqn",
+      "name": "卡布奇诺",
+      "description": "浓缩咖啡配绵密奶泡",
+      "price": 32,
+      "calories": 150,
+      "emoji": "☕",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_mk",
+      "name": "摩卡",
+      "description": "巧克力配咖啡，香甜浓郁",
+      "price": 36,
+      "calories": 300,
+      "emoji": "🍫",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_frb",
+      "name": "馥芮白",
+      "description": "澳式经典，奶咖比例细腻",
+      "price": 34,
+      "calories": 190,
+      "emoji": "☕",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_ab",
+      "name": "澳白",
+      "description": "短笛杯型，口感浓郁",
+      "price": 33,
+      "calories": 175,
+      "emoji": "☕",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_lc",
+      "name": "冷萃咖啡",
+      "description": "低温慢萃，口感顺滑",
+      "price": 30,
+      "calories": 20,
+      "emoji": "🧊",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_mkxbl",
+      "name": "摩卡星冰乐",
+      "description": "冰爽摩卡，巧克力碎点缀",
+      "price": 38,
+      "calories": 420,
+      "emoji": "🥤",
+      "menuCategory": "星冰乐"
+    },
+    {
+      "id": "sbk_mcxbl",
+      "name": "抹茶星冰乐",
+      "description": "浓郁抹茶，清凉解暑",
+      "price": 40,
+      "calories": 400,
+      "emoji": "🍵",
+      "menuCategory": "星冰乐"
+    },
+    {
+      "id": "sbk_cmxbl",
+      "name": "草莓星冰乐",
+      "description": "草莓果肉，酸甜冰爽",
+      "price": 38,
+      "calories": 380,
+      "emoji": "🍓",
+      "menuCategory": "星冰乐"
+    },
+    {
+      "id": "sbk_jtxbl",
+      "name": "焦糖星冰乐",
+      "description": "焦糖酱汁，香甜浓郁",
+      "price": 39,
+      "calories": 410,
+      "emoji": "🥤",
+      "menuCategory": "星冰乐"
+    },
+    {
+      "id": "sbk_ttwl",
+      "name": "桃桃乌龙茶拿铁",
+      "description": "蜜桃乌龙配奶盖，清新香甜",
+      "price": 34,
+      "calories": 240,
+      "emoji": "🍑",
+      "menuCategory": "茶饮"
+    },
+    {
+      "id": "sbk_mcnt",
+      "name": "抹茶拿铁",
+      "description": "日式抹茶配牛奶，回甘悠长",
+      "price": 35,
+      "calories": 260,
+      "emoji": "🍵",
+      "menuCategory": "茶饮"
+    },
+    {
+      "id": "sbk_hcnt",
+      "name": "红茶拿铁",
+      "description": "英式红茶配奶香，醇厚顺滑",
+      "price": 32,
+      "calories": 220,
+      "emoji": "🍵",
+      "menuCategory": "茶饮"
+    },
+    {
+      "id": "sbk_nmhc",
+      "name": "柠檬红茶",
+      "description": "清新柠檬配红茶，酸甜解腻",
+      "price": 26,
+      "calories": 90,
+      "emoji": "🍋",
+      "menuCategory": "茶饮"
+    },
+    {
+      "id": "sbk_yxjr",
+      "name": "烟熏鸡肉三明治",
+      "description": "烟熏鸡胸配新鲜蔬菜",
+      "price": 28,
+      "calories": 380,
+      "emoji": "🥪",
+      "menuCategory": "轻食",
+      "popular": true
+    },
+    {
+      "id": "sbk_nyjx",
+      "name": "牛油果鸡胸沙拉",
+      "description": "牛油果配嫩煎鸡胸，营养均衡",
+      "price": 32,
+      "calories": 280,
+      "emoji": "🥗",
+      "menuCategory": "轻食"
+    },
+    {
+      "id": "sbk_bgpn",
+      "name": "培根芝士帕尼尼",
+      "description": "香煎帕尼尼，芝士拉丝",
+      "price": 30,
+      "calories": 420,
+      "emoji": "🥪",
+      "menuCategory": "轻食"
+    },
+    {
+      "id": "sbk_jqy",
+      "name": "金枪鱼三明治",
+      "description": "金枪鱼沙拉配全麦面包",
+      "price": 27,
+      "calories": 350,
+      "emoji": "🥪",
+      "menuCategory": "轻食"
+    },
+    {
+      "id": "sbk_hthk",
+      "name": "火腿芝士可颂",
+      "description": "酥脆可颂夹火腿芝士",
+      "price": 22,
+      "calories": 320,
+      "emoji": "🥐",
+      "menuCategory": "轻食"
+    },
+    {
+      "id": "sbk_bskzs",
+      "name": "巴斯克芝士蛋糕",
+      "description": "焦糖表层，芯部绵密",
+      "price": 28,
+      "calories": 380,
+      "emoji": "🍰",
+      "menuCategory": "甜点",
+      "popular": true
+    },
+    {
+      "id": "sbk_bl",
+      "name": "布朗尼",
+      "description": "浓郁巧克力布朗尼",
+      "price": 20,
+      "calories": 340,
+      "emoji": "🍫",
+      "menuCategory": "甜点"
+    },
+    {
+      "id": "sbk_kc",
+      "name": "可颂",
+      "description": "经典法式可颂，层次丰富",
+      "price": 16,
+      "calories": 280,
+      "emoji": "🥐",
+      "menuCategory": "甜点"
+    },
+    {
+      "id": "sbk_mf",
+      "name": "玛芬蛋糕",
+      "description": "蓝莓玛芬，松软香甜",
+      "price": 18,
+      "calories": 300,
+      "emoji": "🧁",
+      "menuCategory": "甜点"
+    },
+    {
+      "id": "sbk_sk",
+      "name": "司康饼",
+      "description": "英式司康，配果酱更佳",
+      "price": 20,
+      "calories": 310,
+      "emoji": "🍞",
+      "menuCategory": "甜点"
+    },
+    {
+      "id": "sbk_tlsb",
+      "name": "提拉米苏杯",
+      "description": "经典意式甜品杯装版",
+      "price": 24,
+      "calories": 350,
+      "emoji": "🍮",
+      "menuCategory": "甜点"
+    },
+    {
+      "id": "sbk_ynnt",
+      "name": "燕麦奶拿铁",
+      "description": "植物基燕麦奶，清爽无负担",
+      "price": 34,
+      "calories": 160,
+      "emoji": "☕",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_yzsms",
+      "name": "椰子水美式",
+      "description": "天然椰子水配美式，清甜解渴",
+      "price": 30,
+      "calories": 60,
+      "emoji": "🥥",
+      "menuCategory": "咖啡"
+    },
+    {
+      "id": "sbk_bynmc",
+      "name": "冰摇柠檬茶",
+      "description": "现摇柠檬茶，酸爽提神",
+      "price": 26,
+      "calories": 80,
+      "emoji": "🍋",
+      "menuCategory": "茶饮"
+    }
+  ]
+}

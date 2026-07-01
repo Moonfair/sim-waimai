@@ -1,5 +1,6 @@
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useCart } from '../context/CartContext';
+import { assetUrl } from '../lib/assetUrl';
 
 interface Props {
   item: MenuItemType;
@@ -13,12 +14,20 @@ export default function MenuItem({ item, restaurant }: Props) {
 
   return (
     <div className="flex gap-3 py-3 border-b border-gray-50 last:border-0">
-      <div
-        className="w-20 h-20 rounded-lg flex-shrink-0 flex items-center justify-center text-4xl"
-        style={{ background: `linear-gradient(135deg, ${restaurant.bgColor}22, ${restaurant.bgColor}11)` }}
-      >
-        {item.emoji}
-      </div>
+      {item.image ? (
+        <img
+          src={assetUrl(item.image)}
+          alt={item.name}
+          className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+        />
+      ) : (
+        <div
+          className="w-20 h-20 rounded-lg flex-shrink-0 flex items-center justify-center text-4xl"
+          style={{ background: `linear-gradient(135deg, ${restaurant.bgColor}22, ${restaurant.bgColor}11)` }}
+        >
+          {item.emoji}
+        </div>
+      )}
 
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between">

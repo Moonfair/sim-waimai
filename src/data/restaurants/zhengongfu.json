@@ -1,0 +1,309 @@
+{
+  "id": "zhengongfu",
+  "order": 13,
+  "name": "真功夫",
+  "category": "中式快餐",
+  "rating": 4.5,
+  "ratingCount": 2600,
+  "monthlyOrders": 7100,
+  "deliveryFee": 3,
+  "deliveryTime": 26,
+  "minOrder": 15,
+  "emoji": "🍚",
+  "bgColor": "#f5a623",
+  "tags": [
+    "营养快餐",
+    "满25减4",
+    "蒸功夫"
+  ],
+  "menuCategories": [
+    "热销",
+    "饭类",
+    "汤类",
+    "小吃",
+    "饮品"
+  ],
+  "menu": [
+    {
+      "id": "zgf_fqnn",
+      "name": "番茄牛腩饭",
+      "description": "软烂牛腩配番茄汤汁，酸甜开胃",
+      "price": 22,
+      "calories": 620,
+      "emoji": "🍛",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "zgf_pg",
+      "name": "排骨饭",
+      "description": "香卤排骨，肉质酥烂",
+      "price": 24,
+      "calories": 680,
+      "emoji": "🍖",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "zgf_sgwwc",
+      "name": "三菇娃娃菜饭",
+      "description": "三种菌菇配娃娃菜，清淡营养",
+      "price": 18,
+      "calories": 480,
+      "emoji": "🍄",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_xghj",
+      "name": "香菇滑鸡饭",
+      "description": "嫩滑鸡肉配香菇，家常美味",
+      "price": 20,
+      "calories": 560,
+      "emoji": "🍗",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "zgf_glnn",
+      "name": "咖喱牛腩饭",
+      "description": "浓郁咖喱配软烂牛腩",
+      "price": 23,
+      "calories": 640,
+      "emoji": "🍛",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "zgf_szpg",
+      "name": "豉汁蒸排骨饭",
+      "description": "豉香浓郁，排骨软嫩",
+      "price": 22,
+      "calories": 600,
+      "emoji": "🍖",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "zgf_sgss",
+      "name": "双菇时蔬饭",
+      "description": "清淡爽口，健康低脂",
+      "price": 16,
+      "calories": 420,
+      "emoji": "🥦",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "zgf_lrf",
+      "name": "卤肉饭",
+      "description": "肥瘦相间卤肉，香浓下饭",
+      "price": 18,
+      "calories": 550,
+      "emoji": "🍚",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "zgf_zdnr",
+      "name": "蒸蛋牛肉饭",
+      "description": "嫩滑蒸蛋配牛肉粒",
+      "price": 21,
+      "calories": 580,
+      "emoji": "🍳",
+      "menuCategory": "饭类"
+    },
+    {
+      "id": "zgf_ympg",
+      "name": "玉米排骨汤",
+      "description": "甜玉米炖排骨，清甜滋补",
+      "price": 8,
+      "calories": 220,
+      "emoji": "🌽",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "zgf_dgym",
+      "name": "冬瓜薏米汤",
+      "description": "清热祛湿，清爽不腻",
+      "price": 7,
+      "calories": 150,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "zgf_ftd",
+      "name": "番茄蛋汤",
+      "description": "酸甜开胃，家常味道",
+      "price": 6,
+      "calories": 120,
+      "emoji": "🍅",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "zgf_zchd",
+      "name": "紫菜蛋花汤",
+      "description": "清淡鲜美，暖胃暖心",
+      "price": 6,
+      "calories": 100,
+      "emoji": "🥣",
+      "menuCategory": "汤类"
+    },
+    {
+      "id": "zgf_ld",
+      "name": "卤蛋",
+      "description": "入味卤蛋，配饭必点",
+      "price": 3,
+      "calories": 90,
+      "emoji": "🥚",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_xldg",
+      "name": "香卤豆干",
+      "description": "劲道豆干，卤香入味",
+      "price": 6,
+      "calories": 130,
+      "emoji": "🧊",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_ssbc",
+      "name": "手撕包菜",
+      "description": "爽脆包菜，清淡开胃",
+      "price": 8,
+      "calories": 110,
+      "emoji": "🥬",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_qcss",
+      "name": "清炒时蔬",
+      "description": "时令蔬菜，清爽健康",
+      "price": 9,
+      "calories": 100,
+      "emoji": "🥦",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_zym",
+      "name": "蒸玉米",
+      "description": "香甜软糯，健康小食",
+      "price": 5,
+      "calories": 140,
+      "emoji": "🌽",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_mldf",
+      "name": "麻辣豆腐",
+      "description": "嫩滑豆腐配麻辣汁，下饭一绝",
+      "price": 8,
+      "calories": 160,
+      "emoji": "🌶️",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_lbme",
+      "name": "凉拌木耳",
+      "description": "爽脆开胃，酸辣可口",
+      "price": 7,
+      "calories": 80,
+      "emoji": "🍂",
+      "menuCategory": "小吃"
+    },
+    {
+      "id": "zgf_smt",
+      "name": "酸梅汤",
+      "description": "解腻消暑，酸甜可口",
+      "price": 6,
+      "calories": 90,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "zgf_jhc",
+      "name": "菊花茶",
+      "description": "清热去火，清香回甘",
+      "price": 5,
+      "calories": 20,
+      "emoji": "🍵",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "zgf_nmfmc",
+      "name": "柠檬蜂蜜茶",
+      "description": "酸甜可口，润喉解渴",
+      "price": 8,
+      "calories": 110,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "zgf_ds",
+      "name": "豆浆",
+      "description": "香浓豆浆，营养早餐首选",
+      "price": 5,
+      "calories": 90,
+      "emoji": "🥛",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "zgf_srtc",
+      "name": "双人套餐",
+      "description": "两份主食配汤，双人共享超值",
+      "price": 42,
+      "calories": 1200,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_etctc",
+      "name": "儿童套餐",
+      "description": "小份营养均衡，适合儿童",
+      "price": 20,
+      "calories": 480,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_drzgftc",
+      "name": "单人蒸功夫套餐",
+      "description": "主食+汤+小吃，一人食超值",
+      "price": 28,
+      "calories": 750,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_jtsrc",
+      "name": "家庭四人餐",
+      "description": "多份主食搭配，全家共享",
+      "price": 88,
+      "calories": 2400,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_ssctc",
+      "name": "素食套餐",
+      "description": "全素搭配，清淡健康",
+      "price": 22,
+      "calories": 500,
+      "emoji": "🥗",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_zgfpp",
+      "name": "蒸功夫拼盘",
+      "description": "多种小吃拼盘，丰富多样",
+      "price": 35,
+      "calories": 900,
+      "emoji": "🍱",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "zgf_yycztc",
+      "name": "营养早餐套餐",
+      "description": "包子+豆浆+小菜，营养早餐",
+      "price": 15,
+      "calories": 400,
+      "emoji": "🍳",
+      "menuCategory": "热销"
+    }
+  ]
+}

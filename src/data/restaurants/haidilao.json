@@ -1,0 +1,314 @@
+{
+  "id": "haidilao",
+  "order": 8,
+  "name": "海底捞",
+  "category": "火锅",
+  "rating": 4.9,
+  "ratingCount": 5600,
+  "monthlyOrders": 15000,
+  "deliveryFee": 8,
+  "deliveryTime": 45,
+  "minOrder": 40,
+  "emoji": "🍲",
+  "bgColor": "#c0392b",
+  "tags": [
+    "网红打卡",
+    "满100减15",
+    "服务好评"
+  ],
+  "menuCategories": [
+    "热销",
+    "锅底",
+    "肉类",
+    "丸滑类",
+    "蔬菜",
+    "主食",
+    "饮品"
+  ],
+  "menu": [
+    {
+      "id": "hdl_fq",
+      "name": "番茄牛肉锅",
+      "description": "浓郁番茄汤底，配鲜嫩牛肉，酸甜开胃",
+      "price": 58,
+      "calories": 780,
+      "emoji": "🍅",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "hdl_mlny",
+      "name": "麻辣牛油锅",
+      "description": "经典麻辣牛油锅底，香辣浓郁",
+      "price": 52,
+      "calories": 820,
+      "emoji": "🌶️",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "hdl_yy",
+      "name": "鸳鸯锅套餐",
+      "description": "半辣半清汤，一锅两吃",
+      "price": 98,
+      "calories": 1500,
+      "emoji": "🍲",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "hdl_jg",
+      "name": "菌菇养生锅",
+      "description": "多种菌菇熬制，鲜美滋补",
+      "price": 45,
+      "calories": 400,
+      "emoji": "🍄",
+      "menuCategory": "锅底"
+    },
+    {
+      "id": "hdl_qt",
+      "name": "清汤锅",
+      "description": "清淡爽口，食材本味",
+      "price": 30,
+      "calories": 200,
+      "emoji": "🥣",
+      "menuCategory": "锅底"
+    },
+    {
+      "id": "hdl_scy",
+      "name": "酸菜鱼锅",
+      "description": "酸爽开胃，鱼片鲜嫩",
+      "price": 55,
+      "calories": 600,
+      "emoji": "🐟",
+      "menuCategory": "锅底"
+    },
+    {
+      "id": "hdl_fn",
+      "name": "肥牛卷",
+      "description": "雪花肥牛，入口即化",
+      "price": 38,
+      "calories": 450,
+      "emoji": "🥩",
+      "menuCategory": "肉类",
+      "popular": true
+    },
+    {
+      "id": "hdl_yr",
+      "name": "羊肉卷",
+      "description": "内蒙古羊肉，鲜嫩不膻",
+      "price": 42,
+      "calories": 480,
+      "emoji": "🐑",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "hdl_znh",
+      "name": "猪脑花",
+      "description": "嫩滑口感，火锅经典配菜",
+      "price": 25,
+      "calories": 320,
+      "emoji": "🧠",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "hdl_wcr",
+      "name": "午餐肉",
+      "description": "经典午餐肉，煮着吃更香",
+      "price": 15,
+      "calories": 280,
+      "emoji": "🥫",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "hdl_bgj",
+      "name": "培根卷金针菇",
+      "description": "培根包裹金针菇，肉菜双拼",
+      "price": 22,
+      "calories": 300,
+      "emoji": "🥓",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "hdl_xh",
+      "name": "虾滑",
+      "description": "手打虾滑，Q弹鲜甜",
+      "price": 32,
+      "calories": 260,
+      "emoji": "🍤",
+      "menuCategory": "丸滑类",
+      "popular": true
+    },
+    {
+      "id": "hdl_xrb",
+      "name": "蟹肉棒",
+      "description": "鲜甜蟹肉棒，涮煮即食",
+      "price": 18,
+      "calories": 150,
+      "emoji": "🦀",
+      "menuCategory": "丸滑类"
+    },
+    {
+      "id": "hdl_ydf",
+      "name": "鱼豆腐",
+      "description": "软糯鱼豆腐，吸满汤汁",
+      "price": 12,
+      "calories": 180,
+      "emoji": "🧊",
+      "menuCategory": "丸滑类"
+    },
+    {
+      "id": "hdl_nrw",
+      "name": "牛肉丸",
+      "description": "手打牛肉丸，弹牙有嚼劲",
+      "price": 20,
+      "calories": 220,
+      "emoji": "🟤",
+      "menuCategory": "丸滑类"
+    },
+    {
+      "id": "hdl_myh",
+      "name": "墨鱼滑",
+      "description": "新鲜墨鱼打制，Q弹爽口",
+      "price": 28,
+      "calories": 210,
+      "emoji": "🦑",
+      "menuCategory": "丸滑类"
+    },
+    {
+      "id": "hdl_jzg",
+      "name": "金针菇",
+      "description": "鲜嫩金针菇，涮煮即食",
+      "price": 8,
+      "calories": 40,
+      "emoji": "🍄",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_wwc",
+      "name": "娃娃菜",
+      "description": "清甜爽口，吸汁解腻",
+      "price": 8,
+      "calories": 30,
+      "emoji": "🥬",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_tdp",
+      "name": "土豆片",
+      "description": "软糯土豆片，涮火锅必点",
+      "price": 6,
+      "calories": 120,
+      "emoji": "🥔",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_dg",
+      "name": "冬瓜",
+      "description": "清爽解腻，吸满锅底鲜香",
+      "price": 6,
+      "calories": 25,
+      "emoji": "🥒",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_op",
+      "name": "藕片",
+      "description": "脆嫩藕片，爽口解辣",
+      "price": 8,
+      "calories": 90,
+      "emoji": "🪷",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_me",
+      "name": "木耳",
+      "description": "爽脆木耳，凉拌涮煮皆宜",
+      "price": 7,
+      "calories": 35,
+      "emoji": "🍂",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_sglm",
+      "name": "手工拉面",
+      "description": "现场拉制，劲道爽滑",
+      "price": 10,
+      "calories": 320,
+      "emoji": "🍜",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "hdl_bmf",
+      "name": "白米饭",
+      "description": "香软米饭，配汤锅刚好",
+      "price": 3,
+      "calories": 200,
+      "emoji": "🍚",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "hdl_ng",
+      "name": "年糕",
+      "description": "软糯年糕，越煮越好吃",
+      "price": 10,
+      "calories": 250,
+      "emoji": "🍥",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "hdl_kf",
+      "name": "宽粉",
+      "description": "劲道宽粉，吸汁入味",
+      "price": 9,
+      "calories": 280,
+      "emoji": "🍝",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "hdl_smt",
+      "name": "酸梅汤",
+      "description": "解辣消暑，酸甜可口",
+      "price": 8,
+      "calories": 90,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hdl_wlj",
+      "name": "王老吉",
+      "description": "经典凉茶，配火锅去火",
+      "price": 7,
+      "calories": 60,
+      "emoji": "🥫",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hdl_nmfm",
+      "name": "柠檬蜂蜜水",
+      "description": "清新解腻，酸甜怡人",
+      "price": 10,
+      "calories": 80,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hdl_mjtl",
+      "name": "捞派麻酱调料",
+      "description": "秘制麻酱，火锅蘸料标配",
+      "price": 5,
+      "calories": 150,
+      "emoji": "🥣",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "hdl_blsj",
+      "name": "捞派拌饭酱",
+      "description": "香辣下饭，拌饭拌面都好吃",
+      "price": 6,
+      "calories": 100,
+      "emoji": "🥫",
+      "menuCategory": "主食"
+    }
+  ]
+}

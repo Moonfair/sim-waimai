@@ -1,0 +1,303 @@
+{
+  "id": "malatang",
+  "order": 4,
+  "name": "张亮麻辣烫",
+  "category": "小吃零食",
+  "rating": 4.5,
+  "ratingCount": 2100,
+  "monthlyOrders": 6700,
+  "deliveryFee": 4,
+  "deliveryTime": 32,
+  "minOrder": 15,
+  "emoji": "🌶️",
+  "bgColor": "#cc0000",
+  "tags": [
+    "减配送费",
+    "辣度可选",
+    "自由搭配"
+  ],
+  "menuCategories": [
+    "热销",
+    "蔬菜",
+    "肉类",
+    "丸类",
+    "主食",
+    "海鲜",
+    "饮品"
+  ],
+  "menu": [
+    {
+      "id": "mlt_zx",
+      "name": "麻辣烫自选（200g）",
+      "description": "任选食材，按重量计价，香辣鲜美",
+      "price": 18,
+      "calories": 400,
+      "emoji": "🍲",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "mlt_da",
+      "name": "麻辣烫大份（350g）",
+      "description": "大份实惠，食材丰富，一人食刚好",
+      "price": 30,
+      "calories": 680,
+      "emoji": "🍲",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "mlt_sw",
+      "name": "素丸（5颗）",
+      "description": "爽弹素丸，香味扑鼻",
+      "price": 5,
+      "calories": 120,
+      "emoji": "⚪",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_nm",
+      "name": "牛肉丸（5颗）",
+      "description": "弹牙牛肉丸，鲜嫩多汁",
+      "price": 8,
+      "calories": 160,
+      "emoji": "🟤",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_fm",
+      "name": "粉丝（份）",
+      "description": "晶莹剔透，吸满汤汁",
+      "price": 4,
+      "calories": 200,
+      "emoji": "🍝",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "mlt_wwc",
+      "name": "娃娃菜",
+      "description": "清甜爽口，吸汁解腻",
+      "price": 5,
+      "calories": 30,
+      "emoji": "🥬",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "mlt_tdp",
+      "name": "土豆片",
+      "description": "软糯土豆片，涮煮入味",
+      "price": 5,
+      "calories": 100,
+      "emoji": "🥔",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "mlt_me",
+      "name": "木耳",
+      "description": "爽脆木耳，营养丰富",
+      "price": 5,
+      "calories": 35,
+      "emoji": "🍂",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "mlt_dy",
+      "name": "豆芽",
+      "description": "爽脆豆芽，清爽解腻",
+      "price": 4,
+      "calories": 25,
+      "emoji": "🌱",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "mlt_dg",
+      "name": "冬瓜",
+      "description": "清爽解腻，吸满汤汁",
+      "price": 5,
+      "calories": 20,
+      "emoji": "🥒",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "mlt_bc",
+      "name": "白菜",
+      "description": "清甜爽口，涮煮首选",
+      "price": 4,
+      "calories": 20,
+      "emoji": "🥬",
+      "menuCategory": "蔬菜"
+    },
+    {
+      "id": "mlt_wcr",
+      "name": "午餐肉",
+      "description": "经典午餐肉，煮着吃更香",
+      "price": 6,
+      "calories": 250,
+      "emoji": "🥫",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "mlt_bg",
+      "name": "培根",
+      "description": "香煎培根，咸香可口",
+      "price": 7,
+      "calories": 280,
+      "emoji": "🥓",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "mlt_jxr",
+      "name": "鸡胸肉",
+      "description": "低脂鸡胸肉，健康之选",
+      "price": 8,
+      "calories": 200,
+      "emoji": "🍗",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "mlt_fn",
+      "name": "肥牛",
+      "description": "雪花肥牛，入口即化",
+      "price": 12,
+      "calories": 350,
+      "emoji": "🥩",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "mlt_yw",
+      "name": "鱼丸",
+      "description": "Q弹鱼丸，鲜美可口",
+      "price": 5,
+      "calories": 100,
+      "emoji": "⚪",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_xhw",
+      "name": "虾滑丸",
+      "description": "鲜虾打制，弹牙多汁",
+      "price": 8,
+      "calories": 150,
+      "emoji": "🍤",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_xrb",
+      "name": "蟹肉棒",
+      "description": "鲜甜蟹肉棒，涮煮即食",
+      "price": 6,
+      "calories": 120,
+      "emoji": "🦀",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_zyw",
+      "name": "章鱼丸",
+      "description": "章鱼粒饱满，Q弹有嚼劲",
+      "price": 7,
+      "calories": 180,
+      "emoji": "🐙",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_nyj",
+      "name": "牛筋丸",
+      "description": "弹牙有嚼劲，牛肉香浓",
+      "price": 8,
+      "calories": 160,
+      "emoji": "🟤",
+      "menuCategory": "丸类"
+    },
+    {
+      "id": "mlt_mx",
+      "name": "米线",
+      "description": "爽滑米线，吸满汤汁",
+      "price": 4,
+      "calories": 220,
+      "emoji": "🍜",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "mlt_ng",
+      "name": "年糕",
+      "description": "软糯年糕，越煮越好吃",
+      "price": 5,
+      "calories": 240,
+      "emoji": "🍥",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "mlt_kf",
+      "name": "宽粉",
+      "description": "劲道宽粉，吸汁入味",
+      "price": 4,
+      "calories": 260,
+      "emoji": "🍝",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "mlt_xia",
+      "name": "虾",
+      "description": "新鲜大虾，鲜甜弹牙",
+      "price": 10,
+      "calories": 120,
+      "emoji": "🍤",
+      "menuCategory": "海鲜"
+    },
+    {
+      "id": "mlt_yy",
+      "name": "鱿鱼",
+      "description": "爽脆鱿鱼，鲜香十足",
+      "price": 9,
+      "calories": 150,
+      "emoji": "🦑",
+      "menuCategory": "海鲜"
+    },
+    {
+      "id": "mlt_smt",
+      "name": "酸梅汤",
+      "description": "解辣消暑，酸甜可口",
+      "price": 5,
+      "calories": 80,
+      "emoji": "🥤",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "mlt_nms",
+      "name": "柠檬水",
+      "description": "清新解腻，酸甜爽口",
+      "price": 5,
+      "calories": 40,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "mlt_wlj",
+      "name": "王老吉",
+      "description": "经典凉茶，配麻辣烫去火",
+      "price": 6,
+      "calories": 60,
+      "emoji": "🥫",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "mlt_hhpp",
+      "name": "麻辣烫豪华拼盘",
+      "description": "多种食材精选组合，一份吃遍全味",
+      "price": 45,
+      "calories": 900,
+      "emoji": "🍲",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "mlt_srfx",
+      "name": "双人分享套餐",
+      "description": "食材丰富，两人共享超值",
+      "price": 55,
+      "calories": 1100,
+      "emoji": "🎁",
+      "menuCategory": "热销",
+      "popular": true
+    }
+  ]
+}

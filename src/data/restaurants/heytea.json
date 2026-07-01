@@ -1,0 +1,303 @@
+{
+  "id": "heytea",
+  "order": 3,
+  "name": "喜茶",
+  "category": "奶茶饮品",
+  "rating": 4.9,
+  "ratingCount": 6200,
+  "monthlyOrders": 18000,
+  "deliveryFee": 6,
+  "deliveryTime": 30,
+  "minOrder": 20,
+  "emoji": "🧋",
+  "bgColor": "#6B5344",
+  "tags": [
+    "人气爆款",
+    "满30减3",
+    "新品上架"
+  ],
+  "menuCategories": [
+    "热销",
+    "果茶",
+    "奶茶",
+    "季节限定",
+    "纯茶",
+    "小食"
+  ],
+  "menu": [
+    {
+      "id": "dpg",
+      "name": "多肉葡萄",
+      "description": "满满葡萄果肉，鲜甜爆汁，喜茶经典",
+      "price": 32,
+      "calories": 280,
+      "emoji": "🍇",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "zzmm",
+      "name": "芝芝莓莓",
+      "description": "草莓奶盖茶，芝士与莓果的完美相遇",
+      "price": 35,
+      "calories": 320,
+      "emoji": "🍓",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "bbk",
+      "name": "冰博克",
+      "description": "浓缩冰茶，一口下去极度清爽",
+      "price": 28,
+      "calories": 150,
+      "emoji": "🧊",
+      "menuCategory": "果茶"
+    },
+    {
+      "id": "jbk",
+      "name": "金凤茶王",
+      "description": "经典招牌茶，香气悠长",
+      "price": 22,
+      "calories": 100,
+      "emoji": "🍵",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "scly",
+      "name": "四季春柠檬",
+      "description": "清新四季春搭配鲜柠檬，解腻提神",
+      "price": 25,
+      "calories": 120,
+      "emoji": "🍋",
+      "menuCategory": "季节限定"
+    },
+    {
+      "id": "ht_nac",
+      "name": "奶茶布丁",
+      "description": "丝滑奶茶加手工布丁，甜蜜满满",
+      "price": 30,
+      "calories": 380,
+      "emoji": "🧋",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "ht_mbhy",
+      "name": "满杯红柚",
+      "description": "大颗红柚果肉，清爽多汁",
+      "price": 28,
+      "calories": 200,
+      "emoji": "🍊",
+      "menuCategory": "果茶"
+    },
+    {
+      "id": "ht_zzmm2",
+      "name": "芝芝芒芒",
+      "description": "芒果奶盖茶，热带果香浓郁",
+      "price": 33,
+      "calories": 300,
+      "emoji": "🥭",
+      "menuCategory": "果茶"
+    },
+    {
+      "id": "ht_pt",
+      "name": "葡萄妃",
+      "description": "巨峰葡萄鲜果茶，果香四溢",
+      "price": 30,
+      "calories": 260,
+      "emoji": "🍇",
+      "menuCategory": "果茶"
+    },
+    {
+      "id": "ht_mgbql",
+      "name": "芒果冰淇淋",
+      "description": "芒果果肉配冰淇淋，浓郁香甜",
+      "price": 32,
+      "calories": 280,
+      "emoji": "🍨",
+      "menuCategory": "果茶"
+    },
+    {
+      "id": "ht_bbnc",
+      "name": "波波奶茶",
+      "description": "珍珠波波配香浓奶茶",
+      "price": 24,
+      "calories": 320,
+      "emoji": "🧋",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "ht_znnc",
+      "name": "珍珠奶茶",
+      "description": "经典珍珠奶茶，Q弹香甜",
+      "price": 22,
+      "calories": 300,
+      "emoji": "🧋",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "ht_ynnc",
+      "name": "燕麦奶茶",
+      "description": "植物基燕麦奶，清爽无负担",
+      "price": 26,
+      "calories": 250,
+      "emoji": "🧋",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "ht_qklnc",
+      "name": "巧克力奶茶",
+      "description": "浓郁巧克力配奶茶，香甜丝滑",
+      "price": 28,
+      "calories": 350,
+      "emoji": "🍫",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "ht_ymbc",
+      "name": "杨梅冰茶",
+      "description": "当季杨梅，酸甜冰爽",
+      "price": 26,
+      "calories": 140,
+      "emoji": "🍒",
+      "menuCategory": "季节限定"
+    },
+    {
+      "id": "ht_lzxl",
+      "name": "荔枝仙露",
+      "description": "荔枝清香，甘甜爽口",
+      "price": 30,
+      "calories": 220,
+      "emoji": "🍈",
+      "menuCategory": "季节限定"
+    },
+    {
+      "id": "ht_ghmn",
+      "name": "桂花米酿",
+      "description": "桂花香配米酿，古风新意",
+      "price": 27,
+      "calories": 240,
+      "emoji": "🌸",
+      "menuCategory": "季节限定"
+    },
+    {
+      "id": "ht_ly",
+      "name": "绿妍",
+      "description": "清香绿茶，回甘悠长",
+      "price": 18,
+      "calories": 30,
+      "emoji": "🍵",
+      "menuCategory": "纯茶"
+    },
+    {
+      "id": "ht_qplc",
+      "name": "清瓶绿茶",
+      "description": "纯粹茶香，清爽解腻",
+      "price": 16,
+      "calories": 20,
+      "emoji": "🍵",
+      "menuCategory": "纯茶"
+    },
+    {
+      "id": "ht_dhp",
+      "name": "大红袍",
+      "description": "醇厚乌龙，香气浓郁",
+      "price": 20,
+      "calories": 15,
+      "emoji": "🍵",
+      "menuCategory": "纯茶"
+    },
+    {
+      "id": "ht_mlcx",
+      "name": "茉莉初雪",
+      "description": "茉莉花香，清雅怡人",
+      "price": 22,
+      "calories": 40,
+      "emoji": "🍵",
+      "menuCategory": "纯茶"
+    },
+    {
+      "id": "ht_zsbbj",
+      "name": "芝士波波卷",
+      "description": "芝士奶香配波波，香甜软糯",
+      "price": 15,
+      "calories": 280,
+      "emoji": "🧁",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ht_ynbbj",
+      "name": "芋泥波波卷",
+      "description": "香浓芋泥配波波，绵密香甜",
+      "price": 15,
+      "calories": 260,
+      "emoji": "🧁",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ht_mcdgj",
+      "name": "抹茶蛋糕卷",
+      "description": "抹茶香浓，口感细腻",
+      "price": 18,
+      "calories": 300,
+      "emoji": "🍰",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ht_zst",
+      "name": "芝士挞",
+      "description": "浓郁芝士，外酥内滑",
+      "price": 12,
+      "calories": 220,
+      "emoji": "🥧",
+      "menuCategory": "小食"
+    },
+    {
+      "id": "ht_zztt",
+      "name": "芝芝桃桃",
+      "description": "水蜜桃配芝士奶盖，果香浓郁",
+      "price": 34,
+      "calories": 300,
+      "emoji": "🍑",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ht_htbbnr",
+      "name": "黑糖波波牛乳",
+      "description": "黑糖香浓配Q弹波波",
+      "price": 26,
+      "calories": 340,
+      "emoji": "🧋",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "ht_bdnc",
+      "name": "布丁奶茶",
+      "description": "丝滑布丁配奶茶，双重享受",
+      "price": 25,
+      "calories": 310,
+      "emoji": "🍮",
+      "menuCategory": "奶茶"
+    },
+    {
+      "id": "ht_flfqc",
+      "name": "凤梨福气茶",
+      "description": "凤梨清香，酸甜解腻",
+      "price": 22,
+      "calories": 60,
+      "emoji": "🍍",
+      "menuCategory": "纯茶"
+    },
+    {
+      "id": "ht_htznms",
+      "name": "黑糖珍珠慕斯",
+      "description": "黑糖珍珠配绵密慕斯",
+      "price": 20,
+      "calories": 320,
+      "emoji": "🍮",
+      "menuCategory": "小食"
+    }
+  ]
+}

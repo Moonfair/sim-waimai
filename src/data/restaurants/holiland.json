@@ -1,0 +1,311 @@
+{
+  "id": "holiland",
+  "order": 12,
+  "name": "好利来",
+  "category": "甜点烘焙",
+  "rating": 4.7,
+  "ratingCount": 2900,
+  "monthlyOrders": 5600,
+  "deliveryFee": 5,
+  "deliveryTime": 35,
+  "minOrder": 20,
+  "emoji": "🍰",
+  "bgColor": "#d4a017",
+  "tags": [
+    "现烤现做",
+    "生日蛋糕",
+    "下午茶首选"
+  ],
+  "menuCategories": [
+    "热销",
+    "蛋糕",
+    "面包",
+    "点心",
+    "饮品"
+  ],
+  "menu": [
+    {
+      "id": "hll_bsz",
+      "name": "半熟芝士",
+      "description": "外层微焦，内芯半熟绵密",
+      "price": 15,
+      "calories": 280,
+      "emoji": "🧀",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "hll_tls",
+      "name": "提拉米苏",
+      "description": "经典意式甜品，咖啡香浓",
+      "price": 28,
+      "calories": 380,
+      "emoji": "🍰",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "hll_hsl",
+      "name": "黑森林蛋糕（6寸）",
+      "description": "经典德式黑森林，酒香樱桃",
+      "price": 88,
+      "calories": 1800,
+      "emoji": "🎂",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "hll_cmdg",
+      "name": "草莓蛋糕（6寸）",
+      "description": "新鲜草莓配奶油，酸甜可口",
+      "price": 98,
+      "calories": 1600,
+      "emoji": "🍓",
+      "menuCategory": "蛋糕"
+    },
+    {
+      "id": "hll_mgms",
+      "name": "芒果慕斯蛋糕",
+      "description": "芒果果肉配慕斯，清新香甜",
+      "price": 92,
+      "calories": 1500,
+      "emoji": "🥭",
+      "menuCategory": "蛋糕"
+    },
+    {
+      "id": "hll_qklms",
+      "name": "巧克力慕斯",
+      "description": "浓郁巧克力，丝滑绵密",
+      "price": 85,
+      "calories": 1550,
+      "emoji": "🍫",
+      "menuCategory": "蛋糕"
+    },
+    {
+      "id": "hll_ldql",
+      "name": "榴莲千层",
+      "description": "层层千层皮夹榴莲奶油",
+      "price": 105,
+      "calories": 1700,
+      "emoji": "🥞",
+      "menuCategory": "蛋糕"
+    },
+    {
+      "id": "hll_hsred",
+      "name": "红丝绒蛋糕",
+      "description": "经典红丝绒配奶油芝士霜",
+      "price": 90,
+      "calories": 1650,
+      "emoji": "🎂",
+      "menuCategory": "蛋糕"
+    },
+    {
+      "id": "hll_mchd",
+      "name": "抹茶红豆蛋糕",
+      "description": "抹茶配红豆沙，日式风味",
+      "price": 95,
+      "calories": 1580,
+      "emoji": "🍵",
+      "menuCategory": "蛋糕"
+    },
+    {
+      "id": "hll_fg",
+      "name": "法棍",
+      "description": "外酥内软，经典法式面包",
+      "price": 12,
+      "calories": 280,
+      "emoji": "🥖",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_qmts",
+      "name": "全麦吐司",
+      "description": "健康全麦，松软可口",
+      "price": 16,
+      "calories": 320,
+      "emoji": "🍞",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_rsb",
+      "name": "肉松包",
+      "description": "香浓肉松配沙拉酱",
+      "price": 8,
+      "calories": 260,
+      "emoji": "🍞",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_nlb",
+      "name": "奶酪包",
+      "description": "浓郁奶酪馅，香甜软糯",
+      "price": 10,
+      "calories": 300,
+      "emoji": "🧀",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_bl",
+      "name": "菠萝包",
+      "description": "经典港式菠萝包，外脆内软",
+      "price": 7,
+      "calories": 250,
+      "emoji": "🍍",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_njb",
+      "name": "牛角包",
+      "description": "层次分明，黄油香浓",
+      "price": 9,
+      "calories": 270,
+      "emoji": "🥐",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_hdb",
+      "name": "红豆包",
+      "description": "香甜红豆沙，经典口味",
+      "price": 6,
+      "calories": 240,
+      "emoji": "🍞",
+      "menuCategory": "面包"
+    },
+    {
+      "id": "hll_dt",
+      "name": "蛋挞（4个装）",
+      "description": "外酥内嫩，蛋香浓郁",
+      "price": 18,
+      "calories": 480,
+      "emoji": "🥧",
+      "menuCategory": "点心",
+      "popular": true
+    },
+    {
+      "id": "hll_pf",
+      "name": "泡芙（4个装）",
+      "description": "奶油馅料饱满，香甜可口",
+      "price": 20,
+      "calories": 400,
+      "emoji": "🧁",
+      "menuCategory": "点心"
+    },
+    {
+      "id": "hll_qq",
+      "name": "曲奇饼干（盒）",
+      "description": "黄油曲奇，酥脆香浓",
+      "price": 25,
+      "calories": 550,
+      "emoji": "🍪",
+      "menuCategory": "点心"
+    },
+    {
+      "id": "hll_mkl",
+      "name": "马卡龙（6个装）",
+      "description": "色彩缤纷，口感细腻",
+      "price": 45,
+      "calories": 380,
+      "emoji": "🍬",
+      "menuCategory": "点心"
+    },
+    {
+      "id": "hll_ts",
+      "name": "桃酥",
+      "description": "传统桃酥，酥松香甜",
+      "price": 14,
+      "calories": 320,
+      "emoji": "🍪",
+      "menuCategory": "点心"
+    },
+    {
+      "id": "hll_ldg",
+      "name": "绿豆糕",
+      "description": "细腻绵软，清凉解暑",
+      "price": 16,
+      "calories": 280,
+      "emoji": "🍡",
+      "menuCategory": "点心"
+    },
+    {
+      "id": "hll_lpb",
+      "name": "老婆饼",
+      "description": "经典广式老婆饼，酥皮多层",
+      "price": 12,
+      "calories": 260,
+      "emoji": "🥮",
+      "menuCategory": "点心"
+    },
+    {
+      "id": "hll_xnc",
+      "name": "鲜奶茶",
+      "description": "浓香鲜奶配红茶，顺滑香醇",
+      "price": 18,
+      "calories": 220,
+      "emoji": "🧋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hll_nms",
+      "name": "柠檬水",
+      "description": "清新柠檬，解腻消暑",
+      "price": 12,
+      "calories": 60,
+      "emoji": "🍋",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hll_ds",
+      "name": "豆浆",
+      "description": "现磨豆浆，香浓营养",
+      "price": 8,
+      "calories": 90,
+      "emoji": "🥛",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hll_rms",
+      "name": "热美式",
+      "description": "香浓咖啡，配甜点解腻",
+      "price": 20,
+      "calories": 15,
+      "emoji": "☕",
+      "menuCategory": "饮品"
+    },
+    {
+      "id": "hll_xwctc",
+      "name": "下午茶双人套餐",
+      "description": "蛋糕+面包+饮品，双人共享",
+      "price": 68,
+      "calories": 1100,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "hll_srdgtc",
+      "name": "生日蛋糕套餐（8寸）",
+      "description": "大尺寸生日蛋糕，惊喜满满",
+      "price": 128,
+      "calories": 2200,
+      "emoji": "🎂",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "hll_zcz",
+      "name": "早餐组合",
+      "description": "面包+豆浆，元气满满一天",
+      "price": 22,
+      "calories": 480,
+      "emoji": "🍳",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "hll_jrlh",
+      "name": "节日礼盒",
+      "description": "精选糕点礼盒，送礼佳品",
+      "price": 158,
+      "calories": 2600,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    }
+  ]
+}

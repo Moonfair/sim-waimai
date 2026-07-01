@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getRestaurantById } from '../data/restaurants';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
+import { assetUrl } from '../lib/assetUrl';
 
 export default function Restaurant() {
   const { id } = useParams<{ id: string }>();
@@ -29,22 +30,31 @@ export default function Restaurant() {
       {/* Header */}
       <div
         className="h-48 flex flex-col items-center justify-center relative"
-        style={{ background: `linear-gradient(135deg, ${restaurant.bgColor}ee, ${restaurant.bgColor}88)` }}
+        style={!restaurant.bannerImage ? { background: `linear-gradient(135deg, ${restaurant.bgColor}ee, ${restaurant.bgColor}88)` } : undefined}
       >
+        {restaurant.bannerImage && (
+          <img
+            src={assetUrl(restaurant.bannerImage)}
+            alt={restaurant.name}
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+        )}
         <button
-          className="absolute top-10 left-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white"
+          className="absolute top-10 left-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white z-10"
           onClick={() => navigate(-1)}
         >
           ←
         </button>
-        <div className="text-6xl drop-shadow-lg">{restaurant.emoji}</div>
-        <h1 className="text-white font-black text-2xl mt-2 drop-shadow">{restaurant.name}</h1>
-        <div className="flex items-center gap-3 mt-1">
-          <span className="text-white/90 text-sm">⭐ {restaurant.rating}</span>
-          <span className="text-white/60 text-xs">|</span>
-          <span className="text-white/90 text-sm">配送费¥{restaurant.deliveryFee}</span>
-          <span className="text-white/60 text-xs">|</span>
-          <span className="text-white/90 text-sm">{restaurant.deliveryTime}分钟</span>
+        <div className="relative z-10 flex flex-col items-center">
+          {!restaurant.bannerImage && <div className="text-6xl drop-shadow-lg">{restaurant.emoji}</div>}
+          <h1 className="text-white font-black text-2xl mt-2 drop-shadow">{restaurant.name}</h1>
+          <div className="flex items-center gap-3 mt-1">
+            <span className="text-white/90 text-sm">⭐ {restaurant.rating}</span>
+            <span className="text-white/60 text-xs">|</span>
+            <span className="text-white/90 text-sm">配送费¥{restaurant.deliveryFee}</span>
+            <span className="text-white/60 text-xs">|</span>
+            <span className="text-white/90 text-sm">{restaurant.deliveryTime}分钟</span>
+          </div>
         </div>
       </div>
 

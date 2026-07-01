@@ -1,0 +1,312 @@
+{
+  "id": "juewei",
+  "order": 11,
+  "name": "绝味鸭脖",
+  "category": "小吃零食",
+  "rating": 4.6,
+  "ratingCount": 3400,
+  "monthlyOrders": 8200,
+  "deliveryFee": 4,
+  "deliveryTime": 30,
+  "minOrder": 20,
+  "emoji": "🦆",
+  "bgColor": "#8b0000",
+  "tags": [
+    "卤味专家",
+    "满30减5",
+    "辣度可选"
+  ],
+  "menuCategories": [
+    "热销",
+    "鸭货",
+    "素菜",
+    "海鲜",
+    "肉类",
+    "主食"
+  ],
+  "menu": [
+    {
+      "id": "jw_mlyb",
+      "name": "麻辣鸭脖",
+      "description": "经典麻辣味，越嚼越香",
+      "price": 22,
+      "calories": 320,
+      "emoji": "🦆",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jw_xlyc",
+      "name": "香辣鸭翅",
+      "description": "外皮筋道，肉质紧实",
+      "price": 25,
+      "calories": 380,
+      "emoji": "🍗",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jw_yss",
+      "name": "鸭锁骨",
+      "description": "嚼劲十足，越啃越有味",
+      "price": 20,
+      "calories": 280,
+      "emoji": "🦴",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jw_yz",
+      "name": "鸭掌",
+      "description": "Q弹软糯，卤香入味",
+      "price": 24,
+      "calories": 260,
+      "emoji": "🦶",
+      "menuCategory": "鸭货"
+    },
+    {
+      "id": "jw_ys",
+      "name": "鸭舌",
+      "description": "小巧精致，口感独特",
+      "price": 30,
+      "calories": 240,
+      "emoji": "👅",
+      "menuCategory": "鸭货"
+    },
+    {
+      "id": "jw_yc",
+      "name": "鸭肠",
+      "description": "爽脆口感，卤味十足",
+      "price": 18,
+      "calories": 220,
+      "emoji": "🍢",
+      "menuCategory": "鸭货"
+    },
+    {
+      "id": "jw_yz2",
+      "name": "鸭胗",
+      "description": "嚼劲十足，越吃越香",
+      "price": 16,
+      "calories": 200,
+      "emoji": "🍖",
+      "menuCategory": "鸭货"
+    },
+    {
+      "id": "jw_yt",
+      "name": "整只鸭头",
+      "description": "经典鸭头，卤香浓郁",
+      "price": 12,
+      "calories": 180,
+      "emoji": "🦆",
+      "menuCategory": "鸭货"
+    },
+    {
+      "id": "jw_op",
+      "name": "藕片",
+      "description": "爽脆藕片，卤汁入味",
+      "price": 8,
+      "calories": 100,
+      "emoji": "🪷",
+      "menuCategory": "素菜"
+    },
+    {
+      "id": "jw_dfg",
+      "name": "豆腐干",
+      "description": "劲道豆干，越嚼越香",
+      "price": 6,
+      "calories": 150,
+      "emoji": "🧊",
+      "menuCategory": "素菜"
+    },
+    {
+      "id": "jw_hs",
+      "name": "花生",
+      "description": "香脆花生，卤味小食",
+      "price": 7,
+      "calories": 280,
+      "emoji": "🥜",
+      "menuCategory": "素菜"
+    },
+    {
+      "id": "jw_hdj",
+      "name": "海带结",
+      "description": "爽滑海带，清爽解腻",
+      "price": 6,
+      "calories": 60,
+      "emoji": "🎋",
+      "menuCategory": "素菜"
+    },
+    {
+      "id": "jw_jzg",
+      "name": "金针菇",
+      "description": "鲜嫩爽口，卤汁浓郁",
+      "price": 8,
+      "calories": 50,
+      "emoji": "🍄",
+      "menuCategory": "素菜"
+    },
+    {
+      "id": "jw_me",
+      "name": "木耳",
+      "description": "爽脆木耳，凉拌卤味两相宜",
+      "price": 7,
+      "calories": 40,
+      "emoji": "🍂",
+      "menuCategory": "素菜"
+    },
+    {
+      "id": "jw_xlxw",
+      "name": "小龙虾尾",
+      "description": "麻辣入味，鲜香过瘾",
+      "price": 35,
+      "calories": 320,
+      "emoji": "🦞",
+      "menuCategory": "海鲜"
+    },
+    {
+      "id": "jw_yys",
+      "name": "鱿鱼须",
+      "description": "爽脆有嚼劲，越吃越上瘾",
+      "price": 28,
+      "calories": 220,
+      "emoji": "🦑",
+      "menuCategory": "海鲜"
+    },
+    {
+      "id": "jw_bs",
+      "name": "basa鱼片",
+      "description": "嫩滑鱼片，卤香入味",
+      "price": 22,
+      "calories": 180,
+      "emoji": "🐟",
+      "menuCategory": "海鲜"
+    },
+    {
+      "id": "jw_lzt",
+      "name": "卤猪蹄",
+      "description": "软糯胶质，卤香四溢",
+      "price": 26,
+      "calories": 420,
+      "emoji": "🍖",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "jw_nrl",
+      "name": "牛肉粒",
+      "description": "嚼劲十足，卤香浓郁",
+      "price": 30,
+      "calories": 260,
+      "emoji": "🥩",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "jw_jz",
+      "name": "鸡爪",
+      "description": "Q弹软糯，酸辣可口",
+      "price": 15,
+      "calories": 240,
+      "emoji": "🍗",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "jw_zed",
+      "name": "猪耳朵",
+      "description": "爽脆有嚼劲，卤味经典",
+      "price": 18,
+      "calories": 250,
+      "emoji": "🐷",
+      "menuCategory": "肉类"
+    },
+    {
+      "id": "jw_ld",
+      "name": "卤蛋",
+      "description": "入味卤蛋，蛋黄流沙",
+      "price": 3,
+      "calories": 90,
+      "emoji": "🥚",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "jw_xgft",
+      "name": "香菇饭团",
+      "description": "香糯饭团，配菜下饭",
+      "price": 8,
+      "calories": 220,
+      "emoji": "🍙",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "jw_lrf",
+      "name": "卤肉饭",
+      "description": "肥瘦相间卤肉，香浓入味",
+      "price": 15,
+      "calories": 480,
+      "emoji": "🍚",
+      "menuCategory": "主食"
+    },
+    {
+      "id": "jw_zhpp",
+      "name": "综合拼盘（小）",
+      "description": "多种卤味任你选，分享装",
+      "price": 48,
+      "calories": 850,
+      "emoji": "🍱",
+      "menuCategory": "热销",
+      "popular": true
+    },
+    {
+      "id": "jw_zhpp2",
+      "name": "综合拼盘（大）",
+      "description": "超值大份，多人分享首选",
+      "price": 88,
+      "calories": 1600,
+      "emoji": "🍱",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "jw_qltc",
+      "name": "情侣套餐",
+      "description": "精选卤味组合，两人分享刚好",
+      "price": 68,
+      "calories": 1200,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "jw_drcx",
+      "name": "单人尝鲜装",
+      "description": "小份多样，一人也能吃遍全味",
+      "price": 35,
+      "calories": 600,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "jw_ybst",
+      "name": "鸭脖三件套",
+      "description": "鸭脖鸭翅鸭掌，经典组合",
+      "price": 42,
+      "calories": 750,
+      "emoji": "🎁",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "jw_mlpp",
+      "name": "麻辣拼盘",
+      "description": "重口味麻辣拼盘，过瘾解馋",
+      "price": 55,
+      "calories": 900,
+      "emoji": "🌶️",
+      "menuCategory": "热销"
+    },
+    {
+      "id": "jw_wgyb",
+      "name": "无骨鸭脖",
+      "description": "去骨处理，吃起来更方便",
+      "price": 26,
+      "calories": 300,
+      "emoji": "🦆",
+      "menuCategory": "鸭货"
+    }
+  ]
+}
