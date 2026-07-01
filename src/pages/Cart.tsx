@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAddress } from '../context/AddressContext';
+import AddressEditSheet from '../components/AddressEditSheet';
 
 export default function Cart() {
   const { items, restaurant, totalPrice, totalCalories, updateQuantity, clearCart } = useCart();
+  const { addressInfo } = useAddress();
+  const [addressSheetOpen, setAddressSheetOpen] = useState(false);
   const navigate = useNavigate();
 
   if (items.length === 0 || !restaurant) {
@@ -41,16 +46,29 @@ export default function Cart() {
 
       <div className="px-4 pb-40">
         {/* Delivery address */}
-        <div className="bg-white rounded-xl mt-4 p-4">
+        <div
+          className="bg-white rounded-xl mt-4 p-4 cursor-pointer"
+          onClick={() => setAddressSheetOpen(true)}
+        >
           <div className="flex items-start gap-3">
             <span className="text-orange-500 text-lg mt-0.5">📍</span>
             <div className="flex-1">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-gray-900 text-sm">北京市朝阳区三里屯</span>
-                <span className="text-gray-300 text-xs">›</span>
-              </div>
-              <p className="text-gray-400 text-xs mt-0.5">三里屯太古里北区 N3-15（假地址）</p>
-              <p className="text-gray-400 text-xs mt-0.5">联系电话：138****1234</p>
+              {addressInfo.recipientName && addressInfo.phone ? (
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-gray-900 text-sm">
+                      {addressInfo.recipientName} {addressInfo.phone}
+                    </span>
+                    <span className="text-gray-300 text-xs">›</span>
+                  </div>
+                  <p className="text-gray-400 text-xs mt-0.5">{addressInfo.address}</p>
+                </>
+              ) : (
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-400 text-sm">点击填写收货信息</span>
+                  <span className="text-gray-300 text-xs">›</span>
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-3 bg-orange-50 rounded-lg px-3 py-2 flex items-center gap-2">
@@ -166,6 +184,10 @@ export default function Cart() {
           点击后不会产生任何实际费用
         </p>
       </div>
+
+      {addressSheetOpen && (
+        <AddressEditSheet onClose={() => setAddressSheetOpen(false)} />
+      )}
     </div>
   );
 }
