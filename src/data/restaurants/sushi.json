@@ -34,7 +34,9 @@
       "calories": 320,
       "emoji": "🌯",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 三文鱼手卷: 海苔卷着橙红色三文鱼片和白米饭，圆锥形手卷造型.",
+      "image": "restaurants/sushi/items/smgj.jpg"
     },
     {
       "id": "yzs",
@@ -44,7 +46,9 @@
       "calories": 210,
       "emoji": "🍳",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 玉子烧（3块）: 三块金黄色日式蛋卷，层次分明，切面可见蛋层.",
+      "image": "restaurants/sushi/items/yzs.jpg"
     },
     {
       "id": "wzh",
@@ -53,7 +57,9 @@
       "price": 12,
       "calories": 80,
       "emoji": "🍵",
-      "menuCategory": "汤品"
+      "menuCategory": "汤品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 味噌汤: 浅褐色味噌汤，碗中漂着白色豆腐块和海带.",
+      "image": "restaurants/sushi/items/wzh.jpg"
     },
     {
       "id": "jylr",
@@ -62,7 +68,9 @@
       "price": 35,
       "calories": 290,
       "emoji": "🐟",
-      "menuCategory": "握寿司"
+      "menuCategory": "握寿司",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 酱油溜鱼: 深色酱油浸泡的鱼片，表面油亮.",
+      "image": "restaurants/sushi/items/jylr.jpg"
     },
     {
       "id": "edb",
@@ -71,7 +79,9 @@
       "price": 22,
       "calories": 250,
       "emoji": "🦀",
-      "menuCategory": "手卷"
+      "menuCategory": "手卷",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 蟹棒手卷: 海苔卷着橙白相间蟹棒和蔬菜丝.",
+      "image": "restaurants/sushi/items/edb.jpg"
     },
     {
       "id": "dc",
@@ -81,7 +91,9 @@
       "calories": 320,
       "emoji": "🐙",
       "menuCategory": "小食",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 章鱼小丸子（6颗）: 六颗金黄色章鱼小丸子，表面刷着酱汁，撒着木鱼花.",
+      "image": "restaurants/sushi/items/dc.jpg"
     },
     {
       "id": "ss_lyj",
@@ -90,7 +102,9 @@
       "price": 26,
       "calories": 300,
       "emoji": "🌯",
-      "menuCategory": "手卷"
+      "menuCategory": "手卷",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 鳗鱼手卷: 海苔卷着深酱色蒲烧鳗鱼片.",
+      "image": "restaurants/sushi/items/ss_lyj.jpg"
     },
     {
       "id": "ss_ttlj",
@@ -99,7 +113,9 @@
       "price": 24,
       "calories": 340,
       "emoji": "🌯",
-      "menuCategory": "手卷"
+      "menuCategory": "手卷",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 天妇罗手卷: 海苔卷着金黄酥脆天妇罗.",
+      "image": "restaurants/sushi/items/ss_ttlj.jpg"
     },
     {
       "id": "ss_jzj",
@@ -108,7 +124,9 @@
       "price": 25,
       "calories": 310,
       "emoji": "🌯",
-      "menuCategory": "手卷"
+      "menuCategory": "手卷",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 加州卷: 反卷寿司，外层米饭裹着芝麻，内馅可见蟹柳和牛油果.",
+      "image": "restaurants/sushi/items/ss_jzj.jpg"
     },
     {
       "id": "ss_nyghsj",
@@ -117,7 +135,9 @@
       "price": 20,
       "calories": 260,
       "emoji": "🥑",
-      "menuCategory": "手卷"
+      "menuCategory": "手卷",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 牛油果手卷: 海苔卷着翠绿牛油果片.",
+      "image": "restaurants/sushi/items/ss_nyghsj.jpg"
     },
     {
       "id": "ss_jqyws",
@@ -126,7 +146,9 @@
       "price": 32,
       "calories": 220,
       "emoji": "🍣",
-      "menuCategory": "握寿司"
+      "menuCategory": "握寿司",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 金枪鱼握寿司: 醋饭上覆盖着深红色金枪鱼片.",
+      "image": "restaurants/sushi/items/ss_jqyws.jpg"
     },
     {
       "id": "ss_txws",
@@ -135,7 +157,9 @@
       "price": 30,
       "calories": 200,
       "emoji": "🍣",
-      "menuCategory": "握寿司"
+      "menuCategory": "握寿司",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 甜虾握寿司: 醋饭上覆盖着粉色甜虾.",
+      "image": "restaurants/sushi/items/ss_txws.jpg"
     },
     {
       "id": "ss_bjbws",
@@ -144,7 +168,9 @@
       "price": 34,
       "calories": 210,
       "emoji": "🍣",
-      "menuCategory": "握寿司"
+      "menuCategory": "握寿司",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 北极贝握寿司: 醋饭上覆盖着白色北极贝片.",
+      "image": "restaurants/sushi/items/ss_bjbws.jpg"
     },
     {
       "id": "ss_lyws",
@@ -153,7 +179,9 @@
       "price": 36,
       "calories": 250,
       "emoji": "🍣",
-      "menuCategory": "握寿司"
+      "menuCategory": "握寿司",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 鳗鱼握寿司: 醋饭上覆盖着深酱色蒲烧鳗鱼.",
+      "image": "restaurants/sushi/items/ss_lyws.jpg"
     },
     {
       "id": "ss_smyc",
@@ -163,7 +191,9 @@
       "calories": 260,
       "emoji": "🍣",
       "menuCategory": "刺身",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 三文鱼刺身: 橙红色三文鱼刺身薄片整齐摆放.",
+      "image": "restaurants/sushi/items/ss_smyc.jpg"
     },
     {
       "id": "ss_jqyc",
@@ -172,7 +202,9 @@
       "price": 48,
       "calories": 240,
       "emoji": "🍣",
-      "menuCategory": "刺身"
+      "menuCategory": "刺身",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 金枪鱼刺身: 深红色金枪鱼刺身薄片整齐摆放.",
+      "image": "restaurants/sushi/items/ss_jqyc.jpg"
     },
     {
       "id": "ss_txc",
@@ -181,7 +213,9 @@
       "price": 38,
       "calories": 180,
       "emoji": "🍤",
-      "menuCategory": "刺身"
+      "menuCategory": "刺身",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 甜虾刺身: 粉色甜虾刺身整齐摆放.",
+      "image": "restaurants/sushi/items/ss_txc.jpg"
     },
     {
       "id": "ss_flbc",
@@ -190,7 +224,9 @@
       "price": 45,
       "calories": 200,
       "emoji": "🐚",
-      "menuCategory": "刺身"
+      "menuCategory": "刺身",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 帆立贝刺身: 白色帆立贝刺身整齐摆放.",
+      "image": "restaurants/sushi/items/ss_flbc.jpg"
     },
     {
       "id": "ss_rsjz",
@@ -199,7 +235,9 @@
       "price": 18,
       "calories": 320,
       "emoji": "🥟",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 日式煎饺（5个）: 五个金黄色煎饺，底部焦脆.",
+      "image": "restaurants/sushi/items/ss_rsjz.jpg"
     },
     {
       "id": "ss_ttlpp",
@@ -208,7 +246,9 @@
       "price": 25,
       "calories": 400,
       "emoji": "🍤",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 天妇罗拼盘: 什锦天妇罗整齐摆放，外皮金黄酥脆.",
+      "image": "restaurants/sushi/items/ss_ttlpp.jpg"
     },
     {
       "id": "ss_jmzy",
@@ -217,7 +257,9 @@
       "price": 16,
       "calories": 150,
       "emoji": "🐙",
-      "menuCategory": "小食"
+      "menuCategory": "小食",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 芥末章鱼: 白色章鱼片配绿色芥末点缀.",
+      "image": "restaurants/sushi/items/ss_jmzy.jpg"
     },
     {
       "id": "ss_glt",
@@ -226,7 +268,9 @@
       "price": 15,
       "calories": 100,
       "emoji": "🥣",
-      "menuCategory": "汤品"
+      "menuCategory": "汤品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 蛤蜊汤: 清汤中漂浮着开口蛤蜊.",
+      "image": "restaurants/sushi/items/ss_glt.jpg"
     },
     {
       "id": "ss_zrt",
@@ -235,7 +279,9 @@
       "price": 16,
       "calories": 220,
       "emoji": "🥣",
-      "menuCategory": "汤品"
+      "menuCategory": "汤品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 猪肉汤: 浓白色豚汁汤，漂着薄片猪肉.",
+      "image": "restaurants/sushi/items/ss_zrt.jpg"
     },
     {
       "id": "ss_mcnt",
@@ -244,7 +290,9 @@
       "price": 20,
       "calories": 200,
       "emoji": "🍵",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 抹茶拿铁: 绿色抹茶拿铁，杯口分层明显.",
+      "image": "restaurants/sushi/items/ss_mcnt.jpg"
     },
     {
       "id": "ss_mj",
@@ -253,7 +301,9 @@
       "price": 25,
       "calories": 150,
       "emoji": "🍶",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 梅酒: 透明玻璃杯装淡黄色梅酒.",
+      "image": "restaurants/sushi/items/ss_mj.jpg"
     },
     {
       "id": "ss_wlc",
@@ -262,7 +312,9 @@
       "price": 10,
       "calories": 10,
       "emoji": "🍵",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 乌龙茶: 透明杯装琥珀色乌龙茶.",
+      "image": "restaurants/sushi/items/ss_wlc.jpg"
     },
     {
       "id": "ss_yzmc",
@@ -271,7 +323,9 @@
       "price": 16,
       "calories": 160,
       "emoji": "🍋",
-      "menuCategory": "饮品"
+      "menuCategory": "饮品",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 柚子蜜茶: 透明杯装黄色柚子蜜茶，杯中可见柚子果肉.",
+      "image": "restaurants/sushi/items/ss_yzmc.jpg"
     },
     {
       "id": "ss_zhsspp",
@@ -281,7 +335,9 @@
       "calories": 900,
       "emoji": "🍱",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 综合寿司拼盘: 多种寿司整齐摆放在长方形餐盘上，色彩丰富.",
+      "image": "restaurants/sushi/items/ss_zhsspp.jpg"
     },
     {
       "id": "ss_smycpp",
@@ -291,7 +347,9 @@
       "calories": 850,
       "emoji": "🍣",
       "menuCategory": "热销",
-      "popular": true
+      "popular": true,
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 三文鱼刺身拼盘: 大份橙红色三文鱼刺身整齐摆满餐盘.",
+      "image": "restaurants/sushi/items/ss_smycpp.jpg"
     },
     {
       "id": "ss_yzjjz",
@@ -300,7 +358,12 @@
       "price": 38,
       "calories": 190,
       "emoji": "🍣",
-      "menuCategory": "握寿司"
+      "menuCategory": "握寿司",
+      "imagePrompt": "Top-down or 45-degree angle product photography of a single menu item, square 1:1 crop, plain neutral light-colored background, soft even studio lighting, consistent color grading and exposure, no text/watermark/logo, no hands/utensils holding food, item centered and fully visible, appetizing and true-to-life. Show ONLY this one item and its own container (one bowl, one plate, or one cup/glass) — absolutely no additional bowls, plates, side dishes, rice, or extra cups in frame. If this item is a beverage, the entire frame must contain nothing but that single cup or glass of the beverage. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 鱼子酱军舰: 军舰寿司上堆着黑色晶莹鱼子酱.",
+      "image": "restaurants/sushi/items/ss_yzjjz.jpg"
     }
-  ]
+  ],
+  "seriesStyle": "日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。",
+  "bannerImagePrompt": "Professional food-delivery-app restaurant banner photograph, wide horizontal composition, warm inviting natural lighting, shallow depth of field, appetizing commercial food photography style, no visible text/logos/watermarks, no people/hands, subject centered with generous negative space margin around it (to survive a wider crop), consistent warm natural color grading. 日式料理视觉风格：素雅深色调，简约禅意氛围，柔和自然光线，传递精致细腻、原汁原味的日式餐饮氛围。 画面主体是精美摆盘的寿司拼盘，多种寿司整齐排列，色彩鲜明，主体居中，四周留足够空白以适应裁切。",
+  "bannerImage": "restaurants/sushi/banner.jpg"
 }
