@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { getRandomRider } from '../data/riders';
 
 const TOTAL_SECONDS = 30;
 
@@ -8,6 +9,7 @@ export default function Tracking() {
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [progressStep, setProgressStep] = useState(1);
   const [showFinalMsg, setShowFinalMsg] = useState(false);
+  const [rider] = useState(getRandomRider);
   const riderRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { restaurant, totalPrice, totalCalories } = useCart();
@@ -105,7 +107,7 @@ export default function Tracking() {
           className="rider-icon"
           style={{ animationDuration: `${TOTAL_SECONDS}s` }}
         >
-          🛵
+          {rider.vehicleEmoji}
         </div>
 
         {/* ETA badge */}
@@ -145,13 +147,13 @@ export default function Tracking() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-orange-100 dark:bg-orange-500/20 rounded-full flex items-center justify-center text-2xl">
-              🧑‍🦱
+              {rider.avatarEmoji}
             </div>
             <div>
-              <p className="font-bold text-gray-900 dark:text-gray-100">赵雷</p>
+              <p className="font-bold text-gray-900 dark:text-gray-100">{rider.name}</p>
               <div className="flex items-center gap-1">
                 <span className="text-yellow-400 text-xs">★★★★★</span>
-                <span className="text-gray-400 dark:text-gray-500 text-xs">4.9分 · 送单12万+</span>
+                <span className="text-gray-400 dark:text-gray-500 text-xs">{rider.rating}分 · 送单{rider.deliveryCount}</span>
               </div>
             </div>
           </div>
