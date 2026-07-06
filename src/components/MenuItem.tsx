@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useCart } from '../context/CartContext';
 import { assetUrl } from '../lib/assetUrl';
+import { useLongPressStep } from '../hooks/useLongPressStep';
 import MenuItemOptionsSheet from './MenuItemOptionsSheet';
 
 interface Props {
@@ -22,6 +23,17 @@ export default function MenuItem({ item, restaurant }: Props) {
   const customizedTotalQty = hasOptions
     ? items.filter(i => i.menuItem.id === item.id).reduce((sum, i) => sum + i.quantity, 0)
     : 0;
+
+  const decrement = useLongPressStep(() => {
+    const current = items.find(i => i.key === item.id)?.quantity ?? 0;
+    if (current <= 0) return false;
+    updateQuantity(item.id, current - 1);
+    return current - 1 > 0;
+  });
+  const increment = useLongPressStep(() => {
+    addItem(item, restaurant);
+    return true;
+  });
 
   return (
     <div className="flex gap-3 py-3 border-b border-gray-50 dark:border-gray-700 last:border-0">
@@ -79,14 +91,16 @@ export default function MenuItem({ item, restaurant }: Props) {
             <div className="flex items-center gap-2">
               <button
                 className="w-6 h-6 rounded-full border-2 border-orange-400 text-orange-500 flex items-center justify-center text-base font-bold leading-none"
-                onClick={() => updateQuantity(item.id, quantity - 1)}
+                onClick={decrement.wrapClick(() => updateQuantity(item.id, quantity - 1))}
+                {...decrement.handlers}
               >
                 −
               </button>
               <span className="text-sm font-bold text-gray-800 dark:text-gray-100 w-4 text-center">{quantity}</span>
               <button
                 className="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-base font-bold leading-none shadow-sm"
-                onClick={() => addItem(item, restaurant)}
+                onClick={increment.wrapClick(() => addItem(item, restaurant))}
+                {...increment.handlers}
               >
                 +
               </button>
