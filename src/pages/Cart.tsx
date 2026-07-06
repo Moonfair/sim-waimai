@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
 import AddressEditSheet from '../components/AddressEditSheet';
 import CartLineItem from '../components/CartLineItem';
+import { reportOrder } from '../lib/analytics';
 
 export default function Cart() {
   const { items, restaurant, totalPrice, totalCalories, updateQuantity, clearCart } = useCart();
@@ -147,7 +148,10 @@ export default function Cart() {
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-8 pt-4 bg-gradient-to-t from-gray-50 via-gray-50 dark:from-gray-900 dark:via-gray-900">
         <button
           className="w-full bg-orange-500 text-white py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-transform"
-          onClick={() => navigate('/order')}
+          onClick={() => {
+            reportOrder(finalPrice, totalCalories);
+            navigate('/order');
+          }}
         >
           免费下单 🎉
         </button>
