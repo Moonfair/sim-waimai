@@ -9,8 +9,10 @@ export function initAnalytics(): void {
 
   aegis = new Aegis({
     id,
+    reportApiSpeed: true,
+    reportAssetSpeed: true,
     spa: true,
-    reportApiSpeed: false,
+    hostUrl: 'https://rumt-zh.com',
   });
 }
 
