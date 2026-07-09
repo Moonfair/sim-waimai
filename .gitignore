@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Dev-fallback image uploads (COS not configured)
+server/uploads/
+
 # Secrets
 .env
 .env.*
