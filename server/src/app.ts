@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { authRoutes } from './routes/auth';
+import { favoriteRoutes } from './routes/favorites';
 import { orderRoutes } from './routes/orders';
 import { restaurantRoutes } from './routes/restaurants';
 
@@ -11,6 +12,7 @@ export function createApp() {
   app.route('/auth', authRoutes);
   app.route('/restaurants', restaurantRoutes);
   app.route('/orders', orderRoutes);
+  app.route('/favorites', favoriteRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
 

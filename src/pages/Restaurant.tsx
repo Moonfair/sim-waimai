@@ -3,20 +3,47 @@ import { useParams, useNavigate } from 'react-router-dom';
 import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
+import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
+import { api } from '../lib/api';
 import { assetUrl } from '../lib/assetUrl';
 
 export default function Restaurant() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { data: restaurant, loading, error } = useApi<RestaurantData>(id ? `/restaurants/${id}` : null);
   const [activeMenuCat, setActiveMenuCat] = useState('');
+  const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
     if (restaurant && !activeMenuCat) {
       setActiveMenuCat(restaurant.menuCategories[0] ?? '');
     }
   }, [restaurant, activeMenuCat]);
+
+  useEffect(() => {
+    if (restaurant) setIsFav(!!restaurant.isFavorite);
+  }, [restaurant]);
+
+  const toggleFavorite = async () => {
+    if (!id) return;
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(`/restaurant/${id}`)}`);
+      return;
+    }
+    const next = !isFav;
+    setIsFav(next);
+    try {
+      if (next) {
+        await api.put(`/favorites/${id}`);
+      } else {
+        await api.del(`/favorites/${id}`);
+      }
+    } catch {
+      setIsFav(!next);
+    }
+  };
 
   if (loading) {
     return (
@@ -64,6 +91,13 @@ export default function Restaurant() {
           onClick={() => navigate(-1)}
         >
           ←
+        </button>
+        <button
+          className="absolute top-10 right-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg z-10"
+          onClick={toggleFavorite}
+          aria-label={isFav ? '取消收藏' : '收藏餐厅'}
+        >
+          {isFav ? '❤️' : '🤍'}
         </button>
         <div className="relative z-10 flex flex-col items-center">
           {!restaurant.bannerImage && <div className="text-6xl drop-shadow-lg">{restaurant.emoji}</div>}

@@ -62,6 +62,8 @@ export interface Restaurant {
   bannerImagePrompt?: string;
   /** Shared visual style description reused across this restaurant's item image prompts */
   seriesStyle?: string;
+  /** Present only when the API request is authenticated. */
+  isFavorite?: boolean;
 }
 
 export interface Rider {
