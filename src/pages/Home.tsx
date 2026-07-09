@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { restaurants, CATEGORIES } from '../data/restaurants';
-import type { Category } from '../data/restaurants';
+import { CATEGORIES } from '@sim-waimai/shared';
+import type { Category, RestaurantSummary } from '@sim-waimai/shared';
 import RestaurantCard from '../components/RestaurantCard';
+import { useApi } from '../hooks/useApi';
 import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
 import { useTheme } from '../context/ThemeContext';
@@ -15,10 +16,11 @@ export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [addressSheetOpen, setAddressSheetOpen] = useState(false);
   const navigate = useNavigate();
+  const { data: restaurants, loading, error } = useApi<RestaurantSummary[]>('/restaurants');
 
-  const filtered = activeCategory === '全部'
-    ? restaurants
-    : restaurants.filter(r => r.category === activeCategory);
+  const filtered = (restaurants ?? []).filter(
+    r => activeCategory === '全部' || r.category === activeCategory
+  );
 
   return (
     <div className="app-container">
@@ -88,11 +90,24 @@ export default function Home() {
           </h2>
           <span className="text-gray-400 dark:text-gray-500 text-xs">{filtered.length}家</span>
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          {filtered.map(restaurant => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-2 gap-3">
+            {Array.from({ length: 6 }, (_, i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-xl h-56 animate-pulse" />
+            ))}
+          </div>
+        ) : error ? (
+          <div className="text-center py-12 text-gray-400 dark:text-gray-500">
+            <div className="text-4xl mb-2">😵</div>
+            <p className="text-sm">{error}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-3">
+            {filtered.map(restaurant => (
+              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Bottom cart bar if items */}

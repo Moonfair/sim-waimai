@@ -1,10 +1,12 @@
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
+import { restaurantRoutes } from './routes/restaurants';
 
 export function createApp() {
   const app = new Hono().basePath('/api');
 
   app.get('/health', (c) => c.json({ ok: true }));
+  app.route('/restaurants', restaurantRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
 

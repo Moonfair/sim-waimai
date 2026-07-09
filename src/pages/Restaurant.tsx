@@ -1,22 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRestaurantById } from '../data/restaurants';
+import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
+import { useApi } from '../hooks/useApi';
 import { assetUrl } from '../lib/assetUrl';
 
 export default function Restaurant() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const restaurant = id ? getRestaurantById(id) : undefined;
-  const [activeMenuCat, setActiveMenuCat] = useState(restaurant?.menuCategories[0] ?? '');
+  const { data: restaurant, loading, error } = useApi<RestaurantData>(id ? `/restaurants/${id}` : null);
+  const [activeMenuCat, setActiveMenuCat] = useState('');
 
-  if (!restaurant) {
+  useEffect(() => {
+    if (restaurant && !activeMenuCat) {
+      setActiveMenuCat(restaurant.menuCategories[0] ?? '');
+    }
+  }, [restaurant, activeMenuCat]);
+
+  if (loading) {
+    return (
+      <div className="app-container">
+        <div className="h-48 bg-gray-200 dark:bg-gray-800 animate-pulse" />
+        <div className="p-4 space-y-3">
+          {Array.from({ length: 5 }, (_, i) => (
+            <div key={i} className="bg-white dark:bg-gray-800 rounded-xl h-20 animate-pulse" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !restaurant) {
     return (
       <div className="app-container flex items-center justify-center h-screen">
         <div className="text-center text-gray-400 dark:text-gray-500">
           <div className="text-5xl mb-3">🍽️</div>
-          <p>餐厅不存在</p>
+          <p>{error ?? '餐厅不存在'}</p>
           <button className="mt-4 text-orange-500" onClick={() => navigate('/')}>返回首页</button>
         </div>
       </div>

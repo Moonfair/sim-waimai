@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import type { Restaurant } from '../data/restaurants';
+import type { RestaurantSummary } from '@sim-waimai/shared';
 import { assetUrl } from '../lib/assetUrl';
 
 interface Props {
-  restaurant: Restaurant;
+  restaurant: RestaurantSummary;
 }
 
 export default function RestaurantCard({ restaurant }: Props) {
