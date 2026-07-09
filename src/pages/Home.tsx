@@ -4,6 +4,7 @@ import { CATEGORIES } from '@sim-waimai/shared';
 import type { Category, RestaurantSummary } from '@sim-waimai/shared';
 import RestaurantCard from '../components/RestaurantCard';
 import { useApi } from '../hooks/useApi';
+import { assetUrl } from '../lib/assetUrl';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
@@ -19,6 +20,7 @@ export default function Home() {
   const [addressSheetOpen, setAddressSheetOpen] = useState(false);
   const navigate = useNavigate();
   const { data: restaurants, loading, error } = useApi<RestaurantSummary[]>('/restaurants');
+  const { data: recommended } = useApi<RestaurantSummary[]>('/recommendations');
 
   const filtered = (restaurants ?? []).filter(
     r => activeCategory === '全部' || r.category === activeCategory
@@ -71,6 +73,43 @@ export default function Home() {
         </div>
         <div className="text-5xl">🎉</div>
       </div>
+
+      {/* Recommendations */}
+      {recommended && recommended.length > 0 && (
+        <div className="mt-4">
+          <div className="px-4 flex items-center gap-1.5 mb-2">
+            <span className="text-base">✨</span>
+            <h2 className="text-gray-800 dark:text-gray-100 font-bold text-base">为你推荐</h2>
+            <span className="text-gray-300 dark:text-gray-600 text-xs">{user ? '根据你的口味' : '大家都在吃'}</span>
+          </div>
+          <div className="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-1">
+            {recommended.map(r => (
+              <div
+                key={r.id}
+                className="flex-shrink-0 w-28 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform"
+                onClick={() => navigate(`/restaurant/${r.id}`)}
+              >
+                <div
+                  className="h-16 flex items-center justify-center text-3xl relative"
+                  style={!r.bannerImage ? { background: `linear-gradient(135deg, ${r.bgColor}dd, ${r.bgColor}88)` } : undefined}
+                >
+                  {r.bannerImage ? (
+                    <img src={assetUrl(r.bannerImage)} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <span className="drop-shadow">{r.emoji}</span>
+                  )}
+                </div>
+                <div className="p-2">
+                  <p className="text-xs font-bold text-gray-900 dark:text-gray-100 truncate">{r.name}</p>
+                  <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">
+                    ⭐{r.rating} · {r.deliveryTime}分钟
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Category Tabs */}
       <div className="mt-4 px-4">
