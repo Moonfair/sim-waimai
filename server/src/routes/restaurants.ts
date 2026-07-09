@@ -1,8 +1,9 @@
-import { and, asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, desc, eq, inArray, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { db } from '../db/client';
-import { favorites, menuItems, restaurants } from '../db/schema';
-import { toRestaurant, toRestaurantSummary } from '../lib/mappers';
+import { favorites, menuItems, restaurants, reviews, users } from '../db/schema';
+import { decodeCursor, encodeCursor } from '../lib/cursor';
+import { toRestaurant, toRestaurantSummary, toReviewDto } from '../lib/mappers';
 import { optionalAuth } from '../middleware/auth';
 
 /** Ids of the user's favorites among the given restaurant ids (empty set when anonymous). */
@@ -32,6 +33,37 @@ export const restaurantRoutes = new Hono()
     if (!user) return c.json(rows.map((r) => toRestaurantSummary(r)));
     const favs = await favoriteIdSet(user.sub, rows.map((r) => r.id));
     return c.json(rows.map((r) => toRestaurantSummary(r, favs.has(r.id))));
+  })
+  .get('/:id/reviews', async (c) => {
+    const id = c.req.param('id');
+    const limitRaw = Number(c.req.query('limit') ?? 10);
+    const limit = Math.min(Math.max(Number.isFinite(limitRaw) ? Math.floor(limitRaw) : 10, 1), 50);
+
+    const filters = [eq(reviews.restaurantId, id)];
+    const cursorParam = c.req.query('cursor');
+    if (cursorParam) {
+      const cursor = decodeCursor(cursorParam);
+      if (!cursor) return c.json({ error: '无效的分页游标' }, 400);
+      filters.push(
+        sql`(${reviews.createdAt}, ${reviews.id}) < (${cursor.createdAt}, ${cursor.id}::uuid)`,
+      );
+    }
+
+    const rows = await db
+      .select({ review: reviews, username: users.username })
+      .from(reviews)
+      .innerJoin(users, eq(users.id, reviews.userId))
+      .where(and(...filters))
+      .orderBy(desc(reviews.createdAt), desc(reviews.id))
+      .limit(limit + 1);
+
+    const hasMore = rows.length > limit;
+    const page = rows.slice(0, limit);
+    const last = page[page.length - 1];
+    return c.json({
+      items: page.map((r) => toReviewDto(r.review, r.username)),
+      nextCursor: hasMore && last ? encodeCursor(last.review.createdAt, last.review.id) : null,
+    });
   })
   .get('/:id', optionalAuth, async (c) => {
     const id = c.req.param('id');

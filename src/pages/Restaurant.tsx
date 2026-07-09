@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
+import ReviewList from '../components/ReviewList';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
@@ -141,7 +142,7 @@ export default function Restaurant() {
         </div>
 
         {/* Right menu items */}
-        <div className="flex-1 px-3 pb-40">
+        <div className="flex-1 px-3 pb-8">
           <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{activeMenuCat}</h3>
           {filteredMenu.length === 0 ? (
             <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
@@ -152,6 +153,11 @@ export default function Restaurant() {
           )}
         </div>
       </div>
+
+      {/* Reviews */}
+      {id && (
+        <ReviewList restaurantId={id} rating={restaurant.rating} ratingCount={restaurant.ratingCount} />
+      )}
 
       <CartBar deliveryFee={restaurant.deliveryFee} />
     </div>

@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import type { OrderDto } from '@sim-waimai/shared';
+import ReviewForm from '../components/ReviewForm';
 import { useApi } from '../hooks/useApi';
 import { assetUrl } from '../lib/assetUrl';
 
@@ -12,7 +13,7 @@ const STATUS_HEADER: Record<OrderDto['status'], { emoji: string; title: string; 
 export default function OrderDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { data: order, loading, error } = useApi<OrderDto>(id ? `/orders/${id}` : null);
+  const { data: order, loading, error, reload } = useApi<OrderDto>(id ? `/orders/${id}` : null);
 
   if (loading) {
     return (
@@ -144,19 +145,22 @@ export default function OrderDetail() {
           )}
         </div>
 
-        {/* Review (form arrives with the review feature) */}
-        {order.status === 'completed' && order.review && (
-          <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">
-            <h3 className="font-bold text-gray-900 dark:text-gray-100 text-sm mb-2">我的评价</h3>
-            <div className="text-yellow-400 text-sm">
-              {'★'.repeat(order.review.rating)}
-              <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - order.review.rating)}</span>
+        {/* Review */}
+        {order.status === 'completed' &&
+          (order.review ? (
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">
+              <h3 className="font-bold text-gray-900 dark:text-gray-100 text-sm mb-2">我的评价</h3>
+              <div className="text-yellow-400 text-sm">
+                {'★'.repeat(order.review.rating)}
+                <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - order.review.rating)}</span>
+              </div>
+              {order.review.content && (
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-1.5">{order.review.content}</p>
+              )}
             </div>
-            {order.review.content && (
-              <p className="text-gray-600 dark:text-gray-300 text-sm mt-1.5">{order.review.content}</p>
-            )}
-          </div>
-        )}
+          ) : (
+            <ReviewForm orderId={order.id} onSubmitted={reload} />
+          ))}
 
         {/* Meta */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">

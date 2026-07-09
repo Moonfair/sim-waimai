@@ -4,6 +4,7 @@ import { authRoutes } from './routes/auth';
 import { favoriteRoutes } from './routes/favorites';
 import { orderRoutes } from './routes/orders';
 import { restaurantRoutes } from './routes/restaurants';
+import { reviewRoutes } from './routes/reviews';
 
 export function createApp() {
   const app = new Hono().basePath('/api');
@@ -12,6 +13,7 @@ export function createApp() {
   app.route('/auth', authRoutes);
   app.route('/restaurants', restaurantRoutes);
   app.route('/orders', orderRoutes);
+  app.route('/orders', reviewRoutes);
   app.route('/favorites', favoriteRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
