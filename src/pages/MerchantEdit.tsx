@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
 import MenuItemEditor from '../components/MenuItemEditor';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
+import { uploadImage } from '../lib/upload';
 
 const inputClass =
   'w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm';
@@ -20,6 +22,23 @@ export default function MerchantEdit() {
   const [togglingActive, setTogglingActive] = useState(false);
   const [editorItem, setEditorItem] = useState<MerchantMenuItemDto | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
+  const [uploadingBanner, setUploadingBanner] = useState(false);
+  const bannerFileRef = useRef<HTMLInputElement>(null);
+
+  const handlePickBanner = async (file: File | undefined) => {
+    if (!file || !id) return;
+    setUploadingBanner(true);
+    try {
+      const url = await uploadImage(file, 'banner', id);
+      await api.patch(`/merchant/restaurants/${id}`, { bannerImage: url });
+      reload();
+    } catch (err) {
+      setInfoMsg(err instanceof Error ? err.message : '横幅上传失败');
+      setTimeout(() => setInfoMsg(null), 2500);
+    } finally {
+      setUploadingBanner(false);
+    }
+  };
 
   useEffect(() => {
     if (shop) {
@@ -131,6 +150,37 @@ export default function MerchantEdit() {
       </div>
 
       <div className="px-4 space-y-3 mt-4">
+        {/* Banner */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="font-bold text-gray-900 dark:text-gray-100 text-sm">店铺横幅</h2>
+            <button
+              className="text-orange-500 text-xs font-medium disabled:opacity-50"
+              disabled={uploadingBanner}
+              onClick={() => bannerFileRef.current?.click()}
+            >
+              {uploadingBanner ? '上传中…' : shop.bannerImage ? '更换横幅' : '上传横幅'}
+            </button>
+          </div>
+          {shop.bannerImage ? (
+            <img src={assetUrl(shop.bannerImage)} alt="店铺横幅" className="w-full h-28 object-cover rounded-xl" />
+          ) : (
+            <div
+              className="w-full h-28 rounded-xl flex items-center justify-center text-5xl"
+              style={{ background: `linear-gradient(135deg, ${shop.bgColor}ee, ${shop.bgColor}88)` }}
+            >
+              {shop.emoji}
+            </div>
+          )}
+          <input
+            ref={bannerFileRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="hidden"
+            onChange={(e) => handlePickBanner(e.target.files?.[0])}
+          />
+        </div>
+
         {/* Shop info */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 space-y-3">
           <h2 className="font-bold text-gray-900 dark:text-gray-100 text-sm">店铺信息</h2>

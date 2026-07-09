@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { ReviewDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
+import { uploadImage } from '../lib/upload';
 
 interface Props {
   orderId: string;
@@ -12,8 +14,26 @@ const RATING_HINTS = ['', '很差', '较差', '一般', '满意', '超赞'];
 export default function ReviewForm({ orderId, onSubmitted }: Props) {
   const [rating, setRating] = useState(5);
   const [content, setContent] = useState('');
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handlePickPhoto = async (file: File | undefined) => {
+    if (!file || photos.length >= 9) return;
+    setUploading(true);
+    setError(null);
+    try {
+      const url = await uploadImage(file, 'review');
+      setPhotos((p) => [...p, url]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '图片上传失败');
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = '';
+    }
+  };
 
   const handleSubmit = async () => {
     setSubmitting(true);
@@ -22,6 +42,7 @@ export default function ReviewForm({ orderId, onSubmitted }: Props) {
       const review = await api.post<ReviewDto>(`/orders/${orderId}/reviews`, {
         rating,
         content: content.trim(),
+        photos,
       });
       onSubmitted(review);
     } catch (err) {
@@ -58,6 +79,38 @@ export default function ReviewForm({ orderId, onSubmitted }: Props) {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
+      {/* Photos */}
+      <div className="flex items-center gap-2 mt-3 flex-wrap">
+        {photos.map((photo) => (
+          <div key={photo} className="relative">
+            <img src={assetUrl(photo)} alt="评价图片" className="w-14 h-14 rounded-lg object-cover" />
+            <button
+              className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gray-800/80 text-white rounded-full text-[10px] leading-none flex items-center justify-center"
+              onClick={() => setPhotos((p) => p.filter((x) => x !== photo))}
+              aria-label="删除图片"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+        {photos.length < 9 && (
+          <button
+            className="w-14 h-14 rounded-lg border border-dashed border-gray-200 dark:border-gray-700 text-gray-300 dark:text-gray-600 text-xl disabled:opacity-50"
+            disabled={uploading}
+            onClick={() => fileRef.current?.click()}
+            aria-label="添加图片"
+          >
+            {uploading ? '…' : '📷'}
+          </button>
+        )}
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          className="hidden"
+          onChange={(e) => handlePickPhoto(e.target.files?.[0])}
+        />
+      </div>
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       <button
         className="w-full mt-3 bg-orange-500 text-white py-3 rounded-xl font-bold text-sm disabled:opacity-50"

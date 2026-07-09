@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { MenuItemOptionGroup, MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
+import { uploadImage } from '../lib/upload';
 
 interface Props {
   restaurant: MerchantRestaurantDto;
@@ -26,8 +28,24 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
   const [menuCategory, setMenuCategory] = useState(item?.menuCategory ?? restaurant.menuCategories[0] ?? '');
   const [popular, setPopular] = useState(item?.popular ?? false);
   const [groups, setGroups] = useState<MenuItemOptionGroup[]>(item?.optionGroups ?? []);
+  const [image, setImage] = useState(item?.image ?? '');
+  const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handlePickImage = async (file: File | undefined) => {
+    if (!file) return;
+    setUploading(true);
+    setError(null);
+    try {
+      setImage(await uploadImage(file, 'item', restaurant.id));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '图片上传失败');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const updateGroup = (gi: number, patch: Partial<MenuItemOptionGroup>) =>
     setGroups((gs) => gs.map((g, i) => (i === gi ? { ...g, ...patch } : g)));
@@ -79,6 +97,7 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
       emoji: emoji.trim(),
       menuCategory,
       popular,
+      ...(image ? { image } : {}),
       optionGroups: normalizedGroups,
     };
     try {
@@ -135,6 +154,38 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
             <input type="checkbox" checked={popular} onChange={(e) => setPopular(e.target.checked)} className="accent-orange-500" />
             标记为 🔥 热销
           </label>
+
+          {/* Item photo */}
+          <div className="flex items-center gap-3">
+            {image ? (
+              <img src={assetUrl(image)} alt="菜品图" className="w-16 h-16 rounded-xl object-cover" />
+            ) : (
+              <div className="w-16 h-16 rounded-xl bg-gray-50 dark:bg-gray-900 border border-dashed border-gray-200 dark:border-gray-700 flex items-center justify-center text-2xl">
+                📷
+              </div>
+            )}
+            <div className="flex flex-col gap-1">
+              <button
+                className="text-orange-500 text-xs font-medium text-left disabled:opacity-50"
+                disabled={uploading}
+                onClick={() => fileRef.current?.click()}
+              >
+                {uploading ? '上传中…' : image ? '更换图片' : '上传菜品图（可选）'}
+              </button>
+              {image && (
+                <button className="text-gray-400 text-xs text-left" onClick={() => setImage('')}>
+                  移除图片
+                </button>
+              )}
+            </div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              className="hidden"
+              onChange={(e) => handlePickImage(e.target.files?.[0])}
+            />
+          </div>
 
           {/* Option groups */}
           <div className="border-t border-gray-100 dark:border-gray-700 pt-3">
