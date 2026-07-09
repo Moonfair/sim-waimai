@@ -29,7 +29,8 @@ export interface MenuItem {
   emoji: string;
   menuCategory: string;
   popular?: boolean;
-  /** Path relative to public/, no leading slash, e.g. "restaurants/laoxiangji/items/hfj.jpg" */
+  /** Tencent COS object key, no leading slash, e.g. "restaurants/laoxiangji/items/hfj.jpg" —
+   *  resolved to a full URL via assetUrl() (VITE_COS_BASE_URL). */
   image?: string;
   /** Prompt used to generate `image`, kept for inspection/regeneration */
   imagePrompt?: string;
@@ -54,7 +55,8 @@ export interface Restaurant {
   tags: string[];
   menuCategories: string[];
   menu: MenuItem[];
-  /** Path relative to public/, no leading slash, e.g. "restaurants/laoxiangji/banner.jpg" */
+  /** Tencent COS object key, no leading slash, e.g. "restaurants/laoxiangji/banner.jpg" —
+   *  resolved to a full URL via assetUrl() (VITE_COS_BASE_URL). */
   bannerImage?: string;
   /** Prompt used to generate `bannerImage` */
   bannerImagePrompt?: string;
