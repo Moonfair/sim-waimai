@@ -107,6 +107,8 @@ export const orders = pgTable(
     items: jsonb('items').$type<OrderItemSnapshot[]>().notNull(),
     subtotalFen: integer('subtotal_fen').notNull(),
     deliveryFeeFen: integer('delivery_fee_fen').notNull(),
+    /** 满减 promotion applied at checkout (subtotal ≥ ¥30 → ¥3 off). */
+    discountFen: integer('discount_fen').notNull().default(0),
     totalFen: integer('total_fen').notNull(),
     totalCalories: integer('total_calories').notNull(),
     addressSnapshot: jsonb('address_snapshot').$type<AddressSnapshot>().notNull(),

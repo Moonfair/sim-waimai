@@ -84,6 +84,8 @@ export interface OrderDto {
   items: OrderItemSnapshot[];
   subtotal: number;
   deliveryFee: number;
+  /** 满减 discount in yuan (0 if none). */
+  discount: number;
   total: number;
   totalCalories: number;
   address: AddressSnapshot;

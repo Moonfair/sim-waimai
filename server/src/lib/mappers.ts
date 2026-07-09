@@ -1,9 +1,19 @@
 import { fenToYuan } from '@sim-waimai/shared';
-import type { Category, MenuItem, Restaurant, RestaurantSummary } from '@sim-waimai/shared';
-import type { menuItems, restaurants } from '../db/schema';
+import type {
+  Category,
+  MenuItem,
+  OrderDto,
+  OrderSummaryDto,
+  Restaurant,
+  RestaurantSummary,
+  ReviewDto,
+} from '@sim-waimai/shared';
+import type { menuItems, orders, restaurants, reviews } from '../db/schema';
 
 export type RestaurantRow = typeof restaurants.$inferSelect;
 export type MenuItemRow = typeof menuItems.$inferSelect;
+export type OrderRow = typeof orders.$inferSelect;
+export type ReviewRow = typeof reviews.$inferSelect;
 
 export function toRestaurantSummary(row: RestaurantRow, isFavorite?: boolean): RestaurantSummary {
   const summary: RestaurantSummary = {
@@ -50,4 +60,53 @@ export function toRestaurant(row: RestaurantRow, items: MenuItemRow[]): Restaura
     menu: items.map(toMenuItem),
   };
   return restaurant;
+}
+
+export function toReviewDto(row: ReviewRow, username: string): ReviewDto {
+  return {
+    id: row.id,
+    orderId: row.orderId,
+    restaurantId: row.restaurantId,
+    username,
+    rating: row.rating,
+    content: row.content,
+    photos: row.photos,
+    createdAt: row.createdAt.toISOString(),
+  };
+}
+
+export function toOrderDto(row: OrderRow, review?: ReviewDto | null): OrderDto {
+  return {
+    id: row.id,
+    restaurantId: row.restaurantId,
+    restaurant: row.restaurantSnapshot,
+    status: row.status,
+    items: row.items,
+    subtotal: fenToYuan(row.subtotalFen),
+    deliveryFee: fenToYuan(row.deliveryFeeFen),
+    discount: fenToYuan(row.discountFen),
+    total: fenToYuan(row.totalFen),
+    totalCalories: row.totalCalories,
+    address: row.addressSnapshot,
+    rider: row.riderSnapshot ?? null,
+    createdAt: row.createdAt.toISOString(),
+    completedAt: row.completedAt?.toISOString() ?? null,
+    review: review ?? null,
+  };
+}
+
+export function toOrderSummary(row: OrderRow, hasReview: boolean): OrderSummaryDto {
+  return {
+    id: row.id,
+    restaurantId: row.restaurantId,
+    restaurantName: row.restaurantSnapshot.name,
+    restaurantEmoji: row.restaurantSnapshot.emoji,
+    restaurantBgColor: row.restaurantSnapshot.bgColor,
+    status: row.status,
+    itemCount: row.items.reduce((sum, i) => sum + i.quantity, 0),
+    firstItemName: row.items[0]?.name ?? '',
+    total: fenToYuan(row.totalFen),
+    createdAt: row.createdAt.toISOString(),
+    hasReview,
+  };
 }

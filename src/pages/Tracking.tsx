@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { OrderDto } from '@sim-waimai/shared';
 import { useCart } from '../context/CartContext';
+import { useApi } from '../hooks/useApi';
+import { api } from '../lib/api';
 import { getRandomRider } from '../data/riders';
 
 const TOTAL_SECONDS = 30;
@@ -9,10 +12,31 @@ export default function Tracking() {
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [progressStep, setProgressStep] = useState(1);
   const [showFinalMsg, setShowFinalMsg] = useState(false);
-  const [rider] = useState(getRandomRider);
+  const [fallbackRider] = useState(getRandomRider);
   const riderRef = useRef<HTMLDivElement>(null);
+  const completedRef = useRef(false);
   const navigate = useNavigate();
-  const { restaurant, totalPrice, totalCalories } = useCart();
+  const location = useLocation();
+  const orderId = (location.state as { orderId?: string } | null)?.orderId;
+  const { restaurant: cartRestaurant, totalPrice, totalCalories } = useCart();
+  const { data: order } = useApi<OrderDto>(orderId ? `/orders/${orderId}` : null);
+
+  // rider assigned by the backend when the order went to delivering
+  const rider = order?.rider ?? fallbackRider;
+  const restaurant = order ? order.restaurant : cartRestaurant;
+  const savedPrice = order ? order.total : totalPrice;
+  const savedCalories = order ? order.totalCalories : totalCalories;
+
+  const finishOrder = () => {
+    if (completedRef.current) return;
+    completedRef.current = true;
+    const done = () => navigate('/done', { state: { orderId } });
+    if (orderId) {
+      api.patch(`/orders/${orderId}/status`, { status: 'completed' }).catch(() => {}).finally(done);
+    } else {
+      done();
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,11 +56,12 @@ export default function Tracking() {
     if (elapsed >= 8 && progressStep < 2) setProgressStep(2);
     if (elapsed >= 18 && progressStep < 3) setProgressStep(3);
     if (elapsed >= 26 && progressStep < 4) setProgressStep(4);
-    if (secondsLeft === 0) {
+    if (secondsLeft === 0 && !showFinalMsg) {
       setShowFinalMsg(true);
-      setTimeout(() => navigate('/done'), 2000);
+      setTimeout(finishOrder, 2000);
     }
-  }, [secondsLeft, progressStep, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [secondsLeft, progressStep, showFinalMsg]);
 
   const progressSteps = [
     { label: '接单', done: progressStep >= 1 },
@@ -183,12 +208,12 @@ export default function Tracking() {
       <div className="px-4 mt-4 pb-8">
         <button
           className="w-full border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 py-4 rounded-2xl font-bold text-base active:scale-95 transition-transform"
-          onClick={() => navigate('/done')}
+          onClick={finishOrder}
         >
           我改变主意了（提前完成）
         </button>
         <p className="text-center text-gray-300 dark:text-gray-600 text-xs mt-2">
-          总节省金额 ¥{totalPrice.toFixed(2)} · {totalCalories} 千卡
+          总节省金额 ¥{savedPrice.toFixed(2)} · {savedCalories} 千卡
         </p>
       </div>
     </div>

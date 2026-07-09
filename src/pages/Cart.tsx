@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { OrderDto } from '@sim-waimai/shared';
+import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
 import AddressEditSheet from '../components/AddressEditSheet';
 import CartLineItem from '../components/CartLineItem';
+import { api, ApiError } from '../lib/api';
 import { reportOrder } from '../lib/analytics';
 
 export default function Cart() {
   const { items, restaurant, totalPrice, totalCalories, updateQuantity, clearCart } = useCart();
+  const { user } = useAuth();
   const { addressInfo } = useAddress();
   const [addressSheetOpen, setAddressSheetOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   if (items.length === 0 || !restaurant) {
@@ -30,6 +36,37 @@ export default function Cart() {
   const deliveryFee = restaurant.deliveryFee;
   const discount = totalPrice >= 30 ? 3 : 0;
   const finalPrice = totalPrice + deliveryFee - discount;
+
+  const handleSubmit = async () => {
+    if (!user) {
+      navigate('/login?redirect=/cart');
+      return;
+    }
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const order = await api.post<OrderDto>('/orders', {
+        restaurantId: restaurant.id,
+        items: items.map(i => ({
+          menuItemId: i.menuItem.id,
+          quantity: i.quantity,
+          ...(i.selectedOptions?.length
+            ? { selectedOptionIds: i.selectedOptions.map(o => o.optionId) }
+            : {}),
+        })),
+        address: addressInfo,
+      });
+      reportOrder(order.total, order.totalCalories);
+      navigate('/order', { state: { orderId: order.id } });
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 401) {
+        navigate('/login?redirect=/cart');
+        return;
+      }
+      setSubmitError(err instanceof Error ? err.message : '下单失败，请稍后重试');
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="app-container bg-gray-50 dark:bg-gray-900">
@@ -146,17 +183,18 @@ export default function Cart() {
 
       {/* Bottom CTA */}
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-8 pt-4 bg-gradient-to-t from-gray-50 via-gray-50 dark:from-gray-900 dark:via-gray-900">
+        {submitError && (
+          <p className="text-center text-red-500 text-xs mb-2">{submitError}</p>
+        )}
         <button
-          className="w-full bg-orange-500 text-white py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-transform"
-          onClick={() => {
-            reportOrder(finalPrice, totalCalories);
-            navigate('/order');
-          }}
+          className="w-full bg-orange-500 text-white py-4 rounded-2xl font-black text-lg shadow-lg active:scale-95 transition-transform disabled:opacity-60"
+          disabled={submitting}
+          onClick={handleSubmit}
         >
-          免费下单 🎉
+          {submitting ? '下单中…' : '免费下单 🎉'}
         </button>
         <p className="text-center text-gray-300 dark:text-gray-600 text-xs mt-2">
-          点击后不会产生任何实际费用
+          {user ? '点击后不会产生任何实际费用' : '登录后即可下单，不会产生任何实际费用'}
         </p>
       </div>
 

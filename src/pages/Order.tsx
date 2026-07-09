@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { api } from '../lib/api';
 
 const steps = [
   { icon: '🔄', text: '正在联系商家...', subtext: '商家确认中，请稍候' },
@@ -11,16 +12,26 @@ const steps = [
 export default function Order() {
   const [step, setStep] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+  const orderId = (location.state as { orderId?: string } | null)?.orderId;
   const { restaurant } = useCart();
 
   useEffect(() => {
+    if (!orderId) {
+      navigate('/', { replace: true });
+      return;
+    }
     const timers = [
       setTimeout(() => setStep(1), 1500),
-      setTimeout(() => setStep(2), 3000),
-      setTimeout(() => navigate('/tracking'), 4500),
+      setTimeout(() => {
+        setStep(2);
+        // rider takes the order → order moves to delivering (fire and forget)
+        api.patch(`/orders/${orderId}/status`, { status: 'delivering' }).catch(() => {});
+      }, 3000),
+      setTimeout(() => navigate('/tracking', { state: { orderId } }), 4500),
     ];
     return () => timers.forEach(clearTimeout);
-  }, [navigate]);
+  }, [navigate, orderId]);
 
   const current = steps[step];
 

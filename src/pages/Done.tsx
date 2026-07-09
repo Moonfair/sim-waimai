@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { OrderDto } from '@sim-waimai/shared';
 import { useCart } from '../context/CartContext';
+import { useApi } from '../hooks/useApi';
 
 interface Confetti {
   id: number;
@@ -57,9 +59,12 @@ export default function Done() {
   const [copied, setCopied] = useState(false);
   const { totalPrice, totalCalories, restaurant, clearCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
+  const orderId = (location.state as { orderId?: string } | null)?.orderId;
+  const { data: order } = useApi<OrderDto>(orderId ? `/orders/${orderId}` : null);
 
-  const savedPrice = totalPrice + (restaurant?.deliveryFee ?? 5);
-  const savedCalories = totalCalories;
+  const savedPrice = order ? order.total : totalPrice + (restaurant?.deliveryFee ?? 5);
+  const savedCalories = order ? order.totalCalories : totalCalories;
   const kmEquivalent = (savedCalories / 60).toFixed(0);
   const waterEquivalent = Math.round(savedPrice / 2);
 
@@ -67,6 +72,12 @@ export default function Done() {
     const t = setTimeout(() => setShowContent(true), 400);
     return () => clearTimeout(t);
   }, []);
+
+  // Once the persisted order backs this screen, the in-memory cart can go
+  useEffect(() => {
+    if (order) clearCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order]);
 
   const handleShareClick = async () => {
     try {
@@ -157,6 +168,14 @@ export default function Done() {
           >
             再省一次 💪
           </button>
+          {orderId && (
+            <button
+              className="w-full bg-orange-50 dark:bg-orange-500/10 text-orange-500 py-3.5 rounded-2xl font-bold text-base active:scale-95 transition-transform"
+              onClick={() => navigate(`/orders/${orderId}`)}
+            >
+              查看订单 · 去评价 📝
+            </button>
+          )}
           <button
             className="w-full border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 py-3.5 rounded-2xl font-bold text-base active:scale-95 transition-transform relative"
             onClick={handleShareClick}
