@@ -16,6 +16,8 @@ import Profile from './pages/Profile';
 import Orders from './pages/Orders';
 import OrderDetail from './pages/OrderDetail';
 import Favorites from './pages/Favorites';
+import MerchantHome from './pages/MerchantHome';
+import MerchantEdit from './pages/MerchantEdit';
 
 export default function App() {
   return (
@@ -37,6 +39,8 @@ export default function App() {
                 <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />
                 <Route path="/orders/:id" element={<RequireAuth><OrderDetail /></RequireAuth>} />
                 <Route path="/favorites" element={<RequireAuth><Favorites /></RequireAuth>} />
+                <Route path="/merchant" element={<RequireAuth><MerchantHome /></RequireAuth>} />
+                <Route path="/merchant/:id" element={<RequireAuth><MerchantEdit /></RequireAuth>} />
               </Routes>
             </CartProvider>
           </AddressProvider>

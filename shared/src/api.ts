@@ -1,4 +1,4 @@
-import type { Category, Rider } from './types';
+import type { Category, MenuItem, Rider } from './types';
 
 /** Cursor-paginated response envelope. */
 export interface Page<T> {
@@ -104,6 +104,22 @@ export interface ReviewDto {
   content: string;
   photos: string[];
   createdAt: string;
+}
+
+/** Merchant-view menu item: includes delisted state. */
+export interface MerchantMenuItemDto extends MenuItem {
+  isListed: boolean;
+}
+
+/** Merchant-view restaurant list row. */
+export interface MerchantRestaurantSummaryDto extends RestaurantSummary {
+  isActive: boolean;
+}
+
+/** Merchant-view restaurant detail: all items (listed or not) + open/closed state. */
+export interface MerchantRestaurantDto extends MerchantRestaurantSummaryDto {
+  menuCategories: string[];
+  menu: MerchantMenuItemDto[];
 }
 
 export type UploadKind = 'banner' | 'item' | 'review';
