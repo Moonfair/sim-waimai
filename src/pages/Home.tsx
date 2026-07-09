@@ -4,6 +4,7 @@ import { CATEGORIES } from '@sim-waimai/shared';
 import type { Category, RestaurantSummary } from '@sim-waimai/shared';
 import RestaurantCard from '../components/RestaurantCard';
 import { useApi } from '../hooks/useApi';
+import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
 import { useTheme } from '../context/ThemeContext';
@@ -11,6 +12,7 @@ import AddressEditSheet from '../components/AddressEditSheet';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<Category>('全部');
+  const { user } = useAuth();
   const { totalItems, totalPrice, restaurant: cartRestaurant } = useCart();
   const { addressInfo } = useAddress();
   const { theme, toggleTheme } = useTheme();
@@ -50,6 +52,13 @@ export default function Home() {
             aria-label="切换深色模式"
           >
             {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <button
+            className="w-9 h-9 flex-shrink-0 rounded-full bg-white/20 flex items-center justify-center text-base"
+            onClick={() => navigate(user ? '/profile' : '/login')}
+            aria-label="个人中心"
+          >
+            👤
           </button>
         </div>
       </div>
