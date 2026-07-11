@@ -2,16 +2,23 @@ import { desc, eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { db } from '../db/client';
 import { orders, restaurants } from '../db/schema';
+import { ttlCache } from '../lib/cache';
 import { toRestaurantSummary } from '../lib/mappers';
 import { optionalAuth } from '../middleware/auth';
 
 const LIMIT = 6;
 const RECENT_ORDERS_WINDOW = 50;
 
+// The active-restaurant set is shared across all callers and changes rarely; personalization is
+// layered on per-user below, so a short shared cache avoids scanning every restaurant per request.
+const activeRestaurants = ttlCache(30_000, () =>
+  db.select().from(restaurants).where(eq(restaurants.isActive, true)),
+);
+
 export const recommendationRoutes = new Hono().get('/', optionalAuth, async (c) => {
   const user = c.get('user');
 
-  const active = await db.select().from(restaurants).where(eq(restaurants.isActive, true));
+  const active = await activeRestaurants();
 
   // category taste profile from the user's recent orders
   const weights = new Map<string, number>();

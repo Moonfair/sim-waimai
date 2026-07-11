@@ -6,6 +6,7 @@ import { CATEGORIES, yuanToFen } from '@sim-waimai/shared';
 import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { menuItems, restaurants } from '../db/schema';
+import { imageUrlSchema } from '../lib/imageUrl';
 import { toMenuItem, toRestaurantSummary, type MenuItemRow, type RestaurantRow } from '../lib/mappers';
 import { validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
@@ -85,7 +86,7 @@ const itemBaseSchema = z.object({
   emoji: z.string().min(1, '请选择一个菜品emoji').max(8),
   menuCategory: z.string().min(1, '请选择菜单分类').max(10),
   popular: z.boolean().default(false),
-  image: z.string().max(500).optional(),
+  image: imageUrlSchema.optional(),
   optionGroups: optionGroupsSchema.optional(),
 });
 
@@ -158,7 +159,7 @@ export const merchantRoutes = new Hono()
     validateJson(
       restaurantBaseSchema.partial().extend({
         isActive: z.boolean().optional(),
-        bannerImage: z.string().max(500).nullable().optional(),
+        bannerImage: imageUrlSchema.nullable().optional(),
       }),
     ),
     async (c) => {

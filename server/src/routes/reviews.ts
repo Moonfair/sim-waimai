@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import { db } from '../db/client';
 import { orders, restaurants, reviews } from '../db/schema';
+import { imageUrlSchema } from '../lib/imageUrl';
 import { toReviewDto } from '../lib/mappers';
 import { UUID_RE, validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
@@ -10,7 +11,7 @@ import { requireAuth } from '../middleware/auth';
 const createReviewSchema = z.object({
   rating: z.number().int().min(1, '请打分').max(5),
   content: z.string().max(500, '评价内容最多500字').default(''),
-  photos: z.array(z.string().max(500)).max(9, '最多上传9张图片').default([]),
+  photos: z.array(imageUrlSchema).max(9, '最多上传9张图片').default([]),
 });
 
 /** Mounted under /orders — POST /orders/:id/reviews. */

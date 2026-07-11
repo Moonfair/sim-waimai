@@ -11,6 +11,11 @@ import { env } from '../env';
 import { signToken } from '../lib/jwt';
 import { hashPassword, verifyPassword } from '../lib/password';
 import { AUTH_COOKIE, optionalAuth, requireAuth } from '../middleware/auth';
+import { rateLimit } from '../middleware/rateLimit';
+
+// Throttle credential endpoints per IP to blunt brute-force / credential-stuffing and mass signups.
+const loginRateLimit = rateLimit({ windowMs: 5 * 60_000, max: 10, message: '尝试过于频繁，请稍后再试' });
+const registerRateLimit = rateLimit({ windowMs: 60 * 60_000, max: 20, message: '操作过于频繁，请稍后再试' });
 
 const credentialsSchema = z.object({
   username: z
@@ -50,7 +55,7 @@ async function findByUsername(username: string) {
 }
 
 export const authRoutes = new Hono()
-  .post('/register', validateCredentials, async (c) => {
+  .post('/register', registerRateLimit, validateCredentials, async (c) => {
     const { username, password } = c.req.valid('json');
     if (await findByUsername(username)) {
       return c.json({ error: '用户名已存在' }, 409);
@@ -69,7 +74,7 @@ export const authRoutes = new Hono()
     await setAuthCookie(c, row!);
     return c.json(toUserDto(row!));
   })
-  .post('/login', validateCredentials, async (c) => {
+  .post('/login', loginRateLimit, validateCredentials, async (c) => {
     const { username, password } = c.req.valid('json');
     const row = await findByUsername(username);
     if (!row || !(await verifyPassword(password, row.passwordHash))) {

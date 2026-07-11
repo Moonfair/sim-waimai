@@ -14,10 +14,16 @@ function cosClient(): COS {
   return client;
 }
 
+/** Origin that serves uploaded objects publicly, or null when COS isn't set up. */
+export function cosPublicBase(): string | null {
+  if (env.COS_PUBLIC_BASE_URL) return env.COS_PUBLIC_BASE_URL.replace(/\/$/, '');
+  if (isCosConfigured()) return `https://${env.COS_BUCKET}.cos.${env.COS_REGION}.myqcloud.com`;
+  return null;
+}
+
 export function publicUrlFor(key: string): string {
-  const base =
-    env.COS_PUBLIC_BASE_URL || `https://${env.COS_BUCKET}.cos.${env.COS_REGION}.myqcloud.com`;
-  return `${base.replace(/\/$/, '')}/${key}`;
+  const base = cosPublicBase() ?? `https://${env.COS_BUCKET}.cos.${env.COS_REGION}.myqcloud.com`;
+  return `${base}/${key}`;
 }
 
 /** Presigned PUT URL so the client uploads straight to COS (expires in 300s). */
