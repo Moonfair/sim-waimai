@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '@sim-waimai/shared';
 import type { Category, RestaurantSummary } from '@sim-waimai/shared';
 import RestaurantCard from '../components/RestaurantCard';
+import BottomNav from '../components/BottomNav';
 import { useApi } from '../hooks/useApi';
 import { assetUrl } from '../lib/assetUrl';
 import { useAuth } from '../context/AuthContext';
@@ -131,7 +132,7 @@ export default function Home() {
       </div>
 
       {/* Restaurant List */}
-      <div className="mt-3 px-4 pb-32">
+      <div className="mt-3 px-4 pb-40">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-gray-800 dark:text-gray-100 font-bold text-base">
             {activeCategory === '全部' ? '附近餐厅' : activeCategory}
@@ -158,9 +159,9 @@ export default function Home() {
         )}
       </div>
 
-      {/* Bottom cart bar if items */}
+      {/* Bottom cart bar if items — floats just above the tab bar */}
       {totalItems > 0 && cartRestaurant && (
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-6">
+        <div className="fixed bottom-16 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-2 z-40">
           <div
             className="bg-gray-900 rounded-2xl flex items-center justify-between px-4 py-3 shadow-2xl cursor-pointer"
             onClick={() => navigate('/cart')}
@@ -187,6 +188,8 @@ export default function Home() {
       {addressSheetOpen && (
         <AddressEditSheet onClose={() => setAddressSheetOpen(false)} />
       )}
+
+      <BottomNav />
     </div>
   );
 }

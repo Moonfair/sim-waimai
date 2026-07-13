@@ -59,7 +59,7 @@ export default function AuthForm({ mode }: Props) {
         </div>
       </div>
 
-      <form className="px-6 -mt-4" onSubmit={handleSubmit}>
+      <form className="px-6 mt-4" onSubmit={handleSubmit}>
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-5 space-y-3">
           <h2 className="text-gray-800 dark:text-gray-100 font-bold text-lg">{title}</h2>
           <input

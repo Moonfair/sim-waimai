@@ -92,7 +92,7 @@ export default function Done() {
   };
 
   return (
-    <div className="app-container bg-white dark:bg-gray-900 overflow-hidden relative flex flex-col min-h-screen">
+    <div className="app-container bg-white dark:bg-gray-900 overflow-x-hidden relative flex flex-col min-h-screen">
       {/* Confetti */}
       {confetti.map(c => (
         <div

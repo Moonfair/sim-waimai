@@ -281,6 +281,9 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
           >
             {submitting ? '保存中…' : '保存菜品'}
           </button>
+          <p className="text-center text-xs text-gray-400 dark:text-gray-500">
+            保存后需通过审核才对顾客可见
+          </p>
         </div>
       </div>
     </div>

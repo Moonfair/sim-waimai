@@ -10,7 +10,15 @@ export interface UserDto {
   id: string;
   username: string;
   createdAt: string;
+  /** True when the username is in the server's ADMIN_USERNAMES list. */
+  isAdmin?: boolean;
 }
+
+/** Moderation state for user-published restaurants and menu items. */
+export type ReviewStatus = 'pending' | 'approved' | 'rejected';
+
+/** AI moderation's own verdict, persisted regardless of whether it auto-resolved the item. */
+export type AiVerdict = 'approve' | 'reject' | 'uncertain';
 
 /** Restaurant list item (no menu). All money fields in yuan. */
 export interface RestaurantSummary {
@@ -109,17 +117,62 @@ export interface ReviewDto {
 /** Merchant-view menu item: includes delisted state. */
 export interface MerchantMenuItemDto extends MenuItem {
   isListed: boolean;
+  reviewStatus: ReviewStatus;
+  rejectReason?: string | null;
 }
 
 /** Merchant-view restaurant list row. */
 export interface MerchantRestaurantSummaryDto extends RestaurantSummary {
   isActive: boolean;
+  reviewStatus: ReviewStatus;
+  rejectReason?: string | null;
 }
 
 /** Merchant-view restaurant detail: all items (listed or not) + open/closed state. */
 export interface MerchantRestaurantDto extends MerchantRestaurantSummaryDto {
   menuCategories: string[];
   menu: MerchantMenuItemDto[];
+}
+
+/** Cumulative stats across all of a user's orders, for the 我的 dashboard. */
+export interface UserStatsDto {
+  totalOrders: number;
+  /** Sum of order totals in yuan. */
+  totalSaved: number;
+  totalCalories: number;
+  topRestaurant: { id: string; name: string; emoji: string; bgColor: string; orderCount: number } | null;
+  topItem: { name: string; emoji: string; quantity: number } | null;
+  biggestOrder: {
+    id: string;
+    restaurantName: string;
+    restaurantEmoji: string;
+    total: number;
+    createdAt: string;
+  } | null;
+}
+
+/** One row in the admin moderation queue: a restaurant or a single menu item. */
+export interface ModerationItemDto {
+  targetType: 'restaurant' | 'menuItem';
+  restaurantId: string;
+  restaurantName: string;
+  /** Present only for menuItem rows. */
+  itemId?: string;
+  name: string;
+  emoji: string;
+  /** Restaurant 品类 or menu item 菜单分类. */
+  category: string;
+  description?: string;
+  tags?: string[];
+  reviewStatus: ReviewStatus;
+  rejectReason?: string | null;
+  /** 'ai' or the deciding admin's username; null while pending. */
+  reviewedBy?: string | null;
+  ownerUsername?: string | null;
+  /** AI's own verdict/reasoning, kept even when it left the item pending or was later overridden. */
+  aiVerdict?: AiVerdict | null;
+  aiReason?: string | null;
+  aiConfidence?: number | null;
 }
 
 export type UploadKind = 'banner' | 'item' | 'review';

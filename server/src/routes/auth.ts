@@ -8,6 +8,7 @@ import type { UserDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { users } from '../db/schema';
 import { env } from '../env';
+import { isAdmin } from '../lib/admin';
 import { signToken } from '../lib/jwt';
 import { hashPassword, verifyPassword } from '../lib/password';
 import { AUTH_COOKIE, optionalAuth, requireAuth } from '../middleware/auth';
@@ -33,7 +34,12 @@ const validateCredentials = zValidator('json', credentialsSchema, (result, c) =>
 });
 
 function toUserDto(row: { id: string; username: string; createdAt: Date }): UserDto {
-  return { id: row.id, username: row.username, createdAt: row.createdAt.toISOString() };
+  return {
+    id: row.id,
+    username: row.username,
+    createdAt: row.createdAt.toISOString(),
+    isAdmin: isAdmin(row.username),
+  };
 }
 
 async function setAuthCookie(c: Context, user: { id: string; username: string }) {

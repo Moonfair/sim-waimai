@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { AddressProvider } from './context/AddressContext';
 import { ThemeProvider } from './context/ThemeContext';
+import RequireAdmin from './components/RequireAdmin';
 import RequireAuth from './components/RequireAuth';
 import Home from './pages/Home';
 import Restaurant from './pages/Restaurant';
@@ -18,6 +19,7 @@ import OrderDetail from './pages/OrderDetail';
 import Favorites from './pages/Favorites';
 import MerchantHome from './pages/MerchantHome';
 import MerchantEdit from './pages/MerchantEdit';
+import AdminReview from './pages/AdminReview';
 
 export default function App() {
   return (
@@ -35,12 +37,13 @@ export default function App() {
                 <Route path="/done" element={<Done />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />
                 <Route path="/orders/:id" element={<RequireAuth><OrderDetail /></RequireAuth>} />
                 <Route path="/favorites" element={<RequireAuth><Favorites /></RequireAuth>} />
                 <Route path="/merchant" element={<RequireAuth><MerchantHome /></RequireAuth>} />
                 <Route path="/merchant/:id" element={<RequireAuth><MerchantEdit /></RequireAuth>} />
+                <Route path="/admin/review" element={<RequireAdmin><AdminReview /></RequireAdmin>} />
               </Routes>
             </CartProvider>
           </AddressProvider>

@@ -3,6 +3,7 @@ import { bodyLimit } from 'hono/body-limit';
 import { HTTPException } from 'hono/http-exception';
 import { timeout } from 'hono/timeout';
 import { rateLimit } from './middleware/rateLimit';
+import { adminRoutes } from './routes/admin';
 import { authRoutes } from './routes/auth';
 import { favoriteRoutes } from './routes/favorites';
 import { merchantRoutes } from './routes/merchant';
@@ -46,6 +47,7 @@ export function createApp() {
   app.route('/merchant', merchantRoutes);
   app.route('/uploads', uploadRoutes);
   app.route('/recommendations', recommendationRoutes);
+  app.route('/admin', adminRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
 

@@ -2,7 +2,7 @@ import { and, desc, eq, inArray, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { fenToYuan, yuanToFen } from '@sim-waimai/shared';
-import type { OrderItemSnapshot, SelectedOptionSnapshot } from '@sim-waimai/shared';
+import type { OrderItemSnapshot, SelectedOptionSnapshot, UserStatsDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { menuItems, orders, restaurants, reviews } from '../db/schema';
 import { decodeCursor, encodeCursor } from '../lib/cursor';
@@ -84,7 +84,7 @@ export const orderRoutes = new Hono()
       .select()
       .from(restaurants)
       .where(eq(restaurants.id, body.restaurantId));
-    if (!restaurant || !restaurant.isActive) {
+    if (!restaurant || !restaurant.isActive || restaurant.reviewStatus !== 'approved') {
       return c.json({ error: '餐厅不存在或已休息' }, 400);
     }
 
@@ -97,6 +97,7 @@ export const orderRoutes = new Hono()
           eq(menuItems.restaurantId, restaurant.id),
           inArray(menuItems.id, ids),
           eq(menuItems.isListed, true),
+          eq(menuItems.reviewStatus, 'approved'),
         ),
       );
     const itemsById = new Map(rows.map((r) => [r.id, r]));
@@ -189,6 +190,95 @@ export const orderRoutes = new Hono()
       items: page.map((r) => toOrderSummary(r.order, r.reviewId !== null)),
       nextCursor: hasMore && last ? encodeCursor(last.order.createdAt, last.order.id) : null,
     });
+  })
+  .get('/stats', requireAuth, async (c) => {
+    const user = c.get('user');
+
+    const [totals] = await db
+      .select({
+        count: sql<number>`count(*)::int`,
+        savedFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::int`,
+        calories: sql<number>`COALESCE(sum(${orders.totalCalories}), 0)::int`,
+      })
+      .from(orders)
+      .where(eq(orders.userId, user.sub));
+
+    if (!totals || totals.count === 0) {
+      const empty: UserStatsDto = {
+        totalOrders: 0,
+        totalSaved: 0,
+        totalCalories: 0,
+        topRestaurant: null,
+        topItem: null,
+        biggestOrder: null,
+      };
+      return c.json(empty);
+    }
+
+    const [restaurantResult, itemResult, biggestOrderRows] = await Promise.all([
+      db.execute<{
+        restaurant_id: string;
+        order_count: number;
+        snapshot: { name: string; emoji: string; bgColor: string };
+      }>(sql`
+        SELECT restaurant_id,
+               count(*)::int AS order_count,
+               (array_agg(restaurant_snapshot ORDER BY created_at DESC))[1] AS snapshot
+        FROM orders
+        WHERE user_id = ${user.sub}
+        GROUP BY restaurant_id
+        ORDER BY order_count DESC, max(created_at) DESC
+        LIMIT 1
+      `),
+      db.execute<{ name: string; emoji: string; quantity: number }>(sql`
+        SELECT item ->> 'name' AS name,
+               item ->> 'emoji' AS emoji,
+               sum((item ->> 'quantity')::int)::int AS quantity
+        FROM orders, jsonb_array_elements(items) AS item
+        WHERE user_id = ${user.sub}
+        GROUP BY item ->> 'name', item ->> 'emoji'
+        ORDER BY quantity DESC
+        LIMIT 1
+      `),
+      db
+        .select()
+        .from(orders)
+        .where(eq(orders.userId, user.sub))
+        .orderBy(desc(orders.totalFen))
+        .limit(1),
+    ]);
+
+    const restaurantRow = restaurantResult.rows[0];
+    const itemRow = itemResult.rows[0];
+    const biggestOrderRow = biggestOrderRows[0];
+
+    const stats: UserStatsDto = {
+      totalOrders: totals.count,
+      totalSaved: fenToYuan(totals.savedFen),
+      totalCalories: totals.calories,
+      topRestaurant: restaurantRow
+        ? {
+            id: restaurantRow.restaurant_id,
+            name: restaurantRow.snapshot.name,
+            emoji: restaurantRow.snapshot.emoji,
+            bgColor: restaurantRow.snapshot.bgColor,
+            orderCount: restaurantRow.order_count,
+          }
+        : null,
+      topItem: itemRow
+        ? { name: itemRow.name, emoji: itemRow.emoji, quantity: itemRow.quantity }
+        : null,
+      biggestOrder: biggestOrderRow
+        ? {
+            id: biggestOrderRow.id,
+            restaurantName: biggestOrderRow.restaurantSnapshot.name,
+            restaurantEmoji: biggestOrderRow.restaurantSnapshot.emoji,
+            total: fenToYuan(biggestOrderRow.totalFen),
+            createdAt: biggestOrderRow.createdAt.toISOString(),
+          }
+        : null,
+    };
+    return c.json(stats);
   })
   .get('/:id', requireAuth, async (c) => {
     const user = c.get('user');

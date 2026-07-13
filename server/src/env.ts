@@ -18,6 +18,9 @@ const envSchema = z.object({
   COS_BUCKET: z.string().optional(),
   COS_REGION: z.string().optional(),
   COS_PUBLIC_BASE_URL: z.string().optional(),
+  /** 留空则新发布内容全部进入人工审核队列。 */
+  ANTHROPIC_API_KEY: z.string().optional(),
+  MODERATION_MODEL: z.string().default('claude-haiku-4-5-20251001'),
 });
 
 export const env = envSchema.parse(process.env);

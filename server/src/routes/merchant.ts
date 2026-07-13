@@ -8,6 +8,7 @@ import { db } from '../db/client';
 import { menuItems, restaurants } from '../db/schema';
 import { imageUrlSchema } from '../lib/imageUrl';
 import { toMenuItem, toRestaurantSummary, type MenuItemRow, type RestaurantRow } from '../lib/mappers';
+import { queueReview, type ModerationContent } from '../lib/moderation';
 import { validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
 import type { AuthPayload } from '../lib/jwt';
@@ -78,6 +79,15 @@ const optionGroupsSchema = z
     }
   });
 
+// zod 的 .partial() 不会移除 .default()：缺席字段仍被注入默认值，PATCH 会把
+// tags/description 等悄悄重置并误触发重审。PATCH 专用 schema 把带默认值的字段
+// 覆盖为纯 optional。
+const restaurantPatchSchema = restaurantBaseSchema.partial().extend({
+  tags: z.array(z.string().min(1).max(10)).max(5).optional(),
+  isActive: z.boolean().optional(),
+  bannerImage: imageUrlSchema.nullable().optional(),
+});
+
 const itemBaseSchema = z.object({
   name: z.string().min(1, '请填写菜品名称').max(30),
   description: z.string().max(100).default(''),
@@ -90,16 +100,68 @@ const itemBaseSchema = z.object({
   optionGroups: optionGroupsSchema.optional(),
 });
 
+const itemPatchSchema = itemBaseSchema.partial().extend({
+  description: z.string().max(100).optional(),
+  calories: z.number().int().min(0).max(10000).optional(),
+  popular: z.boolean().optional(),
+  isListed: z.boolean().optional(),
+});
+
 function toMerchantMenuItem(row: MenuItemRow): MerchantMenuItemDto {
-  return { ...toMenuItem(row), isListed: row.isListed };
+  return {
+    ...toMenuItem(row),
+    isListed: row.isListed,
+    reviewStatus: row.reviewStatus,
+    rejectReason: row.rejectReason,
+  };
 }
 
 function toMerchantRestaurant(row: RestaurantRow, items: MenuItemRow[]): MerchantRestaurantDto {
   return {
     ...toRestaurantSummary(row),
     isActive: row.isActive,
+    reviewStatus: row.reviewStatus,
+    rejectReason: row.rejectReason,
     menuCategories: row.menuCategories,
     menu: items.map(toMerchantMenuItem),
+  };
+}
+
+/** 对外展示字段：命中任一即重新进入待审核（营业状态/价格等不触发）。 */
+const RESTAURANT_MODERATED_FIELDS = ['name', 'category', 'emoji', 'tags', 'menuCategories', 'bannerImage'] as const;
+const ITEM_MODERATED_FIELDS = ['name', 'description', 'emoji', 'menuCategory', 'image', 'optionGroups'] as const;
+
+/** 重审时连同旧的审核结论一起清空（含 AI 建议，避免展示编辑前已过时的判断）。 */
+const RESET_REVIEW = {
+  reviewStatus: 'pending' as const,
+  rejectReason: null,
+  reviewedAt: null,
+  reviewedBy: null,
+  aiVerdict: null,
+  aiReason: null,
+  aiConfidence: null,
+};
+
+function restaurantContent(row: RestaurantRow, imageChanged: boolean): ModerationContent {
+  return {
+    targetType: 'restaurant',
+    name: row.name,
+    category: row.category,
+    tags: [...row.tags, ...row.menuCategories],
+    emoji: row.emoji,
+    imageChanged,
+  };
+}
+
+function itemContent(row: MenuItemRow, imageChanged: boolean): ModerationContent {
+  return {
+    targetType: 'menuItem',
+    name: row.name,
+    category: row.menuCategory,
+    description: row.description || undefined,
+    optionText: row.optionGroups?.flatMap((g) => [g.name, ...g.options.map((o) => o.name)]),
+    emoji: row.emoji,
+    imageChanged,
   };
 }
 
@@ -119,7 +181,14 @@ export const merchantRoutes = new Hono()
       .from(restaurants)
       .where(eq(restaurants.ownerId, user.sub))
       .orderBy(desc(restaurants.createdAt));
-    return c.json(rows.map((r) => ({ ...toRestaurantSummary(r), isActive: r.isActive })));
+    return c.json(
+      rows.map((r) => ({
+        ...toRestaurantSummary(r),
+        isActive: r.isActive,
+        reviewStatus: r.reviewStatus,
+        rejectReason: r.rejectReason,
+      })),
+    );
   })
   .post('/restaurants', requireAuth, validateJson(restaurantBaseSchema), async (c) => {
     const user = c.get('user');
@@ -139,8 +208,10 @@ export const merchantRoutes = new Hono()
         bgColor: body.bgColor,
         tags: body.tags,
         menuCategories: body.menuCategories,
+        reviewStatus: 'pending',
       })
       .returning();
+    queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!, false));
     return c.json(toMerchantRestaurant(row!, []));
   })
   .get('/restaurants/:id', requireAuth, async (c) => {
@@ -156,12 +227,7 @@ export const merchantRoutes = new Hono()
   .patch(
     '/restaurants/:id',
     requireAuth,
-    validateJson(
-      restaurantBaseSchema.partial().extend({
-        isActive: z.boolean().optional(),
-        bannerImage: imageUrlSchema.nullable().optional(),
-      }),
-    ),
+    validateJson(restaurantPatchSchema),
     async (c) => {
       const owned = await ownedRestaurant(c.get('user'), c.req.param('id'));
       if ('error' in owned) return c.json({ error: owned.error }, owned.status);
@@ -179,12 +245,25 @@ export const merchantRoutes = new Hono()
       if (body.isActive !== undefined) patch.isActive = body.isActive;
       if (body.bannerImage !== undefined) patch.bannerImage = body.bannerImage;
       if (Object.keys(patch).length === 0) return c.json({ error: '没有需要更新的内容' }, 400);
+      const needsReview = RESTAURANT_MODERATED_FIELDS.some((f) => body[f] !== undefined);
+      if (needsReview) Object.assign(patch, RESET_REVIEW);
       const [row] = await db
         .update(restaurants)
         .set(patch)
         .where(eq(restaurants.id, owned.row.id))
         .returning();
-      return c.json({ ...toRestaurantSummary(row!), isActive: row!.isActive });
+      if (needsReview) {
+        queueReview(
+          { table: 'restaurants', restaurantId: row!.id },
+          restaurantContent(row!, body.bannerImage !== undefined),
+        );
+      }
+      return c.json({
+        ...toRestaurantSummary(row!),
+        isActive: row!.isActive,
+        reviewStatus: row!.reviewStatus,
+        rejectReason: row!.rejectReason,
+      });
     },
   )
   .post('/restaurants/:id/items', requireAuth, validateJson(itemBaseSchema), async (c) => {
@@ -213,14 +292,19 @@ export const merchantRoutes = new Hono()
         image: body.image ?? null,
         optionGroups: body.optionGroups?.length ? body.optionGroups : null,
         sortOrder: maxSort + 1,
+        reviewStatus: 'pending',
       })
       .returning();
+    queueReview(
+      { table: 'menuItems', restaurantId: owned.row.id, itemId: row!.id },
+      itemContent(row!, body.image !== undefined),
+    );
     return c.json(toMerchantMenuItem(row!));
   })
   .patch(
     '/restaurants/:id/items/:itemId',
     requireAuth,
-    validateJson(itemBaseSchema.partial().extend({ isListed: z.boolean().optional() })),
+    validateJson(itemPatchSchema),
     async (c) => {
       const owned = await ownedRestaurant(c.get('user'), c.req.param('id'));
       if ('error' in owned) return c.json({ error: owned.error }, owned.status);
@@ -242,6 +326,8 @@ export const merchantRoutes = new Hono()
       }
       if (body.isListed !== undefined) patch.isListed = body.isListed;
       if (Object.keys(patch).length === 0) return c.json({ error: '没有需要更新的内容' }, 400);
+      const needsReview = ITEM_MODERATED_FIELDS.some((f) => body[f] !== undefined);
+      if (needsReview) Object.assign(patch, RESET_REVIEW);
       const [row] = await db
         .update(menuItems)
         .set(patch)
@@ -250,6 +336,12 @@ export const merchantRoutes = new Hono()
         )
         .returning();
       if (!row) return c.json({ error: '菜品不存在' }, 404);
+      if (needsReview) {
+        queueReview(
+          { table: 'menuItems', restaurantId: owned.row.id, itemId: row.id },
+          itemContent(row, body.image !== undefined),
+        );
+      }
       return c.json(toMerchantMenuItem(row));
     },
   )

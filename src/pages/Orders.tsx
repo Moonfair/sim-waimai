@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { OrderSummaryDto, Page } from '@sim-waimai/shared';
+import BottomNav from '../components/BottomNav';
 import { api } from '../lib/api';
 
 const STATUS_LABEL: Record<OrderSummaryDto['status'], { text: string; className: string }> = {
@@ -57,7 +58,7 @@ export default function Orders() {
         </div>
       </div>
 
-      <div className="px-4 pb-10">
+      <div className="px-4 pb-24">
         {loading ? (
           <div className="space-y-3 mt-4">
             {Array.from({ length: 5 }, (_, i) => (
@@ -148,6 +149,8 @@ export default function Orders() {
           </>
         )}
       </div>
+
+      <BottomNav />
     </div>
   );
 }

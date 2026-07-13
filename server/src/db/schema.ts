@@ -16,9 +16,11 @@ import {
 } from 'drizzle-orm/pg-core';
 import type {
   AddressSnapshot,
+  AiVerdict,
   MenuItemOptionGroup,
   OrderItemSnapshot,
   OrderStatus,
+  ReviewStatus,
   Rider,
 } from '@sim-waimai/shared';
 
@@ -57,12 +59,25 @@ export const restaurants = pgTable(
     menuCategories: jsonb('menu_categories').$type<string[]>().notNull().default([]),
     bannerImage: text('banner_image'),
     isActive: boolean('is_active').notNull().default(true),
+    /** Default 'approved' so seeded/backfilled rows pass; merchant routes stamp 'pending' explicitly. */
+    reviewStatus: text('review_status').$type<ReviewStatus>().notNull().default('approved'),
+    rejectReason: text('reject_reason'),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    /** 'ai' or the deciding admin's username. */
+    reviewedBy: text('reviewed_by'),
+    /** AI's own verdict/reasoning, persisted even when it left the item pending (uncertain). */
+    aiVerdict: text('ai_verdict').$type<AiVerdict>(),
+    aiReason: text('ai_reason'),
+    aiConfidence: real('ai_confidence'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
+    check('restaurants_review_status_check', sql`${t.reviewStatus} IN ('pending', 'approved', 'rejected')`),
+    check('restaurants_ai_verdict_check', sql`${t.aiVerdict} IN ('approve', 'reject', 'uncertain')`),
     index('restaurants_category_idx').on(t.category),
     index('restaurants_owner_idx').on(t.ownerId),
     index('restaurants_rating_idx').on(t.rating.desc(), t.monthlyOrders.desc()),
+    index('restaurants_review_status_idx').on(t.reviewStatus),
   ],
 );
 
@@ -85,9 +100,24 @@ export const menuItems = pgTable(
     optionGroups: jsonb('option_groups').$type<MenuItemOptionGroup[]>(),
     /** Soft delete: delisted items stay for order-history integrity. */
     isListed: boolean('is_listed').notNull().default(true),
+    /** Default 'approved' so seeded/backfilled rows pass; merchant routes stamp 'pending' explicitly. */
+    reviewStatus: text('review_status').$type<ReviewStatus>().notNull().default('approved'),
+    rejectReason: text('reject_reason'),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    /** 'ai' or the deciding admin's username. */
+    reviewedBy: text('reviewed_by'),
+    /** AI's own verdict/reasoning, persisted even when it left the item pending (uncertain). */
+    aiVerdict: text('ai_verdict').$type<AiVerdict>(),
+    aiReason: text('ai_reason'),
+    aiConfidence: real('ai_confidence'),
     sortOrder: integer('sort_order').notNull().default(0),
   },
-  (t) => [primaryKey({ columns: [t.restaurantId, t.id] })],
+  (t) => [
+    primaryKey({ columns: [t.restaurantId, t.id] }),
+    check('menu_items_review_status_check', sql`${t.reviewStatus} IN ('pending', 'approved', 'rejected')`),
+    check('menu_items_ai_verdict_check', sql`${t.aiVerdict} IN ('approve', 'reject', 'uncertain')`),
+    index('menu_items_review_status_idx').on(t.reviewStatus),
+  ],
 );
 
 export const orders = pgTable(

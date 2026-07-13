@@ -8,7 +8,7 @@ import type {
 } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
-import { restaurants, users } from '../db/schema';
+import { menuItems, restaurants, users } from '../db/schema';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -30,6 +30,12 @@ async function register(cred: { username: string; password: string }) {
     cookie: (res.headers.get('set-cookie') ?? '').split(';')[0],
     id: ((await res.json()) as { id: string }).id,
   };
+}
+
+/** 新建店铺/商品默认待审核；本文件只测商家管理能力，直接在 DB 里批准以保住公开可见性断言。 */
+async function approveAll(id: string) {
+  await db.update(restaurants).set({ reviewStatus: 'approved' }).where(eq(restaurants.id, id));
+  await db.update(menuItems).set({ reviewStatus: 'approved' }).where(eq(menuItems.restaurantId, id));
 }
 
 function req(path: string, cookie: string, init?: { method?: string; body?: unknown }) {
@@ -82,6 +88,7 @@ describe('merchant registration', () => {
     const mine = (await (await req('/api/merchant/restaurants', ownerCookie)).json()) as RestaurantSummary[];
     expect(mine.some((r) => r.id === shopId)).toBe(true);
 
+    await approveAll(shopId);
     const publicList = (await (await app.request('/api/restaurants')).json()) as RestaurantSummary[];
     expect(publicList.some((r) => r.id === shopId)).toBe(true);
   });
@@ -147,6 +154,7 @@ describe('menu item management', () => {
     itemId = item.id;
     expect(item.price).toBe(32.5);
 
+    await approveAll(shopId);
     const detail = (await (await app.request(`/api/restaurants/${shopId}`)).json()) as Restaurant;
     expect(detail.menu.some((m) => m.id === itemId)).toBe(true);
   });

@@ -1,4 +1,4 @@
-import { desc, eq } from 'drizzle-orm';
+import { and, desc, eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { db } from '../db/client';
 import { orders, restaurants } from '../db/schema';
@@ -11,8 +11,12 @@ const RECENT_ORDERS_WINDOW = 50;
 
 // The active-restaurant set is shared across all callers and changes rarely; personalization is
 // layered on per-user below, so a short shared cache avoids scanning every restaurant per request.
+// 30s TTL means moderation flips can lag here by up to 30s — acceptable for recommendations.
 const activeRestaurants = ttlCache(30_000, () =>
-  db.select().from(restaurants).where(eq(restaurants.isActive, true)),
+  db
+    .select()
+    .from(restaurants)
+    .where(and(eq(restaurants.isActive, true), eq(restaurants.reviewStatus, 'approved'))),
 );
 
 export const recommendationRoutes = new Hono().get('/', optionalAuth, async (c) => {

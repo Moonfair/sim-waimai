@@ -8,11 +8,12 @@ import { requireAuth } from '../middleware/auth';
 export const favoriteRoutes = new Hono()
   .get('/', requireAuth, async (c) => {
     const user = c.get('user');
+    // 过滤未过审的店：避免收藏列表里出现点进去 404 的店铺（打烊的仍显示）。
     const rows = await db
       .select({ restaurant: restaurants })
       .from(favorites)
       .innerJoin(restaurants, eq(restaurants.id, favorites.restaurantId))
-      .where(eq(favorites.userId, user.sub))
+      .where(and(eq(favorites.userId, user.sub), eq(restaurants.reviewStatus, 'approved')))
       .orderBy(desc(favorites.createdAt));
     return c.json(rows.map((r) => toRestaurantSummary(r.restaurant, true)));
   })

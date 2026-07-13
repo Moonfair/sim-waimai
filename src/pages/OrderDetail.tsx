@@ -59,7 +59,7 @@ export default function OrderDetail() {
         </div>
       </div>
 
-      <div className="px-4 -mt-6 space-y-3">
+      <div className="px-4 mt-4 space-y-3">
         {/* Items */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm">
           <div
@@ -171,6 +171,13 @@ export default function OrderDetail() {
             {order.completedAt && <p>完成时间：{new Date(order.completedAt).toLocaleString('zh-CN')}</p>}
           </div>
         </div>
+
+        <button
+          className="w-full bg-orange-500 text-white py-3.5 rounded-2xl font-bold text-sm active:scale-95 transition-transform"
+          onClick={() => navigate('/')}
+        >
+          返回首页
+        </button>
       </div>
     </div>
   );

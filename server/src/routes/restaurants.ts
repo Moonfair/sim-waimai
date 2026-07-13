@@ -19,7 +19,7 @@ async function favoriteIdSet(userId: string | undefined, restaurantIds: string[]
 export const restaurantRoutes = new Hono()
   .get('/', optionalAuth, async (c) => {
     const category = c.req.query('category');
-    const filters = [eq(restaurants.isActive, true)];
+    const filters = [eq(restaurants.isActive, true), eq(restaurants.reviewStatus, 'approved')];
     if (category && category !== '全部') {
       filters.push(eq(restaurants.category, category));
     }
@@ -68,13 +68,19 @@ export const restaurantRoutes = new Hono()
   .get('/:id', optionalAuth, async (c) => {
     const id = c.req.param('id');
     const [row] = await db.select().from(restaurants).where(eq(restaurants.id, id));
-    if (!row || !row.isActive) {
+    if (!row || !row.isActive || row.reviewStatus !== 'approved') {
       return c.json({ error: '餐厅不存在' }, 404);
     }
     const items = await db
       .select()
       .from(menuItems)
-      .where(and(eq(menuItems.restaurantId, id), eq(menuItems.isListed, true)))
+      .where(
+        and(
+          eq(menuItems.restaurantId, id),
+          eq(menuItems.isListed, true),
+          eq(menuItems.reviewStatus, 'approved'),
+        ),
+      )
       .orderBy(asc(menuItems.sortOrder));
 
     const restaurant = toRestaurant(row, items);

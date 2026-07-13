@@ -99,12 +99,22 @@ export default function MerchantHome() {
                         </span>
                         <span
                           className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
-                            shop.isActive
-                              ? 'text-green-600 bg-green-50 dark:bg-green-500/10'
-                              : 'text-gray-400 bg-gray-100 dark:bg-gray-700'
+                            shop.reviewStatus === 'pending'
+                              ? 'text-amber-600 bg-amber-50 dark:bg-amber-500/10'
+                              : shop.reviewStatus === 'rejected'
+                                ? 'text-red-500 bg-red-50 dark:bg-red-500/10'
+                                : shop.isActive
+                                  ? 'text-green-600 bg-green-50 dark:bg-green-500/10'
+                                  : 'text-gray-400 bg-gray-100 dark:bg-gray-700'
                           }`}
                         >
-                          {shop.isActive ? '营业中' : '已打烊'}
+                          {shop.reviewStatus === 'pending'
+                            ? '审核中'
+                            : shop.reviewStatus === 'rejected'
+                              ? '已驳回'
+                              : shop.isActive
+                                ? '营业中'
+                                : '已打烊'}
                         </span>
                       </div>
                       <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5">

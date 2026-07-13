@@ -87,7 +87,7 @@ export default function MerchantEdit() {
         menuCategories: info.menuCategories.split(/[,，]/).map((s) => s.trim()).filter(Boolean),
         tags: info.tags.split(/[,，]/).map((s) => s.trim()).filter(Boolean),
       });
-      setInfoMsg('已保存 ✓');
+      setInfoMsg('已保存，等待审核 ✓');
       reload();
     } catch (err) {
       setInfoMsg(err instanceof Error ? err.message : '保存失败');
@@ -121,7 +121,7 @@ export default function MerchantEdit() {
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 px-4 pt-10 pb-4 border-b border-gray-100 dark:border-gray-700">
         <div className="flex items-center gap-3">
-          <button className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300" onClick={() => navigate('/merchant')}>
+          <button className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300" onClick={() => navigate(-1)}>
             ←
           </button>
           <div className="flex-1 min-w-0">
@@ -129,6 +129,17 @@ export default function MerchantEdit() {
               {shop.emoji} {shop.name}
             </h1>
           </div>
+          {shop.reviewStatus !== 'approved' && (
+            <span
+              className={`text-xs px-2 py-1.5 rounded-full font-medium flex-shrink-0 ${
+                shop.reviewStatus === 'pending'
+                  ? 'text-amber-600 bg-amber-50 dark:bg-amber-500/10'
+                  : 'text-red-500 bg-red-50 dark:bg-red-500/10'
+              }`}
+            >
+              {shop.reviewStatus === 'pending' ? '审核中' : '已驳回'}
+            </span>
+          )}
           <button
             className={`text-xs px-3 py-1.5 rounded-full font-medium ${
               shop.isActive
@@ -148,6 +159,18 @@ export default function MerchantEdit() {
           查看顾客视角 ›
         </button>
       </div>
+
+      {/* Review status banner */}
+      {shop.reviewStatus === 'pending' && (
+        <div className="mx-4 mt-4 bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs rounded-2xl px-4 py-3">
+          ⏳ 店铺信息审核中，通过后将对顾客可见
+        </div>
+      )}
+      {shop.reviewStatus === 'rejected' && (
+        <div className="mx-4 mt-4 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-xs rounded-2xl px-4 py-3">
+          ❌ 审核未通过{shop.rejectReason ? `：${shop.rejectReason}` : ''}，修改店铺信息后将自动重新提交审核
+        </div>
+      )}
 
       <div className="px-4 space-y-3 mt-4">
         {/* Banner */}
@@ -249,11 +272,20 @@ export default function MerchantEdit() {
                       {!item.isListed && (
                         <span className="text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded-full flex-shrink-0">已下架</span>
                       )}
+                      {item.reviewStatus === 'pending' && (
+                        <span className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-500/10 px-1.5 py-0.5 rounded-full flex-shrink-0">审核中</span>
+                      )}
+                      {item.reviewStatus === 'rejected' && (
+                        <span className="text-xs text-red-500 bg-red-50 dark:bg-red-500/10 px-1.5 py-0.5 rounded-full flex-shrink-0">已驳回</span>
+                      )}
                     </div>
                     <p className="text-xs text-gray-400 dark:text-gray-500">
                       ¥{item.price} · {item.menuCategory}
                       {item.optionGroups?.length ? ` · ${item.optionGroups.length}个规格组` : ''}
                     </p>
+                    {item.reviewStatus === 'rejected' && item.rejectReason && (
+                      <p className="text-xs text-red-500 mt-0.5">驳回原因：{item.rejectReason}</p>
+                    )}
                   </div>
                   <button
                     className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1"

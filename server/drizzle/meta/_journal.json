@@ -15,6 +15,20 @@
       "when": 1783592617710,
       "tag": "0001_neat_gabe_jones",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783744773774,
+      "tag": "0002_clammy_robin_chapel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783933714231,
+      "tag": "0003_silky_pepper_potts",
+      "breakpoints": true
     }
   ]
 }
