@@ -31,7 +31,8 @@ export interface MenuItem {
   emoji: string;
   menuCategory: string;
   popular?: boolean;
-  /** Path relative to public/, absolute COS URL, or /api/uploads/local/... dev-fallback URL */
+  /** Tencent COS object key (resolved via VITE_COS_BASE_URL), absolute COS URL, or
+   *  /api/uploads/local/... dev-fallback URL. */
   image?: string;
   /** Prompt used to generate `image`, kept for inspection/regeneration */
   imagePrompt?: string;
@@ -56,7 +57,8 @@ export interface Restaurant {
   tags: string[];
   menuCategories: string[];
   menu: MenuItem[];
-  /** Path relative to public/, absolute COS URL, or /api/uploads/local/... dev-fallback URL */
+  /** Tencent COS object key (resolved via VITE_COS_BASE_URL), absolute COS URL, or
+   *  /api/uploads/local/... dev-fallback URL. */
   bannerImage?: string;
   /** Prompt used to generate `bannerImage` */
   bannerImagePrompt?: string;

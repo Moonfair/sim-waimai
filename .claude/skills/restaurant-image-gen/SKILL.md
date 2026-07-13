@@ -12,7 +12,7 @@ description: |
 
 ## 前置条件
 
-- 运行 `node tools/generate-image.mjs --dry-run ...` 不需要任何配置；真正联网生成图片前，确认仓库根目录存在 `.env`（复制 `.env.example`）并填好 `ARK_API_KEY`、`ARK_IMAGE_MODEL`。如果没有配置，先提醒用户去 Volcengine Ark 控制台获取，不要用假 key 硬跑。
+- 运行 `node tools/generate-image.mjs --dry-run ...` 不需要任何配置；真正联网生成图片前，确认仓库根目录存在 `.env`（复制 `.env.example`）并填好 `ARK_API_KEY`、`ARK_IMAGE_MODEL`（生成图片）以及 `COS_SECRET_ID`/`COS_SECRET_KEY`/`COS_BUCKET`/`COS_REGION`（上传到腾讯云 COS，`backfill-images.mjs`/`upload-to-cos.mjs` 都需要）。如果没有配置，先提醒用户去对应控制台获取，不要用假 key/密钥硬跑。
 - 先读 `references/data-conventions.md`（数据字段/id前缀/价格区间约定）、`references/visual-style-banner.md`、`references/visual-style-menu-item.md`（prompt 组装规范），这三份是本 skill 生成内容的依据，不要凭空发挥。
 
 ## 两种模式
@@ -53,12 +53,15 @@ node tools/backfill-images.mjs <id>
 ```
 试点/小范围验证时可以先限制数量：`node tools/backfill-images.mjs <id> --limit 5`；只想补 banner 或只想补商品图分别用 `--banner-only` / `--items-only`。跑完看它打印的 Summary（成功/跳过/失败张数，失败的会列出商品名和原因）。
 
-需要单独生成/调试某一张图（比如某张失败了想改改 prompt 重试）时，才用 `tools/generate-image.mjs` 手动跑一张：
+需要单独生成/调试某一张图（比如某张失败了想改改 prompt 重试）时，才用 `tools/generate-image.mjs` 手动跑一张，写到本地临时文件，再用 `tools/upload-to-cos.mjs` 推到 COS（图片现在都存 COS，不再落 `public/`）：
 ```
-node tools/generate-image.mjs --kind banner --prompt "<bannerImagePrompt>" --out public/restaurants/<id>/banner.jpg
-node tools/generate-image.mjs --kind item --prompt "<该商品 imagePrompt>" --out public/restaurants/<id>/items/<itemId>.jpg
+node tools/generate-image.mjs --kind banner --prompt "<bannerImagePrompt>" --out /tmp/banner.jpg
+node tools/upload-to-cos.mjs --file /tmp/banner.jpg --key restaurants/<id>/banner.jpg
+
+node tools/generate-image.mjs --kind item --prompt "<该商品 imagePrompt>" --out /tmp/item.jpg
+node tools/upload-to-cos.mjs --file /tmp/item.jpg --key restaurants/<id>/items/<itemId>.jpg
 ```
-退出码 `0` 成功（把打印出的路径，`public/` 之后的部分、**不带开头斜杠**，手动写回 JSON 的 `bannerImage`/`image` 字段）；`2` 是这一张审核不过/生成失败，可以调整 prompt 后重试；`1`/`3` 是致命错误（鉴权/模型配置/网络问题），需要先排查。
+`generate-image.mjs` 退出码 `0` 成功、`2` 是这一张审核不过/生成失败（可调整 prompt 重试）、`1`/`3` 是致命错误（鉴权/模型配置/网络问题，需先排查）。上传成功后把 `--key` 的值（原样，不带开头斜杠）手动写回 JSON 的 `bannerImage`/`image` 字段。
 
 ### 步骤 5 — 收尾校验
 
@@ -83,6 +86,9 @@ node tools/generate-image.mjs --kind item --prompt "<该商品 imagePrompt>" --o
 
 | 脚本 | 用途 | 调用方式 |
 |---|---|---|
-| `tools/backfill-images.mjs` | 批量生成一个商家缺失的 banner + 商品图，自动跳过已有的、边生成边回填 JSON，可中断续跑 | `node tools/backfill-images.mjs <id> [--limit N] [--banner-only] [--items-only]` |
-| `tools/generate-image.mjs` | 生成单张图片，用于手动调试/重试单张 | `node tools/generate-image.mjs --kind banner\|item --prompt "..." --out public/restaurants/<id>/...` （加 `--dry-run` 可不联网预览请求体） |
-| `tools/ark-client.mjs` | 上面两个脚本共用的请求核心逻辑（.env 读取、调用接口、错误分类），不直接运行 | — |
+| `tools/backfill-images.mjs` | 批量生成一个商家缺失的 banner + 商品图，直接上传到 COS、自动跳过已有的、边生成边回填 JSON，可中断续跑 | `node tools/backfill-images.mjs <id> [--limit N] [--banner-only] [--items-only]` |
+| `tools/generate-image.mjs` | 生成单张图片到本地文件，用于手动调试/重试单张 | `node tools/generate-image.mjs --kind banner\|item --prompt "..." --out <本地路径>` （加 `--dry-run` 可不联网预览请求体） |
+| `tools/upload-to-cos.mjs` | 把本地文件上传到 COS，配合 `generate-image.mjs` 的手动重试流程 | `node tools/upload-to-cos.mjs --file <本地路径> --key restaurants/<id>/...` |
+| `tools/migrate-images-to-cos.mjs` | 一次性把 `public/restaurants/**` 迁移到 COS（历史数据用），日常新增图片不需要跑它 | `node tools/migrate-images-to-cos.mjs [--dry-run]` |
+| `tools/ark-client.mjs` | 图片生成脚本共用的请求核心逻辑（.env 读取、调用接口、错误分类），不直接运行 | — |
+| `tools/cos-client.mjs` | 图片上传脚本共用的 COS 客户端（鉴权、拼 URL、上传对象），不直接运行 | — |
