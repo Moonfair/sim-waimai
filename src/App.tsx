@@ -20,6 +20,7 @@ import Favorites from './pages/Favorites';
 import MerchantHome from './pages/MerchantHome';
 import MerchantEdit from './pages/MerchantEdit';
 import AdminReview from './pages/AdminReview';
+import AdminReviewDetail from './pages/AdminReviewDetail';
 
 export default function App() {
   return (
@@ -44,6 +45,22 @@ export default function App() {
                 <Route path="/merchant" element={<RequireAuth><MerchantHome /></RequireAuth>} />
                 <Route path="/merchant/:id" element={<RequireAuth><MerchantEdit /></RequireAuth>} />
                 <Route path="/admin/review" element={<RequireAdmin><AdminReview /></RequireAdmin>} />
+                <Route
+                  path="/admin/review/restaurant/:id"
+                  element={
+                    <RequireAdmin>
+                      <AdminReviewDetail targetType="restaurant" />
+                    </RequireAdmin>
+                  }
+                />
+                <Route
+                  path="/admin/review/item/:id/:itemId"
+                  element={
+                    <RequireAdmin>
+                      <AdminReviewDetail targetType="menuItem" />
+                    </RequireAdmin>
+                  }
+                />
               </Routes>
             </CartProvider>
           </AddressProvider>
