@@ -18,9 +18,10 @@
 | 后端运行方式 | Docker 容器，`node:20-alpine` | `sharp` 在 lockfile 里已有 `linuxmusl-x64` 预编译二进制，alpine 无需装编译工具链，镜像小 |
 | 后端启动命令 | 容器内直接 `tsx src/index.ts`（不额外编译到 JS） | `server/tsconfig.json` 本来就是 `noEmit: true`；`start` 脚本已经是这个模式，沿用即改动最小 |
 | 前端构建方式 | 不进容器，CVM 本机 `npm ci && npm run build` 产出 `dist/` | 静态文件没有运行时依赖，没必要为它单独维护镜像 |
-| 反向代理 | Nginx **直接装在 CVM 系统上**（非容器化） | 证书管理更省心：腾讯云证书直接放系统目录、`systemctl reload` 即可；只代理一个后端服务，容器化收益不大 |
-| TLS 证书 | 腾讯云签发证书（手动/腾讯云证书管理下载） | 用户已有域名，选择用腾讯云证书而非 Let's Encrypt |
-| 部署机制（首版） | 手动 SSH 上去拉代码、构建、`docker compose up -d` | 先跑通，CI/CD 自动化留作后续迭代，避免一次性引入过多变量 |
+| 反向代理 | Nginx **直接装在 CVM 系统上**（非容器化） | 证书管理更省心：`systemctl reload` 即可；只代理一个后端服务，容器化收益不大 |
+| 域名 | `sim-waimai.moonfair.cn`，A 记录已指向 `106.55.231.31` | 用户已在腾讯云 DNS 配好，无需额外操作 |
+| TLS 证书 | `certbot --nginx` 自动申请 Let's Encrypt | 全程可在 SSH 会话里跑完，无需去控制台下载文件再手动上传；90 天自动续期（certbot 自带 systemd timer），比腾讯云证书手动下载更适合"计划里要实际执行完"的目标 |
+| 部署机制（首版） | 手动 SSH 上去拉代码、构建、`docker compose up -d`；实施阶段直接用 SSH 别名 `txy`（`root@106.55.231.31`）执行，不是甩手册给用户 | 先跑通，CI/CD 自动化留作后续迭代，避免一次性引入过多变量 |
 | CORS / Cookie SameSite | **不改动**（继续 `SameSite=Lax`，无需 CORS 中间件） | 同域部署后请求都是同站请求，跨站问题不存在 |
 
 ## 组件与目录
@@ -53,12 +54,13 @@ deploy/
 
 ### `deploy/nginx.conf`
 
-单个 `server` 块，同时做两件事：
+初始版本只监听 80 端口（`server_name sim-waimai.moonfair.cn`）：
 
 - `location /` → `root` 指向 CVM 上 checkout 目录的 `dist/`；`try_files $uri /index.html` 做 SPA fallback
 - `location /api/` → `proxy_pass http://127.0.0.1:3001`，带 `X-Forwarded-For`/`X-Forwarded-Proto`
 - `client_max_body_size 6m`（上传接口限制 5MB，留出余量）
-- `listen 443 ssl`，证书路径指向腾讯云下载的 `.crt`/`.key`；`listen 80` 做 `301` 跳转到 `https`
+
+443/HTTPS 部分不手写——跑 `certbot --nginx -d sim-waimai.moonfair.cn` 时由 certbot 自动在这份配置基础上追加 `listen 443 ssl` server 块、证书路径，并把 80 端口改写为跳转到 HTTPS。仓库里的 `deploy/nginx.conf` 保留 certbot 改写前的版本，作为可重复部署的起点。
 
 ### `deploy/DEPLOY.md`
 
@@ -70,8 +72,9 @@ deploy/
 4. `docker compose -f deploy/docker-compose.yml up -d`
 5. 一次性初始化：`docker compose exec server npm -w server run migrate`、`docker compose exec server npm -w server run seed`
 6. CVM 本机 `npm ci && npm run build` 产出 `dist/`
-7. 装系统 Nginx（`yum install nginx`），落地 `deploy/nginx.conf`（替换域名/证书路径占位符），配腾讯云证书，`systemctl enable --now nginx`
-8. 冒烟：浏览器访问域名，走一遍注册/登录/下单/上传图片
+7. 装系统 Nginx（`yum install nginx`），落地 `deploy/nginx.conf`，`systemctl enable --now nginx`
+8. 装 certbot（`yum install certbot python3-certbot-nginx`），跑 `certbot --nginx -d sim-waimai.moonfair.cn` 自动签发证书并改写 Nginx 配置加上 HTTPS
+9. 冒烟：浏览器访问 `https://sim-waimai.moonfair.cn`，走一遍注册/登录/下单/上传图片
 
 ## 不做的事（本次范围外）
 
@@ -83,7 +86,9 @@ deploy/
 
 ## 验收
 
+实施计划里的部署步骤不是只交付文档，而是要实际登录目标机执行并验证：CVM 已可通过 SSH 别名 `txy`（`root@106.55.231.31`）连接，实施阶段直接 `ssh txy` 上去按 `deploy/DEPLOY.md` 跑一遍，而不是把操作手册甩给用户自行执行。
+
 - `docker compose -f deploy/docker-compose.yml up -d` 后 `db`/`server` 均健康，`curl 127.0.0.1:3001/api/health` 返回 `{ok:true}`
-- Nginx 启动后，`https://<域名>/` 能加载前端首页，`https://<域名>/api/health` 能拿到同样的健康检查响应
+- certbot 签发成功后，`https://sim-waimai.moonfair.cn/` 能加载前端首页，`https://sim-waimai.moonfair.cn/api/health` 能拿到同样的健康检查响应，HTTP 访问会 301 到 HTTPS
 - 浏览器完整走一遍：注册 → 登录（cookie 正确写入且后续请求带上）→ 下单 → 上传图片（校验落到 COS 而非本地回退）→ 刷新页面后登录态仍保持
 - `.github/workflows/deploy.yml` 已删除，仓库里不再有指向 GH Pages 的发布流程
