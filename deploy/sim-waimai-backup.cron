@@ -1,0 +1,1 @@
+0 3 * * * root /srv/sim-waimai/deploy/backup-db.sh >> /var/log/sim-waimai-backup.log 2>&1
