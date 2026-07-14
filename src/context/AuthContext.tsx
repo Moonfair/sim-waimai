@@ -8,7 +8,12 @@ interface AuthContextType {
   /** True while the initial /auth/me bootstrap is in flight. */
   loading: boolean;
   login: (username: string, password: string) => Promise<void>;
-  register: (username: string, password: string) => Promise<void>;
+  register: (
+    username: string,
+    password: string,
+    captchaToken: string,
+    captchaAnswer: number,
+  ) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -30,8 +35,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(await api.post<UserDto>('/auth/login', { username, password }));
   };
 
-  const register = async (username: string, password: string) => {
-    setUser(await api.post<UserDto>('/auth/register', { username, password }));
+  const register = async (
+    username: string,
+    password: string,
+    captchaToken: string,
+    captchaAnswer: number,
+  ) => {
+    setUser(
+      await api.post<UserDto>('/auth/register', {
+        username,
+        password,
+        captchaToken,
+        captchaAnswer,
+      }),
+    );
   };
 
   const logout = async () => {

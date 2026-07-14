@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { SubmitEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import type { CaptchaChallenge } from '@sim-waimai/shared';
 import { useAuth } from '../context/AuthContext';
+import { api } from '../lib/api';
 
 interface Props {
   mode: 'login' | 'register';
@@ -15,11 +17,25 @@ export default function AuthForm({ mode }: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [captcha, setCaptcha] = useState<CaptchaChallenge | null>(null);
+  const [captchaAnswer, setCaptchaAnswer] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const isLogin = mode === 'login';
   const title = isLogin ? '登录' : '注册';
+
+  const refreshCaptcha = () => {
+    setCaptchaAnswer('');
+    api
+      .get<CaptchaChallenge>('/auth/captcha')
+      .then(setCaptcha)
+      .catch(() => setCaptcha(null));
+  };
+
+  useEffect(() => {
+    if (!isLogin) refreshCaptcha();
+  }, [isLogin]);
 
   const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
@@ -30,10 +46,16 @@ export default function AuthForm({ mode }: Props) {
     setError(null);
     setSubmitting(true);
     try {
-      await (isLogin ? login : register)(username.trim(), password);
+      if (isLogin) {
+        await login(username.trim(), password);
+      } else {
+        if (!captcha) throw new Error('验证码加载失败，请重试');
+        await register(username.trim(), password, captcha.token, Number(captchaAnswer));
+      }
       navigate(redirect, { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : '操作失败，请稍后重试');
+      if (!isLogin) refreshCaptcha();
     } finally {
       setSubmitting(false);
     }
@@ -87,10 +109,26 @@ export default function AuthForm({ mode }: Props) {
               onChange={(e) => setConfirm(e.target.value)}
             />
           )}
+          {!isLogin && (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                验证：{captcha ? `${captcha.question} =` : '加载中…'}
+              </span>
+              <input
+                className={inputClass}
+                inputMode="numeric"
+                placeholder="请输入结果"
+                value={captchaAnswer}
+                onChange={(e) => setCaptchaAnswer(e.target.value)}
+              />
+            </div>
+          )}
           {error && <p className="text-red-500 text-xs px-1">{error}</p>}
           <button
             type="submit"
-            disabled={submitting || !username || !password}
+            disabled={
+              submitting || !username || !password || (!isLogin && (!captcha || !captchaAnswer))
+            }
             className="w-full bg-orange-500 text-white py-3 rounded-xl font-bold text-sm disabled:opacity-50"
           >
             {submitting ? `${title}中…` : title}
