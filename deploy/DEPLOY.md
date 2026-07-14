@@ -24,7 +24,17 @@ ssh txy 'systemctl enable --now docker'
 
 ```bash
 ssh txy 'git clone https://github.com/Moonfair/sim-waimai.git /srv/sim-waimai || true'
-# clone 到 github.com 经常超时，失败就重跑上面这条
+# clone 到 github.com 经常超时/中途卡死，重跑几次通常能成；如果反复卡住不报错（用
+# `ps aux | grep "git clone"` + 间隔几秒对比 `du -sh /srv/sim-waimai/.git` 看是否
+# 还在真的收数据），大概率是 github.com 本身当时连不通（`curl -m 10 https://github.com`
+# 验证），但 codeload.github.com 往往还通，改用 tarball 更可靠：
+#   ssh txy 'rm -rf /srv/sim-waimai && curl -sSL -m 60 \
+#     https://codeload.github.com/Moonfair/sim-waimai/tar.gz/refs/heads/main -o /tmp/repo.tar.gz \
+#     && mkdir -p /srv/sim-waimai \
+#     && tar -xzf /tmp/repo.tar.gz -C /srv/sim-waimai --strip-components=1 \
+#     && rm -f /tmp/repo.tar.gz'
+# 注意这样拿到的 /srv/sim-waimai 没有 .git，以后更新代码要重新下载+解压覆盖，
+# 不能 git pull。
 
 cd /Users/moonfair/Projects/sim-waimai
 set -a; source .env; set +a
@@ -45,7 +55,12 @@ VITE_COS_BASE_URL=${VITE_COS_BASE_URL}
 VITE_RUM_ID=${VITE_RUM_ID}
 ADMIN_USERNAMES=${ADMIN_USERNAMES}
 EOF
-ssh txy 'chmod 600 /srv/sim-waimai/.env'   # 默认 umask 会把新建文件设成 644，必须收紧
+# db 容器另起了 seccomp:unconfined（见下），不能让它也拿到 JWT_SECRET/COS_* 这些
+# app 密钥，所以单独给它一份只有 Postgres 需要的最小 env 文件：
+ssh txy "cat > /srv/sim-waimai/deploy/.env.db" <<EOF
+POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+EOF
+ssh txy 'chmod 600 /srv/sim-waimai/.env /srv/sim-waimai/deploy/.env.db'   # 默认 umask 是 644，必须收紧
 
 ssh txy 'cd /srv/sim-waimai && docker compose -f deploy/docker-compose.yml up -d --build'
 ssh txy 'curl -s http://127.0.0.1:3001/api/health'   # 期望 {"ok":true}
@@ -91,6 +106,8 @@ curl -s https://sim-waimai.moonfair.cn/ | head -5
 ## 故障排查
 
 - `ssh` 报 `Connection closed by ... port 22`：连接层抖动，重跑同一条命令。
-- `git clone` 卡住/超时：重跑，GitHub 连接不稳定，通常 2-3 次内会成功。
+- `git clone` 卡住/超时：先重跑几次；如果长时间卡在同一个 `.git` 大小不再增长，说明是
+  `github.com` 本身当时连不通（而不是普通的偶发超时），改用第 2 步里的
+  `codeload.github.com` tarball 方式绕过。
 - certbot 报 `Timeout during connect (likely firewall problem)`：去云厂商控制台检查这台机器绑定的安全组有没有放行入站 TCP 80/443。
 - Nginx 返回 500，错误日志里有 `stat() ... Permission denied`：说明部署目录挂在了 `/root` 之类 Nginx worker 用户读不到的地方，必须放在 `/srv` 或其他世界可穿透的路径下。
