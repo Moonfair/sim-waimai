@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sim-waimai-db
+    restart: unless-stopped
+    # CentOS 7 的 3.10 内核在 Docker 默认 seccomp profile 下会让 Postgres 的 WAL 预分配
+    # (posix_fallocate) 报 "Operation not permitted" 直接崩溃退出。db 只在 compose 内部
+    # 网络暴露给 server，不对宿主机/公网开端口，放宽 seccomp 的影响面很小。
+    security_opt:
+      - seccomp:unconfined
+    env_file: ../.env
+    environment:
+      POSTGRES_DB: sim_waimai
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  server:
+    build:
+      context: ../
+      dockerfile: server/Dockerfile
+    container_name: sim-waimai-server
+    restart: unless-stopped
+    env_file: ../.env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3001:3001"
+    volumes:
+      - uploads:/app/server/uploads
+
+volumes:
+  pgdata:
+  uploads:
