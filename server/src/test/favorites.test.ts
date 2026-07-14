@@ -4,6 +4,7 @@ import type { Restaurant, RestaurantSummary } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { favorites, users } from '../db/schema';
+import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const cred = { username: `t_fav_${Date.now().toString(36)}`, password: 'secret123' };
@@ -11,11 +12,7 @@ let cookie = '';
 let userId = '';
 
 beforeAll(async () => {
-  const res = await app.request('/api/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(cred),
-  });
+  const res = await registerTestUser(app, cred);
   cookie = (res.headers.get('set-cookie') ?? '').split(';')[0];
   userId = ((await res.json()) as { id: string }).id;
 });

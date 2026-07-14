@@ -4,6 +4,7 @@ import type { UserStatsDto } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { orders, users } from '../db/schema';
+import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -16,11 +17,7 @@ function req(path: string) {
 }
 
 beforeAll(async () => {
-  const res = await app.request('/api/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(cred),
-  });
+  const res = await registerTestUser(app, cred);
   cookie = (res.headers.get('set-cookie') ?? '').split(';')[0];
   userId = ((await res.json()) as { id: string }).id;
 });
@@ -147,11 +144,7 @@ describe('GET /api/orders/stats', () => {
 
   it("does not leak another user's stats", async () => {
     const other = { username: `t_st_o_${stamp}`, password: 'secret123' };
-    const res = await app.request('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(other),
-    });
+    const res = await registerTestUser(app, other);
     const otherCookie = (res.headers.get('set-cookie') ?? '').split(';')[0];
     const otherId = ((await res.json()) as { id: string }).id;
 

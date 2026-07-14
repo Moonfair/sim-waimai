@@ -12,6 +12,7 @@ import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { menuItems, restaurants, users } from '../db/schema';
 import { __awaitReviews, __setAiReviewer } from '../lib/moderation';
+import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -27,11 +28,7 @@ let savedAdmins: string | undefined;
 let savedApiKey: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
-  const res = await app.request('/api/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(cred),
-  });
+  const res = await registerTestUser(app, cred);
   return {
     cookie: (res.headers.get('set-cookie') ?? '').split(';')[0],
     user: (await res.json()) as UserDto,

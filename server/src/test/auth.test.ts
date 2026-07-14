@@ -3,6 +3,7 @@ import { eq } from 'drizzle-orm';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { users } from '../db/schema';
+import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const username = `t_auth_${Date.now().toString(36)}`;
@@ -31,7 +32,7 @@ function cookieOf(res: Response): string {
 
 describe('auth round-trip', () => {
   it('register sets cookie and returns the user', async () => {
-    const res = await postJson('/api/auth/register', { username, password });
+    const res = await registerTestUser(app, { username, password });
     expect(res.status).toBe(200);
     const body = (await res.json()) as { username: string };
     expect(body.username).toBe(username);
@@ -41,10 +42,7 @@ describe('auth round-trip', () => {
   });
 
   it('rejects duplicate username with 409 (case-insensitive)', async () => {
-    const res = await postJson('/api/auth/register', {
-      username: username.toUpperCase(),
-      password,
-    });
+    const res = await registerTestUser(app, { username: username.toUpperCase(), password });
     expect(res.status).toBe(409);
     expect(((await res.json()) as { error: string }).error).toBe('用户名已存在');
   });

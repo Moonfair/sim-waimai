@@ -9,6 +9,7 @@ import { db } from '../db/client';
 import { users } from '../db/schema';
 import { env } from '../env';
 import { isAdmin } from '../lib/admin';
+import { issueCaptcha, verifyCaptcha } from '../lib/captcha';
 import { signToken } from '../lib/jwt';
 import { hashPassword, verifyPassword } from '../lib/password';
 import { AUTH_COOKIE, optionalAuth, requireAuth } from '../middleware/auth';
@@ -27,7 +28,18 @@ const credentialsSchema = z.object({
   password: z.string().min(6, '密码至少6位').max(72, '密码过长'),
 });
 
+const registerSchema = credentialsSchema.extend({
+  captchaToken: z.string().min(1, '请完成验证'),
+  captchaAnswer: z.coerce.number(),
+});
+
 const validateCredentials = zValidator('json', credentialsSchema, (result, c) => {
+  if (!result.success) {
+    return c.json({ error: result.error.issues[0]?.message ?? '参数错误' }, 400);
+  }
+});
+
+const validateRegister = zValidator('json', registerSchema, (result, c) => {
   if (!result.success) {
     return c.json({ error: result.error.issues[0]?.message ?? '参数错误' }, 400);
   }
@@ -61,8 +73,12 @@ async function findByUsername(username: string) {
 }
 
 export const authRoutes = new Hono()
-  .post('/register', registerRateLimit, validateCredentials, async (c) => {
-    const { username, password } = c.req.valid('json');
+  .get('/captcha', async (c) => c.json(await issueCaptcha()))
+  .post('/register', registerRateLimit, validateRegister, async (c) => {
+    const { username, password, captchaToken, captchaAnswer } = c.req.valid('json');
+    if (!(await verifyCaptcha(captchaToken, captchaAnswer))) {
+      return c.json({ error: '验证码错误或已过期' }, 400);
+    }
     if (await findByUsername(username)) {
       return c.json({ error: '用户名已存在' }, 409);
     }

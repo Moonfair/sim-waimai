@@ -211,3 +211,9 @@ export interface PresignResponse {
   publicUrl: string;
   headers: Record<string, string>;
 }
+
+/** Stateless arithmetic captcha challenge returned by GET /auth/captcha. */
+export interface CaptchaChallenge {
+  token: string;
+  question: string;
+}

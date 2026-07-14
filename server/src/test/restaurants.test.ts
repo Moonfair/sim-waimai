@@ -4,6 +4,7 @@ import type { MerchantRestaurantDto, Restaurant, RestaurantSummary, UserDto } fr
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { restaurants, users } from '../db/schema';
+import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -16,11 +17,7 @@ async function getJson<T>(path: string, cookie?: string): Promise<{ status: numb
 }
 
 async function registerAndCreatePendingShop(username: string) {
-  const registerRes = await app.request('/api/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password: 'secret123' }),
-  });
+  const registerRes = await registerTestUser(app, { username, password: 'secret123' });
   const cookie = (registerRes.headers.get('set-cookie') ?? '').split(';')[0];
   const user = (await registerRes.json()) as UserDto;
 

@@ -4,6 +4,7 @@ import type { OrderDto, OrderSummaryDto, Page, Restaurant } from '@sim-waimai/sh
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { orders, users } from '../db/schema';
+import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -17,11 +18,7 @@ let heytea: Restaurant;
 const address = { recipientName: '测试', phone: '13800000000', address: '北京市朝阳区测试路1号' };
 
 async function registerAndLogin(cred: { username: string; password: string }) {
-  const res = await app.request('/api/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(cred),
-  });
+  const res = await registerTestUser(app, cred);
   expect(res.status).toBe(200);
   const cookie = (res.headers.get('set-cookie') ?? '').split(';')[0];
   const body = (await res.json()) as { id: string };
