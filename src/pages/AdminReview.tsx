@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import type { AiVerdict, ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 
 const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
   { value: 'pending', label: '待审核' },
@@ -10,22 +11,16 @@ const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
   { value: 'rejected', label: '已驳回' },
 ];
 
-const STATUS_BADGE: Record<ReviewStatus, { label: string; className: string }> = {
-  pending: { label: '待审核', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
-  approved: { label: '已通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
-  rejected: { label: '已驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
-};
-
-const AI_VERDICT_BADGE: Record<AiVerdict, { label: string; className: string }> = {
-  approve: { label: 'AI建议：通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
-  reject: { label: 'AI建议：驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
-  uncertain: { label: 'AI存疑，待人工判断', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
-};
-
 function reviewPath(item: ModerationItemDto): string {
   return item.targetType === 'restaurant'
     ? `/admin/restaurants/${item.restaurantId}/review`
     : `/admin/restaurants/${item.restaurantId}/items/${item.itemId}/review`;
+}
+
+function detailPath(item: ModerationItemDto): string {
+  return item.targetType === 'restaurant'
+    ? `/admin/review/restaurant/${item.restaurantId}`
+    : `/admin/review/item/${item.restaurantId}/${item.itemId}`;
 }
 
 function itemKey(item: ModerationItemDto): string {
@@ -34,14 +29,16 @@ function itemKey(item: ModerationItemDto): string {
 
 export default function AdminReview() {
   const navigate = useNavigate();
-  const [status, setStatus] = useState<ReviewStatus>('pending');
+  const location = useLocation();
+  const [status, setStatus] = useState<ReviewStatus>(
+    () => (location.state as { status?: ReviewStatus } | null)?.status ?? 'pending',
+  );
   const { data: items, loading, error, reload } = useApi<ModerationItemDto[]>(
     `/admin/moderation?status=${status}`,
   );
   const [submittingKey, setSubmittingKey] = useState<string | null>(null);
   const [rejectingKey, setRejectingKey] = useState<string | null>(null);
   const [rejectReason, setRejectReason] = useState('');
-  const [expandedKey, setExpandedKey] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
   const flash = (text: string) => {
@@ -158,20 +155,20 @@ export default function AdminReview() {
                         <p className="text-red-500 text-xs mt-1">驳回原因：{item.rejectReason}</p>
                       )}
                       {item.aiVerdict && (
-                        <button
-                          type="button"
+                        <span
                           className={`mt-1.5 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${AI_VERDICT_BADGE[item.aiVerdict].className}`}
-                          onClick={() => setExpandedKey(expandedKey === key ? null : key)}
                         >
                           🤖 {AI_VERDICT_BADGE[item.aiVerdict].label}
                           {item.aiConfidence != null && ` · ${Math.round(item.aiConfidence * 100)}%`}
-                        </button>
+                        </span>
                       )}
-                      {expandedKey === key && item.aiVerdict && (
-                        <p className="text-gray-500 dark:text-gray-400 text-xs mt-1.5 bg-gray-50 dark:bg-gray-900 rounded-lg p-2">
-                          {item.aiReason}
-                        </p>
-                      )}
+                      <button
+                        type="button"
+                        className="block mt-1.5 text-xs text-orange-500"
+                        onClick={() => navigate(detailPath(item), { state: { status } })}
+                      >
+                        查看详情 ›
+                      </button>
                     </div>
                   </div>
 
