@@ -1,9 +1,15 @@
 import { and, asc, desc, eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
-import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
+import type {
+  ModerationItemDetailDto,
+  ModerationItemDto,
+  ModerationRestaurantDetailDto,
+  ReviewStatus,
+} from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { menuItems, restaurants, users } from '../db/schema';
+import { toMenuItem, toRestaurant } from '../lib/mappers';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 
@@ -95,6 +101,57 @@ export const adminRoutes = new Hono()
       ...itemRows.map((r) => toItemModerationItem(r.item, r.restaurantName, r.ownerUsername)),
     ];
     return c.json(list);
+  })
+  .get('/restaurants/:id', requireAdmin, async (c) => {
+    const [row] = await db.select().from(restaurants).where(eq(restaurants.id, c.req.param('id')));
+    if (!row) return c.json({ error: '店铺不存在' }, 404);
+    const [owner] = row.ownerId
+      ? await db.select({ username: users.username }).from(users).where(eq(users.id, row.ownerId))
+      : [];
+    const detail: ModerationRestaurantDetailDto = {
+      targetType: 'restaurant',
+      restaurant: toRestaurant(row, []),
+      reviewStatus: row.reviewStatus,
+      rejectReason: row.rejectReason,
+      reviewedAt: row.reviewedAt?.toISOString() ?? null,
+      reviewedBy: row.reviewedBy,
+      ownerUsername: owner?.username ?? null,
+      aiVerdict: row.aiVerdict,
+      aiReason: row.aiReason,
+      aiConfidence: row.aiConfidence,
+    };
+    return c.json(detail);
+  })
+  .get('/restaurants/:id/items/:itemId', requireAdmin, async (c) => {
+    const restaurantId = c.req.param('id');
+    const itemId = c.req.param('itemId');
+    const [row] = await db
+      .select()
+      .from(menuItems)
+      .where(and(eq(menuItems.restaurantId, restaurantId), eq(menuItems.id, itemId)));
+    if (!row) return c.json({ error: '菜品不存在' }, 404);
+    const [shop] = await db
+      .select({ name: restaurants.name, ownerId: restaurants.ownerId })
+      .from(restaurants)
+      .where(eq(restaurants.id, restaurantId));
+    const [owner] = shop?.ownerId
+      ? await db.select({ username: users.username }).from(users).where(eq(users.id, shop.ownerId))
+      : [];
+    const detail: ModerationItemDetailDto = {
+      targetType: 'menuItem',
+      restaurantId,
+      restaurantName: shop?.name ?? '',
+      item: toMenuItem(row),
+      reviewStatus: row.reviewStatus,
+      rejectReason: row.rejectReason,
+      reviewedAt: row.reviewedAt?.toISOString() ?? null,
+      reviewedBy: row.reviewedBy,
+      ownerUsername: owner?.username ?? null,
+      aiVerdict: row.aiVerdict,
+      aiReason: row.aiReason,
+      aiConfidence: row.aiConfidence,
+    };
+    return c.json(detail);
   })
   .post('/restaurants/:id/review', requireAdmin, validateJson(reviewSchema), async (c) => {
     const admin = c.get('user');

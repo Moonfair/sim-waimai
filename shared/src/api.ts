@@ -1,4 +1,4 @@
-import type { Category, MenuItem, Rider } from './types';
+import type { Category, MenuItem, Restaurant, Rider } from './types';
 
 /** Cursor-paginated response envelope. */
 export interface Page<T> {
@@ -173,6 +173,34 @@ export interface ModerationItemDto {
   aiVerdict?: AiVerdict | null;
   aiReason?: string | null;
   aiConfidence?: number | null;
+}
+
+/** Shared review/AI metadata for both detail DTOs below. */
+interface ModerationReviewMeta {
+  reviewStatus: ReviewStatus;
+  rejectReason?: string | null;
+  /** ISO timestamp of the last review decision, null while still pending. */
+  reviewedAt?: string | null;
+  /** 'ai' or the deciding admin's username; null while pending. */
+  reviewedBy?: string | null;
+  ownerUsername?: string | null;
+  aiVerdict?: AiVerdict | null;
+  aiReason?: string | null;
+  aiConfidence?: number | null;
+}
+
+/** Full detail for a single shop under review (admin review detail page). */
+export interface ModerationRestaurantDetailDto extends ModerationReviewMeta {
+  targetType: 'restaurant';
+  restaurant: Restaurant;
+}
+
+/** Full detail for a single menu item under review (admin review detail page). */
+export interface ModerationItemDetailDto extends ModerationReviewMeta {
+  targetType: 'menuItem';
+  restaurantId: string;
+  restaurantName: string;
+  item: MenuItem;
 }
 
 export type UploadKind = 'banner' | 'item' | 'review';

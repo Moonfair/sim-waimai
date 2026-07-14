@@ -362,3 +362,98 @@ describe('AI 审核路径（注入 reviewer）', () => {
     expect(row!.reviewedBy).toBe('ai');
   });
 });
+
+describe('审核详情接口（GET /api/admin/restaurants/:id[/items/:itemId]）', () => {
+  it('returns full submitted content for a shop, admin-only, 404 for unknown id', async () => {
+    const shop = await createShop(`详情店_${stamp}`);
+
+    expect((await app.request(`/api/admin/restaurants/${shop.id}`)).status).toBe(401);
+    expect((await req(`/api/admin/restaurants/${shop.id}`, randoCookie)).status).toBe(403);
+
+    const res = await req(`/api/admin/restaurants/${shop.id}`, adminCookie);
+    expect(res.status).toBe(200);
+    const detail = (await res.json()) as {
+      targetType: string;
+      restaurant: { deliveryFee: number; bgColor: string; category: string };
+      reviewStatus: string;
+      ownerUsername: string | null;
+      aiVerdict: string | null;
+    };
+    expect(detail.targetType).toBe('restaurant');
+    expect(detail.restaurant.deliveryFee).toBe(3);
+    expect(detail.restaurant.bgColor).toBe('#336699');
+    expect(detail.restaurant.category).toBe('中式快餐');
+    expect(detail.reviewStatus).toBe('pending');
+    expect(detail.ownerUsername).toBe(owner.username);
+    expect(detail.aiVerdict).toBeNull();
+
+    expect((await req('/api/admin/restaurants/does-not-exist', adminCookie)).status).toBe(404);
+  });
+
+  it('returns full submitted content for a menu item, including option groups, 404 for unknown item', async () => {
+    const shop = await createShop(`详情商品店_${stamp}`);
+    const itemRes = await req(`/api/merchant/restaurants/${shop.id}/items`, ownerCookie, {
+      method: 'POST',
+      body: {
+        name: '详情规格菜',
+        price: 18,
+        emoji: '🍜',
+        menuCategory: '招牌',
+        optionGroups: [
+          {
+            id: 'size',
+            name: '规格',
+            selectionType: 'single',
+            required: true,
+            options: [
+              { id: 'small', name: '小份', priceDelta: 0 },
+              { id: 'large', name: '大份', priceDelta: 5 },
+            ],
+            defaultOptionIds: ['small'],
+          },
+        ],
+      },
+    });
+    const item = (await itemRes.json()) as MerchantMenuItemDto;
+
+    const res = await req(`/api/admin/restaurants/${shop.id}/items/${item.id}`, adminCookie);
+    expect(res.status).toBe(200);
+    const detail = (await res.json()) as {
+      targetType: string;
+      restaurantName: string;
+      item: {
+        price: number;
+        calories: number;
+        menuCategory: string;
+        optionGroups?: { name: string; options: { name: string; priceDelta: number }[] }[];
+      };
+    };
+    expect(detail.targetType).toBe('menuItem');
+    expect(detail.restaurantName).toBe(shop.name);
+    expect(detail.item.price).toBe(18);
+    expect(detail.item.menuCategory).toBe('招牌');
+    expect(detail.item.optionGroups?.[0]?.name).toBe('规格');
+    expect(detail.item.optionGroups?.[0]?.options.map((o) => o.name)).toEqual(['小份', '大份']);
+    expect(detail.item.optionGroups?.[0]?.options[1]?.priceDelta).toBe(5);
+
+    expect(
+      (await req(`/api/admin/restaurants/${shop.id}/items/does-not-exist`, adminCookie)).status,
+    ).toBe(404);
+  });
+
+  it('detail reflects the same AI verdict/reason/confidence the list endpoint shows', async () => {
+    __setAiReviewer(async () => ({ verdict: 'uncertain', reason: '详情一致性测试', confidence: 0.55 }));
+    const shop = await createShop(`详情AI店_${stamp}`);
+    await __awaitReviews();
+
+    const res = await req(`/api/admin/restaurants/${shop.id}`, adminCookie);
+    const detail = (await res.json()) as {
+      aiVerdict: string | null;
+      aiReason: string | null;
+      aiConfidence: number | null;
+    };
+    expect(detail.aiVerdict).toBe('uncertain');
+    expect(detail.aiReason).toBe('详情一致性测试');
+    expect(detail.aiConfidence).toBe(0.55);
+  });
+});
