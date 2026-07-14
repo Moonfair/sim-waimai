@@ -68,23 +68,22 @@ export const restaurantRoutes = new Hono()
   .get('/:id', optionalAuth, async (c) => {
     const id = c.req.param('id');
     const [row] = await db.select().from(restaurants).where(eq(restaurants.id, id));
-    if (!row || !row.isActive || row.reviewStatus !== 'approved') {
+    const user = c.get('user');
+    // Owner can preview their own shop before it's approved (e.g. "查看顾客视角" from the
+    // merchant dashboard); everyone else only ever sees approved, active shops.
+    const isOwner = !!user && row?.ownerId === user.sub;
+    if (!row || !row.isActive || (row.reviewStatus !== 'approved' && !isOwner)) {
       return c.json({ error: '餐厅不存在' }, 404);
     }
+    const itemFilters = [eq(menuItems.restaurantId, id), eq(menuItems.isListed, true)];
+    if (!isOwner) itemFilters.push(eq(menuItems.reviewStatus, 'approved'));
     const items = await db
       .select()
       .from(menuItems)
-      .where(
-        and(
-          eq(menuItems.restaurantId, id),
-          eq(menuItems.isListed, true),
-          eq(menuItems.reviewStatus, 'approved'),
-        ),
-      )
+      .where(and(...itemFilters))
       .orderBy(asc(menuItems.sortOrder));
 
     const restaurant = toRestaurant(row, items);
-    const user = c.get('user');
     if (user) {
       const favs = await favoriteIdSet(user.sub, [id]);
       restaurant.isFavorite = favs.has(id);

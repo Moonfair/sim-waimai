@@ -1,15 +1,54 @@
 import { describe, expect, it, afterAll } from 'vitest';
-import type { Restaurant, RestaurantSummary } from '@sim-waimai/shared';
+import { eq } from 'drizzle-orm';
+import type { MerchantRestaurantDto, Restaurant, RestaurantSummary, UserDto } from '@sim-waimai/shared';
 import { createApp } from '../app';
-import { pool } from '../db/client';
+import { db, pool } from '../db/client';
+import { restaurants, users } from '../db/schema';
 
 const app = createApp();
+const stamp = Date.now().toString(36);
 
 afterAll(() => pool.end());
 
-async function getJson<T>(path: string): Promise<{ status: number; body: T }> {
-  const raw = await app.request(path);
+async function getJson<T>(path: string, cookie?: string): Promise<{ status: number; body: T }> {
+  const raw = await app.request(path, { headers: cookie ? { Cookie: cookie } : {} });
   return { status: raw.status, body: (await raw.json()) as T };
+}
+
+async function registerAndCreatePendingShop(username: string) {
+  const registerRes = await app.request('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password: 'secret123' }),
+  });
+  const cookie = (registerRes.headers.get('set-cookie') ?? '').split(';')[0];
+  const user = (await registerRes.json()) as UserDto;
+
+  const shopRes = await app.request('/api/merchant/restaurants', {
+    method: 'POST',
+    headers: { Cookie: cookie, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: `预览测试店_${stamp}`,
+      category: '中式快餐',
+      emoji: '🍱',
+      bgColor: '#336699',
+      deliveryFee: 3,
+      minOrder: 15,
+      deliveryTime: 30,
+      tags: ['测试'],
+      menuCategories: ['招牌'],
+    }),
+  });
+  const shop = (await shopRes.json()) as MerchantRestaurantDto;
+
+  const itemRes = await app.request(`/api/merchant/restaurants/${shop.id}/items`, {
+    method: 'POST',
+    headers: { Cookie: cookie, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: '预览测试菜', price: 18, emoji: '🍜', menuCategory: '招牌' }),
+  });
+  await itemRes.json();
+
+  return { cookie, userId: user.id, shop };
 }
 
 describe('GET /api/restaurants', () => {
@@ -50,5 +89,25 @@ describe('GET /api/restaurants/:id', () => {
   it('404s for unknown id', async () => {
     const { status } = await getJson('/api/restaurants/does-not-exist');
     expect(status).toBe(404);
+  });
+});
+
+describe('owner preview of a pending shop (查看顾客视角)', () => {
+  it('owner can view their own pending shop and its pending items; others still 404', async () => {
+    const { cookie, userId, shop } = await registerAndCreatePendingShop(`t_preview_${stamp}`);
+    try {
+      expect(shop.reviewStatus).toBe('pending');
+
+      const ownerView = await getJson<Restaurant>(`/api/restaurants/${shop.id}`, cookie);
+      expect(ownerView.status).toBe(200);
+      expect(ownerView.body.menu.length).toBe(1);
+      expect(ownerView.body.menu[0]!.name).toBe('预览测试菜');
+
+      const anonView = await getJson(`/api/restaurants/${shop.id}`);
+      expect(anonView.status).toBe(404);
+    } finally {
+      await db.delete(restaurants).where(eq(restaurants.id, shop.id));
+      await db.delete(users).where(eq(users.id, userId));
+    }
   });
 });
