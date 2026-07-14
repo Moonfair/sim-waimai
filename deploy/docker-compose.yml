@@ -21,6 +21,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   server:
     build:
@@ -36,6 +41,17 @@ services:
       - "127.0.0.1:3001:3001"
     volumes:
       - uploads:/app/server/uploads
+    # node:20-alpine 没有 curl/wget，用 Node 20 自带的 fetch 写健康检查命令。
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3001/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   pgdata:
