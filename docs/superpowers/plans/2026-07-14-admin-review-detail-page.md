@@ -285,41 +285,46 @@ EOF
 ### Task 2: 前端详情页组件 + 路由
 
 **Files:**
+- Create: `src/lib/reviewBadges.ts`（`STATUS_BADGE`/`AI_VERDICT_BADGE` 共享常量，供本任务和 Task 3 复用，避免同一份配色映射在两个文件里各写一遍）
 - Create: `src/pages/AdminReviewDetail.tsx`
 - Modify: `src/App.tsx`（新增两条路由）
 
 **Interfaces:**
 - Consumes：Task 1 产出的 `ModerationRestaurantDetailDto`/`ModerationItemDetailDto`（`@sim-waimai/shared`）、`GET /admin/restaurants/:id`、`GET /admin/restaurants/:id/items/:itemId`、`POST /admin/restaurants/:id/review`、`POST /admin/restaurants/:id/items/:itemId/review`（已存在，无需改动）；`useApi`（`src/hooks/useApi.ts`）；`assetUrl`（`src/lib/assetUrl.ts`）。
-- Produces：`<AdminReviewDetail targetType="restaurant" | "menuItem" />` 组件，挂载在 `/admin/review/restaurant/:id` 与 `/admin/review/item/:id/:itemId` 两条路由上，供 Task 3 的列表页链接过去。
+- Produces：`STATUS_BADGE`/`AI_VERDICT_BADGE`（`src/lib/reviewBadges.ts`），Task 3 会把 `AdminReview.tsx` 里现有的同名本地常量删掉，改成从这里导入。`<AdminReviewDetail targetType="restaurant" | "menuItem" />` 组件，挂载在 `/admin/review/restaurant/:id` 与 `/admin/review/item/:id/:itemId` 两条路由上，供 Task 3 的列表页链接过去。
 
-- [ ] **Step 1: 创建详情页组件**
+- [ ] **Step 1: 提取共享徽标常量**
+
+写入 `src/lib/reviewBadges.ts`（内容跟 `AdminReview.tsx` 里现有的 `STATUS_BADGE`/`AI_VERDICT_BADGE` 定义逐字一致，只是挪了个位置）：
+
+```ts
+import type { AiVerdict, ReviewStatus } from '@sim-waimai/shared';
+
+export const STATUS_BADGE: Record<ReviewStatus, { label: string; className: string }> = {
+  pending: { label: '待审核', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
+  approved: { label: '已通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
+  rejected: { label: '已驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
+};
+
+export const AI_VERDICT_BADGE: Record<AiVerdict, { label: string; className: string }> = {
+  approve: { label: 'AI建议：通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
+  reject: { label: 'AI建议：驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
+  uncertain: { label: 'AI存疑，待人工判断', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
+};
+```
+
+- [ ] **Step 2: 创建详情页组件**
 
 写入 `src/pages/AdminReviewDetail.tsx`：
 
 ```tsx
 import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import type {
-  AiVerdict,
-  ModerationItemDetailDto,
-  ModerationRestaurantDetailDto,
-  ReviewStatus,
-} from '@sim-waimai/shared';
+import type { ModerationItemDetailDto, ModerationRestaurantDetailDto, ReviewStatus } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { assetUrl } from '../lib/assetUrl';
-
-const STATUS_BADGE: Record<ReviewStatus, { label: string; className: string }> = {
-  pending: { label: '待审核', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
-  approved: { label: '已通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
-  rejected: { label: '已驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
-};
-
-const AI_VERDICT_BADGE: Record<AiVerdict, { label: string; className: string }> = {
-  approve: { label: 'AI建议：通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
-  reject: { label: 'AI建议：驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
-  uncertain: { label: 'AI存疑，待人工判断', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
-};
+import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 
 type Detail = ModerationRestaurantDetailDto | ModerationItemDetailDto;
 
@@ -561,7 +566,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
 }
 ```
 
-- [ ] **Step 2: 接入路由**
+- [ ] **Step 3: 接入路由**
 
 `src/App.tsx`：在 `import AdminReview from './pages/AdminReview';` 下面加一行：
 
@@ -590,12 +595,12 @@ import AdminReviewDetail from './pages/AdminReviewDetail';
                 />
 ```
 
-- [ ] **Step 3: typecheck + build**
+- [ ] **Step 4: typecheck + build**
 
 Run: `npm run build`
 Expected: 通过（`tsc -b && vite build` 无报错）。
 
-- [ ] **Step 4: 手动验证（浏览器）**
+- [ ] **Step 5: 手动验证（浏览器）**
 
 前提：`npm run dev` 已在跑，且已有 `ADMIN_USERNAMES` 里的管理员账号登录。
 
@@ -606,7 +611,7 @@ Expected: 通过（`tsc -b && vite build` 无报错）。
 5. 用同样方式访问一个 `/admin/review/item/:id/:itemId`，确认商品字段（价格/卡路里/规格组，如果该商品有规格组）显示正确。
 6. 访问一个不存在的 id（如 `/admin/review/restaurant/does-not-exist`），确认显示"该内容不存在或已变更" + 返回列表链接，不白屏/不报错。
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add src/pages/AdminReviewDetail.tsx src/App.tsx
@@ -633,13 +638,53 @@ EOF
 
 在 `src/pages/AdminReview.tsx` 里：
 
-1. 在文件顶部加 `useLocation` import：
+1. 把顶部这一行：
+
+```tsx
+import { useNavigate } from 'react-router-dom';
+```
+
+改成：
 
 ```tsx
 import { useLocation, useNavigate } from 'react-router-dom';
 ```
 
-2. 在 `reviewPath` 函数下面加一个新 helper：
+把这一行：
+
+```tsx
+import type { AiVerdict, ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
+```
+
+改成（不再需要 `AiVerdict`，改成从共享徽标模块拿颜色映射）：
+
+```tsx
+import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
+```
+
+并在 `import { api } from '../lib/api';` 下面新增一行：
+
+```tsx
+import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
+```
+
+2. 删除文件里这两段本地常量定义（现在从 Step 1 里改好的 import 拿）：
+
+```tsx
+const STATUS_BADGE: Record<ReviewStatus, { label: string; className: string }> = {
+  pending: { label: '待审核', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
+  approved: { label: '已通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
+  rejected: { label: '已驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
+};
+
+const AI_VERDICT_BADGE: Record<AiVerdict, { label: string; className: string }> = {
+  approve: { label: 'AI建议：通过', className: 'text-green-600 bg-green-50 dark:bg-green-500/10' },
+  reject: { label: 'AI建议：驳回', className: 'text-red-500 bg-red-50 dark:bg-red-500/10' },
+  uncertain: { label: 'AI存疑，待人工判断', className: 'text-amber-600 bg-amber-50 dark:bg-amber-500/10' },
+};
+```
+
+3. 在 `reviewPath` 函数下面加一个新 helper：
 
 ```tsx
 function detailPath(item: ModerationItemDto): string {
@@ -649,13 +694,13 @@ function detailPath(item: ModerationItemDto): string {
 }
 ```
 
-3. 组件内，`const navigate = useNavigate();` 下面加：
+4. 组件内，`const navigate = useNavigate();` 下面加：
 
 ```tsx
   const location = useLocation();
 ```
 
-4. 把 `const [status, setStatus] = useState<ReviewStatus>('pending');` 改成从 `location.state` 读回上次的 tab：
+5. 把 `const [status, setStatus] = useState<ReviewStatus>('pending');` 改成从 `location.state` 读回上次的 tab：
 
 ```tsx
   const [status, setStatus] = useState<ReviewStatus>(
@@ -663,9 +708,9 @@ function detailPath(item: ModerationItemDto): string {
   );
 ```
 
-5. 删除 `const [expandedKey, setExpandedKey] = useState<string | null>(null);` 这一行（不再需要）。
+6. 删除 `const [expandedKey, setExpandedKey] = useState<string | null>(null);` 这一行（不再需要）。
 
-6. 把现有的 AI 徽标 `<button>`（可点击展开）：
+7. 把现有的 AI 徽标 `<button>`（可点击展开）：
 
 ```tsx
                       {item.aiVerdict && (
