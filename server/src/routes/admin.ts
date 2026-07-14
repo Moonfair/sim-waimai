@@ -28,6 +28,31 @@ const reviewSchema = z
 
 type RestaurantRow = typeof restaurants.$inferSelect;
 type MenuItemRow = typeof menuItems.$inferSelect;
+type ReviewMetaRow = Pick<
+  RestaurantRow,
+  'reviewStatus' | 'rejectReason' | 'reviewedAt' | 'reviewedBy' | 'aiVerdict' | 'aiReason' | 'aiConfidence'
+>;
+
+/** Username of the owning user, or null for platform-seeded rows / anonymous. */
+async function lookupOwnerUsername(ownerId: string | null): Promise<string | null> {
+  if (!ownerId) return null;
+  const [owner] = await db.select({ username: users.username }).from(users).where(eq(users.id, ownerId));
+  return owner?.username ?? null;
+}
+
+/** The review/AI metadata fields shared by both detail DTOs (restaurants and menu_items rows). */
+function toReviewMeta(row: ReviewMetaRow, ownerUsername: string | null) {
+  return {
+    reviewStatus: row.reviewStatus,
+    rejectReason: row.rejectReason,
+    reviewedAt: row.reviewedAt?.toISOString() ?? null,
+    reviewedBy: row.reviewedBy,
+    ownerUsername,
+    aiVerdict: row.aiVerdict,
+    aiReason: row.aiReason,
+    aiConfidence: row.aiConfidence,
+  };
+}
 
 function toRestaurantModerationItem(row: RestaurantRow, ownerUsername: string | null): ModerationItemDto {
   return {
@@ -105,20 +130,11 @@ export const adminRoutes = new Hono()
   .get('/restaurants/:id', requireAdmin, async (c) => {
     const [row] = await db.select().from(restaurants).where(eq(restaurants.id, c.req.param('id')));
     if (!row) return c.json({ error: '店铺不存在' }, 404);
-    const [owner] = row.ownerId
-      ? await db.select({ username: users.username }).from(users).where(eq(users.id, row.ownerId))
-      : [];
     const detail: ModerationRestaurantDetailDto = {
       targetType: 'restaurant',
+      // menu 不展示，菜品各自独立走审核（见 GET .../items/:itemId）。
       restaurant: toRestaurant(row, []),
-      reviewStatus: row.reviewStatus,
-      rejectReason: row.rejectReason,
-      reviewedAt: row.reviewedAt?.toISOString() ?? null,
-      reviewedBy: row.reviewedBy,
-      ownerUsername: owner?.username ?? null,
-      aiVerdict: row.aiVerdict,
-      aiReason: row.aiReason,
-      aiConfidence: row.aiConfidence,
+      ...toReviewMeta(row, await lookupOwnerUsername(row.ownerId)),
     };
     return c.json(detail);
   })
@@ -134,22 +150,12 @@ export const adminRoutes = new Hono()
       .select({ name: restaurants.name, ownerId: restaurants.ownerId })
       .from(restaurants)
       .where(eq(restaurants.id, restaurantId));
-    const [owner] = shop?.ownerId
-      ? await db.select({ username: users.username }).from(users).where(eq(users.id, shop.ownerId))
-      : [];
     const detail: ModerationItemDetailDto = {
       targetType: 'menuItem',
       restaurantId,
       restaurantName: shop?.name ?? '',
       item: toMenuItem(row),
-      reviewStatus: row.reviewStatus,
-      rejectReason: row.rejectReason,
-      reviewedAt: row.reviewedAt?.toISOString() ?? null,
-      reviewedBy: row.reviewedBy,
-      ownerUsername: owner?.username ?? null,
-      aiVerdict: row.aiVerdict,
-      aiReason: row.aiReason,
-      aiConfidence: row.aiConfidence,
+      ...toReviewMeta(row, await lookupOwnerUsername(shop?.ownerId ?? null)),
     };
     return c.json(detail);
   })
@@ -168,10 +174,7 @@ export const adminRoutes = new Hono()
       .where(eq(restaurants.id, c.req.param('id')))
       .returning();
     if (!row) return c.json({ error: '店铺不存在' }, 404);
-    const [owner] = row.ownerId
-      ? await db.select({ username: users.username }).from(users).where(eq(users.id, row.ownerId))
-      : [];
-    return c.json(toRestaurantModerationItem(row, owner?.username ?? null));
+    return c.json(toRestaurantModerationItem(row, await lookupOwnerUsername(row.ownerId)));
   })
   .post('/restaurants/:id/items/:itemId/review', requireAdmin, validateJson(reviewSchema), async (c) => {
     const admin = c.get('user');
@@ -191,8 +194,7 @@ export const adminRoutes = new Hono()
       .select({ name: restaurants.name, ownerId: restaurants.ownerId })
       .from(restaurants)
       .where(eq(restaurants.id, row.restaurantId));
-    const [owner] = shop?.ownerId
-      ? await db.select({ username: users.username }).from(users).where(eq(users.id, shop.ownerId))
-      : [];
-    return c.json(toItemModerationItem(row, shop?.name ?? '', owner?.username ?? null));
+    return c.json(
+      toItemModerationItem(row, shop?.name ?? '', await lookupOwnerUsername(shop?.ownerId ?? null)),
+    );
   });
