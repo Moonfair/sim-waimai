@@ -26,19 +26,13 @@ export function publicUrlFor(key: string): string {
   return `${base}/${key}`;
 }
 
-/** Presigned PUT URL so the client uploads straight to COS (expires in 300s). */
-export function presignPut(key: string): Promise<string> {
+/** Uploads bytes to COS from the server (client never talks to COS directly, so the server
+ *  can validate/re-encode the file first — see routes/uploads.ts). */
+export function putObject(key: string, body: Buffer, contentType: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    cosClient().getObjectUrl(
-      {
-        Bucket: env.COS_BUCKET!,
-        Region: env.COS_REGION!,
-        Key: key,
-        Method: 'PUT',
-        Sign: true,
-        Expires: 300,
-      },
-      (err, data) => (err ? reject(err) : resolve(data.Url)),
+    cosClient().putObject(
+      { Bucket: env.COS_BUCKET!, Region: env.COS_REGION!, Key: key, Body: body, ContentType: contentType },
+      (err) => (err ? reject(err) : resolve()),
     );
   });
 }

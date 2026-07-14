@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { eq } from 'drizzle-orm';
+import sharp from 'sharp';
 import type { MerchantRestaurantDto, PresignResponse } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
@@ -76,7 +77,11 @@ describe('uploads (local fallback, COS unconfigured)', () => {
     expect(grant.uploadUrl).toMatch(/^\/api\/uploads\/local\/uploads\//);
     expect(grant.publicUrl).toBe(grant.uploadUrl);
 
-    const bytes = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10, 1, 2, 3]);
+    const bytes = await sharp({
+      create: { width: 2, height: 2, channels: 3, background: { r: 10, g: 20, b: 30 } },
+    })
+      .png()
+      .toBuffer();
     const put = await app.request(grant.uploadUrl, {
       method: 'PUT',
       headers: { Cookie: ownerCookie, 'Content-Type': 'image/png' },
@@ -87,7 +92,24 @@ describe('uploads (local fallback, COS unconfigured)', () => {
     const get = await app.request(grant.publicUrl);
     expect(get.status).toBe(200);
     expect(get.headers.get('content-type')).toBe('image/png');
-    expect(new Uint8Array(await get.arrayBuffer())).toEqual(bytes);
+    // Bytes are re-encoded server-side (not stored verbatim), so compare decoded pixels instead
+    // of the raw buffer.
+    const stored = await sharp(Buffer.from(await get.arrayBuffer())).raw().toBuffer();
+    const original = await sharp(bytes).raw().toBuffer();
+    expect(new Uint8Array(stored)).toEqual(new Uint8Array(original));
+  });
+
+  it('rejects a non-image file disguised with an image extension', async () => {
+    const grant = (await (
+      await presign(ownerCookie, { kind: 'item', restaurantId: shopId, contentType: 'image/png' })
+    ).json()) as PresignResponse;
+
+    const put = await app.request(grant.uploadUrl, {
+      method: 'PUT',
+      headers: { Cookie: ownerCookie, 'Content-Type': 'image/png' },
+      body: new TextEncoder().encode('<script>alert(1)</script>not actually a png'),
+    });
+    expect(put.status).toBe(400);
   });
 
   it('rejects presign for a shop you do not own', async () => {
@@ -103,6 +125,32 @@ describe('uploads (local fallback, COS unconfigured)', () => {
     const res = await presign(randoCookie, { kind: 'review', contentType: 'image/webp' });
     expect(res.status).toBe(200);
     expect((await presign('', { kind: 'review', contentType: 'image/webp' })).status).toBe(401);
+  });
+
+  it('rejects a non-owner overwriting another shop\'s uploaded item image', async () => {
+    const grant = (await (
+      await presign(ownerCookie, { kind: 'item', restaurantId: shopId, contentType: 'image/png' })
+    ).json()) as PresignResponse;
+
+    const put = await app.request(grant.uploadUrl, {
+      method: 'PUT',
+      headers: { Cookie: randoCookie, 'Content-Type': 'image/png' },
+      body: new Uint8Array([1, 2, 3]),
+    });
+    expect(put.status).toBe(403);
+  });
+
+  it('rejects uploading a review photo under another user\'s id', async () => {
+    const grant = (await (
+      await presign(ownerCookie, { kind: 'review', contentType: 'image/png' })
+    ).json()) as PresignResponse;
+
+    const put = await app.request(grant.uploadUrl, {
+      method: 'PUT',
+      headers: { Cookie: randoCookie, 'Content-Type': 'image/png' },
+      body: new Uint8Array([1, 2, 3]),
+    });
+    expect(put.status).toBe(403);
   });
 
   it('rejects unsupported content types and bad keys', async () => {

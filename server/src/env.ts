@@ -25,6 +25,17 @@ const envSchema = z.object({
 
 export const env = envSchema.parse(process.env);
 
+// Uploads always proxy through this server now (never a direct-to-COS presigned PUT from the
+// browser), so a developer's real COS credentials in .env would otherwise make the test suite
+// write to the production bucket. Force the local-disk fallback under test regardless of .env.
+if (env.NODE_ENV === 'test') {
+  env.COS_SECRET_ID = undefined;
+  env.COS_SECRET_KEY = undefined;
+  env.COS_BUCKET = undefined;
+  env.COS_REGION = undefined;
+  env.COS_PUBLIC_BASE_URL = undefined;
+}
+
 if (env.NODE_ENV === 'production' && env.JWT_SECRET === 'dev-secret-change-me') {
   throw new Error('JWT_SECRET must be set in production');
 }
