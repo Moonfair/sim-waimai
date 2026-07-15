@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '@sim-waimai/shared';
 import type { MerchantRestaurantDto, MerchantRestaurantSummaryDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { uploadImage } from '../lib/upload';
 
 const SHOP_CATEGORIES = CATEGORIES.filter((c) => c !== '全部');
 
@@ -27,8 +28,24 @@ export default function MerchantHome() {
     tags: '新店开业',
     menuCategories: '招牌,主食,小吃,饮品',
   });
+  const [bannerFile, setBannerFile] = useState<File | null>(null);
+  const [bannerPreview, setBannerPreview] = useState<string | null>(null);
+  const bannerFileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (bannerPreview) URL.revokeObjectURL(bannerPreview);
+    };
+  }, [bannerPreview]);
 
   const set = (key: keyof typeof form) => (value: string) => setForm((f) => ({ ...f, [key]: value }));
+
+  const handlePickBanner = (file: File | undefined) => {
+    if (!file) return;
+    if (bannerPreview) URL.revokeObjectURL(bannerPreview);
+    setBannerFile(file);
+    setBannerPreview(URL.createObjectURL(file));
+  };
 
   const handleCreate = async () => {
     setSubmitting(true);
@@ -45,6 +62,14 @@ export default function MerchantHome() {
         tags: form.tags.split(/[,，]/).map((s) => s.trim()).filter(Boolean),
         menuCategories: form.menuCategories.split(/[,，]/).map((s) => s.trim()).filter(Boolean),
       });
+      if (bannerFile) {
+        try {
+          const url = await uploadImage(bannerFile, 'banner', shop.id);
+          await api.patch(`/merchant/restaurants/${shop.id}`, { bannerImage: url });
+        } catch {
+          // Shop is already created; banner can be (re)uploaded from the shop page.
+        }
+      }
       navigate(`/merchant/${shop.id}`);
     } catch (err) {
       setFormError(err instanceof Error ? err.message : '开店失败，请稍后重试');
@@ -145,6 +170,35 @@ export default function MerchantHome() {
             ) : (
               <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 mt-4 space-y-3">
                 <h2 className="font-bold text-gray-900 dark:text-gray-100 text-base">开一家新店</h2>
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-xs text-gray-400 dark:text-gray-500">店铺横幅（可选）</label>
+                    <button
+                      type="button"
+                      className="text-orange-500 text-xs font-medium"
+                      onClick={() => bannerFileRef.current?.click()}
+                    >
+                      {bannerPreview ? '更换横幅' : '上传横幅'}
+                    </button>
+                  </div>
+                  {bannerPreview ? (
+                    <img src={bannerPreview} alt="店铺横幅预览" className="w-full h-28 object-cover rounded-xl" />
+                  ) : (
+                    <div
+                      className="w-full h-28 rounded-xl flex items-center justify-center text-5xl"
+                      style={{ background: `linear-gradient(135deg, ${form.bgColor}ee, ${form.bgColor}88)` }}
+                    >
+                      {form.emoji}
+                    </div>
+                  )}
+                  <input
+                    ref={bannerFileRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    className="hidden"
+                    onChange={(e) => handlePickBanner(e.target.files?.[0])}
+                  />
+                </div>
                 <input className={inputClass} placeholder="店铺名称" value={form.name} onChange={(e) => set('name')(e.target.value)} />
                 <div className="flex gap-2">
                   <select className={inputClass} value={form.category} onChange={(e) => set('category')(e.target.value)}>
