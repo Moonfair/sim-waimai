@@ -34,6 +34,8 @@ export interface RestaurantSummary {
   emoji: string;
   bgColor: string;
   tags: string[];
+  /** 玩家自制商家(ownerId 非空);系统种子商家为 false。 */
+  isPlayerMade: boolean;
   bannerImage?: string;
   /** Present only when the request is authenticated. */
   isFavorite?: boolean;

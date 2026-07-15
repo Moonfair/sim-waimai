@@ -57,6 +57,7 @@ describe('GET /api/restaurants', () => {
     expect(kfc).toBeDefined();
     expect(kfc!.deliveryFee).toBe(5);
     expect(kfc).not.toHaveProperty('menu');
+    expect(kfc!.isPlayerMade).toBe(false);
   });
 
   it('filters by category', async () => {
@@ -65,6 +66,24 @@ describe('GET /api/restaurants', () => {
     );
     expect(body.length).toBeGreaterThan(0);
     expect(body.every((r) => r.category === '汉堡炸鸡')).toBe(true);
+  });
+
+  it('marks player-made shops with isPlayerMade=true once approved', async () => {
+    const { userId, shop } = await registerAndCreatePendingShop(`t_ilv_${stamp}`);
+    try {
+      await db
+        .update(restaurants)
+        .set({ reviewStatus: 'approved' })
+        .where(eq(restaurants.id, shop.id));
+
+      const { body } = await getJson<RestaurantSummary[]>('/api/restaurants');
+      const mine = body.find((r) => r.id === shop.id);
+      expect(mine).toBeDefined();
+      expect(mine!.isPlayerMade).toBe(true);
+    } finally {
+      await db.delete(restaurants).where(eq(restaurants.id, shop.id));
+      await db.delete(users).where(eq(users.id, userId));
+    }
   });
 });
 

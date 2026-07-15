@@ -29,6 +29,7 @@ export function toRestaurantSummary(row: RestaurantRow, isFavorite?: boolean): R
     emoji: row.emoji,
     bgColor: row.bgColor,
     tags: row.tags,
+    isPlayerMade: row.ownerId !== null,
   };
   if (row.bannerImage) summary.bannerImage = row.bannerImage;
   if (isFavorite !== undefined) summary.isFavorite = isFavorite;
