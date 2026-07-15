@@ -16,7 +16,8 @@
     "db:up": "docker compose up -d db",
     "db:migrate": "npm -w server run migrate",
     "db:seed": "npm -w server run seed",
-    "test:server": "npm -w server run test"
+    "test:server": "npm -w server run test",
+    "test:web": "vitest run --dir src"
   },
   "dependencies": {
     "@sim-waimai/shared": "*",
@@ -37,6 +38,7 @@
     "postcss": "^8.5.16",
     "tailwindcss": "^3.4.19",
     "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "vitest": "^4.1.10"
   }
 }
