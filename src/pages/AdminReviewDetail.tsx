@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import type { ModerationItemDetailDto, ModerationRestaurantDetailDto, ReviewStatus } from '@sim-waimai/shared';
+import type { ModerationItemDetailDto, ModerationRestaurantDetailDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { assetUrl } from '../lib/assetUrl';
@@ -16,7 +16,6 @@ export default function AdminReviewDetail({ targetType }: Props) {
   const { id, itemId } = useParams<{ id: string; itemId?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const returnStatus = (location.state as { status?: ReviewStatus } | null)?.status ?? 'pending';
 
   const fetchPath =
     targetType === 'restaurant' ? `/admin/restaurants/${id}` : `/admin/restaurants/${id}/items/${itemId}`;
@@ -27,7 +26,9 @@ export default function AdminReviewDetail({ targetType }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  const goBack = () => navigate('/admin/review', { state: { status: returnStatus } });
+  // 'default' key = 直接打开的深链，没有可回退的历史，只能显式跳列表
+  const goBack = () =>
+    location.key === 'default' ? navigate('/admin/review', { replace: true }) : navigate(-1);
 
   const review = async (decision: 'approved' | 'rejected', reason?: string) => {
     const reviewPath =

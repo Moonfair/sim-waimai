@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
@@ -29,10 +29,11 @@ function itemKey(item: ModerationItemDto): string {
 
 export default function AdminReview() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [status, setStatus] = useState<ReviewStatus>(
-    () => (location.state as { status?: ReviewStatus } | null)?.status ?? 'pending',
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const statusParam = searchParams.get('status');
+  const status: ReviewStatus = STATUS_TABS.some((t) => t.value === statusParam)
+    ? (statusParam as ReviewStatus)
+    : 'pending';
   const { data: items, loading, error, reload } = useApi<ModerationItemDto[]>(
     `/admin/moderation?status=${status}`,
   );
@@ -85,7 +86,7 @@ export default function AdminReview() {
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
               }`}
               onClick={() => {
-                setStatus(tab.value);
+                setSearchParams({ status: tab.value }, { replace: true });
                 setRejectingKey(null);
               }}
             >
@@ -165,7 +166,7 @@ export default function AdminReview() {
                       <button
                         type="button"
                         className="block mt-1.5 text-xs text-orange-500"
-                        onClick={() => navigate(detailPath(item), { state: { status } })}
+                        onClick={() => navigate(detailPath(item))}
                       >
                         查看详情 ›
                       </button>
