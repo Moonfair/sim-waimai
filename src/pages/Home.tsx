@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '@sim-waimai/shared';
 import type { Category, RestaurantSummary } from '@sim-waimai/shared';
@@ -6,6 +6,7 @@ import RestaurantCard from '../components/RestaurantCard';
 import BottomNav from '../components/BottomNav';
 import { useApi } from '../hooks/useApi';
 import { assetUrl } from '../lib/assetUrl';
+import { HOME_SHUFFLE_SEED, interleaveRestaurants } from '../lib/homeShuffle';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
@@ -23,7 +24,11 @@ export default function Home() {
   const { data: restaurants, loading, error } = useApi<RestaurantSummary[]>('/restaurants');
   const { data: recommended } = useApi<RestaurantSummary[]>('/recommendations');
 
-  const filtered = (restaurants ?? []).filter(
+  const shuffled = useMemo(
+    () => interleaveRestaurants(restaurants ?? [], HOME_SHUFFLE_SEED),
+    [restaurants]
+  );
+  const filtered = shuffled.filter(
     r => activeCategory === '全部' || r.category === activeCategory
   );
 
