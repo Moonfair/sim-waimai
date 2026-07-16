@@ -164,3 +164,23 @@ export function getReviewer(): Reviewer | null {
   if (injectedReviewer) return injectedReviewer;
   return credentials() ? tencentReviewer : null;
 }
+
+/**
+ * 同步文本审核（注册用户名等阻塞路径用）：未配置凭证/超时/报错返回 null，
+ * 调用方 fail-open 放行——绝不因审核不可用阻塞注册。
+ */
+export async function moderateTextSync(
+  text: string,
+  timeoutMs = 3000,
+): Promise<ModerationResult | null> {
+  const reviewer = getReviewer();
+  if (!reviewer) return null;
+  try {
+    return await Promise.race([
+      reviewer({ texts: [text], images: [] }),
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs)),
+    ]);
+  } catch {
+    return null;
+  }
+}

@@ -11,6 +11,7 @@ import { env } from '../env';
 import { isAdmin } from '../lib/admin';
 import { issueCaptcha, verifyCaptcha } from '../lib/captcha';
 import { signToken } from '../lib/jwt';
+import { moderateTextSync } from '../lib/moderationProvider';
 import { hashPassword, verifyPassword } from '../lib/password';
 import { AUTH_COOKIE, optionalAuth, requireAuth } from '../middleware/auth';
 import { rateLimit } from '../middleware/rateLimit';
@@ -81,6 +82,12 @@ export const authRoutes = new Hono()
     }
     if (await findByUsername(username)) {
       return c.json({ error: '用户名已存在' }, 409);
+    }
+    // 用户名全站可见，同步送 AI 文本审核；仅明确违规（reject）拒绝注册，
+    // 存疑/未配置/超时/报错一律放行（fail-open，不阻塞注册）。
+    const verdict = await moderateTextSync(username);
+    if (verdict?.verdict === 'reject') {
+      return c.json({ error: '用户名包含违规内容，请更换' }, 400);
     }
     const passwordHash = await hashPassword(password);
     let row;

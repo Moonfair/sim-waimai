@@ -39,6 +39,10 @@ if (env.NODE_ENV === 'test') {
   env.COS_BUCKET = undefined;
   env.COS_REGION = undefined;
   env.COS_PUBLIC_BASE_URL = undefined;
+  // 天御凭证是运行期从 process.env 读的（lib/moderationProvider.ts），且注册路径会同步送审
+  // 用户名——不清掉的话，带真实 .env 的开发机跑任何注册用户的测试都会触网计费。
+  delete process.env.TENCENT_MODERATION_SECRET_ID;
+  delete process.env.TENCENT_MODERATION_SECRET_KEY;
 }
 
 if (env.NODE_ENV === 'production' && env.JWT_SECRET === 'dev-secret-change-me') {
