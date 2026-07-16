@@ -5,7 +5,7 @@ import type { Category, RestaurantSummary } from '@sim-waimai/shared';
 import RestaurantCard from '../components/RestaurantCard';
 import BottomNav from '../components/BottomNav';
 import { useApi } from '../hooks/useApi';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from '../components/ZoomableImage';
 import { HOME_SHUFFLE_SEED, interleaveRestaurants } from '../lib/homeShuffle';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -100,7 +100,7 @@ export default function Home() {
                   style={!r.bannerImage ? { background: `linear-gradient(135deg, ${r.bgColor}dd, ${r.bgColor}88)` } : undefined}
                 >
                   {r.bannerImage ? (
-                    <img src={assetUrl(r.bannerImage)} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
+                    <ZoomableImage src={r.bannerImage} alt={r.name} className="absolute inset-0 w-full h-full object-cover" />
                   ) : (
                     <span className="drop-shadow">{r.emoji}</span>
                   )}

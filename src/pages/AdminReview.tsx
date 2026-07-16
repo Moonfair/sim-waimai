@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 
 const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
@@ -156,9 +156,9 @@ export default function AdminReview() {
                       {item.photos && item.photos.length > 0 && (
                         <div className="flex gap-1.5 mt-1.5 overflow-x-auto">
                           {item.photos.map((photo) => (
-                            <img
+                            <ZoomableImage
                               key={photo}
-                              src={assetUrl(photo)}
+                              src={photo}
                               alt="评价图片"
                               className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
                             />

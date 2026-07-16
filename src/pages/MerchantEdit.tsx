@@ -4,7 +4,7 @@ import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/sha
 import MenuItemEditor from '../components/MenuItemEditor';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from '../components/ZoomableImage';
 import { copyRestaurantLink } from '../lib/share';
 import { uploadImage } from '../lib/upload';
 
@@ -198,7 +198,7 @@ export default function MerchantEdit() {
             </button>
           </div>
           {shop.bannerImage ? (
-            <img src={assetUrl(shop.bannerImage)} alt="店铺横幅" className="w-full h-28 object-cover rounded-xl" />
+            <ZoomableImage src={shop.bannerImage} alt="店铺横幅" className="w-full h-28 object-cover rounded-xl" />
           ) : (
             <div
               className="w-full h-28 rounded-xl flex items-center justify-center text-5xl"

@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import type { OrderDto } from '@sim-waimai/shared';
 import ReviewForm from '../components/ReviewForm';
 import { useApi } from '../hooks/useApi';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from '../components/ZoomableImage';
 
 const STATUS_HEADER: Record<OrderDto['status'], { emoji: string; title: string; sub: string }> = {
   pending: { emoji: '🍳', title: '商家备餐中', sub: '商家正在为您精心准备' },
@@ -73,7 +73,7 @@ export default function OrderDetail() {
           {order.items.map((item) => (
             <div key={item.key} className="flex items-center gap-3 px-4 py-3">
               {item.image ? (
-                <img src={assetUrl(item.image)} alt={item.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
+                <ZoomableImage src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
               ) : (
                 <div className="w-12 h-12 rounded-lg bg-gray-50 dark:bg-gray-700 flex items-center justify-center text-2xl flex-shrink-0">
                   {item.emoji}

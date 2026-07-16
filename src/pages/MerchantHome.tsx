@@ -5,6 +5,7 @@ import type { MerchantRestaurantDto, MerchantRestaurantSummaryDto } from '@sim-w
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { uploadImage } from '../lib/upload';
+import ZoomableImage from '../components/ZoomableImage';
 
 const SHOP_CATEGORIES = CATEGORIES.filter((c) => c !== '全部');
 
@@ -182,7 +183,7 @@ export default function MerchantHome() {
                     </button>
                   </div>
                   {bannerPreview ? (
-                    <img src={bannerPreview} alt="店铺横幅预览" className="w-full h-28 object-cover rounded-xl" />
+                    <ZoomableImage src={bannerPreview} alt="店铺横幅预览" className="w-full h-28 object-cover rounded-xl" />
                   ) : (
                     <div
                       className="w-full h-28 rounded-xl flex items-center justify-center text-5xl"

@@ -99,9 +99,9 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
               {review.photos.length > 0 && (
                 <div className="flex gap-2 mt-2 overflow-x-auto">
                   {review.photos.map((photo) => (
-                    <img
+                    <ZoomableImage
                       key={photo}
-                      src={assetUrl(photo)}
+                      src={photo}
                       alt="评价图片"
                       className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
                     />

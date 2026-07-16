@@ -7,7 +7,7 @@ import type {
 } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 
 type Detail = ModerationRestaurantDetailDto | ModerationItemDetailDto | ModerationUserReviewDetailDto;
@@ -127,8 +127,8 @@ export default function AdminReviewDetail({ targetType }: Props) {
                 {data.restaurant.bgColor}
               </div>
               {data.restaurant.bannerImage && (
-                <img
-                  src={assetUrl(data.restaurant.bannerImage)}
+                <ZoomableImage
+                  src={data.restaurant.bannerImage}
                   alt="横幅"
                   className="w-full h-32 object-cover rounded-xl"
                 />
@@ -157,9 +157,9 @@ export default function AdminReviewDetail({ targetType }: Props) {
               {data.review.photos.length > 0 && (
                 <div className="grid grid-cols-3 gap-2">
                   {data.review.photos.map((photo) => (
-                    <img
+                    <ZoomableImage
                       key={photo}
-                      src={assetUrl(photo)}
+                      src={photo}
                       alt="评价图片"
                       className="w-full aspect-square object-cover rounded-xl"
                     />
@@ -181,8 +181,8 @@ export default function AdminReviewDetail({ targetType }: Props) {
                 {data.item.popular ? ' · 人气' : ''}
               </p>
               {data.item.image && (
-                <img
-                  src={assetUrl(data.item.image)}
+                <ZoomableImage
+                  src={data.item.image}
                   alt={data.item.name}
                   className="w-32 h-32 object-cover rounded-xl"
                 />

@@ -7,7 +7,7 @@ import ReviewList from '../components/ReviewList';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from '../components/ZoomableImage';
 import { copyRestaurantLink } from '../lib/share';
 
 export default function Restaurant() {
@@ -90,8 +90,8 @@ export default function Restaurant() {
         style={!restaurant.bannerImage ? { background: `linear-gradient(135deg, ${restaurant.bgColor}ee, ${restaurant.bgColor}88)` } : undefined}
       >
         {restaurant.bannerImage && (
-          <img
-            src={assetUrl(restaurant.bannerImage)}
+          <ZoomableImage
+            src={restaurant.bannerImage}
             alt={restaurant.name}
             className="absolute inset-0 w-full h-full object-cover z-0"
           />

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useCart } from '../context/CartContext';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from './ZoomableImage';
 import { useLongPressStep } from '../hooks/useLongPressStep';
 import MenuItemOptionsSheet from './MenuItemOptionsSheet';
 
@@ -38,8 +38,8 @@ export default function MenuItem({ item, restaurant }: Props) {
   return (
     <div className="flex gap-3 py-3 border-b border-gray-50 dark:border-gray-700 last:border-0">
       {item.image ? (
-        <img
-          src={assetUrl(item.image)}
+        <ZoomableImage
+          src={item.image}
           alt={item.name}
           className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
         />

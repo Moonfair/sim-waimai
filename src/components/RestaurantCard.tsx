@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { RestaurantSummary } from '@sim-waimai/shared';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from './ZoomableImage';
 
 interface Props {
   restaurant: RestaurantSummary;
@@ -19,7 +19,7 @@ export default function RestaurantCard({ restaurant }: Props) {
         style={!restaurant.bannerImage ? { background: `linear-gradient(135deg, ${restaurant.bgColor}dd, ${restaurant.bgColor}88)` } : undefined}
       >
         {restaurant.bannerImage ? (
-          <img src={assetUrl(restaurant.bannerImage)} alt={restaurant.name} className="absolute inset-0 w-full h-full object-cover" />
+          <ZoomableImage src={restaurant.bannerImage} alt={restaurant.name} className="absolute inset-0 w-full h-full object-cover" />
         ) : (
           <span className="drop-shadow-lg">{restaurant.emoji}</span>
         )}
