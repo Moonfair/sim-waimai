@@ -23,6 +23,7 @@ export default function MerchantEdit() {
   const [editorItem, setEditorItem] = useState<MerchantMenuItemDto | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [uploadingBanner, setUploadingBanner] = useState(false);
+  const [shareState, setShareState] = useState<'idle' | 'copied' | 'failed'>('idle');
   const bannerFileRef = useRef<HTMLInputElement>(null);
 
   const handlePickBanner = async (file: File | undefined) => {
@@ -107,6 +108,30 @@ export default function MerchantEdit() {
     }
   };
 
+  const handleShare = async () => {
+    const url = new URL(`${import.meta.env.BASE_URL}restaurant/${shop.id}`, window.location.origin).toString();
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(url);
+      ok = true;
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        ok = document.execCommand('copy');
+      } catch {
+        ok = false;
+      }
+      document.body.removeChild(ta);
+    }
+    setShareState(ok ? 'copied' : 'failed');
+    setTimeout(() => setShareState('idle'), 2000);
+  };
+
   const handleToggleListed = async (item: MerchantMenuItemDto) => {
     if (item.isListed) {
       await api.del(`/merchant/restaurants/${shop.id}/items/${item.id}`);
@@ -152,12 +177,16 @@ export default function MerchantEdit() {
             {shop.isActive ? '营业中 · 点击打烊' : '已打烊 · 点击营业'}
           </button>
         </div>
-        <button
-          className="mt-2 text-xs text-orange-500"
-          onClick={() => navigate(`/restaurant/${shop.id}`)}
-        >
-          查看顾客视角 ›
-        </button>
+        <div className="mt-2 flex items-center gap-4">
+          <button className="text-xs text-orange-500" onClick={() => navigate(`/restaurant/${shop.id}`)}>
+            查看顾客视角 ›
+          </button>
+          {shop.reviewStatus === 'approved' && (
+            <button className="text-xs text-orange-500" onClick={handleShare}>
+              {shareState === 'copied' ? '已复制 ✓' : shareState === 'failed' ? '复制失败' : '🔗 分享店铺'}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Review status banner */}
