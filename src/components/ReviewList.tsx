@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { Page, ReviewDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
-import { assetUrl } from '../lib/assetUrl';
+import ZoomableImage from './ZoomableImage';
 
 interface Props {
   restaurantId: string;
@@ -66,13 +66,29 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
           {items.map((review) => (
             <div key={review.id} className="border-b border-gray-50 dark:border-gray-700 pb-3 last:border-0">
               <div className="flex items-center justify-between">
-                <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">
-                  {review.username}
+                <span className="flex items-center gap-2 min-w-0">
+                  <span className="text-gray-800 dark:text-gray-200 text-sm font-medium truncate">
+                    {review.username}
+                  </span>
+                  {/* 非 approved 的评价服务端只会返回给作者本人 */}
+                  {review.reviewStatus === 'pending' && (
+                    <span className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 text-amber-600 bg-amber-50 dark:bg-amber-500/10">
+                      审核中，仅自己可见
+                    </span>
+                  )}
+                  {review.reviewStatus === 'rejected' && (
+                    <span className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 text-red-500 bg-red-50 dark:bg-red-500/10">
+                      未通过
+                    </span>
+                  )}
                 </span>
-                <span className="text-gray-300 dark:text-gray-600 text-xs">
+                <span className="text-gray-300 dark:text-gray-600 text-xs flex-shrink-0">
                   {new Date(review.createdAt).toLocaleDateString('zh-CN')}
                 </span>
               </div>
+              {review.reviewStatus === 'rejected' && review.rejectReason && (
+                <p className="text-red-500 text-xs mt-0.5">未通过原因：{review.rejectReason}</p>
+              )}
               <div className="text-yellow-400 text-xs mt-0.5">
                 {'★'.repeat(review.rating)}
                 <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - review.rating)}</span>

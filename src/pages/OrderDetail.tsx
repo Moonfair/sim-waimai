@@ -149,13 +149,31 @@ export default function OrderDetail() {
         {order.status === 'completed' &&
           (order.review ? (
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">
-              <h3 className="font-bold text-gray-900 dark:text-gray-100 text-sm mb-2">我的评价</h3>
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 text-sm">我的评价</h3>
+                {order.review.reviewStatus === 'pending' && (
+                  <span className="text-xs px-2 py-0.5 rounded-full font-medium text-amber-600 bg-amber-50 dark:bg-amber-500/10">
+                    审核中
+                  </span>
+                )}
+                {order.review.reviewStatus === 'rejected' && (
+                  <span className="text-xs px-2 py-0.5 rounded-full font-medium text-red-500 bg-red-50 dark:bg-red-500/10">
+                    未通过
+                  </span>
+                )}
+              </div>
               <div className="text-yellow-400 text-sm">
                 {'★'.repeat(order.review.rating)}
                 <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - order.review.rating)}</span>
               </div>
               {order.review.content && (
                 <p className="text-gray-600 dark:text-gray-300 text-sm mt-1.5">{order.review.content}</p>
+              )}
+              {order.review.reviewStatus === 'pending' && (
+                <p className="text-gray-400 dark:text-gray-500 text-xs mt-1.5">审核通过后将对外展示</p>
+              )}
+              {order.review.reviewStatus === 'rejected' && order.review.rejectReason && (
+                <p className="text-red-500 text-xs mt-1.5">未通过原因：{order.review.rejectReason}</p>
               )}
             </div>
           ) : (
