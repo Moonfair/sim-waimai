@@ -17,7 +17,8 @@ import {
 } from '../lib/mappers';
 import { queueReview } from '../lib/moderation';
 import type { ModerationInput } from '../lib/moderationProvider';
-import { validateJson } from '../lib/validate';
+import { applyRatingDelta } from '../lib/ratings';
+import { UUID_RE, validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
 import type { AuthPayload } from '../lib/jwt';
 
@@ -107,6 +108,8 @@ const itemBaseSchema = z.object({
   image: imageUrlSchema.optional(),
   optionGroups: optionGroupsSchema.optional(),
 });
+
+const reviewHiddenSchema = z.object({ hidden: z.boolean() });
 
 const itemPatchSchema = itemBaseSchema.partial().extend({
   description: z.string().max(100).optional(),
@@ -262,6 +265,43 @@ export const merchantRoutes = new Hono()
       nextCursor: hasMore && last ? encodeCursor(last.review.createdAt, last.review.id) : null,
     });
   })
+  .patch(
+    '/restaurants/:id/reviews/:reviewId',
+    requireAuth,
+    validateJson(reviewHiddenSchema),
+    async (c) => {
+      const owned = await ownedRestaurant(c.get('user'), c.req.param('id'));
+      if ('error' in owned) return c.json({ error: owned.error }, owned.status);
+      const reviewId = c.req.param('reviewId');
+      if (!UUID_RE.test(reviewId)) return c.json({ error: '评价不存在' }, 404);
+      const { hidden } = c.req.valid('json');
+      // FOR UPDATE 锁行：与 AI 审核/管理员裁决串行化，避免并发翻转下聚合重复增减
+      const row = await db.transaction(async (tx) => {
+        const [old] = await tx
+          .select()
+          .from(reviews)
+          .where(and(eq(reviews.id, reviewId), eq(reviews.restaurantId, owned.row.id)))
+          .for('update');
+        // 未过审的评价尚未公开，无从隐藏/恢复
+        if (!old || old.reviewStatus !== 'approved') return null;
+        // 已处于目标状态：幂等返回，不动聚合（重复点击不会把评分扣两次）
+        if ((old.hiddenAt !== null) === hidden) return old;
+        const [updated] = await tx
+          .update(reviews)
+          .set({ hiddenAt: hidden ? new Date() : null })
+          .where(eq(reviews.id, reviewId))
+          .returning();
+        await applyRatingDelta(tx, owned.row.id, hidden ? -old.rating : old.rating, hidden ? -1 : 1);
+        return updated!;
+      });
+      if (!row) return c.json({ error: '评价不存在' }, 404);
+      const [author] = await db
+        .select({ username: users.username })
+        .from(users)
+        .where(eq(users.id, row.userId));
+      return c.json(toMerchantReviewDto(row, author?.username ?? ''));
+    },
+  )
   .patch(
     '/restaurants/:id',
     requireAuth,

@@ -207,8 +207,9 @@ export const adminRoutes = new Hono()
         })
         .where(eq(reviews.id, reviewId))
         .returning();
-      const wasCounted = old.reviewStatus === 'approved';
-      const nowCounted = body.decision === 'approved';
+      // 被商家隐藏的评价不计入聚合：隐藏那一刻商家侧已回滚，裁决翻转时不能再动聚合
+      const wasCounted = old.reviewStatus === 'approved' && old.hiddenAt === null;
+      const nowCounted = body.decision === 'approved' && old.hiddenAt === null;
       if (!wasCounted && nowCounted) await applyRatingDelta(tx, old.restaurantId, old.rating, 1);
       else if (wasCounted && !nowCounted) await applyRatingDelta(tx, old.restaurantId, -old.rating, -1);
       return updated;
