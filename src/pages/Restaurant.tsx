@@ -8,6 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { assetUrl } from '../lib/assetUrl';
+import { copyRestaurantLink } from '../lib/share';
 
 export default function Restaurant() {
   const { id } = useParams<{ id: string }>();
@@ -16,6 +17,7 @@ export default function Restaurant() {
   const { data: restaurant, loading, error } = useApi<RestaurantData>(id ? `/restaurants/${id}` : null);
   const [activeMenuCat, setActiveMenuCat] = useState('');
   const [isFav, setIsFav] = useState(false);
+  const [shareState, setShareState] = useState<'idle' | 'copied' | 'failed'>('idle');
 
   useEffect(() => {
     if (restaurant && !activeMenuCat) {
@@ -44,6 +46,13 @@ export default function Restaurant() {
     } catch {
       setIsFav(!next);
     }
+  };
+
+  const handleShare = async () => {
+    if (!id) return;
+    const ok = await copyRestaurantLink(id);
+    setShareState(ok ? 'copied' : 'failed');
+    setTimeout(() => setShareState('idle'), 2000);
   };
 
   if (loading) {
@@ -92,6 +101,13 @@ export default function Restaurant() {
           onClick={() => navigate(-1)}
         >
           ←
+        </button>
+        <button
+          className="absolute top-10 right-16 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg text-white z-10"
+          onClick={handleShare}
+          aria-label="分享餐厅"
+        >
+          {shareState === 'copied' ? '✓' : shareState === 'failed' ? '✕' : '🔗'}
         </button>
         <button
           className="absolute top-10 right-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg z-10"
