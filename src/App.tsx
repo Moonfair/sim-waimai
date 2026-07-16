@@ -19,6 +19,7 @@ import OrderDetail from './pages/OrderDetail';
 import Favorites from './pages/Favorites';
 import MerchantHome from './pages/MerchantHome';
 import MerchantEdit from './pages/MerchantEdit';
+import MerchantReviews from './pages/MerchantReviews';
 import AdminReview from './pages/AdminReview';
 import AdminReviewDetail from './pages/AdminReviewDetail';
 
@@ -44,6 +45,7 @@ export default function App() {
                 <Route path="/favorites" element={<RequireAuth><Favorites /></RequireAuth>} />
                 <Route path="/merchant" element={<RequireAuth><MerchantHome /></RequireAuth>} />
                 <Route path="/merchant/:id" element={<RequireAuth><MerchantEdit /></RequireAuth>} />
+                <Route path="/merchant/:id/reviews" element={<RequireAuth><MerchantReviews /></RequireAuth>} />
                 <Route path="/admin/review" element={<RequireAdmin><AdminReview /></RequireAdmin>} />
                 <Route
                   path="/admin/review/restaurant/:id"

@@ -164,6 +164,9 @@ export default function MerchantEdit() {
           <button className="text-xs text-orange-500" onClick={() => navigate(`/restaurant/${shop.id}`)}>
             查看顾客视角 ›
           </button>
+          <button className="text-xs text-orange-500" onClick={() => navigate(`/merchant/${shop.id}/reviews`)}>
+            💬 评价管理
+          </button>
           {shop.reviewStatus === 'approved' && (
             <button className="text-xs text-orange-500" onClick={handleShare}>
               {shareState === 'copied' ? '已复制 ✓' : shareState === 'failed' ? '复制失败' : '🔗 分享店铺'}
