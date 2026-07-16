@@ -460,3 +460,36 @@ describe('审核详情接口（GET /api/admin/restaurants/:id[/items/:itemId]）
     expect(detail.aiConfidence).toBe(0.55);
   });
 });
+
+describe('审核队列图片字段', () => {
+  it('queue rows carry bannerImage / item image for list thumbnails', async () => {
+    const shop = await createShop(`图片店_${stamp}`);
+    const patched = await req(`/api/merchant/restaurants/${shop.id}`, ownerCookie, {
+      method: 'PATCH',
+      body: { bannerImage: '/api/uploads/mod-banner.jpg' },
+    });
+    expect(patched.status).toBe(200);
+
+    const itemRes = await req(`/api/merchant/restaurants/${shop.id}/items`, ownerCookie, {
+      method: 'POST',
+      body: {
+        name: `图片菜_${stamp}`,
+        price: 18,
+        emoji: '🍜',
+        menuCategory: '招牌',
+        image: '/api/uploads/mod-item.jpg',
+      },
+    });
+    expect(itemRes.status).toBe(200);
+    const item = (await itemRes.json()) as MerchantMenuItemDto;
+
+    await __awaitReviews();
+    const res = await req('/api/admin/moderation', adminCookie);
+    expect(res.status).toBe(200);
+    const queue = (await res.json()) as ModerationItemDto[];
+    const shopRow = queue.find((m) => m.targetType === 'restaurant' && m.restaurantId === shop.id);
+    const itemRow = queue.find((m) => m.targetType === 'menuItem' && m.itemId === item.id);
+    expect(shopRow?.image).toBe('/api/uploads/mod-banner.jpg');
+    expect(itemRow?.image).toBe('/api/uploads/mod-item.jpg');
+  });
+});
