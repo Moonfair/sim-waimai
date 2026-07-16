@@ -119,6 +119,11 @@ export interface ReviewDto {
   createdAt: string;
 }
 
+/** Merchant-view review: includes hidden (soft-deleted) state. */
+export interface MerchantReviewDto extends ReviewDto {
+  hidden: boolean;
+}
+
 /** Merchant-view menu item: includes delisted state. */
 export interface MerchantMenuItemDto extends MenuItem {
   isListed: boolean;
@@ -173,6 +178,8 @@ export interface ModerationItemDto {
   reviewId?: string;
   rating?: number;
   photos?: string[];
+  /** 待审图片：restaurant 为 bannerImage，menuItem 为菜品 image；无图为空。 */
+  image?: string | null;
   reviewStatus: ReviewStatus;
   rejectReason?: string | null;
   /** 'ai' or the deciding admin's username; null while pending. */

@@ -2,6 +2,7 @@ import { fenToYuan } from '@sim-waimai/shared';
 import type {
   Category,
   MenuItem,
+  MerchantReviewDto,
   OrderDto,
   OrderSummaryDto,
   Restaurant,
@@ -76,6 +77,10 @@ export function toReviewDto(row: ReviewRow, username: string): ReviewDto {
     rejectReason: row.rejectReason,
     createdAt: row.createdAt.toISOString(),
   };
+}
+
+export function toMerchantReviewDto(row: ReviewRow, username: string): MerchantReviewDto {
+  return { ...toReviewDto(row, username), hidden: row.hiddenAt !== null };
 }
 
 export function toOrderDto(row: OrderRow, review?: ReviewDto | null): OrderDto {

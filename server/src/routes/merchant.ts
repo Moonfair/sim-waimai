@@ -5,9 +5,16 @@ import { z } from 'zod';
 import { CATEGORIES, yuanToFen } from '@sim-waimai/shared';
 import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
-import { menuItems, restaurants } from '../db/schema';
+import { menuItems, restaurants, reviews, users } from '../db/schema';
+import { decodeCursor, encodeCursor } from '../lib/cursor';
 import { imageUrlSchema } from '../lib/imageUrl';
-import { toMenuItem, toRestaurantSummary, type MenuItemRow, type RestaurantRow } from '../lib/mappers';
+import {
+  toMenuItem,
+  toMerchantReviewDto,
+  toRestaurantSummary,
+  type MenuItemRow,
+  type RestaurantRow,
+} from '../lib/mappers';
 import { queueReview } from '../lib/moderation';
 import type { ModerationInput } from '../lib/moderationProvider';
 import { validateJson } from '../lib/validate';
@@ -221,6 +228,39 @@ export const merchantRoutes = new Hono()
       .where(eq(menuItems.restaurantId, owned.row.id))
       .orderBy(asc(menuItems.sortOrder));
     return c.json(toMerchantRestaurant(owned.row, items));
+  })
+  .get('/restaurants/:id/reviews', requireAuth, async (c) => {
+    const owned = await ownedRestaurant(c.get('user'), c.req.param('id'));
+    if ('error' in owned) return c.json({ error: owned.error }, owned.status);
+    const limitRaw = Number(c.req.query('limit') ?? 10);
+    const limit = Math.min(Math.max(Number.isFinite(limitRaw) ? Math.floor(limitRaw) : 10, 1), 50);
+
+    // 只列已过审的评价（含被商家隐藏的）：未过审的尚未公开，无从管理，也不该泄露给商家
+    const filters = [eq(reviews.restaurantId, owned.row.id), eq(reviews.reviewStatus, 'approved')];
+    const cursorParam = c.req.query('cursor');
+    if (cursorParam) {
+      const cursor = decodeCursor(cursorParam);
+      if (!cursor) return c.json({ error: '无效的分页游标' }, 400);
+      filters.push(
+        sql`(${reviews.createdAt}, ${reviews.id}) < (${cursor.createdAt}, ${cursor.id}::uuid)`,
+      );
+    }
+
+    const rows = await db
+      .select({ review: reviews, username: users.username })
+      .from(reviews)
+      .innerJoin(users, eq(users.id, reviews.userId))
+      .where(and(...filters))
+      .orderBy(desc(reviews.createdAt), desc(reviews.id))
+      .limit(limit + 1);
+
+    const hasMore = rows.length > limit;
+    const page = rows.slice(0, limit);
+    const last = page[page.length - 1];
+    return c.json({
+      items: page.map((r) => toMerchantReviewDto(r.review, r.username)),
+      nextCursor: hasMore && last ? encodeCursor(last.review.createdAt, last.review.id) : null,
+    });
   })
   .patch(
     '/restaurants/:id',
