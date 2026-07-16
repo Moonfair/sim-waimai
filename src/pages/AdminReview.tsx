@@ -130,9 +130,17 @@ export default function AdminReview() {
               return (
                 <div key={key} className="bg-white dark:bg-gray-800 rounded-2xl p-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center text-2xl flex-shrink-0">
-                      {item.emoji}
-                    </div>
+                    {item.image ? (
+                      <ZoomableImage
+                        src={item.image}
+                        alt={item.name}
+                        className="w-12 h-12 rounded-xl object-cover flex-shrink-0"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center text-2xl flex-shrink-0">
+                        {item.emoji}
+                      </div>
+                    )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-bold text-gray-900 dark:text-gray-100 text-sm truncate">
