@@ -1,15 +1,25 @@
 import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import type { ModerationItemDetailDto, ModerationRestaurantDetailDto } from '@sim-waimai/shared';
+import type {
+  ModerationItemDetailDto,
+  ModerationRestaurantDetailDto,
+  ModerationUserReviewDetailDto,
+} from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { assetUrl } from '../lib/assetUrl';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 
-type Detail = ModerationRestaurantDetailDto | ModerationItemDetailDto;
+type Detail = ModerationRestaurantDetailDto | ModerationItemDetailDto | ModerationUserReviewDetailDto;
 
 interface Props {
-  targetType: 'restaurant' | 'menuItem';
+  targetType: 'restaurant' | 'menuItem' | 'review';
+}
+
+/** 路由参数 :id 对店铺/菜品是 restaurantId，对评价是 reviewId。 */
+function fetchPathFor(targetType: Props['targetType'], id: string, itemId?: string): string {
+  if (targetType === 'review') return `/admin/reviews/${id}`;
+  return targetType === 'restaurant' ? `/admin/restaurants/${id}` : `/admin/restaurants/${id}/items/${itemId}`;
 }
 
 export default function AdminReviewDetail({ targetType }: Props) {
@@ -17,9 +27,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fetchPath =
-    targetType === 'restaurant' ? `/admin/restaurants/${id}` : `/admin/restaurants/${id}/items/${itemId}`;
-  const { data, loading, error } = useApi<Detail>(fetchPath);
+  const { data, loading, error } = useApi<Detail>(fetchPathFor(targetType, id!, itemId));
 
   const [rejecting, setRejecting] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
@@ -32,9 +40,11 @@ export default function AdminReviewDetail({ targetType }: Props) {
 
   const review = async (decision: 'approved' | 'rejected', reason?: string) => {
     const reviewPath =
-      targetType === 'restaurant'
-        ? `/admin/restaurants/${id}/review`
-        : `/admin/restaurants/${id}/items/${itemId}/review`;
+      targetType === 'review'
+        ? `/admin/reviews/${id}/review`
+        : targetType === 'restaurant'
+          ? `/admin/restaurants/${id}/review`
+          : `/admin/restaurants/${id}/items/${itemId}/review`;
     setSubmitting(true);
     try {
       await api.post(reviewPath, { decision, ...(reason ? { reason } : {}) });
@@ -67,8 +77,14 @@ export default function AdminReviewDetail({ targetType }: Props) {
   }
 
   const badge = STATUS_BADGE[data.reviewStatus];
-  const emoji = data.targetType === 'restaurant' ? data.restaurant.emoji : data.item.emoji;
-  const name = data.targetType === 'restaurant' ? data.restaurant.name : data.item.name;
+  const emoji =
+    data.targetType === 'restaurant' ? data.restaurant.emoji : data.targetType === 'menuItem' ? data.item.emoji : '💬';
+  const name =
+    data.targetType === 'restaurant'
+      ? data.restaurant.name
+      : data.targetType === 'menuItem'
+        ? data.item.name
+        : `${data.review.username} 的评价`;
 
   return (
     <div className="app-container min-h-screen bg-gray-50 dark:bg-gray-900 pb-28">
@@ -126,6 +142,33 @@ export default function AdminReviewDetail({ targetType }: Props) {
                   菜单分类：{data.restaurant.menuCategories.join(' / ')}
                 </p>
               )}
+            </>
+          ) : data.targetType === 'review' ? (
+            <>
+              <p className="text-sm text-gray-500 dark:text-gray-400">所属店铺：{data.restaurantName}</p>
+              <p className="text-sm text-orange-500">
+                {'★'.repeat(data.review.rating)}
+                <span className="text-gray-300 dark:text-gray-600">{'★'.repeat(5 - data.review.rating)}</span>
+                <span className="text-gray-500 dark:text-gray-400 ml-1">{data.review.rating}星</span>
+              </p>
+              {data.review.content && (
+                <p className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap">{data.review.content}</p>
+              )}
+              {data.review.photos.length > 0 && (
+                <div className="grid grid-cols-3 gap-2">
+                  {data.review.photos.map((photo) => (
+                    <img
+                      key={photo}
+                      src={assetUrl(photo)}
+                      alt="评价图片"
+                      className="w-full aspect-square object-cover rounded-xl"
+                    />
+                  ))}
+                </div>
+              )}
+              <p className="text-xs text-gray-400 dark:text-gray-500">
+                发布时间:{new Date(data.review.createdAt).toLocaleString('zh-CN')}
+              </p>
             </>
           ) : (
             <>
@@ -192,7 +235,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
           <div className="space-y-2">
             <input
               className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-red-400 text-sm"
-              placeholder="填写驳回原因（将展示给商家）"
+              placeholder="填写驳回原因（将展示给发布者）"
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}
               autoFocus

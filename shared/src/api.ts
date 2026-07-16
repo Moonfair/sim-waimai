@@ -156,9 +156,9 @@ export interface UserStatsDto {
   } | null;
 }
 
-/** One row in the admin moderation queue: a restaurant or a single menu item. */
+/** One row in the admin moderation queue: a restaurant, a single menu item, or a user review. */
 export interface ModerationItemDto {
-  targetType: 'restaurant' | 'menuItem';
+  targetType: 'restaurant' | 'menuItem' | 'review';
   restaurantId: string;
   restaurantName: string;
   /** Present only for menuItem rows. */
@@ -169,6 +169,10 @@ export interface ModerationItemDto {
   category: string;
   description?: string;
   tags?: string[];
+  /** Present only for review rows. */
+  reviewId?: string;
+  rating?: number;
+  photos?: string[];
   reviewStatus: ReviewStatus;
   rejectReason?: string | null;
   /** 'ai' or the deciding admin's username; null while pending. */
@@ -206,6 +210,14 @@ export interface ModerationItemDetailDto extends ModerationReviewMeta {
   restaurantId: string;
   restaurantName: string;
   item: MenuItem;
+}
+
+/** Full detail for a single user review under moderation (admin review detail page). */
+export interface ModerationUserReviewDetailDto extends ModerationReviewMeta {
+  targetType: 'review';
+  restaurantId: string;
+  restaurantName: string;
+  review: ReviewDto;
 }
 
 export type UploadKind = 'banner' | 'item' | 'review';

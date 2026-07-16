@@ -61,6 +61,14 @@ export default function App() {
                     </RequireAdmin>
                   }
                 />
+                <Route
+                  path="/admin/review/user-review/:id"
+                  element={
+                    <RequireAdmin>
+                      <AdminReviewDetail targetType="review" />
+                    </RequireAdmin>
+                  }
+                />
               </Routes>
             </CartProvider>
           </AddressProvider>

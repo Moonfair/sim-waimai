@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 
 const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
@@ -12,19 +13,23 @@ const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
 ];
 
 function reviewPath(item: ModerationItemDto): string {
+  if (item.targetType === 'review') return `/admin/reviews/${item.reviewId}/review`;
   return item.targetType === 'restaurant'
     ? `/admin/restaurants/${item.restaurantId}/review`
     : `/admin/restaurants/${item.restaurantId}/items/${item.itemId}/review`;
 }
 
 function detailPath(item: ModerationItemDto): string {
+  if (item.targetType === 'review') return `/admin/review/user-review/${item.reviewId}`;
   return item.targetType === 'restaurant'
     ? `/admin/review/restaurant/${item.restaurantId}`
     : `/admin/review/item/${item.restaurantId}/${item.itemId}`;
 }
 
+const TARGET_TYPE_LABEL = { restaurant: '店铺', menuItem: '菜品', review: '评价' } as const;
+
 function itemKey(item: ModerationItemDto): string {
-  return `${item.targetType}:${item.restaurantId}:${item.itemId ?? ''}`;
+  return `${item.targetType}:${item.restaurantId}:${item.itemId ?? item.reviewId ?? ''}`;
 }
 
 export default function AdminReview() {
@@ -134,19 +139,31 @@ export default function AdminReview() {
                           {item.name}
                         </span>
                         <span className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 bg-orange-50 dark:bg-orange-500/10 text-orange-500">
-                          {item.targetType === 'restaurant' ? '店铺' : '菜品'}
+                          {TARGET_TYPE_LABEL[item.targetType]}
                         </span>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${badge.className}`}>
                           {badge.label}
                         </span>
                       </div>
                       <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
-                        {item.targetType === 'menuItem' && `${item.restaurantName} · `}
+                        {item.targetType !== 'restaurant' && `${item.restaurantName} · `}
                         {item.category}
                         {item.tags?.length ? ` · ${item.tags.join(' / ')}` : ''}
                       </p>
                       {item.description && (
                         <p className="text-gray-500 dark:text-gray-400 text-xs mt-1 line-clamp-2">{item.description}</p>
+                      )}
+                      {item.photos && item.photos.length > 0 && (
+                        <div className="flex gap-1.5 mt-1.5 overflow-x-auto">
+                          {item.photos.map((photo) => (
+                            <img
+                              key={photo}
+                              src={assetUrl(photo)}
+                              alt="评价图片"
+                              className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
+                            />
+                          ))}
+                        </div>
                       )}
                       <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
                         发布者：{item.ownerUsername ?? '平台'}
@@ -177,7 +194,7 @@ export default function AdminReview() {
                     <div className="mt-3 space-y-2">
                       <input
                         className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-red-400 text-sm"
-                        placeholder="填写驳回原因（将展示给商家）"
+                        placeholder="填写驳回原因（将展示给发布者）"
                         value={rejectReason}
                         onChange={(e) => setRejectReason(e.target.value)}
                         autoFocus

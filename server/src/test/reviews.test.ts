@@ -10,14 +10,19 @@ import { applyRatingDelta } from '../lib/ratings';
 import { registerTestUser } from './testHelpers';
 
 const app = createApp();
-const cred = { username: `t_rev_${Date.now().toString(36)}`, password: 'secret123' };
+const stamp = Date.now().toString(36);
+const cred = { username: `t_rev_${stamp}`, password: 'secret123' };
+const adminCred = { username: `t_rev_a_${stamp}`, password: 'secret123' };
 let cookie = '';
+let adminCookie = '';
 let userId = '';
+let adminId = '';
 const RID = 'kfc';
 const RATING = 5;
 
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
+let savedAdmins: string | undefined;
 
 function req(path: string, init?: { method?: string; body?: unknown }) {
   return app.request(path, {
@@ -73,14 +78,22 @@ beforeAll(async () => {
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
 
+  savedAdmins = process.env.ADMIN_USERNAMES;
+  process.env.ADMIN_USERNAMES = [savedAdmins, adminCred.username].filter(Boolean).join(',');
+
   const res = await registerTestUser(app, cred);
   cookie = (res.headers.get('set-cookie') ?? '').split(';')[0];
   userId = ((await res.json()) as { id: string }).id;
+  const adminRes = await registerTestUser(app, adminCred);
+  adminCookie = (adminRes.headers.get('set-cookie') ?? '').split(';')[0];
+  adminId = ((await adminRes.json()) as { id: string }).id;
 });
 
 afterAll(async () => {
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
+  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
+  else process.env.ADMIN_USERNAMES = savedAdmins;
   // undo the aggregate bumps (only approved reviews were counted) so reruns don't drift kfc's rating
   const mine = await db.select().from(reviews).where(eq(reviews.userId, userId));
   await db.transaction(async (tx) => {
@@ -93,6 +106,7 @@ afterAll(async () => {
   });
   await db.delete(orders).where(eq(orders.userId, userId));
   await db.delete(users).where(eq(users.id, userId));
+  await db.delete(users).where(eq(users.id, adminId));
   await pool.end();
 });
 
@@ -207,5 +221,100 @@ describe('order reviews（先审后发）', () => {
     expect(
       (await req(`/api/orders/${orderId}/reviews`, { method: 'POST', body: { rating: 6 } })).status,
     ).toBe(400);
+  });
+});
+
+function adminReq(path: string, init?: { method?: string; body?: unknown }) {
+  return app.request(path, {
+    method: init?.method ?? 'GET',
+    headers: {
+      Cookie: adminCookie,
+      ...(init?.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: init?.body !== undefined ? JSON.stringify(init.body) : undefined,
+  });
+}
+
+describe('admin 人工审核评价', () => {
+  it('pending 评价进入队列，详情可见，通过后公开并计入聚合，推翻后回滚', async () => {
+    const before = await shopAggregate();
+    const orderId = await placeCompletedOrder();
+    const submitted = (await (
+      await req(`/api/orders/${orderId}/reviews`, {
+        method: 'POST',
+        body: { rating: RATING, content: '等待人工审核的评价' },
+      })
+    ).json()) as ReviewDto;
+    await __awaitReviews(); // 无凭证：保持 pending
+
+    // 队列可见
+    const queue = (await (await adminReq('/api/admin/moderation?status=pending')).json()) as Array<{
+      targetType: string;
+      reviewId?: string;
+      ownerUsername?: string | null;
+      description?: string;
+    }>;
+    const entry = queue.find((m) => m.targetType === 'review' && m.reviewId === submitted.id);
+    expect(entry).toBeDefined();
+    expect(entry!.ownerUsername).toBe(cred.username);
+    expect(entry!.description).toBe('等待人工审核的评价');
+
+    // 详情
+    const detailRes = await adminReq(`/api/admin/reviews/${submitted.id}`);
+    expect(detailRes.status).toBe(200);
+    const detail = (await detailRes.json()) as {
+      targetType: string;
+      restaurantName: string;
+      review: ReviewDto;
+    };
+    expect(detail.targetType).toBe('review');
+    expect(detail.review.content).toBe('等待人工审核的评价');
+
+    // 驳回必须填原因
+    expect(
+      (
+        await adminReq(`/api/admin/reviews/${submitted.id}/review`, {
+          method: 'POST',
+          body: { decision: 'rejected' },
+        })
+      ).status,
+    ).toBe(400);
+
+    // 通过 → 公开可见 + 聚合 +1
+    const approveRes = await adminReq(`/api/admin/reviews/${submitted.id}/review`, {
+      method: 'POST',
+      body: { decision: 'approved' },
+    });
+    expect(approveRes.status).toBe(200);
+    expect((await publicReviews()).some((r) => r.id === submitted.id)).toBe(true);
+    let agg = await shopAggregate();
+    expect(agg.ratingCount).toBe(before.ratingCount + 1);
+
+    // 推翻（approved → rejected）→ 公开不可见 + 聚合回滚
+    const rejectRes = await adminReq(`/api/admin/reviews/${submitted.id}/review`, {
+      method: 'POST',
+      body: { decision: 'rejected', reason: '内容不实' },
+    });
+    expect(rejectRes.status).toBe(200);
+    expect((await publicReviews()).some((r) => r.id === submitted.id)).toBe(false);
+    agg = await shopAggregate();
+    expect(agg.ratingCount).toBe(before.ratingCount);
+    expect(agg.rating).toBeCloseTo(before.rating, 1);
+
+    // 本人可见驳回原因
+    const minePage = (await (
+      await req(`/api/restaurants/${RID}/reviews?limit=50`)
+    ).json()) as Page<ReviewDto>;
+    const mine = minePage.items.find((r) => r.id === submitted.id);
+    expect(mine!.reviewStatus).toBe('rejected');
+    expect(mine!.rejectReason).toBe('内容不实');
+  });
+
+  it('admin review endpoints are admin-only and 404 on unknown id', async () => {
+    expect((await req('/api/admin/reviews/00000000-0000-0000-0000-000000000000')).status).toBe(403);
+    expect(
+      (await adminReq('/api/admin/reviews/00000000-0000-0000-0000-000000000000')).status,
+    ).toBe(404);
+    expect((await adminReq('/api/admin/reviews/not-a-uuid')).status).toBe(404);
   });
 });

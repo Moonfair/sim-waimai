@@ -5,12 +5,14 @@ import type {
   ModerationItemDetailDto,
   ModerationItemDto,
   ModerationRestaurantDetailDto,
+  ModerationUserReviewDetailDto,
   ReviewStatus,
 } from '@sim-waimai/shared';
 import { db } from '../db/client';
-import { menuItems, restaurants, users } from '../db/schema';
-import { toMenuItem, toRestaurant } from '../lib/mappers';
-import { validateJson } from '../lib/validate';
+import { menuItems, restaurants, reviews, users } from '../db/schema';
+import { toMenuItem, toRestaurant, toReviewDto } from '../lib/mappers';
+import { applyRatingDelta } from '../lib/ratings';
+import { UUID_RE, validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 
 const LIST_LIMIT = 100;
@@ -28,6 +30,7 @@ const reviewSchema = z
 
 type RestaurantRow = typeof restaurants.$inferSelect;
 type MenuItemRow = typeof menuItems.$inferSelect;
+type UserReviewRow = typeof reviews.$inferSelect;
 type ReviewMetaRow = Pick<
   RestaurantRow,
   'reviewStatus' | 'rejectReason' | 'reviewedAt' | 'reviewedBy' | 'aiVerdict' | 'aiReason' | 'aiConfidence'
@@ -97,6 +100,32 @@ function toItemModerationItem(
   };
 }
 
+function toUserReviewModerationItem(
+  row: UserReviewRow,
+  restaurantName: string,
+  authorUsername: string | null,
+): ModerationItemDto {
+  return {
+    targetType: 'review',
+    restaurantId: row.restaurantId,
+    restaurantName,
+    reviewId: row.id,
+    name: authorUsername ?? '匿名用户',
+    emoji: '💬',
+    category: `${row.rating}星评价`,
+    description: row.content || undefined,
+    rating: row.rating,
+    photos: row.photos,
+    reviewStatus: row.reviewStatus,
+    rejectReason: row.rejectReason,
+    reviewedBy: row.reviewedBy,
+    ownerUsername: authorUsername,
+    aiVerdict: row.aiVerdict,
+    aiReason: row.aiReason,
+    aiConfidence: row.aiConfidence,
+  };
+}
+
 export const adminRoutes = new Hono()
   .get('/moderation', requireAdmin, async (c) => {
     const parsed = statusSchema.safeParse(c.req.query('status') ?? 'pending');
@@ -121,11 +150,75 @@ export const adminRoutes = new Hono()
       .orderBy(asc(menuItems.restaurantId), asc(menuItems.sortOrder))
       .limit(LIST_LIMIT);
 
+    const reviewRows = await db
+      .select({ review: reviews, restaurantName: restaurants.name, authorUsername: users.username })
+      .from(reviews)
+      .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
+      .innerJoin(users, eq(users.id, reviews.userId))
+      .where(eq(reviews.reviewStatus, status))
+      .orderBy(desc(reviews.createdAt))
+      .limit(LIST_LIMIT);
+
     const list: ModerationItemDto[] = [
       ...shopRows.map((r) => toRestaurantModerationItem(r.restaurant, r.ownerUsername)),
       ...itemRows.map((r) => toItemModerationItem(r.item, r.restaurantName, r.ownerUsername)),
+      ...reviewRows.map((r) => toUserReviewModerationItem(r.review, r.restaurantName, r.authorUsername)),
     ];
     return c.json(list);
+  })
+  .get('/reviews/:reviewId', requireAdmin, async (c) => {
+    const reviewId = c.req.param('reviewId');
+    if (!UUID_RE.test(reviewId)) return c.json({ error: '评价不存在' }, 404);
+    const [row] = await db
+      .select({ review: reviews, restaurantName: restaurants.name, authorUsername: users.username })
+      .from(reviews)
+      .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
+      .innerJoin(users, eq(users.id, reviews.userId))
+      .where(eq(reviews.id, reviewId));
+    if (!row) return c.json({ error: '评价不存在' }, 404);
+    const detail: ModerationUserReviewDetailDto = {
+      targetType: 'review',
+      restaurantId: row.review.restaurantId,
+      restaurantName: row.restaurantName,
+      review: toReviewDto(row.review, row.authorUsername),
+      ...toReviewMeta(row.review, row.authorUsername),
+    };
+    return c.json(detail);
+  })
+  .post('/reviews/:reviewId/review', requireAdmin, validateJson(reviewSchema), async (c) => {
+    const admin = c.get('user');
+    const body = c.req.valid('json');
+    const reviewId = c.req.param('reviewId');
+    if (!UUID_RE.test(reviewId)) return c.json({ error: '评价不存在' }, 404);
+    // FOR UPDATE 锁行取旧状态：与在途的 AI 审核（WHERE pending）串行化，
+    // 聚合按旧→新状态转移（只有 approved 计入店铺评分）。
+    const row = await db.transaction(async (tx) => {
+      const [old] = await tx.select().from(reviews).where(eq(reviews.id, reviewId)).for('update');
+      if (!old) return null;
+      const [updated] = await tx
+        .update(reviews)
+        .set({
+          reviewStatus: body.decision,
+          rejectReason: body.decision === 'rejected' ? body.reason!.trim() : null,
+          reviewedAt: new Date(),
+          reviewedBy: admin.username,
+        })
+        .where(eq(reviews.id, reviewId))
+        .returning();
+      const wasCounted = old.reviewStatus === 'approved';
+      const nowCounted = body.decision === 'approved';
+      if (!wasCounted && nowCounted) await applyRatingDelta(tx, old.restaurantId, old.rating, 1);
+      else if (wasCounted && !nowCounted) await applyRatingDelta(tx, old.restaurantId, -old.rating, -1);
+      return updated;
+    });
+    if (!row) return c.json({ error: '评价不存在' }, 404);
+    const [meta] = await db
+      .select({ restaurantName: restaurants.name, authorUsername: users.username })
+      .from(reviews)
+      .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
+      .innerJoin(users, eq(users.id, reviews.userId))
+      .where(eq(reviews.id, reviewId));
+    return c.json(toUserReviewModerationItem(row, meta?.restaurantName ?? '', meta?.authorUsername ?? null));
   })
   .get('/restaurants/:id', requireAdmin, async (c) => {
     const [row] = await db.select().from(restaurants).where(eq(restaurants.id, c.req.param('id')));
