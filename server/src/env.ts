@@ -18,9 +18,14 @@ const envSchema = z.object({
   COS_BUCKET: z.string().optional(),
   COS_REGION: z.string().optional(),
   COS_PUBLIC_BASE_URL: z.string().optional(),
-  /** 留空则新发布内容全部进入人工审核队列。 */
-  ANTHROPIC_API_KEY: z.string().optional(),
-  MODERATION_MODEL: z.string().default('claude-haiku-4-5-20251001'),
+  /** 腾讯云内容安全（天御 TMS/IMS）凭证：留空则新发布内容全部进入人工审核队列。
+   *  可与 COS 用同一对密钥（需 CAM 授权 TMS/IMS），但必须显式填写，不做静默回落。 */
+  TENCENT_MODERATION_SECRET_ID: z.string().optional(),
+  TENCENT_MODERATION_SECRET_KEY: z.string().optional(),
+  TENCENT_MODERATION_REGION: z.string().default('ap-guangzhou'),
+  /** 天御控制台的自定义审核策略/词库（可选）。 */
+  TENCENT_TMS_BIZTYPE: z.string().optional(),
+  TENCENT_IMS_BIZTYPE: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);

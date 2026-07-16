@@ -1,7 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import sharp from 'sharp';
@@ -10,10 +9,10 @@ import type { PresignResponse } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { restaurants } from '../db/schema';
 import { isCosConfigured, publicUrlFor, putObject } from '../lib/cos';
+import { UPLOADS_DIR } from '../lib/localUploads';
 import { validateJson } from '../lib/validate';
 import { optionalAuth, requireAuth } from '../middleware/auth';
 
-const UPLOADS_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../uploads');
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 
 const EXT_BY_CONTENT_TYPE: Record<string, string> = {

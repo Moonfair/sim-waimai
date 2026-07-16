@@ -8,7 +8,8 @@ import { db } from '../db/client';
 import { menuItems, restaurants } from '../db/schema';
 import { imageUrlSchema } from '../lib/imageUrl';
 import { toMenuItem, toRestaurantSummary, type MenuItemRow, type RestaurantRow } from '../lib/mappers';
-import { queueReview, type ModerationContent } from '../lib/moderation';
+import { queueReview } from '../lib/moderation';
+import type { ModerationInput } from '../lib/moderationProvider';
 import { validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
 import type { AuthPayload } from '../lib/jwt';
@@ -142,26 +143,23 @@ const RESET_REVIEW = {
   aiConfidence: null,
 };
 
-function restaurantContent(row: RestaurantRow, imageChanged: boolean): ModerationContent {
+function restaurantContent(row: RestaurantRow): ModerationInput {
   return {
-    targetType: 'restaurant',
-    name: row.name,
-    category: row.category,
-    tags: [...row.tags, ...row.menuCategories],
-    emoji: row.emoji,
-    imageChanged,
+    texts: [row.name, row.category, row.emoji, ...row.tags, ...row.menuCategories],
+    images: row.bannerImage ? [row.bannerImage] : [],
   };
 }
 
-function itemContent(row: MenuItemRow, imageChanged: boolean): ModerationContent {
+function itemContent(row: MenuItemRow): ModerationInput {
   return {
-    targetType: 'menuItem',
-    name: row.name,
-    category: row.menuCategory,
-    description: row.description || undefined,
-    optionText: row.optionGroups?.flatMap((g) => [g.name, ...g.options.map((o) => o.name)]),
-    emoji: row.emoji,
-    imageChanged,
+    texts: [
+      row.name,
+      row.menuCategory,
+      row.emoji,
+      row.description,
+      ...(row.optionGroups?.flatMap((g) => [g.name, ...g.options.map((o) => o.name)]) ?? []),
+    ],
+    images: row.image ? [row.image] : [],
   };
 }
 
@@ -211,7 +209,7 @@ export const merchantRoutes = new Hono()
         reviewStatus: 'pending',
       })
       .returning();
-    queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!, false));
+    queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!));
     return c.json(toMerchantRestaurant(row!, []));
   })
   .get('/restaurants/:id', requireAuth, async (c) => {
@@ -253,10 +251,7 @@ export const merchantRoutes = new Hono()
         .where(eq(restaurants.id, owned.row.id))
         .returning();
       if (needsReview) {
-        queueReview(
-          { table: 'restaurants', restaurantId: row!.id },
-          restaurantContent(row!, body.bannerImage !== undefined),
-        );
+        queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!));
       }
       return c.json({
         ...toRestaurantSummary(row!),
@@ -295,10 +290,7 @@ export const merchantRoutes = new Hono()
         reviewStatus: 'pending',
       })
       .returning();
-    queueReview(
-      { table: 'menuItems', restaurantId: owned.row.id, itemId: row!.id },
-      itemContent(row!, body.image !== undefined),
-    );
+    queueReview({ table: 'menuItems', restaurantId: owned.row.id, itemId: row!.id }, itemContent(row!));
     return c.json(toMerchantMenuItem(row!));
   })
   .patch(
@@ -337,10 +329,7 @@ export const merchantRoutes = new Hono()
         .returning();
       if (!row) return c.json({ error: '菜品不存在' }, 404);
       if (needsReview) {
-        queueReview(
-          { table: 'menuItems', restaurantId: owned.row.id, itemId: row.id },
-          itemContent(row, body.image !== undefined),
-        );
+        queueReview({ table: 'menuItems', restaurantId: owned.row.id, itemId: row.id }, itemContent(row));
       }
       return c.json(toMerchantMenuItem(row));
     },

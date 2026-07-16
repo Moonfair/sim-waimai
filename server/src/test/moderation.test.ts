@@ -11,7 +11,8 @@ import type {
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { menuItems, restaurants, users } from '../db/schema';
-import { __awaitReviews, __setAiReviewer } from '../lib/moderation';
+import { __awaitReviews } from '../lib/moderation';
+import { __setReviewer } from '../lib/moderationProvider';
 import { registerTestUser } from './testHelpers';
 
 const app = createApp();
@@ -25,7 +26,8 @@ let randoCookie = '';
 let ownerId = '';
 
 let savedAdmins: string | undefined;
-let savedApiKey: string | undefined;
+let savedSecretId: string | undefined;
+let savedSecretKey: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
   const res = await registerTestUser(app, cred);
@@ -105,10 +107,13 @@ async function merchantShop(shopId: string): Promise<MerchantRestaurantDto> {
 }
 
 beforeAll(async () => {
-  // lib/admin.ts 与 lib/moderation.ts 都在调用时惰性读 process.env，运行期设置即可生效。
+  // lib/admin.ts 与 lib/moderationProvider.ts 都在调用时惰性读 process.env，运行期设置即可生效。
   savedAdmins = process.env.ADMIN_USERNAMES;
-  savedApiKey = process.env.ANTHROPIC_API_KEY;
-  delete process.env.ANTHROPIC_API_KEY; // 无 key：默认走人工队列，避免测试触网
+  savedSecretId = process.env.TENCENT_MODERATION_SECRET_ID;
+  savedSecretKey = process.env.TENCENT_MODERATION_SECRET_KEY;
+  // 无凭证：默认走人工队列，避免测试触网计费
+  delete process.env.TENCENT_MODERATION_SECRET_ID;
+  delete process.env.TENCENT_MODERATION_SECRET_KEY;
   process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
 
   const a = await register(admin);
@@ -124,7 +129,8 @@ beforeAll(async () => {
 afterAll(async () => {
   if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
   else process.env.ADMIN_USERNAMES = savedAdmins;
-  if (savedApiKey !== undefined) process.env.ANTHROPIC_API_KEY = savedApiKey;
+  if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
+  if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
   await db.delete(restaurants).where(eq(restaurants.ownerId, ownerId)); // cascades menu_items
   await db
     .delete(users)
@@ -133,7 +139,7 @@ afterAll(async () => {
 });
 
 afterEach(() => {
-  __setAiReviewer(null);
+  __setReviewer(null);
 });
 
 describe('无 AI key 时的人工队列兜底', () => {
@@ -271,7 +277,7 @@ describe('人工审核与编辑重审', () => {
 
 describe('AI 审核路径（注入 reviewer）', () => {
   it('AI approve/reject verdicts land in the DB with reviewedBy=ai', async () => {
-    __setAiReviewer(async () => ({ verdict: 'approve', reason: '正常餐饮内容', confidence: 0.98 }));
+    __setReviewer(async () => ({ verdict: 'approve', reason: '正常餐饮内容', confidence: 0.98 }));
     const approvedShop = await createShop(`AI通过店_${stamp}`);
     await __awaitReviews();
     const [row1] = await db
@@ -284,7 +290,7 @@ describe('AI 审核路径（注入 reviewer）', () => {
     expect(row1!.aiReason).toBe('正常餐饮内容');
     expect(row1!.aiConfidence).toBe(0.98);
 
-    __setAiReviewer(async () => ({ verdict: 'reject', reason: '包含违禁品信息', confidence: 0.95 }));
+    __setReviewer(async () => ({ verdict: 'reject', reason: '包含违禁品信息', confidence: 0.95 }));
     const rejectedShop = await createShop(`AI驳回店_${stamp}`);
     await __awaitReviews();
     const [row2] = await db
@@ -299,7 +305,7 @@ describe('AI 审核路径（注入 reviewer）', () => {
   });
 
   it('uncertain verdict stays pending but AI suggestion is persisted for manual review', async () => {
-    __setAiReviewer(async () => ({ verdict: 'uncertain', reason: '无法判断', confidence: 0.4 }));
+    __setReviewer(async () => ({ verdict: 'uncertain', reason: '无法判断', confidence: 0.4 }));
     const shop = await createShop(`AI存疑店_${stamp}`);
     await __awaitReviews();
     const [row] = await db.select().from(restaurants).where(eq(restaurants.id, shop.id));
@@ -310,13 +316,13 @@ describe('AI 审核路径（注入 reviewer）', () => {
   });
 
   it('editing a reviewed shop resets the stale AI suggestion', async () => {
-    __setAiReviewer(async () => ({ verdict: 'approve', reason: '正常餐饮内容', confidence: 0.9 }));
+    __setReviewer(async () => ({ verdict: 'approve', reason: '正常餐饮内容', confidence: 0.9 }));
     const shop = await createShop(`AI重审店_${stamp}`);
     await __awaitReviews();
     const [before] = await db.select().from(restaurants).where(eq(restaurants.id, shop.id));
     expect(before!.aiVerdict).toBe('approve');
 
-    __setAiReviewer(null); // 改名后重新入队但不注入 AI，保持 pending 以观察重置结果
+    __setReviewer(null); // 改名后重新入队但不注入 AI，保持 pending 以观察重置结果
     await req(`/api/merchant/restaurants/${shop.id}`, ownerCookie, {
       method: 'PATCH',
       body: { name: `AI重审店改名_${stamp}` },
@@ -331,7 +337,7 @@ describe('AI 审核路径（注入 reviewer）', () => {
   it('slow AI result does not overwrite an admin decision (WHERE pending guard)', async () => {
     let release!: () => void;
     const gate = new Promise<void>((resolve) => (release = resolve));
-    __setAiReviewer(async () => {
+    __setReviewer(async () => {
       await gate;
       return { verdict: 'reject', reason: '慢速驳回', confidence: 0.9 };
     });
@@ -347,7 +353,7 @@ describe('AI 审核路径（注入 reviewer）', () => {
   });
 
   it('AI review also covers menu items', async () => {
-    __setAiReviewer(async () => ({ verdict: 'approve', reason: 'ok', confidence: 0.97 }));
+    __setReviewer(async () => ({ verdict: 'approve', reason: 'ok', confidence: 0.97 }));
     const shop = await createShop(`AI商品店_${stamp}`);
     const item = await createItem(shop.id, 'AI审核菜');
     await __awaitReviews();
@@ -439,7 +445,7 @@ describe('审核详情接口（GET /api/admin/restaurants/:id[/items/:itemId]）
   });
 
   it('detail reflects the same AI verdict/reason/confidence the list endpoint shows', async () => {
-    __setAiReviewer(async () => ({ verdict: 'uncertain', reason: '详情一致性测试', confidence: 0.55 }));
+    __setReviewer(async () => ({ verdict: 'uncertain', reason: '详情一致性测试', confidence: 0.55 }));
     const shop = await createShop(`详情AI店_${stamp}`);
     await __awaitReviews();
 
