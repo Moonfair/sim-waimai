@@ -5,6 +5,7 @@ import MenuItemEditor from '../components/MenuItemEditor';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { assetUrl } from '../lib/assetUrl';
+import { copyRestaurantLink } from '../lib/share';
 import { uploadImage } from '../lib/upload';
 
 const inputClass =
@@ -109,25 +110,7 @@ export default function MerchantEdit() {
   };
 
   const handleShare = async () => {
-    const url = new URL(`${import.meta.env.BASE_URL}restaurant/${shop.id}`, window.location.origin).toString();
-    let ok = false;
-    try {
-      await navigator.clipboard.writeText(url);
-      ok = true;
-    } catch {
-      const ta = document.createElement('textarea');
-      ta.value = url;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        ok = document.execCommand('copy');
-      } catch {
-        ok = false;
-      }
-      document.body.removeChild(ta);
-    }
+    const ok = await copyRestaurantLink(shop.id);
     setShareState(ok ? 'copied' : 'failed');
     setTimeout(() => setShareState('idle'), 2000);
   };
