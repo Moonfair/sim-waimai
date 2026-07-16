@@ -172,6 +172,8 @@ export const reviews = pgTable(
     rating: smallint('rating').notNull(),
     content: text('content').notNull().default(''),
     photos: jsonb('photos').$type<string[]>().notNull().default([]),
+    /** 非 NULL = 被商家隐藏（软删除），不在店铺页公开展示；顾客本人订单里仍可见。 */
+    hiddenAt: timestamp('hidden_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
