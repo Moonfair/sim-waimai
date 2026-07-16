@@ -113,6 +113,9 @@ export interface ReviewDto {
   rating: number;
   content: string;
   photos: string[];
+  /** 先审后发：非 approved 的评价只会返回给作者本人。 */
+  reviewStatus: ReviewStatus;
+  rejectReason?: string | null;
   createdAt: string;
 }
 

@@ -174,11 +174,24 @@ export const reviews = pgTable(
     photos: jsonb('photos').$type<string[]>().notNull().default([]),
     /** 非 NULL = 被商家隐藏（软删除），不在店铺页公开展示；顾客本人订单里仍可见。 */
     hiddenAt: timestamp('hidden_at', { withTimezone: true }),
+    /** Default 'approved' so pre-moderation rows pass; the create route stamps 'pending' explicitly. */
+    reviewStatus: text('review_status').$type<ReviewStatus>().notNull().default('approved'),
+    rejectReason: text('reject_reason'),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    /** 'ai' or the deciding admin's username. */
+    reviewedBy: text('reviewed_by'),
+    /** AI's own verdict/reasoning, persisted even when it left the review pending (uncertain). */
+    aiVerdict: text('ai_verdict').$type<AiVerdict>(),
+    aiReason: text('ai_reason'),
+    aiConfidence: real('ai_confidence'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     check('reviews_rating_check', sql`${t.rating} BETWEEN 1 AND 5`),
+    check('reviews_review_status_check', sql`${t.reviewStatus} IN ('pending', 'approved', 'rejected')`),
+    check('reviews_ai_verdict_check', sql`${t.aiVerdict} IN ('approve', 'reject', 'uncertain')`),
     index('reviews_restaurant_idx').on(t.restaurantId, t.createdAt.desc()),
+    index('reviews_review_status_idx').on(t.reviewStatus),
   ],
 );
 

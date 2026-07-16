@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, inArray, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, inArray, or, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { db } from '../db/client';
 import { favorites, menuItems, restaurants, reviews, users } from '../db/schema';
@@ -34,12 +34,17 @@ export const restaurantRoutes = new Hono()
     const favs = await favoriteIdSet(user.sub, rows.map((r) => r.id));
     return c.json(rows.map((r) => toRestaurantSummary(r, favs.has(r.id))));
   })
-  .get('/:id/reviews', async (c) => {
+  .get('/:id/reviews', optionalAuth, async (c) => {
     const id = c.req.param('id');
     const limitRaw = Number(c.req.query('limit') ?? 10);
     const limit = Math.min(Math.max(Number.isFinite(limitRaw) ? Math.floor(limitRaw) : 10, 1), 50);
 
-    const filters = [eq(reviews.restaurantId, id)];
+    // 先审后发：公开只展示已通过的评价；本人始终可见自己的（含审核中/被驳回，前端标注状态）。
+    const user = c.get('user');
+    const visible = user
+      ? or(eq(reviews.reviewStatus, 'approved'), eq(reviews.userId, user.sub))!
+      : eq(reviews.reviewStatus, 'approved');
+    const filters = [eq(reviews.restaurantId, id), visible];
     const cursorParam = c.req.query('cursor');
     if (cursorParam) {
       const cursor = decodeCursor(cursorParam);

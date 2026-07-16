@@ -1,10 +1,11 @@
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { db } from '../db/client';
-import { orders, restaurants, reviews } from '../db/schema';
+import { orders, reviews } from '../db/schema';
 import { imageUrlSchema } from '../lib/imageUrl';
 import { toReviewDto } from '../lib/mappers';
+import { queueReview } from '../lib/moderation';
 import { UUID_RE, validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
 
@@ -33,29 +34,24 @@ export const reviewRoutes = new Hono().post(
 
     const body = c.req.valid('json');
     try {
-      const row = await db.transaction(async (tx) => {
-        const [inserted] = await tx
-          .insert(reviews)
-          .values({
-            orderId: id,
-            userId: user.sub,
-            restaurantId: order.restaurantId,
-            rating: body.rating,
-            content: body.content.trim(),
-            photos: body.photos,
-          })
-          .returning();
-        // keep the aggregate exact: rating = rating_sum / rating_count (1 decimal)
-        await tx
-          .update(restaurants)
-          .set({
-            ratingSum: sql`${restaurants.ratingSum} + ${body.rating}`,
-            ratingCount: sql`${restaurants.ratingCount} + 1`,
-            rating: sql`ROUND((${restaurants.ratingSum} + ${body.rating})::numeric / (${restaurants.ratingCount} + 1), 1)`,
-          })
-          .where(eq(restaurants.id, order.restaurantId));
-        return inserted;
-      });
+      // 先审后发：落库为 pending（不计入店铺评分聚合），AI 通过时才公开并累加聚合
+      //（见 lib/moderation.ts），驳回/存疑走人工队列。
+      const [row] = await db
+        .insert(reviews)
+        .values({
+          orderId: id,
+          userId: user.sub,
+          restaurantId: order.restaurantId,
+          rating: body.rating,
+          content: body.content.trim(),
+          photos: body.photos,
+          reviewStatus: 'pending',
+        })
+        .returning();
+      queueReview(
+        { table: 'reviews', reviewId: row!.id },
+        { texts: [row!.content], images: row!.photos },
+      );
       return c.json(toReviewDto(row!, user.username));
     } catch (err) {
       if ((err as { code?: string }).code === '23505') {

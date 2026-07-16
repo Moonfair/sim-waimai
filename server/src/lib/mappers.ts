@@ -72,6 +72,8 @@ export function toReviewDto(row: ReviewRow, username: string): ReviewDto {
     rating: row.rating,
     content: row.content,
     photos: row.photos,
+    reviewStatus: row.reviewStatus,
+    rejectReason: row.rejectReason,
     createdAt: row.createdAt.toISOString(),
   };
 }

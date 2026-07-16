@@ -1,7 +1,9 @@
 import { and, eq } from 'drizzle-orm';
+import type { AiVerdict, ReviewStatus } from '@sim-waimai/shared';
 import { db } from '../db/client';
-import { menuItems, restaurants } from '../db/schema';
+import { menuItems, restaurants, reviews } from '../db/schema';
 import { getReviewer, type ModerationInput } from './moderationProvider';
+import { applyRatingDelta } from './ratings';
 
 /**
  * AI 内容审核落库层：路由把新建/修改的内容先落库为 pending 并立即响应，
@@ -11,7 +13,19 @@ import { getReviewer, type ModerationInput } from './moderationProvider';
 
 export type ModerationTarget =
   | { table: 'restaurants'; restaurantId: string }
-  | { table: 'menuItems'; restaurantId: string; itemId: string };
+  | { table: 'menuItems'; restaurantId: string; itemId: string }
+  | { table: 'reviews'; reviewId: string };
+
+/** 三张表同名的审核字段子集。 */
+interface ReviewPatch {
+  aiVerdict: AiVerdict;
+  aiReason: string;
+  aiConfidence: number;
+  reviewStatus?: ReviewStatus;
+  rejectReason?: string | null;
+  reviewedAt?: Date;
+  reviewedBy?: string;
+}
 
 const inflight = new Set<Promise<void>>();
 
@@ -35,7 +49,7 @@ async function runReview(target: ModerationTarget, input: ModerationInput): Prom
   const result = await reviewer(input);
 
   // AI 的判断始终落库（供审核页展示"AI 建议"），uncertain 时额外保持 pending 走人工队列。
-  const patch: Partial<typeof restaurants.$inferInsert> = {
+  const patch: ReviewPatch = {
     aiVerdict: result.verdict,
     aiReason: result.reason,
     aiConfidence: result.confidence,
@@ -54,7 +68,7 @@ async function runReview(target: ModerationTarget, input: ModerationInput): Prom
       .update(restaurants)
       .set(patch)
       .where(and(eq(restaurants.id, target.restaurantId), eq(restaurants.reviewStatus, 'pending')));
-  } else {
+  } else if (target.table === 'menuItems') {
     await db
       .update(menuItems)
       .set(patch)
@@ -65,5 +79,17 @@ async function runReview(target: ModerationTarget, input: ModerationInput): Prom
           eq(menuItems.reviewStatus, 'pending'),
         ),
       );
+  } else {
+    // 评价先审后发：通过时才把评分计入店铺聚合。RETURNING 命中（仍为 pending）才累加，天然幂等。
+    await db.transaction(async (tx) => {
+      const [row] = await tx
+        .update(reviews)
+        .set(patch)
+        .where(and(eq(reviews.id, target.reviewId), eq(reviews.reviewStatus, 'pending')))
+        .returning();
+      if (row && patch.reviewStatus === 'approved') {
+        await applyRatingDelta(tx, row.restaurantId, row.rating, 1);
+      }
+    });
   }
 }
