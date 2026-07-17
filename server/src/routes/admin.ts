@@ -128,6 +128,74 @@ function toUserReviewModerationItem(
   };
 }
 
+type ReviewDecision = { decision: 'approved' | 'rejected'; reason?: string };
+
+/** 审批裁决写入的公共字段。 */
+function decisionFields(body: ReviewDecision, adminUsername: string) {
+  return {
+    reviewStatus: body.decision,
+    rejectReason: body.decision === 'rejected' ? body.reason!.trim() : null,
+    reviewedAt: new Date(),
+    reviewedBy: adminUsername,
+  };
+}
+
+/** 店铺审批核心。不加 WHERE pending：管理员可覆盖任何状态（含推翻 AI 结论）。目标不存在返回 null。 */
+async function applyRestaurantDecision(
+  restaurantId: string,
+  body: ReviewDecision,
+  adminUsername: string,
+): Promise<RestaurantRow | null> {
+  const [row] = await db
+    .update(restaurants)
+    .set(decisionFields(body, adminUsername))
+    .where(eq(restaurants.id, restaurantId))
+    .returning();
+  return row ?? null;
+}
+
+/** 菜品审批核心。目标不存在返回 null。 */
+async function applyMenuItemDecision(
+  restaurantId: string,
+  itemId: string,
+  body: ReviewDecision,
+  adminUsername: string,
+): Promise<MenuItemRow | null> {
+  const [row] = await db
+    .update(menuItems)
+    .set(decisionFields(body, adminUsername))
+    .where(and(eq(menuItems.restaurantId, restaurantId), eq(menuItems.id, itemId)))
+    .returning();
+  return row ?? null;
+}
+
+/**
+ * 用户评价审批核心。FOR UPDATE 锁行取旧状态：与在途的 AI 审核（WHERE pending）串行化，
+ * 聚合按旧→新状态转移（只有 approved 计入店铺评分）。目标不存在返回 null。
+ */
+async function applyUserReviewDecision(
+  reviewId: string,
+  body: ReviewDecision,
+  adminUsername: string,
+): Promise<UserReviewRow | null> {
+  if (!UUID_RE.test(reviewId)) return null;
+  return await db.transaction(async (tx) => {
+    const [old] = await tx.select().from(reviews).where(eq(reviews.id, reviewId)).for('update');
+    if (!old) return null;
+    const [updated] = await tx
+      .update(reviews)
+      .set(decisionFields(body, adminUsername))
+      .where(eq(reviews.id, reviewId))
+      .returning();
+    // 被商家隐藏的评价不计入聚合：隐藏那一刻商家侧已回滚，裁决翻转时不能再动聚合
+    const wasCounted = old.reviewStatus === 'approved' && old.hiddenAt === null;
+    const nowCounted = body.decision === 'approved' && old.hiddenAt === null;
+    if (!wasCounted && nowCounted) await applyRatingDelta(tx, old.restaurantId, old.rating, 1);
+    else if (wasCounted && !nowCounted) await applyRatingDelta(tx, old.restaurantId, -old.rating, -1);
+    return updated ?? null;
+  });
+}
+
 export const adminRoutes = new Hono()
   .get('/moderation', requireAdmin, async (c) => {
     const parsed = statusSchema.safeParse(c.req.query('status') ?? 'pending');
@@ -188,39 +256,18 @@ export const adminRoutes = new Hono()
     return c.json(detail);
   })
   .post('/reviews/:reviewId/review', requireAdmin, validateJson(reviewSchema), async (c) => {
-    const admin = c.get('user');
-    const body = c.req.valid('json');
-    const reviewId = c.req.param('reviewId');
-    if (!UUID_RE.test(reviewId)) return c.json({ error: '评价不存在' }, 404);
-    // FOR UPDATE 锁行取旧状态：与在途的 AI 审核（WHERE pending）串行化，
-    // 聚合按旧→新状态转移（只有 approved 计入店铺评分）。
-    const row = await db.transaction(async (tx) => {
-      const [old] = await tx.select().from(reviews).where(eq(reviews.id, reviewId)).for('update');
-      if (!old) return null;
-      const [updated] = await tx
-        .update(reviews)
-        .set({
-          reviewStatus: body.decision,
-          rejectReason: body.decision === 'rejected' ? body.reason!.trim() : null,
-          reviewedAt: new Date(),
-          reviewedBy: admin.username,
-        })
-        .where(eq(reviews.id, reviewId))
-        .returning();
-      // 被商家隐藏的评价不计入聚合：隐藏那一刻商家侧已回滚，裁决翻转时不能再动聚合
-      const wasCounted = old.reviewStatus === 'approved' && old.hiddenAt === null;
-      const nowCounted = body.decision === 'approved' && old.hiddenAt === null;
-      if (!wasCounted && nowCounted) await applyRatingDelta(tx, old.restaurantId, old.rating, 1);
-      else if (wasCounted && !nowCounted) await applyRatingDelta(tx, old.restaurantId, -old.rating, -1);
-      return updated;
-    });
+    const row = await applyUserReviewDecision(
+      c.req.param('reviewId'),
+      c.req.valid('json'),
+      c.get('user').username,
+    );
     if (!row) return c.json({ error: '评价不存在' }, 404);
     const [meta] = await db
       .select({ restaurantName: restaurants.name, authorUsername: users.username })
       .from(reviews)
       .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
       .innerJoin(users, eq(users.id, reviews.userId))
-      .where(eq(reviews.id, reviewId));
+      .where(eq(reviews.id, row.id));
     return c.json(toUserReviewModerationItem(row, meta?.restaurantName ?? '', meta?.authorUsername ?? null));
   })
   .get('/restaurants/:id', requireAdmin, async (c) => {
@@ -256,35 +303,21 @@ export const adminRoutes = new Hono()
     return c.json(detail);
   })
   .post('/restaurants/:id/review', requireAdmin, validateJson(reviewSchema), async (c) => {
-    const admin = c.get('user');
-    const body = c.req.valid('json');
-    // 不加 WHERE pending：管理员可覆盖任何状态（含推翻 AI 结论）。
-    const [row] = await db
-      .update(restaurants)
-      .set({
-        reviewStatus: body.decision,
-        rejectReason: body.decision === 'rejected' ? body.reason!.trim() : null,
-        reviewedAt: new Date(),
-        reviewedBy: admin.username,
-      })
-      .where(eq(restaurants.id, c.req.param('id')))
-      .returning();
+    const row = await applyRestaurantDecision(
+      c.req.param('id'),
+      c.req.valid('json'),
+      c.get('user').username,
+    );
     if (!row) return c.json({ error: '店铺不存在' }, 404);
     return c.json(toRestaurantModerationItem(row, await lookupOwnerUsername(row.ownerId)));
   })
   .post('/restaurants/:id/items/:itemId/review', requireAdmin, validateJson(reviewSchema), async (c) => {
-    const admin = c.get('user');
-    const body = c.req.valid('json');
-    const [row] = await db
-      .update(menuItems)
-      .set({
-        reviewStatus: body.decision,
-        rejectReason: body.decision === 'rejected' ? body.reason!.trim() : null,
-        reviewedAt: new Date(),
-        reviewedBy: admin.username,
-      })
-      .where(and(eq(menuItems.restaurantId, c.req.param('id')), eq(menuItems.id, c.req.param('itemId'))))
-      .returning();
+    const row = await applyMenuItemDecision(
+      c.req.param('id'),
+      c.req.param('itemId'),
+      c.req.valid('json'),
+      c.get('user').username,
+    );
     if (!row) return c.json({ error: '菜品不存在' }, 404);
     const [shop] = await db
       .select({ name: restaurants.name, ownerId: restaurants.ownerId })
