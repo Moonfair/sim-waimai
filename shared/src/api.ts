@@ -191,6 +191,27 @@ export interface ModerationItemDto {
   aiConfidence?: number | null;
 }
 
+/** One target of a batch moderation decision (POST /admin/moderation/review). */
+export type ModerationTargetDto =
+  | { targetType: 'restaurant'; restaurantId: string }
+  | { targetType: 'menuItem'; restaurantId: string; itemId: string }
+  | { targetType: 'review'; reviewId: string };
+
+/** Request body of POST /admin/moderation/review. */
+export interface BatchReviewRequestDto {
+  /** 1~50 条。 */
+  targets: ModerationTargetDto[];
+  decision: 'approved' | 'rejected';
+  /** rejected 时必填，统一应用到所有目标。 */
+  reason?: string;
+}
+
+/** Result of a batch moderation decision; 逐条独立处理，失败按条返回。 */
+export interface BatchReviewResultDto {
+  succeeded: number;
+  failed: { target: ModerationTargetDto; error: string }[];
+}
+
 /** Shared review/AI metadata for both detail DTOs below. */
 interface ModerationReviewMeta {
   reviewStatus: ReviewStatus;
