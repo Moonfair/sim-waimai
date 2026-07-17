@@ -230,7 +230,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 app-container bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-4">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-4">
         {rejecting ? (
           <div className="space-y-2">
             <input
