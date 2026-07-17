@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import type { ModerationItemDto, ReviewStatus } from '@sim-waimai/shared';
+import type {
+  BatchReviewResultDto,
+  ModerationItemDto,
+  ModerationTargetDto,
+  ReviewStatus,
+} from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
@@ -32,6 +37,13 @@ function itemKey(item: ModerationItemDto): string {
   return `${item.targetType}:${item.restaurantId}:${item.itemId ?? item.reviewId ?? ''}`;
 }
 
+function toTarget(item: ModerationItemDto): ModerationTargetDto {
+  if (item.targetType === 'review') return { targetType: 'review', reviewId: item.reviewId! };
+  if (item.targetType === 'menuItem')
+    return { targetType: 'menuItem', restaurantId: item.restaurantId, itemId: item.itemId! };
+  return { targetType: 'restaurant', restaurantId: item.restaurantId };
+}
+
 export default function AdminReview() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,10 +58,58 @@ export default function AdminReview() {
   const [rejectingKey, setRejectingKey] = useState<string | null>(null);
   const [rejectReason, setRejectReason] = useState('');
   const [message, setMessage] = useState<string | null>(null);
+  const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
+  const [batchRejecting, setBatchRejecting] = useState(false);
+  const [batchReason, setBatchReason] = useState('');
+  const [batchSubmitting, setBatchSubmitting] = useState(false);
+
+  const allSelected =
+    (items ?? []).length > 0 && (items ?? []).every((it) => selectedKeys.has(itemKey(it)));
+  const showBatchBar = status === 'pending' && selectedKeys.size > 0;
 
   const flash = (text: string) => {
     setMessage(text);
     setTimeout(() => setMessage(null), 2500);
+  };
+
+  const clearSelection = () => {
+    setSelectedKeys(new Set());
+    setBatchRejecting(false);
+    setBatchReason('');
+  };
+
+  const toggleSelect = (key: string) => {
+    setSelectedKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  const batchReview = async (decision: 'approved' | 'rejected', reason?: string) => {
+    const targets = (items ?? []).filter((it) => selectedKeys.has(itemKey(it))).map(toTarget);
+    if (targets.length === 0) return;
+    setBatchSubmitting(true);
+    try {
+      const result = await api.post<BatchReviewResultDto>('/admin/moderation/review', {
+        targets,
+        decision,
+        ...(reason ? { reason } : {}),
+      });
+      flash(
+        result.failed.length === 0
+          ? `${decision === 'approved' ? '已通过' : '已驳回'} ${result.succeeded} 条 ✓`
+          : `成功 ${result.succeeded} 条，失败 ${result.failed.length} 条`,
+      );
+      clearSelection();
+      reload();
+    } catch (err) {
+      // 整个请求失败：不清空勾选，便于修正后重试
+      flash(err instanceof Error ? err.message : '操作失败，请稍后重试');
+    } finally {
+      setBatchSubmitting(false);
+    }
   };
 
   const review = async (item: ModerationItemDto, decision: 'approved' | 'rejected', reason?: string) => {
@@ -68,7 +128,7 @@ export default function AdminReview() {
   };
 
   return (
-    <div className="app-container min-h-screen bg-gray-50 dark:bg-gray-900 pb-10">
+    <div className={`app-container min-h-screen bg-gray-50 dark:bg-gray-900 ${showBatchBar ? 'pb-32' : 'pb-10'}`}>
       {/* Header */}
       <div className="bg-white dark:bg-gray-800 px-4 pt-10 pb-4 border-b border-gray-100 dark:border-gray-700">
         <div className="flex items-center gap-3">
@@ -93,6 +153,7 @@ export default function AdminReview() {
               onClick={() => {
                 setSearchParams({ status: tab.value }, { replace: true });
                 setRejectingKey(null);
+                clearSelection();
               }}
             >
               {tab.label}
@@ -122,7 +183,24 @@ export default function AdminReview() {
             </p>
           </div>
         ) : (
-          <div className="space-y-3 mt-4">
+          <>
+            {status === 'pending' && (
+              <label className="flex items-center gap-2 mt-4 px-1 text-sm text-gray-600 dark:text-gray-300">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 accent-orange-500"
+                  checked={allSelected}
+                  onChange={() =>
+                    setSelectedKeys(allSelected ? new Set() : new Set(items!.map(itemKey)))
+                  }
+                />
+                全选
+                {selectedKeys.size > 0 && (
+                  <span className="text-xs text-orange-500">已选 {selectedKeys.size} 条</span>
+                )}
+              </label>
+            )}
+            <div className="space-y-3 mt-3">
             {items!.map((item) => {
               const key = itemKey(item);
               const badge = STATUS_BADGE[item.reviewStatus];
@@ -130,6 +208,14 @@ export default function AdminReview() {
               return (
                 <div key={key} className="bg-white dark:bg-gray-800 rounded-2xl p-4">
                   <div className="flex items-start gap-3">
+                    {status === 'pending' && (
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 mt-0.5 accent-orange-500 flex-shrink-0"
+                        checked={selectedKeys.has(key)}
+                        onChange={() => toggleSelect(key)}
+                      />
+                    )}
                     {item.image ? (
                       <ZoomableImage
                         src={item.image}
@@ -254,9 +340,63 @@ export default function AdminReview() {
                 </div>
               );
             })}
-          </div>
+            </div>
+          </>
         )}
       </div>
+
+      {showBatchBar && (
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-3 space-y-2">
+          {batchRejecting && (
+            <input
+              className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-red-400 text-sm"
+              placeholder="填写统一驳回原因（将展示给发布者）"
+              value={batchReason}
+              onChange={(e) => setBatchReason(e.target.value)}
+              autoFocus
+            />
+          )}
+          <div className="flex gap-2">
+            {batchRejecting ? (
+              <>
+                <button
+                  className="flex-1 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 py-2.5 rounded-xl text-sm"
+                  onClick={() => {
+                    setBatchRejecting(false);
+                    setBatchReason('');
+                  }}
+                >
+                  取消
+                </button>
+                <button
+                  className="flex-1 bg-red-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
+                  disabled={batchSubmitting || !batchReason.trim()}
+                  onClick={() => batchReview('rejected', batchReason.trim())}
+                >
+                  {batchSubmitting ? '提交中…' : `确认驳回 ${selectedKeys.size} 条`}
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="flex-1 border border-red-200 dark:border-red-500/30 text-red-500 py-2.5 rounded-xl text-sm disabled:opacity-50"
+                  disabled={batchSubmitting}
+                  onClick={() => setBatchRejecting(true)}
+                >
+                  批量驳回
+                </button>
+                <button
+                  className="flex-1 bg-green-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
+                  disabled={batchSubmitting}
+                  onClick={() => batchReview('approved')}
+                >
+                  {batchSubmitting ? '提交中…' : `批量通过 ${selectedKeys.size} 条`}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
