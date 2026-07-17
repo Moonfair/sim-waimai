@@ -2,6 +2,7 @@ import { and, asc, desc, eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import type {
+  BatchReviewResultDto,
   ModerationItemDetailDto,
   ModerationItemDto,
   ModerationRestaurantDetailDto,
@@ -21,6 +22,24 @@ const statusSchema = z.enum(['pending', 'approved', 'rejected']);
 
 const reviewSchema = z
   .object({
+    decision: z.enum(['approved', 'rejected']),
+    reason: z.string().max(200).optional(),
+  })
+  .refine((b) => b.decision !== 'rejected' || !!b.reason?.trim(), {
+    message: '驳回必须填写原因',
+  });
+
+const BATCH_LIMIT = 50;
+
+const moderationTargetSchema = z.discriminatedUnion('targetType', [
+  z.object({ targetType: z.literal('restaurant'), restaurantId: z.string().min(1) }),
+  z.object({ targetType: z.literal('menuItem'), restaurantId: z.string().min(1), itemId: z.string().min(1) }),
+  z.object({ targetType: z.literal('review'), reviewId: z.string().regex(UUID_RE, '评价不存在') }),
+]);
+
+const batchReviewSchema = z
+  .object({
+    targets: z.array(moderationTargetSchema).min(1, '至少选择一条').max(BATCH_LIMIT, `单次最多 ${BATCH_LIMIT} 条`),
     decision: z.enum(['approved', 'rejected']),
     reason: z.string().max(200).optional(),
   })
@@ -235,6 +254,31 @@ export const adminRoutes = new Hono()
       ...reviewRows.map((r) => toUserReviewModerationItem(r.review, r.restaurantName, r.authorUsername)),
     ];
     return c.json(list);
+  })
+  .post('/moderation/review', requireAdmin, validateJson(batchReviewSchema), async (c) => {
+    const admin = c.get('user');
+    const body = c.req.valid('json');
+    // 逐条独立处理（非整体原子）：单条失败不影响其余，符合清空审核队列场景。
+    const failed: BatchReviewResultDto['failed'] = [];
+    let succeeded = 0;
+    for (const target of body.targets) {
+      let ok = false;
+      let error = '';
+      if (target.targetType === 'restaurant') {
+        ok = (await applyRestaurantDecision(target.restaurantId, body, admin.username)) !== null;
+        error = '店铺不存在';
+      } else if (target.targetType === 'menuItem') {
+        ok = (await applyMenuItemDecision(target.restaurantId, target.itemId, body, admin.username)) !== null;
+        error = '菜品不存在';
+      } else {
+        ok = (await applyUserReviewDecision(target.reviewId, body, admin.username)) !== null;
+        error = '评价不存在';
+      }
+      if (ok) succeeded += 1;
+      else failed.push({ target, error });
+    }
+    const result: BatchReviewResultDto = { succeeded, failed };
+    return c.json(result);
   })
   .get('/reviews/:reviewId', requireAdmin, async (c) => {
     const reviewId = c.req.param('reviewId');
