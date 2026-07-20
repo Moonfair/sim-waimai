@@ -252,7 +252,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
               </button>
               <button
                 className="flex-1 bg-red-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
-                disabled={submitting || !rejectReason.trim()}
+                disabled={submitting}
                 onClick={() => review('rejected', rejectReason.trim())}
               >
                 {submitting ? '提交中…' : '确认驳回'}

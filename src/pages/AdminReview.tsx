@@ -305,7 +305,7 @@ export default function AdminReview() {
                         </button>
                         <button
                           className="flex-1 bg-red-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
-                          disabled={busy || !rejectReason.trim()}
+                          disabled={busy}
                           onClick={() => review(item, 'rejected', rejectReason.trim())}
                         >
                           {busy ? '提交中…' : '确认驳回'}
@@ -370,7 +370,7 @@ export default function AdminReview() {
                 </button>
                 <button
                   className="flex-1 bg-red-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
-                  disabled={batchSubmitting || !batchReason.trim()}
+                  disabled={batchSubmitting}
                   onClick={() => batchReview('rejected', batchReason.trim())}
                 >
                   {batchSubmitting ? '提交中…' : `确认驳回 ${selectedKeys.size} 条`}

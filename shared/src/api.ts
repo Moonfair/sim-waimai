@@ -202,7 +202,7 @@ export interface BatchReviewRequestDto {
   /** 1~50 条。 */
   targets: ModerationTargetDto[];
   decision: 'approved' | 'rejected';
-  /** rejected 时必填，统一应用到所有目标。 */
+  /** 可选；rejected 时若填写会统一应用到所有目标。 */
   reason?: string;
 }
 

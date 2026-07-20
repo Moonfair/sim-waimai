@@ -213,10 +213,12 @@ describe('人工审核与编辑重审', () => {
     expect((await publicShopIds()).has(shop.id)).toBe(false);
   });
 
-  it('reject requires a reason, surfaces it to the merchant, and can be overridden', async () => {
+  it('reject reason is optional, surfaces it to the merchant when given, and can be overridden', async () => {
     const shop = await createShop(`驳回店_${stamp}`);
 
-    expect((await adminReviewShop(shop.id, 'rejected')).status).toBe(400); // 缺原因
+    const rejectedNoReason = await adminReviewShop(shop.id, 'rejected');
+    expect(rejectedNoReason.status).toBe(200);
+    expect((await merchantShop(shop.id)).rejectReason).toBeNull();
 
     const rejected = await adminReviewShop(shop.id, 'rejected', '店名含违规内容');
     expect(rejected.status).toBe(200);

@@ -270,15 +270,16 @@ describe('admin 人工审核评价', () => {
     expect(detail.targetType).toBe('review');
     expect(detail.review.content).toBe('等待人工审核的评价');
 
-    // 驳回必须填原因
-    expect(
-      (
-        await adminReq(`/api/admin/reviews/${submitted.id}/review`, {
-          method: 'POST',
-          body: { decision: 'rejected' },
-        })
-      ).status,
-    ).toBe(400);
+    // 驳回原因可选：不填也能驳回，rejectReason 为空
+    const rejectNoReasonRes = await adminReq(`/api/admin/reviews/${submitted.id}/review`, {
+      method: 'POST',
+      body: { decision: 'rejected' },
+    });
+    expect(rejectNoReasonRes.status).toBe(200);
+    const mineNoReason = (
+      (await (await req(`/api/restaurants/${RID}/reviews?limit=50`)).json()) as Page<ReviewDto>
+    ).items.find((r) => r.id === submitted.id);
+    expect(mineNoReason!.rejectReason).toBeNull();
 
     // 通过 → 公开可见 + 聚合 +1
     const approveRes = await adminReq(`/api/admin/reviews/${submitted.id}/review`, {

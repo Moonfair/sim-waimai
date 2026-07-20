@@ -20,14 +20,10 @@ const LIST_LIMIT = 100;
 
 const statusSchema = z.enum(['pending', 'approved', 'rejected']);
 
-const reviewSchema = z
-  .object({
-    decision: z.enum(['approved', 'rejected']),
-    reason: z.string().max(200).optional(),
-  })
-  .refine((b) => b.decision !== 'rejected' || !!b.reason?.trim(), {
-    message: '驳回必须填写原因',
-  });
+const reviewSchema = z.object({
+  decision: z.enum(['approved', 'rejected']),
+  reason: z.string().max(200).optional(),
+});
 
 const BATCH_LIMIT = 50;
 
@@ -37,15 +33,11 @@ const moderationTargetSchema = z.discriminatedUnion('targetType', [
   z.object({ targetType: z.literal('review'), reviewId: z.string().regex(UUID_RE, '评价不存在') }),
 ]);
 
-const batchReviewSchema = z
-  .object({
-    targets: z.array(moderationTargetSchema).min(1, '至少选择一条').max(BATCH_LIMIT, `单次最多 ${BATCH_LIMIT} 条`),
-    decision: z.enum(['approved', 'rejected']),
-    reason: z.string().max(200).optional(),
-  })
-  .refine((b) => b.decision !== 'rejected' || !!b.reason?.trim(), {
-    message: '驳回必须填写原因',
-  });
+const batchReviewSchema = z.object({
+  targets: z.array(moderationTargetSchema).min(1, '至少选择一条').max(BATCH_LIMIT, `单次最多 ${BATCH_LIMIT} 条`),
+  decision: z.enum(['approved', 'rejected']),
+  reason: z.string().max(200).optional(),
+});
 
 type RestaurantRow = typeof restaurants.$inferSelect;
 type MenuItemRow = typeof menuItems.$inferSelect;
@@ -153,7 +145,7 @@ type ReviewDecision = { decision: 'approved' | 'rejected'; reason?: string };
 function decisionFields(body: ReviewDecision, adminUsername: string) {
   return {
     reviewStatus: body.decision,
-    rejectReason: body.decision === 'rejected' ? body.reason!.trim() : null,
+    rejectReason: body.decision === 'rejected' ? body.reason?.trim() || null : null,
     reviewedAt: new Date(),
     reviewedBy: adminUsername,
   };

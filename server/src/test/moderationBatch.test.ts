@@ -176,12 +176,6 @@ describe('批量审批 POST /api/admin/moderation/review', () => {
   });
 
   it('validates the request body', async () => {
-    // rejected 缺 reason
-    const noReason = await batchReview({
-      targets: [{ targetType: 'restaurant', restaurantId: 'x' }],
-      decision: 'rejected',
-    });
-    expect(noReason.status).toBe(400);
     // targets 为空
     expect((await batchReview({ targets: [], decision: 'approved' })).status).toBe(400);
     // 超过 50 条
@@ -250,6 +244,19 @@ describe('批量审批 POST /api/admin/moderation/review', () => {
     const [itemRow] = await db.select().from(menuItems).where(eq(menuItems.id, item.id));
     expect(itemRow!.reviewStatus).toBe('rejected');
     expect(itemRow!.rejectReason).toBe('批量测试驳回');
+  });
+
+  it('batch reject without a reason succeeds and leaves rejectReason null', async () => {
+    const shop = await createShop(`批量驳回无原因店_${stamp}`);
+    const res = await batchReview({
+      targets: [{ targetType: 'restaurant', restaurantId: shop.id }],
+      decision: 'rejected',
+    });
+    expect(res.status).toBe(200);
+    expect(((await res.json()) as BatchReviewResultDto).succeeded).toBe(1);
+    const [shopRow] = await db.select().from(restaurants).where(eq(restaurants.id, shop.id));
+    expect(shopRow!.reviewStatus).toBe('rejected');
+    expect(shopRow!.rejectReason).toBeNull();
   });
 
   it('reports per-target failures and still processes the rest', async () => {
