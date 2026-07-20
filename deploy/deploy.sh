@@ -5,8 +5,11 @@
 #
 # 用法：
 #   deploy/deploy.sh             # 只发前端（默认，最常见）
-#   deploy/deploy.sh --server    # 前端 + 重建并重启 API 容器（server/ 有改动时用）
-#   deploy/deploy.sh --migrate   # 部署后跑数据库迁移（隐含 --server）
+#   deploy/deploy.sh --server    # 前端 + 重建并重启 API 容器 + 跑数据库迁移（server/ 有改动时用）
+#
+# --server 总是顺带跑一次 db:migrate：Drizzle 迁移是幂等的（没有待跑的迁移就是
+# no-op），比"记得手动加 --migrate"更可靠——2026-07-20 审核列表 500 就是因为有人
+# --server 重启了带 hidden_at 查询的新代码，但忘了单独跑 --migrate，线上库没建那列。
 set -euo pipefail
 
 HOST=txy
@@ -15,12 +18,11 @@ DOMAIN=sim-waimai.moonfair.cn
 TARBALL_URL=https://codeload.github.com/Moonfair/sim-waimai/tar.gz/refs/heads/main
 
 WITH_SERVER=0
-WITH_MIGRATE=0
 for arg in "$@"; do
   case "$arg" in
     --server) WITH_SERVER=1 ;;
-    --migrate) WITH_SERVER=1; WITH_MIGRATE=1 ;;
-    *) echo "未知参数: $arg（支持 --server / --migrate）" >&2; exit 2 ;;
+    --migrate) WITH_SERVER=1 ;; # 向后兼容旧用法；现在 --server 已隐含跑迁移
+    *) echo "未知参数: $arg（支持 --server）" >&2; exit 2 ;;
   esac
 done
 
@@ -89,10 +91,8 @@ if [ "$WITH_SERVER" -eq 1 ]; then
     if [ "$i" -eq 15 ]; then die "API 重启后 /api/health 一直不通，去服务器看 docker compose logs server"; fi
     sleep 2
   done
-fi
 
-if [ "$WITH_MIGRATE" -eq 1 ]; then
-  step "运行数据库迁移"
+  step "运行数据库迁移（幂等，没有待跑迁移时是 no-op）"
   remote "cd $APP_DIR && docker compose -f deploy/docker-compose.yml exec -T server npm -w server run migrate"
 fi
 

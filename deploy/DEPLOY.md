@@ -9,14 +9,17 @@
 
 ```bash
 deploy/deploy.sh             # 只发前端（最常见）
-deploy/deploy.sh --server    # server/ 或 shared/ 有改动时：额外重建并重启 API 容器
-deploy/deploy.sh --migrate   # 有新迁移时：部署 + 重启 API + 跑 migrate
+deploy/deploy.sh --server    # server/ 或 shared/ 有改动时：重建并重启 API 容器 + 跑数据库迁移
 ```
 
 脚本要求本地 main 已 push（部署源是 GitHub main 的 tarball），会自动备份服务器 `.env`、
 覆盖解压（不 `rm -rf`，保住 `.env`）、容器内重建 dist，并对源站和 EdgeOne CDN 做冒烟验证；
 如果 CDN 返回旧版 index.html，会提示去 EdgeOne 控制台刷新缓存。上次部署的版本记录在服务器
 `/srv/sim-waimai/.deployed-version`，脚本据此提醒 server 端改动是否需要 `--server`。
+
+`--server` 总是顺带跑一次 `db:migrate`（Drizzle 迁移幂等，没有待跑迁移时是 no-op），
+不用再单独记 `--migrate`——2026-07-20 曾因为有人 `--server` 重启了新代码但忘了单独
+跑迁移，导致线上库缺列、审核列表接口 500。
 
 ## 1. 装 Docker
 
