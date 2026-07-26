@@ -22,6 +22,7 @@ import MerchantEdit from './pages/MerchantEdit';
 import MerchantReviews from './pages/MerchantReviews';
 import AdminReview from './pages/AdminReview';
 import AdminReviewDetail from './pages/AdminReviewDetail';
+import AdminStats from './pages/AdminStats';
 
 export default function App() {
   return (
@@ -71,6 +72,7 @@ export default function App() {
                     </RequireAdmin>
                   }
                 />
+                <Route path="/admin/stats" element={<RequireAdmin><AdminStats /></RequireAdmin>} />
               </Routes>
             </CartProvider>
           </AddressProvider>

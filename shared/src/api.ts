@@ -161,6 +161,59 @@ export interface UserStatsDto {
   } | null;
 }
 
+/** Site-wide stats for the admin 网站统计 dashboard (GET /admin/stats). */
+export interface SiteStatsDto {
+  overview: {
+    totalUsers: number;
+    totalOrders: number;
+    /** Sum of totalFen across all orders (any status), yuan. */
+    gmv: number;
+    /** gmv / totalOrders, yuan; 0 when totalOrders is 0. */
+    aov: number;
+    /** completedOrders / totalOrders, 0..1; 0 when totalOrders is 0. */
+    completionRate: number;
+  };
+  today: {
+    newUsers: number;
+    newOrders: number;
+    /** yuan */
+    gmv: number;
+  };
+  /** Always 30 entries, oldest first, one per calendar day, zero-filled for gaps. */
+  trend: SiteStatsTrendDayDto[];
+  merchants: {
+    total: number;
+    byReviewStatus: { pending: number; approved: number; rejected: number };
+    /** AI 自动通过 vs 人工复核，与 admin.ts 的 reviewerCondition() 语义一致. */
+    reviewerSplit: { ai: number; human: number };
+    byCategory: { category: string; count: number }[];
+    /** Top 10 by order count, desc. */
+    topByOrders: SiteStatsTopRestaurantDto[];
+    /** Top 10 by GMV, desc. */
+    topByGmv: SiteStatsTopRestaurantDto[];
+  };
+}
+
+export interface SiteStatsTrendDayDto {
+  /** 'YYYY-MM-DD' */
+  date: string;
+  orders: number;
+  /** yuan */
+  gmv: number;
+  newUsers: number;
+}
+
+export interface SiteStatsTopRestaurantDto {
+  id: string;
+  name: string;
+  emoji: string;
+  bgColor: string;
+  category: string;
+  orderCount: number;
+  /** yuan */
+  gmv: number;
+}
+
 /** One row in the admin moderation queue: a restaurant, a single menu item, or a user review. */
 export interface ModerationItemDto {
   targetType: 'restaurant' | 'menuItem' | 'review';

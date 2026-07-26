@@ -31,7 +31,11 @@ export default function Profile() {
   const joined = user ? new Date(user.createdAt).toLocaleDateString('zh-CN') : '';
 
   const menuRows = user?.isAdmin
-    ? [...MENU_ROWS, { emoji: '🛡️', label: '审核管理', to: '/admin/review' }]
+    ? [
+        ...MENU_ROWS,
+        { emoji: '🛡️', label: '审核管理', to: '/admin/review' },
+        { emoji: '📈', label: '网站统计', to: '/admin/stats' },
+      ]
     : MENU_ROWS;
 
   return (
