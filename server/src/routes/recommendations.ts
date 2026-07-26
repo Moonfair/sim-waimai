@@ -48,7 +48,7 @@ export const recommendationRoutes = new Hono().get('/', optionalAuth, async (c) 
         r.rating +
         Math.log10(r.monthlyOrders + 1),
     }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => b.row.recommendPriority - a.row.recommendPriority || b.score - a.score)
     .slice(0, LIMIT);
 
   return c.json(scored.map(({ row }) => toRestaurantSummary(row)));

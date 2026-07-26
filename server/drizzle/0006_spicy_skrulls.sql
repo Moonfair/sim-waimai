@@ -1,0 +1,1 @@
+ALTER TABLE "restaurants" ADD COLUMN "recommend_priority" integer DEFAULT 0 NOT NULL;

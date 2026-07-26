@@ -244,6 +244,29 @@ export interface ModerationItemDto {
   aiConfidence?: number | null;
 }
 
+/** Preset levels for admin-set homepage recommendation priority; shared by the UI buttons and server validation. */
+export const SHOP_PRIORITY_LEVELS = [
+  { label: '置顶', value: 100 },
+  { label: '较高', value: 10 },
+  { label: '普通', value: 0 },
+  { label: '较低', value: -10 },
+] as const;
+
+/** One row in the admin 店铺管理 list (GET /admin/shops) — player-created shops only. */
+export interface AdminShopDto {
+  id: string;
+  name: string;
+  emoji: string;
+  bgColor: string;
+  category: string;
+  ownerUsername: string | null;
+  rating: number;
+  monthlyOrders: number;
+  isActive: boolean;
+  reviewStatus: ReviewStatus;
+  recommendPriority: number;
+}
+
 /** One target of a batch moderation decision (POST /admin/moderation/review). */
 export type ModerationTargetDto =
   | { targetType: 'restaurant'; restaurantId: string }

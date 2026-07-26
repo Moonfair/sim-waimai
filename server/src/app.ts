@@ -4,6 +4,7 @@ import { HTTPException } from 'hono/http-exception';
 import { timeout } from 'hono/timeout';
 import { rateLimit } from './middleware/rateLimit';
 import { adminRoutes } from './routes/admin';
+import { adminShopsRoutes } from './routes/adminShops';
 import { adminStatsRoutes } from './routes/adminStats';
 import { authRoutes } from './routes/auth';
 import { favoriteRoutes } from './routes/favorites';
@@ -50,6 +51,7 @@ export function createApp() {
   app.route('/recommendations', recommendationRoutes);
   app.route('/admin', adminRoutes);
   app.route('/admin', adminStatsRoutes);
+  app.route('/admin', adminShopsRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
 

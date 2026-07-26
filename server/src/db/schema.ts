@@ -43,6 +43,8 @@ export const restaurants = pgTable(
     /** NULL = platform-seeded restaurant with no owning user. */
     ownerId: uuid('owner_id').references(() => users.id),
     sortOrder: integer('sort_order').notNull().default(0),
+    /** Manual override for homepage recommendation ranking; higher sorts first (admin-set for player shops). */
+    recommendPriority: integer('recommend_priority').notNull().default(0),
     name: text('name').notNull(),
     category: text('category').notNull(),
     rating: real('rating').notNull().default(5),

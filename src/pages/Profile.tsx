@@ -35,6 +35,7 @@ export default function Profile() {
         ...MENU_ROWS,
         { emoji: '🛡️', label: '审核管理', to: '/admin/review' },
         { emoji: '📈', label: '网站统计', to: '/admin/stats' },
+        { emoji: '🏬', label: '店铺管理', to: '/admin/shops' },
       ]
     : MENU_ROWS;
 

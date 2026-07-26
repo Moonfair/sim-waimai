@@ -43,6 +43,13 @@
       "when": 1784182154572,
       "tag": "0005_skinny_elektra",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1785087172524,
+      "tag": "0006_spicy_skrulls",
+      "breakpoints": true
     }
   ]
 }
