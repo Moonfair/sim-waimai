@@ -1,4 +1,5 @@
-import { and, asc, desc, eq } from 'drizzle-orm';
+import { and, asc, desc, eq, isNull, ne, or } from 'drizzle-orm';
+import type { AnyColumn } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import type {
@@ -19,6 +20,7 @@ import { requireAdmin } from '../middleware/auth';
 const LIST_LIMIT = 100;
 
 const statusSchema = z.enum(['pending', 'approved', 'rejected']);
+const reviewerSchema = z.enum(['ai', 'human']).optional();
 
 const reviewSchema = z.object({
   decision: z.enum(['approved', 'rejected']),
@@ -151,6 +153,13 @@ function decisionFields(body: ReviewDecision, adminUsername: string) {
   };
 }
 
+/** AI 桶：reviewedBy === 'ai'；人工桶：reviewedBy 为空（从未审核过的种子数据）或不是 'ai'。 */
+function reviewerCondition(reviewedByColumn: AnyColumn, reviewer: 'ai' | 'human' | undefined) {
+  if (reviewer === 'ai') return eq(reviewedByColumn, 'ai');
+  if (reviewer === 'human') return or(isNull(reviewedByColumn), ne(reviewedByColumn, 'ai'));
+  return undefined;
+}
+
 /** 店铺审批核心。不加 WHERE pending：管理员可覆盖任何状态（含推翻 AI 结论）。目标不存在返回 null。 */
 async function applyRestaurantDecision(
   restaurantId: string,
@@ -213,30 +222,43 @@ export const adminRoutes = new Hono()
     if (!parsed.success) return c.json({ error: '无效的审核状态' }, 400);
     const status: ReviewStatus = parsed.data;
 
+    const reviewerParsed = reviewerSchema.safeParse(c.req.query('reviewer'));
+    if (!reviewerParsed.success) return c.json({ error: '无效的审核人筛选' }, 400);
+    const reviewer = reviewerParsed.data;
+
     // 店铺和商品合并为一个列表；演示场景不做游标分页，各取前 LIST_LIMIT 条。
+    const shopReviewerCond = reviewerCondition(restaurants.reviewedBy, reviewer);
     const shopRows = await db
       .select({ restaurant: restaurants, ownerUsername: users.username })
       .from(restaurants)
       .leftJoin(users, eq(users.id, restaurants.ownerId))
-      .where(eq(restaurants.reviewStatus, status))
+      .where(
+        shopReviewerCond ? and(eq(restaurants.reviewStatus, status), shopReviewerCond) : eq(restaurants.reviewStatus, status),
+      )
       .orderBy(desc(restaurants.createdAt))
       .limit(LIST_LIMIT);
 
+    const itemReviewerCond = reviewerCondition(menuItems.reviewedBy, reviewer);
     const itemRows = await db
       .select({ item: menuItems, restaurantName: restaurants.name, ownerUsername: users.username })
       .from(menuItems)
       .innerJoin(restaurants, eq(restaurants.id, menuItems.restaurantId))
       .leftJoin(users, eq(users.id, restaurants.ownerId))
-      .where(eq(menuItems.reviewStatus, status))
+      .where(
+        itemReviewerCond ? and(eq(menuItems.reviewStatus, status), itemReviewerCond) : eq(menuItems.reviewStatus, status),
+      )
       .orderBy(asc(menuItems.restaurantId), asc(menuItems.sortOrder))
       .limit(LIST_LIMIT);
 
+    const reviewReviewerCond = reviewerCondition(reviews.reviewedBy, reviewer);
     const reviewRows = await db
       .select({ review: reviews, restaurantName: restaurants.name, authorUsername: users.username })
       .from(reviews)
       .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
       .innerJoin(users, eq(users.id, reviews.userId))
-      .where(eq(reviews.reviewStatus, status))
+      .where(
+        reviewReviewerCond ? and(eq(reviews.reviewStatus, status), reviewReviewerCond) : eq(reviews.reviewStatus, status),
+      )
       .orderBy(desc(reviews.createdAt))
       .limit(LIST_LIMIT);
 

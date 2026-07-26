@@ -17,6 +17,11 @@ const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
   { value: 'rejected', label: '已驳回' },
 ];
 
+const REVIEWER_TABS: { value: 'ai' | 'human'; label: string }[] = [
+  { value: 'ai', label: 'AI审核通过' },
+  { value: 'human', label: '已人工核验' },
+];
+
 function reviewPath(item: ModerationItemDto): string {
   if (item.targetType === 'review') return `/admin/reviews/${item.reviewId}/review`;
   return item.targetType === 'restaurant'
@@ -51,8 +56,13 @@ export default function AdminReview() {
   const status: ReviewStatus = STATUS_TABS.some((t) => t.value === statusParam)
     ? (statusParam as ReviewStatus)
     : 'pending';
+  const reviewerParam = searchParams.get('reviewer');
+  const reviewer: 'ai' | 'human' = REVIEWER_TABS.some((t) => t.value === reviewerParam)
+    ? (reviewerParam as 'ai' | 'human')
+    : 'ai';
+  const isAiApprovedTab = status === 'approved' && reviewer === 'ai';
   const { data: items, loading, error, reload } = useApi<ModerationItemDto[]>(
-    `/admin/moderation?status=${status}`,
+    status === 'approved' ? `/admin/moderation?status=${status}&reviewer=${reviewer}` : `/admin/moderation?status=${status}`,
   );
   const [submittingKey, setSubmittingKey] = useState<string | null>(null);
   const [rejectingKey, setRejectingKey] = useState<string | null>(null);
@@ -65,7 +75,7 @@ export default function AdminReview() {
 
   const allSelected =
     (items ?? []).length > 0 && (items ?? []).every((it) => selectedKeys.has(itemKey(it)));
-  const showBatchBar = status === 'pending' && selectedKeys.size > 0;
+  const showBatchBar = (status === 'pending' || isAiApprovedTab) && selectedKeys.size > 0;
 
   const flash = (text: string) => {
     setMessage(text);
@@ -151,7 +161,10 @@ export default function AdminReview() {
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
               }`}
               onClick={() => {
-                setSearchParams({ status: tab.value }, { replace: true });
+                setSearchParams(
+                  tab.value === 'approved' ? { status: tab.value, reviewer: 'ai' } : { status: tab.value },
+                  { replace: true },
+                );
                 setRejectingKey(null);
                 clearSelection();
               }}
@@ -160,6 +173,27 @@ export default function AdminReview() {
             </button>
           ))}
         </div>
+        {status === 'approved' && (
+          <div className="flex gap-2 mt-2">
+            {REVIEWER_TABS.map((tab) => (
+              <button
+                key={tab.value}
+                className={`text-xs px-3 py-1.5 rounded-full font-medium ${
+                  reviewer === tab.value
+                    ? 'bg-orange-500 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
+                }`}
+                onClick={() => {
+                  setSearchParams({ status, reviewer: tab.value }, { replace: true });
+                  setRejectingKey(null);
+                  clearSelection();
+                }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {message && (
@@ -184,7 +218,7 @@ export default function AdminReview() {
           </div>
         ) : (
           <>
-            {status === 'pending' && (
+            {(status === 'pending' || isAiApprovedTab) && (
               <label className="flex items-center gap-2 mt-4 px-1 text-sm text-gray-600 dark:text-gray-300">
                 <input
                   type="checkbox"
@@ -208,7 +242,7 @@ export default function AdminReview() {
               return (
                 <div key={key} className="bg-white dark:bg-gray-800 rounded-2xl p-4">
                   <div className="flex items-start gap-3">
-                    {status === 'pending' && (
+                    {(status === 'pending' || isAiApprovedTab) && (
                       <input
                         type="checkbox"
                         className="w-4 h-4 mt-0.5 accent-orange-500 flex-shrink-0"
@@ -326,13 +360,13 @@ export default function AdminReview() {
                           驳回
                         </button>
                       )}
-                      {item.reviewStatus !== 'approved' && (
+                      {(item.reviewStatus !== 'approved' || isAiApprovedTab) && (
                         <button
                           className="flex-1 bg-green-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
                           disabled={busy}
                           onClick={() => review(item, 'approved')}
                         >
-                          {busy ? '提交中…' : '通过'}
+                          {busy ? '提交中…' : isAiApprovedTab ? '复审通过' : '通过'}
                         </button>
                       )}
                     </div>
@@ -390,7 +424,9 @@ export default function AdminReview() {
                   disabled={batchSubmitting}
                   onClick={() => batchReview('approved')}
                 >
-                  {batchSubmitting ? '提交中…' : `批量通过 ${selectedKeys.size} 条`}
+                  {batchSubmitting
+                    ? '提交中…'
+                    : `${isAiApprovedTab ? '批量复审通过' : '批量通过'} ${selectedKeys.size} 条`}
                 </button>
               </>
             )}
