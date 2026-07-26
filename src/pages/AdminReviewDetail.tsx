@@ -273,13 +273,13 @@ export default function AdminReviewDetail({ targetType }: Props) {
                 驳回
               </button>
             )}
-            {data.reviewStatus !== 'approved' && (
+            {(data.reviewStatus !== 'approved' || data.reviewedBy === 'ai') && (
               <button
                 className="flex-1 bg-green-500 text-white py-2.5 rounded-xl font-bold text-sm disabled:opacity-50"
                 disabled={submitting}
                 onClick={() => review('approved')}
               >
-                {submitting ? '提交中…' : '通过'}
+                {submitting ? '提交中…' : data.reviewStatus === 'approved' ? '复审通过' : '通过'}
               </button>
             )}
           </div>
