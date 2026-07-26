@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
+import ReportSheet from '../components/ReportSheet';
 import ReviewList from '../components/ReviewList';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
@@ -18,6 +19,8 @@ export default function Restaurant() {
   const [activeMenuCat, setActiveMenuCat] = useState('');
   const [isFav, setIsFav] = useState(false);
   const [shareState, setShareState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [reportSheetOpen, setReportSheetOpen] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (restaurant && !activeMenuCat) {
@@ -53,6 +56,20 @@ export default function Restaurant() {
     const ok = await copyRestaurantLink(id);
     setShareState(ok ? 'copied' : 'failed');
     setTimeout(() => setShareState('idle'), 2000);
+  };
+
+  const flash = (text: string) => {
+    setMessage(text);
+    setTimeout(() => setMessage(null), 2500);
+  };
+
+  const handleReportClick = () => {
+    if (!id) return;
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(`/restaurant/${id}`)}`);
+      return;
+    }
+    setReportSheetOpen(true);
   };
 
   if (loading) {
@@ -101,6 +118,13 @@ export default function Restaurant() {
           onClick={() => navigate(-1)}
         >
           ←
+        </button>
+        <button
+          className="absolute top-10 right-28 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg text-white z-10"
+          onClick={handleReportClick}
+          aria-label="举报店铺"
+        >
+          ⚠️
         </button>
         <button
           className="absolute top-10 right-16 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg text-white z-10"
@@ -176,6 +200,20 @@ export default function Restaurant() {
       )}
 
       <CartBar deliveryFee={restaurant.deliveryFee} />
+
+      {message && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gray-900/90 text-white text-xs px-4 py-2 rounded-full">
+          {message}
+        </div>
+      )}
+
+      {reportSheetOpen && id && (
+        <ReportSheet
+          target={{ targetType: 'restaurant', restaurantId: id }}
+          onClose={() => setReportSheetOpen(false)}
+          onSubmitted={flash}
+        />
+      )}
     </div>
   );
 }

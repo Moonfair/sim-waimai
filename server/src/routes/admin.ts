@@ -161,7 +161,7 @@ function reviewerCondition(reviewedByColumn: AnyColumn, reviewer: 'ai' | 'human'
 }
 
 /** 店铺审批核心。不加 WHERE pending：管理员可覆盖任何状态（含推翻 AI 结论）。目标不存在返回 null。 */
-async function applyRestaurantDecision(
+export async function applyRestaurantDecision(
   restaurantId: string,
   body: ReviewDecision,
   adminUsername: string,
@@ -175,7 +175,7 @@ async function applyRestaurantDecision(
 }
 
 /** 菜品审批核心。目标不存在返回 null。 */
-async function applyMenuItemDecision(
+export async function applyMenuItemDecision(
   restaurantId: string,
   itemId: string,
   body: ReviewDecision,
@@ -193,7 +193,7 @@ async function applyMenuItemDecision(
  * 用户评价审批核心。FOR UPDATE 锁行取旧状态：与在途的 AI 审核（WHERE pending）串行化，
  * 聚合按旧→新状态转移（只有 approved 计入店铺评分）。目标不存在返回 null。
  */
-async function applyUserReviewDecision(
+export async function applyUserReviewDecision(
   reviewId: string,
   body: ReviewDecision,
   adminUsername: string,

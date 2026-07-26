@@ -324,6 +324,46 @@ export interface ModerationUserReviewDetailDto extends ModerationReviewMeta {
   review: ReviewDto;
 }
 
+/** POST /reports 请求体：举报目标 + 原因（三选一 targetType）。 */
+export type CreateReportRequestDto =
+  | { targetType: 'restaurant'; restaurantId: string; reason: string }
+  | { targetType: 'menuItem'; restaurantId: string; itemId: string; reason: string }
+  | { targetType: 'review'; reviewId: string; reason: string };
+
+/** 管理端 GET /admin/reports 列表行：目标展示信息 + 举报本身的信息。 */
+export interface AdminReportDto {
+  id: string;
+  targetType: 'restaurant' | 'menuItem' | 'review';
+  restaurantId: string;
+  restaurantName: string;
+  itemId?: string;
+  reviewId?: string;
+  name: string;
+  emoji: string;
+  category: string;
+  description?: string;
+  image?: string | null;
+  rating?: number;
+  photos?: string[];
+  reason: string;
+  reporterUsername: string;
+  createdAt: string;
+}
+
+/** POST /admin/reports/resolve 请求体。decision 指"这条举报"本身的裁决，
+ *  approved = 举报成立（目标走审核失败逻辑），rejected = 举报驳回（不处理目标）。两种结果都会删除该举报行。 */
+export interface ResolveReportsRequestDto {
+  /** 1~50 条。 */
+  reportIds: string[];
+  decision: 'approved' | 'rejected';
+}
+
+/** Result of a batch report resolution; 逐条独立处理，失败按条返回。 */
+export interface ResolveReportsResultDto {
+  succeeded: number;
+  failed: { reportId: string; error: string }[];
+}
+
 export type UploadKind = 'banner' | 'item' | 'review';
 
 export interface PresignResponse {

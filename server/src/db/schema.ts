@@ -213,3 +213,27 @@ export const favorites = pgTable(
     index('favorites_user_idx').on(t.userId, t.createdAt.desc()),
   ],
 );
+
+export const reports = pgTable(
+  'reports',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    targetType: text('target_type').$type<'restaurant' | 'menuItem' | 'review'>().notNull(),
+    restaurantId: text('restaurant_id')
+      .notNull()
+      .references(() => restaurants.id, { onDelete: 'cascade' }),
+    /** 仅 targetType === 'menuItem' 时非空。 */
+    itemId: text('item_id'),
+    /** 仅 targetType === 'review' 时非空。 */
+    reviewId: uuid('review_id').references(() => reviews.id),
+    reporterId: uuid('reporter_id')
+      .notNull()
+      .references(() => users.id),
+    reason: text('reason').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check('reports_target_type_check', sql`${t.targetType} IN ('restaurant', 'menuItem', 'review')`),
+    index('reports_created_idx').on(t.createdAt.desc()),
+  ],
+);

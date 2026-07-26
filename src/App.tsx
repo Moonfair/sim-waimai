@@ -24,6 +24,7 @@ import AdminReview from './pages/AdminReview';
 import AdminReviewDetail from './pages/AdminReviewDetail';
 import AdminStats from './pages/AdminStats';
 import AdminShops from './pages/AdminShops';
+import AdminReports from './pages/AdminReports';
 
 export default function App() {
   return (
@@ -75,6 +76,7 @@ export default function App() {
                 />
                 <Route path="/admin/stats" element={<RequireAdmin><AdminStats /></RequireAdmin>} />
                 <Route path="/admin/shops" element={<RequireAdmin><AdminShops /></RequireAdmin>} />
+                <Route path="/admin/reports" element={<RequireAdmin><AdminReports /></RequireAdmin>} />
               </Routes>
             </CartProvider>
           </AddressProvider>

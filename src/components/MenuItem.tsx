@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
+import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import ReportSheet from './ReportSheet';
 import ZoomableImage from './ZoomableImage';
 import { useLongPressStep } from '../hooks/useLongPressStep';
 import MenuItemOptionsSheet from './MenuItemOptionsSheet';
@@ -11,8 +14,25 @@ interface Props {
 }
 
 export default function MenuItem({ item, restaurant }: Props) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const { items, addItem, updateQuantity } = useCart();
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [reportSheetOpen, setReportSheetOpen] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const flash = (text: string) => {
+    setMessage(text);
+    setTimeout(() => setMessage(null), 2500);
+  };
+
+  const handleReportClick = () => {
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(`/restaurant/${restaurant.id}`)}`);
+      return;
+    }
+    setReportSheetOpen(true);
+  };
 
   const hasOptions = !!item.optionGroups?.length;
   const hasPriceImpact = item.optionGroups?.some(g => g.options.some(o => o.priceDelta > 0)) ?? false;
@@ -60,6 +80,13 @@ export default function MenuItem({ item, restaurant }: Props) {
                 <span className="text-xs px-1 py-0.5 bg-red-50 text-red-500 rounded font-medium">热销</span>
               )}
               <span className="font-medium text-gray-900 dark:text-gray-100 text-sm">{item.name}</span>
+              <button
+                className="text-xs text-gray-300 dark:text-gray-600"
+                onClick={handleReportClick}
+                aria-label="举报商品"
+              >
+                ⚠️
+              </button>
             </div>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 line-clamp-2 leading-relaxed">{item.description}</p>
             <div className="flex items-center gap-2 mt-1">
@@ -124,6 +151,20 @@ export default function MenuItem({ item, restaurant }: Props) {
             addItem(item, restaurant, selectedOptions);
             setSheetOpen(false);
           }}
+        />
+      )}
+
+      {message && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gray-900/90 text-white text-xs px-4 py-2 rounded-full">
+          {message}
+        </div>
+      )}
+
+      {reportSheetOpen && (
+        <ReportSheet
+          target={{ targetType: 'menuItem', restaurantId: restaurant.id, itemId: item.id }}
+          onClose={() => setReportSheetOpen(false)}
+          onSubmitted={flash}
         />
       )}
     </div>

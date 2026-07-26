@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { Page, ReviewDto } from '@sim-waimai/shared';
+import { useAuth } from '../context/AuthContext';
 import { api } from '../lib/api';
+import ReportSheet from './ReportSheet';
 import ZoomableImage from './ZoomableImage';
 
 interface Props {
@@ -10,10 +13,27 @@ interface Props {
 }
 
 export default function ReviewList({ restaurantId, rating, ratingCount }: Props) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [items, setItems] = useState<ReviewDto[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [reportingReviewId, setReportingReviewId] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const flash = (text: string) => {
+    setMessage(text);
+    setTimeout(() => setMessage(null), 2500);
+  };
+
+  const handleReportClick = (reviewId: string) => {
+    if (!user) {
+      navigate(`/login?redirect=${encodeURIComponent(`/restaurant/${restaurantId}`)}`);
+      return;
+    }
+    setReportingReviewId(reviewId);
+  };
 
   const loadPage = useCallback(
     async (cursor: string | null) => {
@@ -82,8 +102,17 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
                     </span>
                   )}
                 </span>
-                <span className="text-gray-300 dark:text-gray-600 text-xs flex-shrink-0">
-                  {new Date(review.createdAt).toLocaleDateString('zh-CN')}
+                <span className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-gray-300 dark:text-gray-600 text-xs">
+                    {new Date(review.createdAt).toLocaleDateString('zh-CN')}
+                  </span>
+                  <button
+                    className="text-xs text-gray-300 dark:text-gray-600"
+                    onClick={() => handleReportClick(review.id)}
+                    aria-label="举报评价"
+                  >
+                    举报
+                  </button>
                 </span>
               </div>
               {review.reviewStatus === 'rejected' && review.rejectReason && (
@@ -120,6 +149,20 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
             </button>
           )}
         </div>
+      )}
+
+      {message && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-gray-900/90 text-white text-xs px-4 py-2 rounded-full">
+          {message}
+        </div>
+      )}
+
+      {reportingReviewId && (
+        <ReportSheet
+          target={{ targetType: 'review', reviewId: reportingReviewId }}
+          onClose={() => setReportingReviewId(null)}
+          onSubmitted={flash}
+        />
       )}
     </div>
   );
