@@ -11,7 +11,7 @@ import type {
 } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
-import { menuItems, orders, reports, restaurants, reviews, users } from '../db/schema';
+import { orders, reports, restaurants, reviews, users } from '../db/schema';
 import { registerTestUser } from './testHelpers';
 
 const app = createApp();
