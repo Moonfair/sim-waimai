@@ -8,6 +8,7 @@ import type {
   Restaurant,
   RestaurantSummary,
   ReviewDto,
+  SearchMenuItemDto,
 } from '@sim-waimai/shared';
 import type { menuItems, orders, restaurants, reviews } from '../db/schema';
 
@@ -51,6 +52,16 @@ export function toMenuItem(row: MenuItemRow): MenuItem {
   if (row.image) item.image = row.image;
   if (row.optionGroups?.length) item.optionGroups = row.optionGroups;
   return item;
+}
+
+export function toSearchMenuItemDto(row: MenuItemRow, restaurant: RestaurantRow): SearchMenuItemDto {
+  return {
+    ...toMenuItem(row),
+    restaurantId: restaurant.id,
+    restaurantName: restaurant.name,
+    restaurantEmoji: restaurant.emoji,
+    restaurantBgColor: restaurant.bgColor,
+  };
 }
 
 /** Full legacy `Restaurant` shape the existing frontend components consume. */

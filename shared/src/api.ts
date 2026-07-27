@@ -20,6 +20,20 @@ export type ReviewStatus = 'pending' | 'approved' | 'rejected';
 /** AI moderation's own verdict, persisted regardless of whether it auto-resolved the item. */
 export type AiVerdict = 'approve' | 'reject' | 'uncertain';
 
+/** Search hit for a menu item: item fields + which restaurant it belongs to. */
+export interface SearchMenuItemDto extends MenuItem {
+  restaurantId: string;
+  restaurantName: string;
+  restaurantEmoji: string;
+  restaurantBgColor: string;
+}
+
+/** Response for GET /search?q=. */
+export interface SearchResultDto {
+  restaurants: RestaurantSummary[];
+  items: SearchMenuItemDto[];
+}
+
 /** Restaurant list item (no menu). All money fields in yuan. */
 export interface RestaurantSummary {
   id: string;

@@ -16,6 +16,7 @@ import { orderRoutes } from './routes/orders';
 import { reportRoutes } from './routes/reports';
 import { restaurantRoutes } from './routes/restaurants';
 import { reviewRoutes } from './routes/reviews';
+import { searchRoutes } from './routes/search';
 import { uploadRoutes } from './routes/uploads';
 
 const JSON_BODY_LIMIT = 256 * 1024;
@@ -46,6 +47,7 @@ export function createApp() {
   app.get('/health', (c) => c.json({ ok: true }));
   app.route('/auth', authRoutes);
   app.route('/restaurants', restaurantRoutes);
+  app.route('/search', searchRoutes);
   app.route('/orders', orderRoutes);
   app.route('/orders', reviewRoutes);
   app.route('/favorites', favoriteRoutes);

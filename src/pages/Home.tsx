@@ -71,6 +71,17 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Search bar — sticky, stays visible while the header scrolls away */}
+      <div className="sticky top-0 z-20 bg-white dark:bg-gray-800 px-4 py-2.5 shadow-sm">
+        <button
+          className="w-full flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-xl px-3 py-2.5 text-left"
+          onClick={() => navigate('/search')}
+        >
+          <span className="text-gray-400">🔍</span>
+          <span className="text-sm text-gray-400 dark:text-gray-500">搜索商家或商品</span>
+        </button>
+      </div>
+
       {/* Banner */}
       <div className="mx-4 mt-4 rounded-2xl overflow-hidden bg-gradient-to-r from-orange-400 to-amber-400 p-4 flex items-center justify-between">
         <div>
