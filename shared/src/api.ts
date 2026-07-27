@@ -280,6 +280,14 @@ export interface ModerationItemDto {
   aiConfidence?: number | null;
 }
 
+/** Paginated response for GET /admin/moderation when a `type` filter is given. */
+export interface ModerationListDto {
+  items: ModerationItemDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
 /** Preset levels for admin-set homepage recommendation priority; shared by the UI buttons and server validation. */
 export const SHOP_PRIORITY_LEVELS = [
   { label: '置顶', value: 100 },
@@ -303,6 +311,14 @@ export interface AdminShopDto {
   recommendPriority: number;
 }
 
+/** Paginated response for GET /admin/shops. */
+export interface AdminShopListDto {
+  items: AdminShopDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
 /** One row in the admin 用户管理 list (GET /admin/users). */
 export interface AdminUserDto {
   id: string;
@@ -312,6 +328,14 @@ export interface AdminUserDto {
   bannedAt: string | null;
   bannedReason: string | null;
   bannedBy: string | null;
+}
+
+/** Paginated response for GET /admin/users. */
+export interface AdminUserListDto {
+  items: AdminUserDto[];
+  total: number;
+  page: number;
+  pageSize: number;
 }
 
 /** Response for POST /admin/users/:id/ban — how much of the user's historical content got auto-rejected. */

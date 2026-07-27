@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import type {
   BatchReviewResultDto,
   ModerationItemDto,
+  ModerationListDto,
   ModerationTargetDto,
   ReviewStatus,
 } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
+import { useDebounce } from '../hooks/useDebounce';
 import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
@@ -21,6 +23,17 @@ const REVIEWER_LABELS: Record<'approved' | 'rejected', { ai: string; human: stri
   approved: { ai: 'AI审核通过', human: '已人工核验' },
   rejected: { ai: 'AI审核驳回', human: '已人工核验' },
 };
+
+type TargetType = 'restaurant' | 'menuItem' | 'review';
+
+const TARGET_TYPE_TABS: { value: TargetType | undefined; label: string }[] = [
+  { value: undefined, label: '全部' },
+  { value: 'restaurant', label: '店铺' },
+  { value: 'menuItem', label: '菜品' },
+  { value: 'review', label: '评价' },
+];
+
+const PAGE_SIZE = 50;
 
 function reviewPath(item: ModerationItemDto): string {
   if (item.targetType === 'review') return `/admin/reviews/${item.reviewId}/review`;
@@ -62,9 +75,31 @@ export default function AdminReview() {
   const reviewer: 'ai' | 'human' = reviewerParam === 'ai' || reviewerParam === 'human' ? reviewerParam : 'ai';
   const hasReviewerTabs = status === 'approved' || status === 'rejected';
   const isAiReviewerTab = hasReviewerTabs && reviewer === 'ai';
-  const { data: items, loading, error, reload } = useApi<ModerationItemDto[]>(
-    hasReviewerTabs ? `/admin/moderation?status=${status}&reviewer=${reviewer}` : `/admin/moderation?status=${status}`,
+  const typeParam = searchParams.get('type');
+  const targetType: TargetType | undefined = TARGET_TYPE_TABS.some((t) => t.value === typeParam)
+    ? (typeParam as TargetType)
+    : undefined;
+  const pageParam = Number(searchParams.get('page'));
+  const page = Number.isFinite(pageParam) && pageParam >= 1 ? Math.floor(pageParam) : 1;
+
+  const [queryInput, setQueryInput] = useState('');
+  const query = useDebounce(queryInput.trim(), 300);
+
+  const listParams = new URLSearchParams({ status });
+  if (hasReviewerTabs) listParams.set('reviewer', reviewer);
+  if (targetType) listParams.set('type', targetType);
+  if (query) listParams.set('q', query);
+  if (targetType) {
+    listParams.set('page', String(page));
+    listParams.set('pageSize', String(PAGE_SIZE));
+  }
+  const { data, loading, error, reload } = useApi<ModerationItemDto[] | ModerationListDto>(
+    `/admin/moderation?${listParams.toString()}`,
   );
+  const items = data ? (Array.isArray(data) ? data : data.items) : null;
+  const total = data && !Array.isArray(data) ? data.total : null;
+  const totalPages = total !== null ? Math.max(1, Math.ceil(total / PAGE_SIZE)) : 1;
+
   const [submittingKey, setSubmittingKey] = useState<string | null>(null);
   const [rejectingKey, setRejectingKey] = useState<string | null>(null);
   const [rejectReason, setRejectReason] = useState('');
@@ -92,6 +127,25 @@ export default function AdminReview() {
     setSelectedKeys(new Set());
     setBatchRejecting(false);
     setBatchReason('');
+  };
+
+  // 搜索关键字变化时回到第一页（状态/审核人/类型页签切换在各自的 onClick 里已经不带 page 参数，天然重置）。
+  useEffect(() => {
+    setSearchParams((prev) => {
+      if (!prev.get('page') || prev.get('page') === '1') return prev;
+      const next = new URLSearchParams(prev);
+      next.delete('page');
+      return next;
+    }, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
+  const goToPage = (next: number) => {
+    const nextParams = new URLSearchParams(searchParams);
+    if (next <= 1) nextParams.delete('page');
+    else nextParams.set('page', String(next));
+    setSearchParams(nextParams, { replace: true });
+    clearSelection();
   };
 
   const toggleSelect = (key: string) => {
@@ -167,12 +221,10 @@ export default function AdminReview() {
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
               }`}
               onClick={() => {
-                setSearchParams(
-                  tab.value === 'approved' || tab.value === 'rejected'
-                    ? { status: tab.value, reviewer: 'ai' }
-                    : { status: tab.value },
-                  { replace: true },
-                );
+                const next: Record<string, string> = { status: tab.value };
+                if (tab.value === 'approved' || tab.value === 'rejected') next.reviewer = 'ai';
+                if (targetType) next.type = targetType;
+                setSearchParams(next, { replace: true });
                 setRejectingKey(null);
                 clearSelection();
               }}
@@ -180,6 +232,38 @@ export default function AdminReview() {
               {tab.label}
             </button>
           ))}
+        </div>
+        {/* Type filter */}
+        <div className="flex gap-2 mt-2">
+          {TARGET_TYPE_TABS.map((tab) => (
+            <button
+              key={tab.label}
+              className={`text-xs px-3 py-1.5 rounded-full font-medium ${
+                targetType === tab.value
+                  ? 'bg-orange-500 text-white'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
+              }`}
+              onClick={() => {
+                const next: Record<string, string> = { status };
+                if (hasReviewerTabs) next.reviewer = reviewer;
+                if (tab.value) next.type = tab.value;
+                setSearchParams(next, { replace: true });
+                setRejectingKey(null);
+                clearSelection();
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        {/* Search */}
+        <div className="mt-2">
+          <input
+            className="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm"
+            placeholder="搜索名称 / 发布者"
+            value={queryInput}
+            onChange={(e) => setQueryInput(e.target.value)}
+          />
         </div>
         {hasReviewerTabs && (
           <div className="flex gap-2 mt-2">
@@ -192,7 +276,9 @@ export default function AdminReview() {
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
                 }`}
                 onClick={() => {
-                  setSearchParams({ status, reviewer: value }, { replace: true });
+                  const next: Record<string, string> = { status, reviewer: value };
+                  if (targetType) next.type = targetType;
+                  setSearchParams(next, { replace: true });
                   setRejectingKey(null);
                   clearSelection();
                 }}
@@ -390,6 +476,29 @@ export default function AdminReview() {
               );
             })}
             </div>
+            {targetType && totalPages > 1 && (
+              <div className="flex items-center justify-center gap-3 mt-4 text-sm">
+                <button
+                  type="button"
+                  className="px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 disabled:opacity-40"
+                  disabled={page <= 1}
+                  onClick={() => goToPage(page - 1)}
+                >
+                  上一页
+                </button>
+                <span className="text-gray-400 dark:text-gray-500 text-xs">
+                  第 {page} / {totalPages} 页 · 共 {total} 条
+                </span>
+                <button
+                  type="button"
+                  className="px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 disabled:opacity-40"
+                  disabled={page >= totalPages}
+                  onClick={() => goToPage(page + 1)}
+                >
+                  下一页
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>

@@ -1,16 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { AdminUserDto, BanUserResultDto } from '@sim-waimai/shared';
+import type { AdminUserDto, AdminUserListDto, BanUserResultDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
+import { useDebounce } from '../hooks/useDebounce';
 import { api } from '../lib/api';
+
+const PAGE_SIZE = 50;
 
 export default function AdminUsers() {
   const navigate = useNavigate();
-  const { data: users, loading, error, reload } = useApi<AdminUserDto[]>('/admin/users');
+  const [queryInput, setQueryInput] = useState('');
+  const query = useDebounce(queryInput.trim(), 300);
+  const [page, setPage] = useState(1);
+  const listParams = new URLSearchParams({ page: String(page), pageSize: String(PAGE_SIZE) });
+  if (query) listParams.set('q', query);
+  const { data, loading, error, reload } = useApi<AdminUserListDto>(`/admin/users?${listParams.toString()}`);
+  const users = data?.items;
+  const total = data?.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
   const [banningId, setBanningId] = useState<string | null>(null);
   const [banReason, setBanReason] = useState('');
   const [submittingId, setSubmittingId] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query]);
 
   const flash = (text: string) => {
     setMessage(text);
@@ -50,6 +65,14 @@ export default function AdminUsers() {
         <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">
           封禁用户后，其名下历史店铺/商品/评价将批量驳回，之后提交的内容也会自动驳回
         </p>
+        <div className="mt-3">
+          <input
+            className="w-full px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm"
+            placeholder="搜索用户名"
+            value={queryInput}
+            onChange={(e) => setQueryInput(e.target.value)}
+          />
+        </div>
       </div>
 
       {message && (
@@ -140,6 +163,29 @@ export default function AdminUsers() {
                 </div>
               );
             })}
+          </div>
+        )}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-3 mt-4 text-sm">
+            <button
+              type="button"
+              className="px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 disabled:opacity-40"
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+            >
+              上一页
+            </button>
+            <span className="text-gray-400 dark:text-gray-500 text-xs">
+              第 {page} / {totalPages} 页 · 共 {total} 条
+            </span>
+            <button
+              type="button"
+              className="px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 disabled:opacity-40"
+              disabled={page >= totalPages}
+              onClick={() => setPage((p) => p + 1)}
+            >
+              下一页
+            </button>
           </div>
         )}
       </div>

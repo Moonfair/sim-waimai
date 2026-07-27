@@ -1,15 +1,27 @@
-import { and, desc, eq, ilike, ne } from 'drizzle-orm';
+import { and, desc, eq, ilike, ne, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
-import type { AdminUserDto, BanUserResultDto } from '@sim-waimai/shared';
+import type { AdminUserDto, AdminUserListDto, BanUserResultDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { menuItems, restaurants, reviews, users } from '../db/schema';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 import { applyMenuItemDecision, applyRestaurantDecision, applyUserReviewDecision } from './admin';
 
-const LIST_LIMIT = 100;
 const BAN_REJECT_REASON = '账号已被封禁';
+const PAGE_SIZE_DEFAULT = 50;
+const PAGE_SIZE_MAX = 50;
+
+function parsePage(raw: string | undefined): number {
+  const n = Math.floor(Number(raw));
+  return Number.isFinite(n) && n >= 1 ? n : 1;
+}
+
+function parsePageSize(raw: string | undefined): number {
+  const n = Math.floor(Number(raw));
+  const v = Number.isFinite(n) ? n : PAGE_SIZE_DEFAULT;
+  return Math.min(Math.max(v, 1), PAGE_SIZE_MAX);
+}
 
 const banSchema = z.object({
   reason: z.string().max(200).optional(),
@@ -30,13 +42,21 @@ function toAdminUserDto(row: typeof users.$inferSelect): AdminUserDto {
 export const adminUsersRoutes = new Hono()
   .get('/users', requireAdmin, async (c) => {
     const q = c.req.query('q')?.trim();
+    const page = parsePage(c.req.query('page'));
+    const pageSize = parsePageSize(c.req.query('pageSize'));
+    const where = q ? ilike(users.username, `%${q}%`) : undefined;
+
+    const [{ total }] = await db.select({ total: sql<number>`count(*)::int` }).from(users).where(where);
     const rows = await db
       .select()
       .from(users)
-      .where(q ? ilike(users.username, `%${q}%`) : undefined)
+      .where(where)
       .orderBy(desc(users.createdAt))
-      .limit(LIST_LIMIT);
-    return c.json(rows.map(toAdminUserDto));
+      .limit(pageSize)
+      .offset((page - 1) * pageSize);
+
+    const result: AdminUserListDto = { items: rows.map(toAdminUserDto), total, page, pageSize };
+    return c.json(result);
   })
   .post('/users/:id/ban', requireAdmin, validateJson(banSchema), async (c) => {
     const admin = c.get('user');

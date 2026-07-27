@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, isNull, ne, or } from 'drizzle-orm';
+import { and, asc, desc, eq, ilike, isNull, ne, or, sql } from 'drizzle-orm';
 import type { AnyColumn } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
@@ -6,6 +6,7 @@ import type {
   BatchReviewResultDto,
   ModerationItemDetailDto,
   ModerationItemDto,
+  ModerationListDto,
   ModerationRestaurantDetailDto,
   ModerationUserReviewDetailDto,
   ReviewStatus,
@@ -18,9 +19,23 @@ import { UUID_RE, validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 
 const LIST_LIMIT = 100;
+const PAGE_SIZE_DEFAULT = 50;
+const PAGE_SIZE_MAX = 50;
 
 const statusSchema = z.enum(['pending', 'approved', 'rejected']);
 const reviewerSchema = z.enum(['ai', 'human']).optional();
+const targetTypeSchema = z.enum(['restaurant', 'menuItem', 'review']).optional();
+
+function parsePage(raw: string | undefined): number {
+  const n = Math.floor(Number(raw));
+  return Number.isFinite(n) && n >= 1 ? n : 1;
+}
+
+function parsePageSize(raw: string | undefined): number {
+  const n = Math.floor(Number(raw));
+  const v = Number.isFinite(n) ? n : PAGE_SIZE_DEFAULT;
+  return Math.min(Math.max(v, 1), PAGE_SIZE_MAX);
+}
 
 const reviewSchema = z.object({
   decision: z.enum(['approved', 'rejected']),
@@ -226,38 +241,145 @@ export const adminRoutes = new Hono()
     if (!reviewerParsed.success) return c.json({ error: '无效的审核人筛选' }, 400);
     const reviewer = reviewerParsed.data;
 
-    // 店铺和商品合并为一个列表；演示场景不做游标分页，各取前 LIST_LIMIT 条。
-    const shopReviewerCond = reviewerCondition(restaurants.reviewedBy, reviewer);
+    const typeParsed = targetTypeSchema.safeParse(c.req.query('type'));
+    if (!typeParsed.success) return c.json({ error: '无效的类型筛选' }, 400);
+    const targetType = typeParsed.data;
+
+    const q = c.req.query('q')?.trim() || undefined;
+    const page = parsePage(c.req.query('page'));
+    const pageSize = parsePageSize(c.req.query('pageSize'));
+
+    // 选中具体类型：单表分页 + 关键字搜索（名称 / 发布者用户名）。
+    if (targetType === 'restaurant') {
+      const where = and(
+        eq(restaurants.reviewStatus, status),
+        reviewerCondition(restaurants.reviewedBy, reviewer),
+        q ? or(ilike(restaurants.name, `%${q}%`), ilike(users.username, `%${q}%`)) : undefined,
+      );
+      const [{ total }] = await db
+        .select({ total: sql<number>`count(*)::int` })
+        .from(restaurants)
+        .leftJoin(users, eq(users.id, restaurants.ownerId))
+        .where(where);
+      const rows = await db
+        .select({ restaurant: restaurants, ownerUsername: users.username })
+        .from(restaurants)
+        .leftJoin(users, eq(users.id, restaurants.ownerId))
+        .where(where)
+        .orderBy(desc(restaurants.createdAt))
+        .limit(pageSize)
+        .offset((page - 1) * pageSize);
+      const result: ModerationListDto = {
+        items: rows.map((r) => toRestaurantModerationItem(r.restaurant, r.ownerUsername)),
+        total,
+        page,
+        pageSize,
+      };
+      return c.json(result);
+    }
+
+    if (targetType === 'menuItem') {
+      const where = and(
+        eq(menuItems.reviewStatus, status),
+        reviewerCondition(menuItems.reviewedBy, reviewer),
+        q ? or(ilike(menuItems.name, `%${q}%`), ilike(users.username, `%${q}%`)) : undefined,
+      );
+      const [{ total }] = await db
+        .select({ total: sql<number>`count(*)::int` })
+        .from(menuItems)
+        .innerJoin(restaurants, eq(restaurants.id, menuItems.restaurantId))
+        .leftJoin(users, eq(users.id, restaurants.ownerId))
+        .where(where);
+      const rows = await db
+        .select({ item: menuItems, restaurantName: restaurants.name, ownerUsername: users.username })
+        .from(menuItems)
+        .innerJoin(restaurants, eq(restaurants.id, menuItems.restaurantId))
+        .leftJoin(users, eq(users.id, restaurants.ownerId))
+        .where(where)
+        .orderBy(asc(menuItems.restaurantId), asc(menuItems.sortOrder))
+        .limit(pageSize)
+        .offset((page - 1) * pageSize);
+      const result: ModerationListDto = {
+        items: rows.map((r) => toItemModerationItem(r.item, r.restaurantName, r.ownerUsername)),
+        total,
+        page,
+        pageSize,
+      };
+      return c.json(result);
+    }
+
+    if (targetType === 'review') {
+      // 评价没有独立的"名称"字段，DTO 里的 name 就是发布者用户名，因此关键字只需匹配 users.username。
+      const where = and(
+        eq(reviews.reviewStatus, status),
+        reviewerCondition(reviews.reviewedBy, reviewer),
+        q ? ilike(users.username, `%${q}%`) : undefined,
+      );
+      const [{ total }] = await db
+        .select({ total: sql<number>`count(*)::int` })
+        .from(reviews)
+        .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
+        .innerJoin(users, eq(users.id, reviews.userId))
+        .where(where);
+      const rows = await db
+        .select({ review: reviews, restaurantName: restaurants.name, authorUsername: users.username })
+        .from(reviews)
+        .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
+        .innerJoin(users, eq(users.id, reviews.userId))
+        .where(where)
+        .orderBy(desc(reviews.createdAt))
+        .limit(pageSize)
+        .offset((page - 1) * pageSize);
+      const result: ModerationListDto = {
+        items: rows.map((r) => toUserReviewModerationItem(r.review, r.restaurantName, r.authorUsername)),
+        total,
+        page,
+        pageSize,
+      };
+      return c.json(result);
+    }
+
+    // 全部：店铺和商品合并为一个列表；演示场景不做游标分页，各取前 LIST_LIMIT 条。
     const shopRows = await db
       .select({ restaurant: restaurants, ownerUsername: users.username })
       .from(restaurants)
       .leftJoin(users, eq(users.id, restaurants.ownerId))
       .where(
-        shopReviewerCond ? and(eq(restaurants.reviewStatus, status), shopReviewerCond) : eq(restaurants.reviewStatus, status),
+        and(
+          eq(restaurants.reviewStatus, status),
+          reviewerCondition(restaurants.reviewedBy, reviewer),
+          q ? or(ilike(restaurants.name, `%${q}%`), ilike(users.username, `%${q}%`)) : undefined,
+        ),
       )
       .orderBy(desc(restaurants.createdAt))
       .limit(LIST_LIMIT);
 
-    const itemReviewerCond = reviewerCondition(menuItems.reviewedBy, reviewer);
     const itemRows = await db
       .select({ item: menuItems, restaurantName: restaurants.name, ownerUsername: users.username })
       .from(menuItems)
       .innerJoin(restaurants, eq(restaurants.id, menuItems.restaurantId))
       .leftJoin(users, eq(users.id, restaurants.ownerId))
       .where(
-        itemReviewerCond ? and(eq(menuItems.reviewStatus, status), itemReviewerCond) : eq(menuItems.reviewStatus, status),
+        and(
+          eq(menuItems.reviewStatus, status),
+          reviewerCondition(menuItems.reviewedBy, reviewer),
+          q ? or(ilike(menuItems.name, `%${q}%`), ilike(users.username, `%${q}%`)) : undefined,
+        ),
       )
       .orderBy(asc(menuItems.restaurantId), asc(menuItems.sortOrder))
       .limit(LIST_LIMIT);
 
-    const reviewReviewerCond = reviewerCondition(reviews.reviewedBy, reviewer);
     const reviewRows = await db
       .select({ review: reviews, restaurantName: restaurants.name, authorUsername: users.username })
       .from(reviews)
       .innerJoin(restaurants, eq(restaurants.id, reviews.restaurantId))
       .innerJoin(users, eq(users.id, reviews.userId))
       .where(
-        reviewReviewerCond ? and(eq(reviews.reviewStatus, status), reviewReviewerCond) : eq(reviews.reviewStatus, status),
+        and(
+          eq(reviews.reviewStatus, status),
+          reviewerCondition(reviews.reviewedBy, reviewer),
+          q ? ilike(users.username, `%${q}%`) : undefined,
+        ),
       )
       .orderBy(desc(reviews.createdAt))
       .limit(LIST_LIMIT);

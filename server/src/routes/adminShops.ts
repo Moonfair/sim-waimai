@@ -1,12 +1,26 @@
-import { asc, desc, eq, isNotNull } from 'drizzle-orm';
+import { and, asc, desc, eq, ilike, isNotNull, or, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
-import type { AdminShopDto } from '@sim-waimai/shared';
+import type { AdminShopDto, AdminShopListDto } from '@sim-waimai/shared';
 import { SHOP_PRIORITY_LEVELS } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { restaurants, users } from '../db/schema';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
+
+const PAGE_SIZE_DEFAULT = 50;
+const PAGE_SIZE_MAX = 50;
+
+function parsePage(raw: string | undefined): number {
+  const n = Math.floor(Number(raw));
+  return Number.isFinite(n) && n >= 1 ? n : 1;
+}
+
+function parsePageSize(raw: string | undefined): number {
+  const n = Math.floor(Number(raw));
+  const v = Number.isFinite(n) ? n : PAGE_SIZE_DEFAULT;
+  return Math.min(Math.max(v, 1), PAGE_SIZE_MAX);
+}
 
 const prioritySchema = z.object({
   priority: z
@@ -16,6 +30,21 @@ const prioritySchema = z.object({
 
 export const adminShopsRoutes = new Hono()
   .get('/shops', requireAdmin, async (c) => {
+    const q = c.req.query('q')?.trim() || undefined;
+    const page = parsePage(c.req.query('page'));
+    const pageSize = parsePageSize(c.req.query('pageSize'));
+
+    const where = and(
+      isNotNull(restaurants.ownerId),
+      q ? or(ilike(restaurants.name, `%${q}%`), ilike(users.username, `%${q}%`)) : undefined,
+    );
+
+    const [{ total }] = await db
+      .select({ total: sql<number>`count(*)::int` })
+      .from(restaurants)
+      .innerJoin(users, eq(users.id, restaurants.ownerId))
+      .where(where);
+
     const rows = await db
       .select({
         id: restaurants.id,
@@ -32,10 +61,14 @@ export const adminShopsRoutes = new Hono()
       })
       .from(restaurants)
       .innerJoin(users, eq(users.id, restaurants.ownerId))
-      .where(isNotNull(restaurants.ownerId))
-      .orderBy(desc(restaurants.recommendPriority), asc(restaurants.name));
-    const shops: AdminShopDto[] = rows;
-    return c.json(shops);
+      .where(where)
+      .orderBy(desc(restaurants.recommendPriority), asc(restaurants.name))
+      .limit(pageSize)
+      .offset((page - 1) * pageSize);
+
+    const items: AdminShopDto[] = rows;
+    const result: AdminShopListDto = { items, total, page, pageSize };
+    return c.json(result);
   })
   .post('/shops/:id/priority', requireAdmin, validateJson(prioritySchema), async (c) => {
     const [row] = await db.select().from(restaurants).where(eq(restaurants.id, c.req.param('id')));
