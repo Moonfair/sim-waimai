@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
 import { HTTPException } from 'hono/http-exception';
 import { timeout } from 'hono/timeout';
+import { logEvent } from './lib/logger';
 import { rateLimit } from './middleware/rateLimit';
 import { adminRoutes } from './routes/admin';
 import { adminReportsRoutes } from './routes/adminReports';
@@ -68,6 +69,12 @@ export function createApp() {
       return c.json({ error: err.message }, err.status);
     }
     console.error(err);
+    logEvent('unhandled_error', {
+      method: c.req.method,
+      path: c.req.path,
+      message: err.message,
+      stack: err.stack,
+    });
     return c.json({ error: '服务器内部错误' }, 500);
   });
 

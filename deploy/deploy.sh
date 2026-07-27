@@ -62,6 +62,12 @@ npm run build >/dev/null || die "本地 npm run build 失败"
 step "备份服务器 .env（tarball 覆盖解压不会碰它，但留个后手）"
 remote "install -m 600 $APP_DIR/.env /root/sim-waimai.env.bak && install -m 600 $APP_DIR/deploy/.env.db /root/sim-waimai.env.db.bak"
 
+# 记一笔部署时间戳到服务器上的 deploy.log（幂等追加）。--server 部署会让 API 容器停几秒再起，
+# 期间所有接口对用户表现为 502——排查"用户反馈请求失败"这类问题时，第一步就是 grep 这个文件
+# 看事发时间是不是刚好撞上一次部署，不用再翻 journalctl -u docker 猜。只记开始时间：如果这次部署
+# 中途 die 掉，deploy.log 里"有 start 没 end"本身就是"部署失败"的信号。
+remote "echo \"\$(date '+%F %T %z') deploy_start sha=$LOCAL_SHA server=$WITH_SERVER\" >> $APP_DIR/deploy.log"
+
 # 若 server/ 相对上次部署有改动而没带 --server，给出提醒
 PREV_SHA=$(remote "cat $APP_DIR/.deployed-version 2>/dev/null" || true)
 if [ "$WITH_SERVER" -eq 0 ] && [ -n "$PREV_SHA" ] && git cat-file -e "$PREV_SHA" 2>/dev/null; then
@@ -114,5 +120,7 @@ else
   curl -sf -m 20 "https://$DOMAIN/api/health" >/dev/null || die "经 CDN 的 /api/health 不通"
   echo "  ✓ CDN 与源站一致，新版已生效：$DIST_JS"
 fi
+
+remote "echo \"\$(date '+%F %T %z') deploy_end sha=$LOCAL_SHA server=$WITH_SERVER\" >> $APP_DIR/deploy.log"
 
 printf '\n\033[1;32m✓ 部署完成\033[0m  版本 %s\n' "${LOCAL_SHA:0:7}"

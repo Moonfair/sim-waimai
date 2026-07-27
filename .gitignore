@@ -15,6 +15,9 @@ dist-ssr
 # Dev-fallback image uploads (COS not configured)
 server/uploads/
 
+# Persisted app event log (server_start/stop, unhandled errors) — see server/src/lib/logger.ts
+server/logs/
+
 # Secrets
 .env
 .env.*
