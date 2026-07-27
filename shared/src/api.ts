@@ -144,6 +144,28 @@ export interface MerchantRestaurantDto extends MerchantRestaurantSummaryDto {
   menu: MerchantMenuItemDto[];
 }
 
+export interface MerchantStoreStatsDto {
+  id: string;
+  /** yuan，该店铺所有订单 totalFen 之和 */
+  totalRevenue: number;
+  /** 该店铺订单数 */
+  totalSales: number;
+  /** yuan，当日订单 totalFen 之和 */
+  todayRevenue: number;
+  /** 当日订单数 */
+  todaySales: number;
+}
+
+/** 商家中心统计看板数据（GET /merchant/stats）。 */
+export interface MerchantStatsDto {
+  /** yuan，名下所有店铺营收之和 */
+  totalRevenue: number;
+  totalSales: number;
+  todayRevenue: number;
+  todaySales: number;
+  stores: MerchantStoreStatsDto[];
+}
+
 /** Cumulative stats across all of a user's orders, for the 我的 dashboard. */
 export interface UserStatsDto {
   totalOrders: number;
@@ -265,6 +287,27 @@ export interface AdminShopDto {
   isActive: boolean;
   reviewStatus: ReviewStatus;
   recommendPriority: number;
+}
+
+/** One row in the admin 用户管理 list (GET /admin/users). */
+export interface AdminUserDto {
+  id: string;
+  username: string;
+  createdAt: string;
+  isBanned: boolean;
+  bannedAt: string | null;
+  bannedReason: string | null;
+  bannedBy: string | null;
+}
+
+/** Response for POST /admin/users/:id/ban — how much of the user's historical content got auto-rejected. */
+export interface BanUserResultDto {
+  user: AdminUserDto;
+  rejectedCounts: {
+    restaurants: number;
+    menuItems: number;
+    reviews: number;
+  };
 }
 
 /** One target of a batch moderation decision (POST /admin/moderation/review). */

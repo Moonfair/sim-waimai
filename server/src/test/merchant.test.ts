@@ -3,12 +3,13 @@ import { eq } from 'drizzle-orm';
 import type {
   MerchantMenuItemDto,
   MerchantRestaurantDto,
+  MerchantStatsDto,
   Restaurant,
   RestaurantSummary,
 } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
-import { menuItems, restaurants, users } from '../db/schema';
+import { menuItems, orders, restaurants, users } from '../db/schema';
 import { registerTestUser } from './testHelpers';
 
 const app = createApp();
@@ -54,11 +55,38 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await db.delete(orders).where(eq(orders.userId, ownerId));
   await db.delete(restaurants).where(eq(restaurants.ownerId, ownerId)); // cascades menu_items
   await db.delete(users).where(eq(users.username, owner.username));
   await db.delete(users).where(eq(users.username, rando.username));
   await pool.end();
 });
+
+function makeOrder(restaurantId: string, totalFen: number, status: 'pending' | 'completed') {
+  return {
+    userId: ownerId,
+    restaurantId,
+    restaurantSnapshot: { name: 'x', emoji: '🍜', bgColor: '#000000' },
+    status,
+    items: [
+      {
+        key: `${restaurantId}-0`,
+        menuItemId: `${restaurantId}-0`,
+        name: '测试商品',
+        emoji: '🍜',
+        quantity: 1,
+        unitPrice: totalFen / 100,
+        calories: 100,
+        lineTotal: totalFen / 100,
+      },
+    ],
+    subtotalFen: totalFen,
+    deliveryFeeFen: 0,
+    totalFen,
+    totalCalories: 100,
+    addressSnapshot: { recipientName: '', phone: '', address: 'x' },
+  };
+}
 
 describe('merchant registration', () => {
   it('creates a shop owned by the user, visible in the public list', async () => {
@@ -241,5 +269,53 @@ describe('menu item management', () => {
       RestaurantSummary & { isActive: boolean }
     >;
     expect(mine.find((r) => r.id === shopId)?.isActive).toBe(false);
+  });
+});
+
+describe('GET /api/merchant/stats', () => {
+  it('requires auth', async () => {
+    expect((await app.request('/api/merchant/stats')).status).toBe(401);
+  });
+
+  it('aggregates revenue and order count across all statuses, split by store', async () => {
+    const createRes = await req('/api/merchant/restaurants', ownerCookie, {
+      method: 'POST',
+      body: {
+        name: `统计测试店_${stamp}`,
+        category: '中式快餐',
+        emoji: '📊',
+        bgColor: '#336699',
+        deliveryFee: 3,
+        minOrder: 15,
+        deliveryTime: 30,
+        tags: ['测试'],
+        menuCategories: ['招牌'],
+      },
+    });
+    const shop = (await createRes.json()) as MerchantRestaurantDto;
+
+    await db.insert(orders).values([
+      makeOrder(shop.id, 5000, 'completed'),
+      makeOrder(shop.id, 3000, 'pending'),
+    ]);
+
+    const stats = (await (
+      await req('/api/merchant/stats', ownerCookie)
+    ).json()) as MerchantStatsDto;
+
+    const mine = stats.stores.find((s) => s.id === shop.id);
+    expect(mine).toBeDefined();
+    // 两种状态都算："营收"不筛 status，和 adminStats.ts 里 GMV 的既有约定一致
+    expect(mine!.totalSales).toBe(2);
+    expect(mine!.totalRevenue).toBeCloseTo(80, 2);
+    // 测试里刚插入的订单 createdAt 就是 now()，落在"今天"的边界内
+    expect(mine!.todaySales).toBe(2);
+    expect(mine!.todayRevenue).toBeCloseTo(80, 2);
+
+    // 汇总字段应等于各店求和（不用绝对值断言，避免和并发跑的其他测试文件互相干扰）
+    const sumRevenue = stats.stores.reduce((s, r) => s + r.totalRevenue, 0);
+    const sumSales = stats.stores.reduce((s, r) => s + r.totalSales, 0);
+    expect(stats.totalRevenue).toBeCloseTo(sumRevenue, 2);
+    expect(stats.totalSales).toBe(sumSales);
   });
 });

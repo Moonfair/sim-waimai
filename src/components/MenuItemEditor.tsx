@@ -201,68 +201,74 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
             <div className="space-y-3">
               {groups.map((group, gi) => (
                 <div key={group.id} className="bg-gray-50 dark:bg-gray-900 rounded-xl p-3 space-y-2">
-                  <div className="flex gap-2 items-center">
+                  <div className="space-y-1.5">
                     <input
-                      className={`${inputClass} flex-1`}
+                      className={`${inputClass} w-full`}
                       placeholder="规格组名，如：辣度"
                       value={group.name}
                       onChange={(e) => updateGroup(gi, { name: e.target.value })}
                     />
-                    <select
-                      className={`${inputClass} w-28`}
-                      value={group.selectionType}
-                      onChange={(e) => {
-                        const selectionType = e.target.value as 'single' | 'multi';
-                        updateGroup(gi, { selectionType, required: selectionType === 'single' });
-                      }}
-                    >
-                      <option value="single">单选·必选</option>
-                      <option value="multi">多选·可选</option>
-                    </select>
-                    <button className="text-gray-300 dark:text-gray-600" onClick={() => setGroups((gs) => gs.filter((_, i) => i !== gi))} aria-label="删除规格组">
-                      🗑️
-                    </button>
+                    <div className="flex gap-2 items-center justify-end">
+                      <select
+                        className={`${inputClass} w-28`}
+                        value={group.selectionType}
+                        onChange={(e) => {
+                          const selectionType = e.target.value as 'single' | 'multi';
+                          updateGroup(gi, { selectionType, required: selectionType === 'single' });
+                        }}
+                      >
+                        <option value="single">单选·必选</option>
+                        <option value="multi">多选·可选</option>
+                      </select>
+                      <button className="text-gray-300 dark:text-gray-600" onClick={() => setGroups((gs) => gs.filter((_, i) => i !== gi))} aria-label="删除规格组">
+                        🗑️
+                      </button>
+                    </div>
                   </div>
                   {group.options.map((option, oi) => (
-                    <div key={option.id} className="flex gap-2 items-center">
-                      {group.selectionType === 'single' && (
+                    <div key={option.id} className="space-y-1.5">
+                      <div className="flex gap-2 items-center">
+                        {group.selectionType === 'single' && (
+                          <input
+                            type="radio"
+                            name={`default-${group.id}`}
+                            className="accent-orange-500 flex-shrink-0"
+                            title="设为默认"
+                            checked={group.defaultOptionIds?.[0] === option.id}
+                            onChange={() => updateGroup(gi, { defaultOptionIds: [option.id] })}
+                          />
+                        )}
                         <input
-                          type="radio"
-                          name={`default-${group.id}`}
-                          className="accent-orange-500 flex-shrink-0"
-                          title="设为默认"
-                          checked={group.defaultOptionIds?.[0] === option.id}
-                          onChange={() => updateGroup(gi, { defaultOptionIds: [option.id] })}
+                          className={`${inputClass} flex-1`}
+                          placeholder="选项名，如：微辣"
+                          value={option.name}
+                          onChange={(e) =>
+                            updateGroup(gi, {
+                              options: group.options.map((o, i) => (i === oi ? { ...o, name: e.target.value } : o)),
+                            })
+                          }
                         />
-                      )}
-                      <input
-                        className={`${inputClass} flex-1`}
-                        placeholder="选项名，如：微辣"
-                        value={option.name}
-                        onChange={(e) =>
-                          updateGroup(gi, {
-                            options: group.options.map((o, i) => (i === oi ? { ...o, name: e.target.value } : o)),
-                          })
-                        }
-                      />
-                      <input
-                        className={`${inputClass} w-20`}
-                        type="number"
-                        min="0"
-                        step="0.5"
-                        placeholder="+¥"
-                        value={option.priceDelta || ''}
-                        onChange={(e) =>
-                          updateGroup(gi, {
-                            options: group.options.map((o, i) =>
-                              i === oi ? { ...o, priceDelta: Number(e.target.value) || 0 } : o,
-                            ),
-                          })
-                        }
-                      />
-                      <button className="text-gray-300 dark:text-gray-600 flex-shrink-0" onClick={() => removeOption(gi, oi)} aria-label="删除选项">
-                        ✕
-                      </button>
+                      </div>
+                      <div className="flex gap-2 items-center justify-end">
+                        <input
+                          className={`${inputClass} w-24`}
+                          type="number"
+                          min="0"
+                          step="0.5"
+                          placeholder="+¥"
+                          value={option.priceDelta || ''}
+                          onChange={(e) =>
+                            updateGroup(gi, {
+                              options: group.options.map((o, i) =>
+                                i === oi ? { ...o, priceDelta: Number(e.target.value) || 0 } : o,
+                              ),
+                            })
+                          }
+                        />
+                        <button className="text-gray-300 dark:text-gray-600 flex-shrink-0" onClick={() => removeOption(gi, oi)} aria-label="删除选项">
+                          ✕
+                        </button>
+                      </div>
                     </div>
                   ))}
                   <button className="text-orange-500 text-xs font-medium" onClick={() => addOption(gi)}>

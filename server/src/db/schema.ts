@@ -31,6 +31,11 @@ export const users = pgTable(
     username: text('username').notNull(),
     passwordHash: text('password_hash').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    isBanned: boolean('is_banned').notNull().default(false),
+    bannedAt: timestamp('banned_at', { withTimezone: true }),
+    bannedReason: text('banned_reason'),
+    /** 执行封禁的管理员 username. */
+    bannedBy: text('banned_by'),
   },
   (t) => [uniqueIndex('users_username_lower_idx').on(sql`lower(${t.username})`)],
 );

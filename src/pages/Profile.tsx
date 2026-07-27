@@ -40,6 +40,7 @@ export default function Profile() {
         { emoji: '📈', label: '网站统计', to: '/admin/stats' },
         { emoji: '🏬', label: '店铺管理', to: '/admin/shops' },
         { emoji: <FontAwesomeIcon icon={faFlag} />, label: '举报管理', to: '/admin/reports' },
+        { emoji: '🚫', label: '用户管理', to: '/admin/users' },
       ]
     : MENU_ROWS;
 

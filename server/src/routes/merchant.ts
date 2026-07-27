@@ -2,10 +2,16 @@ import { and, asc, desc, eq, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
-import { CATEGORIES, yuanToFen } from '@sim-waimai/shared';
-import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
+import { CATEGORIES, fenToYuan, yuanToFen } from '@sim-waimai/shared';
+import type {
+  MerchantMenuItemDto,
+  MerchantRestaurantDto,
+  MerchantStatsDto,
+  MerchantStoreStatsDto,
+} from '@sim-waimai/shared';
 import { db } from '../db/client';
-import { menuItems, restaurants, reviews, users } from '../db/schema';
+import { menuItems, orders, restaurants, reviews, users } from '../db/schema';
+import { initialReviewFields } from '../lib/banStatus';
 import { decodeCursor, encodeCursor } from '../lib/cursor';
 import { imageUrlSchema } from '../lib/imageUrl';
 import {
@@ -142,17 +148,6 @@ function toMerchantRestaurant(row: RestaurantRow, items: MenuItemRow[]): Merchan
 const RESTAURANT_MODERATED_FIELDS = ['name', 'category', 'emoji', 'tags', 'menuCategories', 'bannerImage'] as const;
 const ITEM_MODERATED_FIELDS = ['name', 'description', 'emoji', 'menuCategory', 'image', 'optionGroups'] as const;
 
-/** 重审时连同旧的审核结论一起清空（含 AI 建议，避免展示编辑前已过时的判断）。 */
-const RESET_REVIEW = {
-  reviewStatus: 'pending' as const,
-  rejectReason: null,
-  reviewedAt: null,
-  reviewedBy: null,
-  aiVerdict: null,
-  aiReason: null,
-  aiConfidence: null,
-};
-
 function restaurantContent(row: RestaurantRow): ModerationInput {
   return {
     texts: [row.name, row.category, row.emoji, ...row.tags, ...row.menuCategories],
@@ -198,6 +193,38 @@ export const merchantRoutes = new Hono()
       })),
     );
   })
+  .get('/stats', requireAuth, async (c) => {
+    const user = c.get('user');
+    const rows = await db
+      .select({
+        id: restaurants.id,
+        totalRevenueFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::int`,
+        totalSales: sql<number>`count(${orders.id})::int`,
+        todayRevenueFen: sql<number>`COALESCE(sum(${orders.totalFen}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now())), 0)::int`,
+        todaySales: sql<number>`count(${orders.id}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now()))::int`,
+      })
+      .from(restaurants)
+      .leftJoin(orders, eq(orders.restaurantId, restaurants.id))
+      .where(eq(restaurants.ownerId, user.sub))
+      .groupBy(restaurants.id);
+
+    const stores: MerchantStoreStatsDto[] = rows.map((r) => ({
+      id: r.id,
+      totalRevenue: fenToYuan(r.totalRevenueFen),
+      totalSales: r.totalSales,
+      todayRevenue: fenToYuan(r.todayRevenueFen),
+      todaySales: r.todaySales,
+    }));
+
+    const stats: MerchantStatsDto = {
+      totalRevenue: fenToYuan(rows.reduce((s, r) => s + r.totalRevenueFen, 0)),
+      totalSales: stores.reduce((s, r) => s + r.totalSales, 0),
+      todayRevenue: fenToYuan(rows.reduce((s, r) => s + r.todayRevenueFen, 0)),
+      todaySales: stores.reduce((s, r) => s + r.todaySales, 0),
+      stores,
+    };
+    return c.json(stats);
+  })
   .post('/restaurants', requireAuth, validateJson(restaurantBaseSchema), async (c) => {
     const user = c.get('user');
     const body = c.req.valid('json');
@@ -216,10 +243,12 @@ export const merchantRoutes = new Hono()
         bgColor: body.bgColor,
         tags: body.tags,
         menuCategories: body.menuCategories,
-        reviewStatus: 'pending',
+        ...(await initialReviewFields(user.sub)),
       })
       .returning();
-    queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!));
+    if (row!.reviewStatus === 'pending') {
+      queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!));
+    }
     return c.json(toMerchantRestaurant(row!, []));
   })
   .get('/restaurants/:id', requireAuth, async (c) => {
@@ -324,13 +353,13 @@ export const merchantRoutes = new Hono()
       if (body.bannerImage !== undefined) patch.bannerImage = body.bannerImage;
       if (Object.keys(patch).length === 0) return c.json({ error: '没有需要更新的内容' }, 400);
       const needsReview = RESTAURANT_MODERATED_FIELDS.some((f) => body[f] !== undefined);
-      if (needsReview) Object.assign(patch, RESET_REVIEW);
+      if (needsReview) Object.assign(patch, await initialReviewFields(owned.row.ownerId!));
       const [row] = await db
         .update(restaurants)
         .set(patch)
         .where(eq(restaurants.id, owned.row.id))
         .returning();
-      if (needsReview) {
+      if (needsReview && row!.reviewStatus === 'pending') {
         queueReview({ table: 'restaurants', restaurantId: row!.id }, restaurantContent(row!));
       }
       return c.json({
@@ -399,7 +428,7 @@ export const merchantRoutes = new Hono()
       if (body.isListed !== undefined) patch.isListed = body.isListed;
       if (Object.keys(patch).length === 0) return c.json({ error: '没有需要更新的内容' }, 400);
       const needsReview = ITEM_MODERATED_FIELDS.some((f) => body[f] !== undefined);
-      if (needsReview) Object.assign(patch, RESET_REVIEW);
+      if (needsReview) Object.assign(patch, await initialReviewFields(owned.row.ownerId!));
       const [row] = await db
         .update(menuItems)
         .set(patch)
@@ -408,7 +437,7 @@ export const merchantRoutes = new Hono()
         )
         .returning();
       if (!row) return c.json({ error: '菜品不存在' }, 404);
-      if (needsReview) {
+      if (needsReview && row.reviewStatus === 'pending') {
         queueReview({ table: 'menuItems', restaurantId: owned.row.id, itemId: row.id }, itemContent(row));
       }
       return c.json(toMerchantMenuItem(row));

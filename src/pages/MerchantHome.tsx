@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '@sim-waimai/shared';
-import type { MerchantRestaurantDto, MerchantRestaurantSummaryDto } from '@sim-waimai/shared';
+import type {
+  MerchantRestaurantDto,
+  MerchantRestaurantSummaryDto,
+  MerchantStatsDto,
+} from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { uploadImage } from '../lib/upload';
 import ZoomableImage from '../components/ZoomableImage';
+import MerchantStatsPanel from '../components/MerchantStatsPanel';
 
 const SHOP_CATEGORIES = CATEGORIES.filter((c) => c !== '全部');
 
@@ -15,6 +20,8 @@ const inputClass =
 export default function MerchantHome() {
   const navigate = useNavigate();
   const { data: shops, loading, error } = useApi<MerchantRestaurantSummaryDto[]>('/merchant/restaurants');
+  const { data: stats, loading: statsLoading } = useApi<MerchantStatsDto>('/merchant/stats');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [formOpen, setFormOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -105,51 +112,103 @@ export default function MerchantHome() {
         ) : (
           <>
             {(shops ?? []).length > 0 && (
+              <div className="mt-4">
+                <MerchantStatsPanel stats={stats ?? null} loading={statsLoading} />
+              </div>
+            )}
+
+            {(shops ?? []).length > 0 && (
               <div className="space-y-3 mt-4">
-                {shops!.map((shop) => (
-                  <div
-                    key={shop.id}
-                    className="bg-white dark:bg-gray-800 rounded-2xl p-4 flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-transform"
-                    onClick={() => navigate(`/merchant/${shop.id}`)}
-                  >
+                {shops!.map((shop) => {
+                  const shopStats = stats?.stores.find((s) => s.id === shop.id) ?? null;
+                  const expanded = expandedId === shop.id;
+                  return (
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                      style={{ background: `${shop.bgColor}22` }}
+                      key={shop.id}
+                      className="bg-white dark:bg-gray-800 rounded-2xl p-4 cursor-pointer active:scale-[0.98] transition-transform"
+                      onClick={() => navigate(`/merchant/${shop.id}`)}
                     >
-                      {shop.emoji}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-gray-900 dark:text-gray-100 text-sm truncate">
-                          {shop.name}
-                        </span>
-                        <span
-                          className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
-                            shop.reviewStatus === 'pending'
-                              ? 'text-amber-600 bg-amber-50 dark:bg-amber-500/10'
-                              : shop.reviewStatus === 'rejected'
-                                ? 'text-red-500 bg-red-50 dark:bg-red-500/10'
-                                : shop.isActive
-                                  ? 'text-green-600 bg-green-50 dark:bg-green-500/10'
-                                  : 'text-gray-400 bg-gray-100 dark:bg-gray-700'
-                          }`}
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
+                          style={{ background: `${shop.bgColor}22` }}
                         >
-                          {shop.reviewStatus === 'pending'
-                            ? '审核中'
-                            : shop.reviewStatus === 'rejected'
-                              ? '已驳回'
-                              : shop.isActive
-                                ? '营业中'
-                                : '已打烊'}
-                        </span>
+                          {shop.emoji}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-gray-900 dark:text-gray-100 text-sm truncate">
+                              {shop.name}
+                            </span>
+                            <span
+                              className={`text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 ${
+                                shop.reviewStatus === 'pending'
+                                  ? 'text-amber-600 bg-amber-50 dark:bg-amber-500/10'
+                                  : shop.reviewStatus === 'rejected'
+                                    ? 'text-red-500 bg-red-50 dark:bg-red-500/10'
+                                    : shop.isActive
+                                      ? 'text-green-600 bg-green-50 dark:bg-green-500/10'
+                                      : 'text-gray-400 bg-gray-100 dark:bg-gray-700'
+                              }`}
+                            >
+                              {shop.reviewStatus === 'pending'
+                                ? '审核中'
+                                : shop.reviewStatus === 'rejected'
+                                  ? '已驳回'
+                                  : shop.isActive
+                                    ? '营业中'
+                                    : '已打烊'}
+                            </span>
+                          </div>
+                          <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5">
+                            {shop.category} · ⭐{shop.rating} · 月售{shop.monthlyOrders}
+                          </p>
+                        </div>
+                        <button
+                          className="text-orange-500 text-xs font-medium flex-shrink-0 px-1"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpandedId(expanded ? null : shop.id);
+                          }}
+                        >
+                          {expanded ? '收起统计 ▴' : '详细统计 ▾'}
+                        </button>
                       </div>
-                      <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5">
-                        {shop.category} · ⭐{shop.rating} · 月售{shop.monthlyOrders}
-                      </p>
+
+                      {expanded && (
+                        <div
+                          className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 grid grid-cols-2 gap-2"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {shopStats ? (
+                            <>
+                              <div className="bg-gray-50 dark:bg-gray-900 rounded-xl py-2.5 text-center">
+                                <div className="text-orange-500 font-bold text-sm">¥{shopStats.totalRevenue.toFixed(2)}</div>
+                                <div className="text-gray-400 dark:text-gray-500 text-[11px] mt-0.5">总营收</div>
+                              </div>
+                              <div className="bg-gray-50 dark:bg-gray-900 rounded-xl py-2.5 text-center">
+                                <div className="text-amber-500 font-bold text-sm">{shopStats.totalSales}</div>
+                                <div className="text-gray-400 dark:text-gray-500 text-[11px] mt-0.5">总销量</div>
+                              </div>
+                              <div className="bg-gray-50 dark:bg-gray-900 rounded-xl py-2.5 text-center">
+                                <div className="text-green-600 dark:text-green-500 font-bold text-sm">¥{shopStats.todayRevenue.toFixed(2)}</div>
+                                <div className="text-gray-400 dark:text-gray-500 text-[11px] mt-0.5">今日营收</div>
+                              </div>
+                              <div className="bg-gray-50 dark:bg-gray-900 rounded-xl py-2.5 text-center">
+                                <div className="text-blue-600 dark:text-blue-500 font-bold text-sm">{shopStats.todaySales}</div>
+                                <div className="text-gray-400 dark:text-gray-500 text-[11px] mt-0.5">今日销量</div>
+                              </div>
+                            </>
+                          ) : (
+                            Array.from({ length: 4 }, (_, i) => (
+                              <div key={i} className="h-14 bg-gray-50 dark:bg-gray-900 rounded-xl animate-pulse" />
+                            ))
+                          )}
+                        </div>
+                      )}
                     </div>
-                    <span className="text-gray-300 dark:text-gray-600">›</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 

@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import { db } from '../db/client';
 import { orders, reviews } from '../db/schema';
+import { initialReviewFields } from '../lib/banStatus';
 import { imageUrlSchema } from '../lib/imageUrl';
 import { toReviewDto } from '../lib/mappers';
 import { queueReview } from '../lib/moderation';
@@ -35,7 +36,7 @@ export const reviewRoutes = new Hono().post(
     const body = c.req.valid('json');
     try {
       // 先审后发：落库为 pending（不计入店铺评分聚合），AI 通过时才公开并累加聚合
-      //（见 lib/moderation.ts），驳回/存疑走人工队列。
+      //（见 lib/moderation.ts），驳回/存疑走人工队列。被封禁用户直接落 rejected，跳过审核队列。
       const [row] = await db
         .insert(reviews)
         .values({
@@ -45,13 +46,15 @@ export const reviewRoutes = new Hono().post(
           rating: body.rating,
           content: body.content.trim(),
           photos: body.photos,
-          reviewStatus: 'pending',
+          ...(await initialReviewFields(user.sub)),
         })
         .returning();
-      queueReview(
-        { table: 'reviews', reviewId: row!.id },
-        { texts: [row!.content], images: row!.photos },
-      );
+      if (row!.reviewStatus === 'pending') {
+        queueReview(
+          { table: 'reviews', reviewId: row!.id },
+          { texts: [row!.content], images: row!.photos },
+        );
+      }
       return c.json(toReviewDto(row!, user.username));
     } catch (err) {
       if ((err as { code?: string }).code === '23505') {
