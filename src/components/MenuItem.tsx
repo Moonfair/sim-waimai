@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faFlag } from '@fortawesome/free-solid-svg-icons';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -21,6 +21,7 @@ export default function MenuItem({ item, restaurant }: Props) {
   const { items, addItem, updateQuantity } = useCart();
   const [sheetOpen, setSheetOpen] = useState(false);
   const [reportSheetOpen, setReportSheetOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
   const flash = (text: string) => {
@@ -29,6 +30,7 @@ export default function MenuItem({ item, restaurant }: Props) {
   };
 
   const handleReportClick = () => {
+    setMenuOpen(false);
     if (!user) {
       navigate(`/login?redirect=${encodeURIComponent(`/restaurant/${restaurant.id}`)}`);
       return;
@@ -58,7 +60,29 @@ export default function MenuItem({ item, restaurant }: Props) {
   });
 
   return (
-    <div className="flex gap-3 py-3 border-b border-gray-50 dark:border-gray-700 last:border-0">
+    <div className="relative flex gap-3 py-3 border-b border-gray-50 dark:border-gray-700 last:border-0">
+      <button
+        className="absolute top-1 right-0 w-6 h-6 flex items-center justify-center text-gray-300 dark:text-gray-600"
+        onClick={() => setMenuOpen((v) => !v)}
+        aria-label="更多操作"
+      >
+        <FontAwesomeIcon icon={faEllipsisVertical} />
+      </button>
+      {menuOpen && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
+          <div className="absolute top-7 right-0 z-50 min-w-[96px] bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
+            <button
+              className="w-full flex items-center gap-2 px-3 py-2 text-left text-xs text-gray-600 dark:text-gray-300 whitespace-nowrap"
+              onClick={handleReportClick}
+            >
+              <FontAwesomeIcon icon={faFlag} className="text-xs" />
+              举报
+            </button>
+          </div>
+        </>
+      )}
+
       {item.image ? (
         <ZoomableImage
           src={item.image}
@@ -94,14 +118,7 @@ export default function MenuItem({ item, restaurant }: Props) {
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2 mt-1">
-          <button
-            className="text-gray-300 dark:text-gray-600"
-            onClick={handleReportClick}
-            aria-label="举报商品"
-          >
-            <FontAwesomeIcon icon={faFlag} className="text-xs" />
-          </button>
+        <div className="flex items-center justify-end mt-1">
           {hasOptions ? (
             <div className="relative">
               <button
