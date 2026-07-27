@@ -4,6 +4,7 @@ import { db } from '../db/client';
 import { orders, restaurants } from '../db/schema';
 import { ttlCache } from '../lib/cache';
 import { toRestaurantSummary } from '../lib/mappers';
+import { weightedSample } from '../lib/weightedSample';
 import { optionalAuth } from '../middleware/auth';
 
 const LIMIT = 6;
@@ -39,17 +40,16 @@ export const recommendationRoutes = new Hono().get('/', optionalAuth, async (c) 
     }
   }
 
-  // cold start (anonymous or no history): quality only; otherwise taste dominates
-  const scored = active
-    .map((r) => ({
-      row: r,
-      score:
-        (weights.get(r.category) ?? 0) * 10 +
-        r.rating +
-        Math.log10(r.monthlyOrders + 1),
-    }))
-    .sort((a, b) => b.row.recommendPriority - a.row.recommendPriority || b.score - a.score)
-    .slice(0, LIMIT);
+  // cold start (anonymous or no history): quality only; otherwise taste dominates.
+  // recommendPriority only tilts the odds (weightedSample below) — it never guarantees a slot.
+  const qualityScore = (r: (typeof active)[number]) =>
+    (weights.get(r.category) ?? 0) * 10 + r.rating + Math.log10(r.monthlyOrders + 1);
 
-  return c.json(scored.map(({ row }) => toRestaurantSummary(row)));
+  const picked = weightedSample(
+    active,
+    (r) => Math.max(qualityScore(r), 0.01) * (1 + r.recommendPriority / 50),
+    LIMIT,
+  );
+
+  return c.json(picked.map((row) => toRestaurantSummary(row)));
 });
