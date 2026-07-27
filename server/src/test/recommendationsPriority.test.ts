@@ -7,13 +7,14 @@ import { restaurants, users } from '../db/schema';
 import { registerTestUser } from './testHelpers';
 
 // Own file so the recommendations route's module-level 30s TTL cache starts fresh:
-// the shop below must be visible on the very first /api/recommendations call this process makes.
+// the shops below must be visible on the first /api/recommendations call this process makes.
 const app = createApp();
 const stamp = Date.now().toString(36);
 const admin = { username: `t_recp_a_${stamp}`, password: 'secret123' };
 const owner = { username: `t_recp_o_${stamp}`, password: 'secret123' };
 let ownerId = '';
 let boostedId = '';
+let baselineId = '';
 let savedAdmins: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
@@ -35,18 +36,11 @@ function req(path: string, cookie: string, init?: { method?: string; body?: unkn
   });
 }
 
-beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
-  const a = await register(admin);
-  const o = await register(owner);
-  ownerId = o.user.id;
-
-  // A deliberately low-quality shop (min rating/sales) that should lose on score alone.
-  const shopRes = await req('/api/merchant/restaurants', o.cookie, {
+async function createApprovedShop(name: string, ownerCookie: string, adminCookie: string) {
+  const res = await req('/api/merchant/restaurants', ownerCookie, {
     method: 'POST',
     body: {
-      name: `低分置顶店_${stamp}`,
+      name,
       category: '中式快餐',
       emoji: '🍱',
       bgColor: '#336699',
@@ -57,19 +51,27 @@ beforeAll(async () => {
       menuCategories: ['招牌'],
     },
   });
-  expect(shopRes.status).toBe(200);
-  const shop = (await shopRes.json()) as MerchantRestaurantDto;
-  boostedId = shop.id;
-
-  // Force the worst possible quality score (default rating is already the 5.0 max, which would
-  // otherwise let this shop win on merit alone and defeat the point of the test).
-  await db.update(restaurants).set({ rating: 1 }).where(eq(restaurants.id, boostedId));
-
-  const approveRes = await req(`/api/admin/restaurants/${boostedId}/review`, a.cookie, {
+  expect(res.status).toBe(200);
+  const shop = (await res.json()) as MerchantRestaurantDto;
+  const approve = await req(`/api/admin/restaurants/${shop.id}/review`, adminCookie, {
     method: 'POST',
     body: { decision: 'approved' },
   });
-  expect(approveRes.status).toBe(200);
+  expect(approve.status).toBe(200);
+  return shop.id;
+}
+
+beforeAll(async () => {
+  savedAdmins = process.env.ADMIN_USERNAMES;
+  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
+  const a = await register(admin);
+  const o = await register(owner);
+  ownerId = o.user.id;
+
+  // Two otherwise-identical shops (same defaults: rating 5, monthlyOrders 0) so the only
+  // difference in weight comes from recommendPriority, isolating the priority effect.
+  boostedId = await createApprovedShop(`置顶店_${stamp}`, o.cookie, a.cookie);
+  baselineId = await createApprovedShop(`普通店_${stamp}`, o.cookie, a.cookie);
 
   const priorityRes = await req(`/api/admin/shops/${boostedId}/priority`, a.cookie, {
     method: 'POST',
@@ -86,11 +88,27 @@ afterAll(async () => {
   await pool.end();
 });
 
-describe('GET /api/recommendations honors admin-set recommendPriority', () => {
-  it('places a top-priority shop first despite a low quality score', async () => {
-    const res = await app.request('/api/recommendations');
-    expect(res.status).toBe(200);
-    const items = (await res.json()) as RestaurantSummary[];
-    expect(items[0]?.id).toBe(boostedId);
+describe('GET /api/recommendations honors admin-set recommendPriority as a weight, not a hard sort', () => {
+  it('a boosted shop is selected into the top 6 more often than an identical unboosted one', async () => {
+    let boostedCount = 0;
+    let baselineCount = 0;
+    let boostedAlwaysFirst = true;
+
+    for (let i = 0; i < 200; i++) {
+      // Unique X-Forwarded-For per call so the global per-IP rate limiter (300 req/60s, keyed by
+      // client IP — see server/src/middleware/rateLimit.ts) doesn't bucket all 200 calls together.
+      const res = await app.request('/api/recommendations', {
+        headers: { 'X-Forwarded-For': `test-priority-${stamp}-${i}-${Math.random()}` },
+      });
+      const items = (await res.json()) as RestaurantSummary[];
+      const ids = items.map((it) => it.id);
+      if (ids.includes(boostedId)) boostedCount++;
+      if (ids.includes(baselineId)) baselineCount++;
+      if (items[0]?.id !== boostedId) boostedAlwaysFirst = false;
+    }
+
+    expect(boostedCount).toBeGreaterThan(baselineCount);
+    // Priority tilts the odds; it must not be a disguised hard sort that always wins position 1.
+    expect(boostedAlwaysFirst).toBe(false);
   });
 });
