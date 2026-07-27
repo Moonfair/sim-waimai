@@ -61,7 +61,7 @@ export default function ReportSheet({ target, onClose, onSubmitted }: Props) {
 
         <div className="px-4 py-3">
           <textarea
-            className="w-full border border-gray-100 dark:border-gray-700 dark:bg-gray-900 rounded-lg p-2.5 text-sm text-gray-700 dark:text-gray-200 resize-none outline-none focus:border-orange-300"
+            className="w-full border border-gray-100 dark:border-gray-700 dark:bg-gray-900 rounded-lg p-2.5 text-base text-gray-700 dark:text-gray-200 resize-none outline-none focus:border-orange-300"
             rows={3}
             placeholder="请输入举报原因"
             value={reason}

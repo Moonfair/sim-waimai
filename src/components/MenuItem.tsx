@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -80,13 +82,6 @@ export default function MenuItem({ item, restaurant }: Props) {
                 <span className="text-xs px-1 py-0.5 bg-red-50 text-red-500 rounded font-medium">热销</span>
               )}
               <span className="font-medium text-gray-900 dark:text-gray-100 text-sm">{item.name}</span>
-              <button
-                className="text-xs text-gray-300 dark:text-gray-600"
-                onClick={handleReportClick}
-                aria-label="举报商品"
-              >
-                ⚠️
-              </button>
             </div>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 line-clamp-2 leading-relaxed">{item.description}</p>
             <div className="flex items-center gap-2 mt-1">
@@ -99,7 +94,14 @@ export default function MenuItem({ item, restaurant }: Props) {
           </div>
         </div>
 
-        <div className="flex items-center justify-end mt-1">
+        <div className="flex items-center justify-end gap-2 mt-1">
+          <button
+            className="text-gray-300 dark:text-gray-600"
+            onClick={handleReportClick}
+            aria-label="举报商品"
+          >
+            <FontAwesomeIcon icon={faFlag} className="text-xs" />
+          </button>
           {hasOptions ? (
             <div className="relative">
               <button

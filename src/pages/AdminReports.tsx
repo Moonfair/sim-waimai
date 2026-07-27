@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import type { AdminReportDto, ResolveReportsResultDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
@@ -101,7 +103,9 @@ export default function AdminReports() {
           <p className="text-center text-sm text-gray-400 dark:text-gray-500 py-10">{error}</p>
         ) : (reportList ?? []).length === 0 ? (
           <div className="py-16 text-center text-gray-400 dark:text-gray-500">
-            <div className="text-5xl mb-3">🚩</div>
+            <div className="text-5xl mb-3">
+              <FontAwesomeIcon icon={faFlag} />
+            </div>
             <p className="text-sm">暂无举报</p>
           </div>
         ) : (

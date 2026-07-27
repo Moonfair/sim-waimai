@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
 import ReportSheet from '../components/ReportSheet';
@@ -124,7 +126,7 @@ export default function Restaurant() {
           onClick={handleReportClick}
           aria-label="举报店铺"
         >
-          ⚠️
+          <FontAwesomeIcon icon={faFlag} />
         </button>
         <button
           className="absolute top-10 right-16 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg text-white z-10"

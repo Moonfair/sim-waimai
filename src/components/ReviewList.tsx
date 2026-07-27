@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import type { Page, ReviewDto } from '@sim-waimai/shared';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../lib/api';
@@ -111,7 +113,7 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
                     onClick={() => handleReportClick(review.id)}
                     aria-label="举报评价"
                   >
-                    举报
+                    <FontAwesomeIcon icon={faFlag} />
                   </button>
                 </span>
               </div>

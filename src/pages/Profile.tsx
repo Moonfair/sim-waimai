@@ -1,11 +1,14 @@
+import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import BottomNav from '../components/BottomNav';
 import UserStatsPanel from '../components/UserStatsPanel';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
 interface MenuRow {
-  emoji: string;
+  emoji: ReactNode;
   label: string;
   to: string;
 }
@@ -36,7 +39,7 @@ export default function Profile() {
         { emoji: '🛡️', label: '审核管理', to: '/admin/review' },
         { emoji: '📈', label: '网站统计', to: '/admin/stats' },
         { emoji: '🏬', label: '店铺管理', to: '/admin/shops' },
-        { emoji: '🚩', label: '举报管理', to: '/admin/reports' },
+        { emoji: <FontAwesomeIcon icon={faFlag} />, label: '举报管理', to: '/admin/reports' },
       ]
     : MENU_ROWS;
 
