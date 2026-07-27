@@ -38,6 +38,8 @@ function detailPath(item: ModerationItemDto): string {
 
 const TARGET_TYPE_LABEL = { restaurant: '店铺', menuItem: '菜品', review: '评价' } as const;
 
+const BATCH_SELECT_LIMIT = 50;
+
 function itemKey(item: ModerationItemDto): string {
   return `${item.targetType}:${item.restaurantId}:${item.itemId ?? item.reviewId ?? ''}`;
 }
@@ -73,8 +75,13 @@ export default function AdminReview() {
   const [batchReason, setBatchReason] = useState('');
   const [batchSubmitting, setBatchSubmitting] = useState(false);
 
+  const selectableCount = Math.min((items ?? []).length, BATCH_SELECT_LIMIT);
   const allSelected =
-    (items ?? []).length > 0 && (items ?? []).every((it) => selectedKeys.has(itemKey(it)));
+    selectableCount > 0 &&
+    selectedKeys.size === selectableCount &&
+    (items ?? [])
+      .slice(0, BATCH_SELECT_LIMIT)
+      .every((it) => selectedKeys.has(itemKey(it)));
   const showBatchBar = (status === 'pending' || isAiApprovedTab) && selectedKeys.size > 0;
 
   const flash = (text: string) => {
@@ -225,12 +232,19 @@ export default function AdminReview() {
                   className="w-4 h-4 accent-orange-500"
                   checked={allSelected}
                   onChange={() =>
-                    setSelectedKeys(allSelected ? new Set() : new Set(items!.map(itemKey)))
+                    setSelectedKeys(
+                      allSelected ? new Set() : new Set(items!.slice(0, BATCH_SELECT_LIMIT).map(itemKey)),
+                    )
                   }
                 />
                 全选
                 {selectedKeys.size > 0 && (
                   <span className="text-xs text-orange-500">已选 {selectedKeys.size} 条</span>
+                )}
+                {(items ?? []).length > BATCH_SELECT_LIMIT && (
+                  <span className="text-xs text-gray-400 dark:text-gray-500">
+                    （单次最多选 {BATCH_SELECT_LIMIT} 条）
+                  </span>
                 )}
               </label>
             )}

@@ -9,6 +9,8 @@ import ZoomableImage from '../components/ZoomableImage';
 
 const TARGET_TYPE_LABEL = { restaurant: '店铺', menuItem: '菜品', review: '评价' } as const;
 
+const BATCH_SELECT_LIMIT = 50;
+
 export default function AdminReports() {
   const navigate = useNavigate();
   const { data: reportList, loading, error, reload } = useApi<AdminReportDto[]>('/admin/reports');
@@ -17,7 +19,11 @@ export default function AdminReports() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [batchSubmitting, setBatchSubmitting] = useState(false);
 
-  const allSelected = (reportList ?? []).length > 0 && (reportList ?? []).every((r) => selectedIds.has(r.id));
+  const selectableCount = Math.min((reportList ?? []).length, BATCH_SELECT_LIMIT);
+  const allSelected =
+    selectableCount > 0 &&
+    selectedIds.size === selectableCount &&
+    (reportList ?? []).slice(0, BATCH_SELECT_LIMIT).every((r) => selectedIds.has(r.id));
 
   const flash = (text: string) => {
     setMessage(text);
@@ -116,11 +122,20 @@ export default function AdminReports() {
                 className="w-4 h-4 accent-orange-500"
                 checked={allSelected}
                 onChange={() =>
-                  setSelectedIds(allSelected ? new Set() : new Set(reportList!.map((r) => r.id)))
+                  setSelectedIds(
+                    allSelected
+                      ? new Set()
+                      : new Set(reportList!.slice(0, BATCH_SELECT_LIMIT).map((r) => r.id)),
+                  )
                 }
               />
               全选
               {selectedIds.size > 0 && <span className="text-xs text-orange-500">已选 {selectedIds.size} 条</span>}
+              {(reportList ?? []).length > BATCH_SELECT_LIMIT && (
+                <span className="text-xs text-gray-400 dark:text-gray-500">
+                  （单次最多选 {BATCH_SELECT_LIMIT} 条）
+                </span>
+              )}
             </label>
             <div className="space-y-3 mt-3">
               {reportList!.map((r) => {
