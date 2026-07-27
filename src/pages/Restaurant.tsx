@@ -11,7 +11,8 @@ import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
-import { copyRestaurantLink } from '../lib/share';
+import PosterShareSheet from '../components/PosterShareSheet';
+import { restaurantUrl } from '../lib/share';
 
 export default function Restaurant() {
   const { id } = useParams<{ id: string }>();
@@ -20,7 +21,7 @@ export default function Restaurant() {
   const { data: restaurant, loading, error } = useApi<RestaurantData>(id ? `/restaurants/${id}` : null);
   const [activeMenuCat, setActiveMenuCat] = useState('');
   const [isFav, setIsFav] = useState(false);
-  const [shareState, setShareState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [posterOpen, setPosterOpen] = useState(false);
   const [reportSheetOpen, setReportSheetOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -51,13 +52,6 @@ export default function Restaurant() {
     } catch {
       setIsFav(!next);
     }
-  };
-
-  const handleShare = async () => {
-    if (!id) return;
-    const ok = await copyRestaurantLink(id);
-    setShareState(ok ? 'copied' : 'failed');
-    setTimeout(() => setShareState('idle'), 2000);
   };
 
   const flash = (text: string) => {
@@ -130,10 +124,10 @@ export default function Restaurant() {
         </button>
         <button
           className="absolute top-10 right-16 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg text-white z-10"
-          onClick={handleShare}
+          onClick={() => setPosterOpen(true)}
           aria-label="分享餐厅"
         >
-          {shareState === 'copied' ? '✓' : shareState === 'failed' ? '✕' : '🔗'}
+          🔗
         </button>
         <button
           className="absolute top-10 right-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg z-10"
@@ -214,6 +208,26 @@ export default function Restaurant() {
           target={{ targetType: 'restaurant', restaurantId: id }}
           onClose={() => setReportSheetOpen(false)}
           onSubmitted={flash}
+        />
+      )}
+
+      {posterOpen && id && (
+        <PosterShareSheet
+          payload={{
+            type: 'restaurant',
+            data: {
+              name: restaurant.name,
+              emoji: restaurant.emoji,
+              bgColor: restaurant.bgColor,
+              bannerImage: restaurant.bannerImage,
+              rating: restaurant.rating,
+              ratingCount: restaurant.ratingCount,
+              monthlyOrders: restaurant.monthlyOrders,
+              tags: restaurant.tags,
+            },
+          }}
+          linkUrl={restaurantUrl(id)}
+          onClose={() => setPosterOpen(false)}
         />
       )}
     </div>

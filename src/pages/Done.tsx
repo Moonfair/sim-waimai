@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import type { OrderDto } from '@sim-waimai/shared';
 import { useCart } from '../context/CartContext';
 import { useApi } from '../hooks/useApi';
+import PosterShareSheet from '../components/PosterShareSheet';
+import { homeUrl } from '../lib/share';
 
 interface Confetti {
   id: number;
@@ -56,7 +58,7 @@ function NumberCounter({ target, prefix = '', suffix = '', decimals = 0 }: {
 export default function Done() {
   const [confetti] = useState(() => generateConfetti(40));
   const [showContent, setShowContent] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [posterOpen, setPosterOpen] = useState(false);
   const { totalPrice, totalCalories, restaurant, clearCart } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
@@ -79,17 +81,9 @@ export default function Done() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order]);
 
-  const handleShareClick = async () => {
-    try {
-      const homeUrl = window.location.origin + import.meta.env.BASE_URL;
-      await navigator.clipboard.writeText('我用【吃了嘛外卖】省下了 ¥' + savedPrice.toFixed(2) + ' 元和 ' + savedCalories + ' 千卡！快来试试这款假外卖APP！\n' + homeUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
+  const restaurantName = order?.restaurant.name ?? restaurant?.name ?? '吃了嘛外卖';
+  const restaurantEmoji = order?.restaurant.emoji ?? restaurant?.emoji ?? '🏆';
+  const restaurantBgColor = order?.restaurant.bgColor ?? restaurant?.bgColor ?? '#ff6200';
 
   return (
     <div className="app-container bg-white dark:bg-gray-900 overflow-x-hidden relative flex flex-col min-h-screen">
@@ -177,10 +171,11 @@ export default function Done() {
             </button>
           )}
           <button
-            className="w-full border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 py-3.5 rounded-2xl font-bold text-base active:scale-95 transition-transform relative"
-            onClick={handleShareClick}
+            className="w-full border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 py-3.5 rounded-2xl font-bold text-base active:scale-95 transition-transform relative disabled:opacity-50"
+            onClick={() => setPosterOpen(true)}
+            disabled={!!orderId && !order}
           >
-            {copied ? '✅ 已复制到剪贴板！' : '分享给朋友 🎉'}
+            分享给朋友 🎉
           </button>
         </div>
 
@@ -191,6 +186,17 @@ export default function Done() {
           你的钱包和腰围都感谢你 ❤️
         </p>
       </div>
+
+      {posterOpen && (
+        <PosterShareSheet
+          payload={{
+            type: 'order',
+            data: { restaurantName, restaurantEmoji, restaurantBgColor, savedPrice, savedCalories },
+          }}
+          linkUrl={homeUrl()}
+          onClose={() => setPosterOpen(false)}
+        />
+      )}
     </div>
   );
 }

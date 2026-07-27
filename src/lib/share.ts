@@ -1,6 +1,15 @@
-/** 复制餐厅顾客页链接到剪贴板，返回是否成功。 */
-export async function copyRestaurantLink(id: string): Promise<boolean> {
-  const url = new URL(`${import.meta.env.BASE_URL}restaurant/${id}`, window.location.origin).toString();
+/** 应用主页链接（当前 origin + base path）。 */
+export function homeUrl(): string {
+  return window.location.origin + import.meta.env.BASE_URL;
+}
+
+/** 餐厅顾客页链接。 */
+export function restaurantUrl(id: string): string {
+  return new URL(`${import.meta.env.BASE_URL}restaurant/${id}`, window.location.origin).toString();
+}
+
+/** 复制指定链接到剪贴板，返回是否成功。 */
+export async function copyLink(url: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(url);
     return true;
@@ -20,4 +29,9 @@ export async function copyRestaurantLink(id: string): Promise<boolean> {
     document.body.removeChild(ta);
     return ok;
   }
+}
+
+/** 复制餐厅顾客页链接到剪贴板，返回是否成功。 */
+export async function copyRestaurantLink(id: string): Promise<boolean> {
+  return copyLink(restaurantUrl(id));
 }

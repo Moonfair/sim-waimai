@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { UserStatsDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
+import PosterShareSheet from './PosterShareSheet';
+import { homeUrl } from '../lib/share';
 
 export default function UserStatsPanel() {
   const navigate = useNavigate();
   const { data: stats, loading, error } = useApi<UserStatsDto>('/orders/stats');
+  const [posterOpen, setPosterOpen] = useState(false);
 
   if (loading) {
     return (
@@ -32,7 +36,16 @@ export default function UserStatsPanel() {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4">
-      <h2 className="font-bold text-gray-900 dark:text-gray-100 text-sm mb-3">生涯概况</h2>
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="font-bold text-gray-900 dark:text-gray-100 text-sm">生涯概况</h2>
+        <button
+          className="text-gray-400 dark:text-gray-500 text-base"
+          onClick={() => setPosterOpen(true)}
+          aria-label="分享战绩"
+        >
+          🔗
+        </button>
+      </div>
 
       {/* Headline numbers */}
       <div className="grid grid-cols-3 gap-2">
@@ -103,6 +116,23 @@ export default function UserStatsPanel() {
           </div>
         )}
       </div>
+
+      {posterOpen && (
+        <PosterShareSheet
+          payload={{
+            type: 'stats',
+            data: {
+              totalOrders: stats.totalOrders,
+              totalSaved: stats.totalSaved,
+              totalCalories: stats.totalCalories,
+              topRestaurantName: stats.topRestaurant?.name,
+              topRestaurantEmoji: stats.topRestaurant?.emoji,
+            },
+          }}
+          linkUrl={homeUrl()}
+          onClose={() => setPosterOpen(false)}
+        />
+      )}
     </div>
   );
 }
