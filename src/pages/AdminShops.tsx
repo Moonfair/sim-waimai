@@ -105,6 +105,13 @@ export default function AdminShops() {
                       <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
                         评分 {shop.rating.toFixed(1)} · 月销 {shop.monthlyOrders}
                       </p>
+                      <button
+                        type="button"
+                        className="block mt-1.5 text-xs text-orange-500"
+                        onClick={() => navigate(`/restaurant/${shop.id}`)}
+                      >
+                        查看详情 ›
+                      </button>
                     </div>
                   </div>
 
