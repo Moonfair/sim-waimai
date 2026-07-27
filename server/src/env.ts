@@ -26,6 +26,21 @@ const envSchema = z.object({
   /** 天御控制台的自定义审核策略/词库（可选）。 */
   TENCENT_TMS_BIZTYPE: z.string().optional(),
   TENCENT_IMS_BIZTYPE: z.string().optional(),
+  /** 审核积压邮件提醒：SMTP_HOST 留空则功能整体禁用（不报错）。 */
+  SMTP_HOST: z.string().optional(),
+  SMTP_PORT: z.coerce.number().default(587),
+  SMTP_SECURE: z.coerce.boolean().default(false),
+  SMTP_USER: z.string().optional(),
+  SMTP_PASSWORD: z.string().optional(),
+  SMTP_FROM: z.string().optional(),
+  /** 收件邮箱，逗号分隔支持多个。 */
+  MODERATION_ALERT_EMAIL: z.string().optional(),
+  MODERATION_ALERT_COUNT_THRESHOLD: z.coerce.number().default(10),
+  MODERATION_ALERT_AGE_MINUTES: z.coerce.number().default(120),
+  MODERATION_ALERT_CHECK_INTERVAL_MINUTES: z.coerce.number().default(15),
+  MODERATION_ALERT_COOLDOWN_MINUTES: z.coerce.number().default(120),
+  /** 可选：邮件里拼审核页链接用，不填就不放链接。 */
+  APP_PUBLIC_URL: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);
@@ -43,6 +58,10 @@ if (env.NODE_ENV === 'test') {
   // 用户名——不清掉的话，带真实 .env 的开发机跑任何注册用户的测试都会触网计费。
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
+  // 同理：测试环境不应该因为开发机 .env 里配了真实 SMTP 就悄悄发出真实邮件。
+  env.SMTP_HOST = undefined;
+  env.SMTP_USER = undefined;
+  env.SMTP_PASSWORD = undefined;
 }
 
 if (env.NODE_ENV === 'production' && env.JWT_SECRET === 'dev-secret-change-me') {

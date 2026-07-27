@@ -214,6 +214,14 @@ export const favorites = pgTable(
   ],
 );
 
+/** 审核积压邮件提醒的去重状态：固定单行（id='moderation_backlog'）。 */
+export const moderationAlertState = pgTable('moderation_alert_state', {
+  id: text('id').primaryKey(),
+  isBreaching: boolean('is_breaching').notNull().default(false),
+  lastSentAt: timestamp('last_sent_at', { withTimezone: true }),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const reports = pgTable(
   'reports',
   {

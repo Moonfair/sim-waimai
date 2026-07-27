@@ -57,6 +57,13 @@
       "when": 1785088638604,
       "tag": "0007_young_vapor",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1785090600444,
+      "tag": "0008_gifted_kang",
+      "breakpoints": true
     }
   ]
 }
