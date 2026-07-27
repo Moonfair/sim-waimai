@@ -164,4 +164,30 @@ describe('GET /api/admin/stats', () => {
       expect(mine.gmv).toBeCloseTo(80, 2);
     }
   });
+
+  it('does not overflow Postgres int4 when GMV sums exceed ~21.4M yuan', async () => {
+    // Reproduces a 2026-07-27 production 500: order totals (validation allows up to
+    // 50 items * 99 qty * high-priced menu items per order) can push sum(total_fen)
+    // past int4's ~2.147B range. The route must cast SUM to float8, not ::int.
+    const shop = await createShop(`统计溢出测试店_${stamp}`, '中式快餐');
+    const approveRes = await req(`/api/admin/restaurants/${shop.id}/review`, adminCookie, {
+      method: 'POST',
+      body: { decision: 'approved' },
+    });
+    expect(approveRes.status).toBe(200);
+
+    // Each order's total_fen fits in the orders.total_fen int4 column on its own,
+    // but their SUM (2.4B) exceeds int4 max (2,147,483,647) once aggregated.
+    const perOrderFen = 800_000_000;
+    await db.insert(orders).values([
+      makeOrder(shop, perOrderFen, 'completed'),
+      makeOrder(shop, perOrderFen, 'completed'),
+      makeOrder(shop, perOrderFen, 'completed'),
+    ]);
+
+    const res = await req('/api/admin/stats', adminCookie);
+    expect(res.status).toBe(200);
+    const stats = (await res.json()) as SiteStatsDto;
+    expect(stats.overview.gmv).toBeGreaterThanOrEqual((perOrderFen * 3) / 100);
+  });
 });

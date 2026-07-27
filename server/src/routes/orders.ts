@@ -197,7 +197,7 @@ export const orderRoutes = new Hono()
     const [totals] = await db
       .select({
         count: sql<number>`count(*)::int`,
-        savedFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::int`,
+        savedFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::float8`,
         calories: sql<number>`COALESCE(sum(${orders.totalCalories}), 0)::int`,
       })
       .from(orders)

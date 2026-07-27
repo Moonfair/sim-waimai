@@ -36,10 +36,10 @@ export const adminStatsRoutes = new Hono().get('/stats', requireAdmin, async (c)
     db
       .select({
         totalOrders: sql<number>`count(*)::int`,
-        gmvFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::int`,
+        gmvFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::float8`,
         completedOrders: sql<number>`count(*) FILTER (WHERE ${orders.status} = 'completed')::int`,
         todayOrders: sql<number>`count(*) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now()))::int`,
-        todayGmvFen: sql<number>`COALESCE(sum(${orders.totalFen}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now())), 0)::int`,
+        todayGmvFen: sql<number>`COALESCE(sum(${orders.totalFen}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now())), 0)::float8`,
       })
       .from(orders)
       .then((rows) => rows[0]),
@@ -75,7 +75,7 @@ export const adminStatsRoutes = new Hono().get('/stats', requireAdmin, async (c)
         bgColor: restaurants.bgColor,
         category: restaurants.category,
         orderCount: sql<number>`count(${orders.id})::int`,
-        gmvFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::int`,
+        gmvFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::float8`,
       })
       .from(restaurants)
       .leftJoin(orders, sql`${orders.restaurantId} = ${restaurants.id}`)
@@ -91,7 +91,7 @@ export const adminStatsRoutes = new Hono().get('/stats', requireAdmin, async (c)
       order_agg AS (
         SELECT date_trunc('day', created_at)::date AS day,
                count(*)::int AS order_count,
-               COALESCE(sum(total_fen), 0)::int AS gmv_fen
+               COALESCE(sum(total_fen), 0)::float8 AS gmv_fen
         FROM orders
         WHERE created_at >= date_trunc('day', now()) - interval '29 days'
         GROUP BY 1

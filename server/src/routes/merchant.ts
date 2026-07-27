@@ -198,9 +198,9 @@ export const merchantRoutes = new Hono()
     const rows = await db
       .select({
         id: restaurants.id,
-        totalRevenueFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::int`,
+        totalRevenueFen: sql<number>`COALESCE(sum(${orders.totalFen}), 0)::float8`,
         totalSales: sql<number>`count(${orders.id})::int`,
-        todayRevenueFen: sql<number>`COALESCE(sum(${orders.totalFen}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now())), 0)::int`,
+        todayRevenueFen: sql<number>`COALESCE(sum(${orders.totalFen}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now())), 0)::float8`,
         todaySales: sql<number>`count(${orders.id}) FILTER (WHERE ${orders.createdAt} >= date_trunc('day', now()))::int`,
       })
       .from(restaurants)
