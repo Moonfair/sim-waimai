@@ -13,25 +13,33 @@ export default function Order() {
   const [step, setStep] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const orderId = (location.state as { orderId?: string } | null)?.orderId;
+  const state = location.state as { orderId?: string; realPersonDelivery?: boolean } | null;
+  const orderId = state?.orderId;
+  const realPersonDelivery = state?.realPersonDelivery ?? false;
   const { restaurant } = useCart();
+  const visibleSteps = realPersonDelivery ? steps.slice(0, 2) : steps;
 
   useEffect(() => {
     if (!orderId) {
       navigate('/', { replace: true });
       return;
     }
-    const timers = [
-      setTimeout(() => setStep(1), 1500),
-      setTimeout(() => {
-        setStep(2);
-        // rider takes the order → order moves to delivering (fire and forget)
-        api.patch(`/orders/${orderId}/status`, { status: 'delivering' }).catch(() => {});
-      }, 3000),
-      setTimeout(() => navigate('/tracking', { state: { orderId } }), 4500),
-    ];
+    const timers = realPersonDelivery
+      ? [
+          setTimeout(() => setStep(1), 1500),
+          setTimeout(() => navigate('/tracking', { state: { orderId, realPersonDelivery } }), 3000),
+        ]
+      : [
+          setTimeout(() => setStep(1), 1500),
+          setTimeout(() => {
+            setStep(2);
+            // rider takes the order → order moves to delivering (fire and forget)
+            api.patch(`/orders/${orderId}/status`, { status: 'delivering' }).catch(() => {});
+          }, 3000),
+          setTimeout(() => navigate('/tracking', { state: { orderId } }), 4500),
+        ];
     return () => timers.forEach(clearTimeout);
-  }, [navigate, orderId]);
+  }, [navigate, orderId, realPersonDelivery]);
 
   const current = steps[step];
 
@@ -39,7 +47,7 @@ export default function Order() {
     <div className="app-container flex flex-col items-center justify-center h-screen bg-white dark:bg-gray-900">
       {/* Progress dots */}
       <div className="flex gap-2 mb-10">
-        {steps.map((_, i) => (
+        {visibleSteps.map((_, i) => (
           <div
             key={i}
             className={`h-1.5 rounded-full transition-all duration-500 ${

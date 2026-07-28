@@ -10,8 +10,10 @@ const app = createApp();
 const stamp = Date.now().toString(36);
 const alice = { username: `t_ord_a_${stamp}`, password: 'secret123' };
 const bob = { username: `t_ord_b_${stamp}`, password: 'secret123' };
+const carol = { username: `t_ord_c_${stamp}`, password: 'secret123' };
 let aliceCookie = '';
 let bobCookie = '';
+let carolCookie = '';
 let aliceId = '';
 let heytea: Restaurant;
 
@@ -42,12 +44,14 @@ beforeAll(async () => {
   aliceId = a.id;
   const b = await registerAndLogin(bob);
   bobCookie = b.cookie;
+  const c = await registerAndLogin(carol);
+  carolCookie = c.cookie;
   const res = await app.request('/api/restaurants/heytea');
   heytea = (await res.json()) as Restaurant;
 });
 
 afterAll(async () => {
-  for (const cred of [alice, bob]) {
+  for (const cred of [alice, bob, carol]) {
     const [u] = await db.select().from(users).where(eq(users.username, cred.username));
     if (u) {
       await db.delete(orders).where(eq(orders.userId, u.id));
@@ -146,6 +150,97 @@ describe('POST /api/orders', () => {
     });
     expect(res.status).toBe(400);
     expect(((await res.json()) as { error: string }).error).toContain('起送');
+  });
+});
+
+describe('real-person delivery', () => {
+  it('defaults to simulated delivery when realPersonDelivery is omitted', async () => {
+    const { plain } = pickItems();
+    const qty = Math.max(1, Math.ceil(heytea.minOrder / plain.price));
+    const res = await req('/api/orders', aliceCookie, {
+      method: 'POST',
+      body: { restaurantId: 'heytea', items: [{ menuItemId: plain.id, quantity: qty }], address },
+    });
+    const order = (await res.json()) as OrderDto;
+    expect(order.deliveryType).toBe('simulated');
+    expect(order.riderUserId).toBeNull();
+    expect(order.grabbedAt).toBeNull();
+  });
+
+  it('realPersonDelivery: true creates a pending real_person order with no rider yet', async () => {
+    const { plain } = pickItems();
+    const qty = Math.max(1, Math.ceil(heytea.minOrder / plain.price));
+    const res = await req('/api/orders', aliceCookie, {
+      method: 'POST',
+      body: {
+        restaurantId: 'heytea',
+        items: [{ menuItemId: plain.id, quantity: qty }],
+        address,
+        realPersonDelivery: true,
+      },
+    });
+    expect(res.status).toBe(200);
+    const order = (await res.json()) as OrderDto;
+    expect(order.deliveryType).toBe('real_person');
+    expect(order.status).toBe('pending');
+    expect(order.riderUserId).toBeNull();
+    expect(order.grabbedAt).toBeNull();
+    expect(order.rider).toBeNull();
+  });
+
+  it('rejects the owner-driven pending→delivering PATCH for a real_person order', async () => {
+    const { plain } = pickItems();
+    const qty = Math.max(1, Math.ceil(heytea.minOrder / plain.price));
+    const create = await req('/api/orders', aliceCookie, {
+      method: 'POST',
+      body: {
+        restaurantId: 'heytea',
+        items: [{ menuItemId: plain.id, quantity: qty }],
+        address,
+        realPersonDelivery: true,
+      },
+    });
+    const order = (await create.json()) as OrderDto;
+
+    const patch = await req(`/api/orders/${order.id}/status`, aliceCookie, {
+      method: 'PATCH',
+      body: { status: 'delivering' },
+    });
+    expect(patch.status).toBe(400);
+
+    const stillPending = await req(`/api/orders/${order.id}`, aliceCookie);
+    expect(((await stillPending.json()) as OrderDto).status).toBe('pending');
+  });
+
+  it('lets the assigned rider (not just the owner) complete a delivering real_person order', async () => {
+    const { plain } = pickItems();
+    const qty = Math.max(1, Math.ceil(heytea.minOrder / plain.price));
+    const create = await req('/api/orders', aliceCookie, {
+      method: 'POST',
+      body: { restaurantId: 'heytea', items: [{ menuItemId: plain.id, quantity: qty }], address },
+    });
+    const order = (await create.json()) as OrderDto;
+    // Simulate bob having grabbed this order (bypassing /rider-hall/grab, which isn't under test here).
+    const [bobRow] = await db.select().from(users).where(eq(users.username, bob.username));
+    await db
+      .update(orders)
+      .set({ deliveryType: 'real_person', status: 'delivering', riderUserId: bobRow!.id })
+      .where(eq(orders.id, order.id));
+
+    // A third party (not owner, not rider) still can't touch it.
+    const carolAttempt = await req(`/api/orders/${order.id}/status`, carolCookie, {
+      method: 'PATCH',
+      body: { status: 'completed' },
+    });
+    expect(carolAttempt.status).toBe(403);
+
+    // The assigned rider can complete it.
+    const bobAttempt = await req(`/api/orders/${order.id}/status`, bobCookie, {
+      method: 'PATCH',
+      body: { status: 'completed' },
+    });
+    expect(bobAttempt.status).toBe(200);
+    expect(((await bobAttempt.json()) as OrderDto).status).toBe('completed');
   });
 });
 

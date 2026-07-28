@@ -40,6 +40,34 @@ export const users = pgTable(
   (t) => [uniqueIndex('users_username_lower_idx').on(sql`lower(${t.username})`)],
 );
 
+/** 记录某用户历史上用过的设备指纹，用于封禁时定位其关联设备。 */
+export const userDevices = pgTable(
+  'user_devices',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    deviceId: text('device_id').notNull(),
+    firstSeenAt: timestamp('first_seen_at', { withTimezone: true }).notNull().defaultNow(),
+    lastSeenAt: timestamp('last_seen_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.userId, t.deviceId] }),
+    index('user_devices_device_idx').on(t.deviceId),
+  ],
+);
+
+/** 设备指纹黑名单：命中的设备无法注册新账号或登录任何账号。 */
+export const bannedDevices = pgTable('banned_devices', {
+  deviceId: text('device_id').primaryKey(),
+  bannedAt: timestamp('banned_at', { withTimezone: true }).notNull().defaultNow(),
+  bannedReason: text('banned_reason'),
+  /** 执行封禁的管理员 username. */
+  bannedBy: text('banned_by').notNull(),
+  /** 触发本次封禁的用户账号（审计追溯用；用户被删也不影响设备黑名单本身）. */
+  bannedFromUserId: uuid('banned_from_user_id').references(() => users.id, { onDelete: 'set null' }),
+});
+
 export const restaurants = pgTable(
   'restaurants',
   {
@@ -151,14 +179,23 @@ export const orders = pgTable(
     addressSnapshot: jsonb('address_snapshot').$type<AddressSnapshot>().notNull(),
     /** Assigned when the order moves to delivering. */
     riderSnapshot: jsonb('rider_snapshot').$type<Rider>(),
+    /** 'simulated' (今天的假流程) or 'real_person' (进入抢单大厅，由真实用户接单)。 */
+    deliveryType: text('delivery_type').$type<'simulated' | 'real_person'>().notNull().default('simulated'),
+    /** 抢单成功的用户；null 表示还没人接单。 */
+    riderUserId: uuid('rider_user_id').references(() => users.id, { onDelete: 'set null' }),
+    /** 被抢单的那一刻；createdAt→grabbedAt 即真实等待接单耗时。 */
+    grabbedAt: timestamp('grabbed_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     completedAt: timestamp('completed_at', { withTimezone: true }),
   },
   (t) => [
     check('orders_status_check', sql`${t.status} IN ('pending', 'delivering', 'completed')`),
+    check('orders_delivery_type_check', sql`${t.deliveryType} IN ('simulated', 'real_person')`),
     /** THE index for per-user history with keyset pagination. */
     index('orders_user_history_idx').on(t.userId, t.createdAt.desc(), t.id.desc()),
     index('orders_restaurant_idx').on(t.restaurantId, t.createdAt.desc()),
+    /** 抢单大厅查询：待接取的真人配送订单，按时间倒序。 */
+    index('orders_rider_hall_idx').on(t.deliveryType, t.status, t.riderUserId, t.createdAt.desc()),
   ],
 );
 

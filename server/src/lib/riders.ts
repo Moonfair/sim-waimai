@@ -14,3 +14,25 @@ export const RIDERS: Rider[] = [
 export function getRandomRider(): Rider {
   return RIDERS[Math.floor(Math.random() * RIDERS.length)]!;
 }
+
+const REAL_PERSON_AVATARS = ['🧑', '👩', '🧑‍🦱', '👨‍🦱', '🧑‍🦲', '👩‍🦳'];
+const REAL_PERSON_VEHICLES = ['🛵', '🚲', '🛴'];
+
+function hashToIndex(seed: string, mod: number): number {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  return h % mod;
+}
+
+/** Synthesizes a Rider-shaped snapshot from the grabbing user's own identity —
+ *  no separate rider/courier role exists; any logged-in user can be "the rider". */
+export function buildRealPersonRider(user: { sub: string; username: string }): Rider {
+  return {
+    id: user.sub,
+    name: user.username,
+    avatarEmoji: REAL_PERSON_AVATARS[hashToIndex(user.sub, REAL_PERSON_AVATARS.length)]!,
+    vehicleEmoji: REAL_PERSON_VEHICLES[hashToIndex(`${user.sub}:v`, REAL_PERSON_VEHICLES.length)]!,
+    rating: 5.0,
+    deliveryCount: '真人骑手',
+  };
+}

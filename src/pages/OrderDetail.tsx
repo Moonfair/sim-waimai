@@ -3,6 +3,7 @@ import type { OrderDto } from '@sim-waimai/shared';
 import ReviewForm from '../components/ReviewForm';
 import { useApi } from '../hooks/useApi';
 import ZoomableImage from '../components/ZoomableImage';
+import { formatWaitDuration } from '../lib/duration';
 
 const STATUS_HEADER: Record<OrderDto['status'], { emoji: string; title: string; sub: string }> = {
   pending: { emoji: '🍳', title: '商家备餐中', sub: '商家正在为您精心准备' },
@@ -125,7 +126,9 @@ export default function OrderDetail() {
             <div>
               <p className="font-bold text-gray-900 dark:text-gray-100 text-sm">{order.rider.name}</p>
               <p className="text-gray-400 dark:text-gray-500 text-xs">
-                ★ {order.rider.rating} · 送单{order.rider.deliveryCount}
+                {order.deliveryType === 'real_person' && order.grabbedAt
+                  ? `真人骑手 · 接单用时 ${formatWaitDuration(order.createdAt, order.grabbedAt)}`
+                  : `★ ${order.rider.rating} · 送单${order.rider.deliveryCount}`}
               </p>
             </div>
             <span className="ml-auto text-2xl">{order.rider.vehicleEmoji}</span>

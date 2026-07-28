@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import BottomNav from '../components/BottomNav';
 import UserStatsPanel from '../components/UserStatsPanel';
 import { useAuth } from '../context/AuthContext';
@@ -16,6 +16,7 @@ interface MenuRow {
 const MENU_ROWS: MenuRow[] = [
   { emoji: '📋', label: '我的订单', to: '/orders' },
   { emoji: '❤️', label: '我的收藏', to: '/favorites' },
+  { emoji: <FontAwesomeIcon icon={faTruckFast} />, label: '骑手统计', to: '/rider-stats' },
   { emoji: '🏪', label: '商家中心', to: '/merchant' },
 ];
 

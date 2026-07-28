@@ -4,11 +4,13 @@ import { copyLink } from '../lib/share';
 import OrderPosterTemplate, { type OrderPosterData } from './poster-templates/OrderPosterTemplate';
 import RestaurantPosterTemplate, { type RestaurantPosterData } from './poster-templates/RestaurantPosterTemplate';
 import StatsPosterTemplate, { type StatsPosterData } from './poster-templates/StatsPosterTemplate';
+import RiderStatsPosterTemplate, { type RiderStatsPosterData } from './poster-templates/RiderStatsPosterTemplate';
 
 export type PosterPayload =
   | { type: 'order'; data: OrderPosterData }
   | { type: 'restaurant'; data: RestaurantPosterData }
-  | { type: 'stats'; data: StatsPosterData };
+  | { type: 'stats'; data: StatsPosterData }
+  | { type: 'riderStats'; data: RiderStatsPosterData };
 
 interface Props {
   payload: PosterPayload;
@@ -74,6 +76,7 @@ export default function PosterShareSheet({ payload, linkUrl, onClose }: Props) {
           {payload.type === 'order' && <OrderPosterTemplate {...payload.data} qrDataUrl={qrDataUrl} />}
           {payload.type === 'restaurant' && <RestaurantPosterTemplate {...payload.data} qrDataUrl={qrDataUrl} />}
           {payload.type === 'stats' && <StatsPosterTemplate {...payload.data} qrDataUrl={qrDataUrl} />}
+          {payload.type === 'riderStats' && <RiderStatsPosterTemplate {...payload.data} qrDataUrl={qrDataUrl} />}
         </div>
 
         <p className="text-gray-400 dark:text-gray-500 text-xs text-center mt-3">长按图片也可保存</p>

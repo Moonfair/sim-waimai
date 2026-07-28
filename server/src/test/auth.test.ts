@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { registerTestUser, testDeviceId } from './testHelpers';
 
 const app = createApp();
 const username = `t_auth_${Date.now().toString(36)}`;
@@ -53,13 +53,13 @@ describe('auth round-trip', () => {
   });
 
   it('login with wrong password fails 401', async () => {
-    const res = await postJson('/api/auth/login', { username, password: 'wrong-pass' });
+    const res = await postJson('/api/auth/login', { username, password: 'wrong-pass', deviceId: testDeviceId() });
     expect(res.status).toBe(401);
     expect(((await res.json()) as { error: string }).error).toBe('用户名或密码错误');
   });
 
   it('login → me → logout → me=401', async () => {
-    const login = await postJson('/api/auth/login', { username, password });
+    const login = await postJson('/api/auth/login', { username, password, deviceId: testDeviceId() });
     expect(login.status).toBe(200);
     const cookie = cookieOf(login);
 

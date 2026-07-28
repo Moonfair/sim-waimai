@@ -17,6 +17,7 @@ import { orderRoutes } from './routes/orders';
 import { reportRoutes } from './routes/reports';
 import { restaurantRoutes } from './routes/restaurants';
 import { reviewRoutes } from './routes/reviews';
+import { riderHallRoutes } from './routes/riderHall';
 import { searchRoutes } from './routes/search';
 import { uploadRoutes } from './routes/uploads';
 
@@ -28,7 +29,11 @@ export function createApp() {
   const app = new Hono().basePath('/api');
 
   // Cap request latency, then shed per-IP floods before we buffer any body.
-  app.use('*', timeout(REQUEST_TIMEOUT_MS));
+  // Exempt the 抢单大厅 SSE stream: it's a deliberately long-lived connection, not a slow request.
+  const requestTimeout = timeout(REQUEST_TIMEOUT_MS);
+  app.use('*', (c, next) =>
+    c.req.path === '/api/rider-hall/stream' ? next() : requestTimeout(c, next),
+  );
   app.use('*', rateLimit({ windowMs: 60_000, max: 300, message: '请求过于频繁，请稍后再试' }));
 
   // Bound how much we buffer per request. Uploads carry raw image bytes, so they get a wider cap;
@@ -51,6 +56,7 @@ export function createApp() {
   app.route('/search', searchRoutes);
   app.route('/orders', orderRoutes);
   app.route('/orders', reviewRoutes);
+  app.route('/rider-hall', riderHallRoutes);
   app.route('/favorites', favoriteRoutes);
   app.route('/merchant', merchantRoutes);
   app.route('/uploads', uploadRoutes);

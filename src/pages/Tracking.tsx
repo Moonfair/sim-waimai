@@ -5,21 +5,28 @@ import { useCart } from '../context/CartContext';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { getRandomRider } from '../data/riders';
+import { formatWaitDuration } from '../lib/duration';
 
 const TOTAL_SECONDS = 30;
+const GRAB_POLL_MS = 3000;
 
 export default function Tracking() {
   const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
   const [progressStep, setProgressStep] = useState(1);
   const [showFinalMsg, setShowFinalMsg] = useState(false);
   const [fallbackRider] = useState(getRandomRider);
+  const [now, setNow] = useState(() => Date.now());
   const riderRef = useRef<HTMLDivElement>(null);
   const completedRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const orderId = (location.state as { orderId?: string } | null)?.orderId;
+  const state = location.state as { orderId?: string; realPersonDelivery?: boolean } | null;
+  const orderId = state?.orderId;
   const { restaurant: cartRestaurant, totalPrice, totalCalories } = useCart();
-  const { data: order } = useApi<OrderDto>(orderId ? `/orders/${orderId}` : null);
+  const { data: order, reload } = useApi<OrderDto>(orderId ? `/orders/${orderId}` : null);
+
+  const isRealPerson = order ? order.deliveryType === 'real_person' : (state?.realPersonDelivery ?? false);
+  const isPendingGrab = isRealPerson && (order?.status ?? 'pending') === 'pending';
 
   // rider assigned by the backend when the order went to delivering
   const rider = order?.rider ?? fallbackRider;
@@ -38,7 +45,22 @@ export default function Tracking() {
     }
   };
 
+  // Poll until a real-person order gets grabbed — nothing else refreshes this page's data otherwise.
   useEffect(() => {
+    if (!isPendingGrab) return;
+    const interval = setInterval(reload, GRAB_POLL_MS);
+    return () => clearInterval(interval);
+  }, [isPendingGrab, reload]);
+
+  // Live "已等待" ticker while waiting for a real person to grab the order.
+  useEffect(() => {
+    if (!isPendingGrab) return;
+    const interval = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, [isPendingGrab]);
+
+  useEffect(() => {
+    if (isPendingGrab) return; // don't tick the fake countdown down while still waiting to be grabbed
     const interval = setInterval(() => {
       setSecondsLeft(s => {
         if (s <= 1) {
@@ -49,9 +71,10 @@ export default function Tracking() {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPendingGrab]);
 
   useEffect(() => {
+    if (isPendingGrab) return;
     const elapsed = TOTAL_SECONDS - secondsLeft;
     if (elapsed >= 8 && progressStep < 2) setProgressStep(2);
     if (elapsed >= 18 && progressStep < 3) setProgressStep(3);
@@ -61,7 +84,7 @@ export default function Tracking() {
       setTimeout(finishOrder, 2000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [secondsLeft, progressStep, showFinalMsg]);
+  }, [secondsLeft, progressStep, showFinalMsg, isPendingGrab]);
 
   const progressSteps = [
     { label: '接单', done: progressStep >= 1 },
@@ -69,6 +92,44 @@ export default function Tracking() {
     { label: '配送中', done: progressStep >= 3 },
     { label: '即将到达', done: progressStep >= 4 },
   ];
+
+  if (isPendingGrab && order) {
+    const elapsedSeconds = Math.max(0, Math.round((now - new Date(order.createdAt).getTime()) / 1000));
+    const mm = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
+    const ss = String(elapsedSeconds % 60).padStart(2, '0');
+    return (
+      <div className="app-container bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div className="bg-white dark:bg-gray-800 px-4 pt-10 pb-4 border-b border-gray-100 dark:border-gray-700">
+          <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">等待骑手接单</h1>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-0.5">
+            真人骑手抢单中，抢到后马上为您配送
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center justify-center py-16">
+          <div className="text-6xl mb-4 animate-pulse">🚴</div>
+          <div className="text-3xl font-black text-gray-900 dark:text-gray-100 tabular-nums">
+            {mm}:{ss}
+          </div>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">已等待真人骑手接单</p>
+        </div>
+
+        {restaurant && (
+          <div className="bg-white dark:bg-gray-800 mx-4 mt-3 rounded-2xl p-4 flex items-center gap-3">
+            <div className="text-3xl">{restaurant.emoji}</div>
+            <div className="flex-1">
+              <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{restaurant.name}</p>
+              <p className="text-gray-400 dark:text-gray-500 text-xs">等待骑手抢单中，无需刷新页面</p>
+            </div>
+          </div>
+        )}
+
+        <p className="text-center text-gray-300 dark:text-gray-600 text-xs mt-6">
+          总节省金额 ¥{savedPrice.toFixed(2)} · {savedCalories} 千卡
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container bg-gray-50 dark:bg-gray-900">
@@ -178,7 +239,11 @@ export default function Tracking() {
               <p className="font-bold text-gray-900 dark:text-gray-100">{rider.name}</p>
               <div className="flex items-center gap-1">
                 <span className="text-yellow-400 text-xs">★★★★★</span>
-                <span className="text-gray-400 dark:text-gray-500 text-xs">{rider.rating}分 · 送单{rider.deliveryCount}</span>
+                <span className="text-gray-400 dark:text-gray-500 text-xs">
+                  {isRealPerson && order?.grabbedAt
+                    ? `真人骑手 · 接单用时 ${formatWaitDuration(order.createdAt, order.grabbedAt)}`
+                    : `${rider.rating}分 · 送单${rider.deliveryCount}`}
+                </span>
               </div>
             </div>
           </div>

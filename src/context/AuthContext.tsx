@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { UserDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
+import { getDeviceId } from '../lib/deviceFingerprint';
 
 interface AuthContextType {
   user: UserDto | null;
@@ -32,7 +33,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (username: string, password: string) => {
-    setUser(await api.post<UserDto>('/auth/login', { username, password }));
+    const deviceId = await getDeviceId();
+    setUser(await api.post<UserDto>('/auth/login', { username, password, deviceId }));
   };
 
   const register = async (
@@ -41,12 +43,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     captchaToken: string,
     captchaAnswer: number,
   ) => {
+    const deviceId = await getDeviceId();
     setUser(
       await api.post<UserDto>('/auth/register', {
         username,
         password,
         captchaToken,
         captchaAnswer,
+        deviceId,
       }),
     );
   };

@@ -8,6 +8,7 @@ import { menuItems, orders, restaurants, reviews } from '../db/schema';
 import { decodeCursor, encodeCursor } from '../lib/cursor';
 import { toOrderDto, toOrderSummary, toReviewDto, type MenuItemRow } from '../lib/mappers';
 import { getRandomRider } from '../lib/riders';
+import { emitHallChanged } from '../lib/riderHallEvents';
 import { UUID_RE, validateJson } from '../lib/validate';
 import { requireAuth } from '../middleware/auth';
 
@@ -28,6 +29,7 @@ const createOrderSchema = z.object({
     phone: z.string().max(20).default(''),
     address: z.string().min(1, '请填写收货地址').max(200),
   }),
+  realPersonDelivery: z.boolean().optional().default(false),
 });
 
 const statusSchema = z.object({
@@ -156,8 +158,10 @@ export const orderRoutes = new Hono()
         totalFen: subtotalFen + restaurant.deliveryFeeFen - discountFen,
         totalCalories,
         addressSnapshot: body.address,
+        deliveryType: body.realPersonDelivery ? 'real_person' : 'simulated',
       })
       .returning();
+    if (body.realPersonDelivery) emitHallChanged();
     return c.json(toOrderDto(row!));
   })
   .get('/', requireAuth, async (c) => {
@@ -295,10 +299,15 @@ export const orderRoutes = new Hono()
     if (!UUID_RE.test(id)) return c.json({ error: '订单不存在' }, 404);
     const [row] = await db.select().from(orders).where(eq(orders.id, id));
     if (!row) return c.json({ error: '订单不存在' }, 404);
-    if (row.userId !== user.sub) return c.json({ error: '无权操作该订单' }, 403);
+    if (row.userId !== user.sub && row.riderUserId !== user.sub) {
+      return c.json({ error: '无权操作该订单' }, 403);
+    }
 
     const target = c.req.valid('json').status;
     if (row.status === 'pending' && target === 'delivering') {
+      if (row.deliveryType === 'real_person') {
+        return c.json({ error: '该订单需在抢单大厅由骑手接单，不能直接标记配送中' }, 400);
+      }
       const [updated] = await db
         .update(orders)
         .set({ status: 'delivering', riderSnapshot: getRandomRider() })

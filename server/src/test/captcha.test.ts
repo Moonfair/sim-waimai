@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { registerTestUser, testDeviceId } from './testHelpers';
 
 const app = createApp();
 const username = `t_cap_${Date.now().toString(36)}`;
@@ -33,6 +33,7 @@ describe('captcha-gated registration', () => {
       body: JSON.stringify({
         username: `${username}_wrong`,
         password: 'secret123',
+        deviceId: testDeviceId(),
         captchaToken: challenge.token,
         captchaAnswer: -1,
       }),

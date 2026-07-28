@@ -39,7 +39,9 @@ export default function AdminUsers() {
         ...(banReason.trim() ? { reason: banReason.trim() } : {}),
       });
       const { restaurants, menuItems, reviews } = result.rejectedCounts;
-      flash(`已封禁 ✓ 驳回 ${restaurants} 个店铺 / ${menuItems} 个商品 / ${reviews} 条评价`);
+      flash(
+        `已封禁 ✓ 驳回 ${restaurants} 个店铺 / ${menuItems} 个商品 / ${reviews} 条评价 · 已封禁 ${result.bannedDeviceCount} 个设备`,
+      );
       setBanningId(null);
       setBanReason('');
       reload();
@@ -63,7 +65,8 @@ export default function AdminUsers() {
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">用户管理</h1>
         </div>
         <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">
-          封禁用户后，其名下历史店铺/商品/评价将批量驳回，之后提交的内容也会自动驳回
+          封禁用户后，其名下历史店铺/商品/评价将批量驳回，之后提交的内容也会自动驳回；
+          该用户历史登录过的设备也会被限制注册新账号和登录（换浏览器/清缓存可能绕过，仅作辅助拦截）
         </p>
         <div className="mt-3">
           <input
@@ -106,6 +109,11 @@ export default function AdminUsers() {
                     {user.isBanned && (
                       <span className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 text-red-500 bg-red-50 dark:bg-red-500/10">
                         已封禁
+                      </span>
+                    )}
+                    {user.deviceCount > 0 && (
+                      <span className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700">
+                        设备数 {user.deviceCount}
                       </span>
                     )}
                   </div>

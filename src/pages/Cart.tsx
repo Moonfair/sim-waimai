@@ -16,6 +16,7 @@ export default function Cart() {
   const [addressSheetOpen, setAddressSheetOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [realPersonDelivery, setRealPersonDelivery] = useState(false);
   const navigate = useNavigate();
 
   if (items.length === 0 || !restaurant) {
@@ -55,9 +56,10 @@ export default function Cart() {
             : {}),
         })),
         address: addressInfo,
+        realPersonDelivery,
       });
       reportOrder(order.total, order.totalCalories);
-      navigate('/order', { state: { orderId: order.id } });
+      navigate('/order', { state: { orderId: order.id, realPersonDelivery } });
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
         navigate('/login?redirect=/cart');
@@ -112,8 +114,41 @@ export default function Cart() {
           </div>
           <div className="mt-3 bg-orange-50 dark:bg-orange-500/10 rounded-lg px-3 py-2 flex items-center gap-2">
             <span className="text-orange-400 text-sm">⏱️</span>
-            <span className="text-orange-500 text-xs font-medium">预计 {restaurant.deliveryTime} 分钟后送达（假的）</span>
+            <span className="text-orange-500 text-xs font-medium">
+              {realPersonDelivery
+                ? '送达时间由真人骑手抢单速度决定，暂无固定预计'
+                : `预计 ${restaurant.deliveryTime} 分钟后送达（假的）`}
+            </span>
           </div>
+        </div>
+
+        {/* Real-person delivery toggle */}
+        <div
+          className="bg-white dark:bg-gray-800 rounded-xl mt-3 p-4 flex items-center gap-3 cursor-pointer"
+          onClick={() => setRealPersonDelivery((v) => !v)}
+        >
+          <span className="text-orange-500 text-lg">🚴</span>
+          <div className="flex-1">
+            <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">真人配送</p>
+            <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5">
+              由其他登录用户在抢单大厅抢单配送
+            </p>
+          </div>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={realPersonDelivery}
+            aria-label="真人配送"
+            className={`w-11 h-6 rounded-full relative transition-colors shrink-0 ${
+              realPersonDelivery ? 'bg-orange-500' : 'bg-gray-200 dark:bg-gray-700'
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
+                realPersonDelivery ? 'translate-x-[22px]' : 'translate-x-0.5'
+              }`}
+            />
+          </button>
         </div>
 
         {/* Items */}

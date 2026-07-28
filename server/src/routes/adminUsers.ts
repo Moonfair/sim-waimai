@@ -3,7 +3,7 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import type { AdminUserDto, AdminUserListDto, BanUserResultDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
-import { menuItems, restaurants, reviews, users } from '../db/schema';
+import { bannedDevices, menuItems, restaurants, reviews, userDevices, users } from '../db/schema';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 import { applyMenuItemDecision, applyRestaurantDecision, applyUserReviewDecision } from './admin';
@@ -27,7 +27,7 @@ const banSchema = z.object({
   reason: z.string().max(200).optional(),
 });
 
-function toAdminUserDto(row: typeof users.$inferSelect): AdminUserDto {
+function toAdminUserDto(row: typeof users.$inferSelect, deviceCount: number): AdminUserDto {
   return {
     id: row.id,
     username: row.username,
@@ -36,6 +36,7 @@ function toAdminUserDto(row: typeof users.$inferSelect): AdminUserDto {
     bannedAt: row.bannedAt?.toISOString() ?? null,
     bannedReason: row.bannedReason,
     bannedBy: row.bannedBy,
+    deviceCount,
   };
 }
 
@@ -48,14 +49,21 @@ export const adminUsersRoutes = new Hono()
 
     const [{ total }] = await db.select({ total: sql<number>`count(*)::int` }).from(users).where(where);
     const rows = await db
-      .select()
+      .select({ user: users, deviceCount: sql<number>`count(${userDevices.deviceId})::int` })
       .from(users)
+      .leftJoin(userDevices, eq(userDevices.userId, users.id))
       .where(where)
+      .groupBy(users.id)
       .orderBy(desc(users.createdAt))
       .limit(pageSize)
       .offset((page - 1) * pageSize);
 
-    const result: AdminUserListDto = { items: rows.map(toAdminUserDto), total, page, pageSize };
+    const result: AdminUserListDto = {
+      items: rows.map((r) => toAdminUserDto(r.user, r.deviceCount)),
+      total,
+      page,
+      pageSize,
+    };
     return c.json(result);
   })
   .post('/users/:id/ban', requireAdmin, validateJson(banSchema), async (c) => {
@@ -107,9 +115,24 @@ export const adminUsersRoutes = new Hono()
       if (await applyUserReviewDecision(review.id, decision, admin.username)) reviewCount += 1;
     }
 
+    // 该用户历史登录/注册过的设备一并拉黑，避免换个用户名重新注册或直接登录。
+    const devices = await db.select().from(userDevices).where(eq(userDevices.userId, id));
+    for (const d of devices) {
+      await db
+        .insert(bannedDevices)
+        .values({
+          deviceId: d.deviceId,
+          bannedReason: reason?.trim() || null,
+          bannedBy: admin.username,
+          bannedFromUserId: id,
+        })
+        .onConflictDoNothing();
+    }
+
     const result: BanUserResultDto = {
-      user: toAdminUserDto(updated!),
+      user: toAdminUserDto(updated!, devices.length),
       rejectedCounts: { restaurants: restaurantCount, menuItems: itemCount, reviews: reviewCount },
+      bannedDeviceCount: devices.length,
     };
     return c.json(result);
   });

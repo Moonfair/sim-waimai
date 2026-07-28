@@ -57,6 +57,9 @@ export interface RestaurantSummary {
 
 export type OrderStatus = 'pending' | 'delivering' | 'completed';
 
+/** 'simulated' = 今天的假配送流程；'real_person' = 进入抢单大厅，由真实用户接单配送。 */
+export type OrderDeliveryType = 'simulated' | 'real_person';
+
 export interface SelectedOptionSnapshot {
   groupId: string;
   groupName: string;
@@ -114,9 +117,80 @@ export interface OrderDto {
   totalCalories: number;
   address: AddressSnapshot;
   rider: Rider | null;
+  deliveryType: OrderDeliveryType;
+  /** 抢单成功的用户 id；null 表示还没人接单（或本来就是模拟配送）。 */
+  riderUserId: string | null;
+  /** 被抢单的那一刻，ISO；配合 createdAt 可算出真实等待接单耗时。 */
+  grabbedAt: string | null;
   createdAt: string;
   completedAt: string | null;
   review?: ReviewDto | null;
+}
+
+/** Request body of POST /orders. */
+export interface CreateOrderRequestDto {
+  restaurantId: string;
+  items: { menuItemId: string; quantity: number; selectedOptionIds?: string[] }[];
+  address: AddressSnapshot;
+  /** true 时该订单进入抢单大厅，由其他真实用户抢单配送。 */
+  realPersonDelivery?: boolean;
+}
+
+/** One pending real-person order shown in 抢单大厅 (GET /rider-hall/pending). */
+export interface RiderHallOrderSummary {
+  id: string;
+  restaurantName: string;
+  restaurantEmoji: string;
+  /** yuan */
+  deliveryFee: number;
+  createdAt: string;
+}
+
+export interface RiderHallPendingDto {
+  items: RiderHallOrderSummary[];
+  count: number;
+}
+
+/** Response of POST /rider-hall/grab on success. */
+export interface RiderHallGrabResultDto {
+  id: string;
+  restaurantName: string;
+  restaurantEmoji: string;
+  /** yuan */
+  deliveryFee: number;
+}
+
+/** Request body of POST /rider-hall/grab — the caller commits to a specific previewed order. */
+export interface RiderHallGrabRequestDto {
+  orderId: string;
+}
+
+/** GET /rider-hall/preview — full detail for the newest pending order, shown before accepting.
+ *  Deliberately excludes recipient name/phone/address. */
+export interface RiderHallOrderPreviewDto {
+  id: string;
+  buyerUsername: string;
+  restaurantName: string;
+  restaurantEmoji: string;
+  items: { name: string; emoji: string; quantity: number }[];
+  /** yuan */
+  subtotal: number;
+  /** yuan */
+  deliveryFee: number;
+  /** yuan */
+  total: number;
+  createdAt: string;
+}
+
+/** GET /rider-hall/stats/me — 骑手统计页数据。 */
+export interface RiderStatsDto {
+  completedCount: number;
+  /** yuan，累计获得的配送费 */
+  totalEarned: number;
+  tier: string;
+  tierIndex: number;
+  /** 距下一称号还差几单；null 表示已是最高称号 */
+  nextTierThreshold: number | null;
 }
 
 export interface ReviewDto {
@@ -328,6 +402,8 @@ export interface AdminUserDto {
   bannedAt: string | null;
   bannedReason: string | null;
   bannedBy: string | null;
+  /** 该用户历史登录/注册过的设备指纹数量。 */
+  deviceCount: number;
 }
 
 /** Paginated response for GET /admin/users. */
@@ -346,6 +422,8 @@ export interface BanUserResultDto {
     menuItems: number;
     reviews: number;
   };
+  /** 本次一并封禁的设备指纹数量（该用户历史登录/注册过的设备）。 */
+  bannedDeviceCount: number;
 }
 
 /** One target of a batch moderation decision (POST /admin/moderation/review). */

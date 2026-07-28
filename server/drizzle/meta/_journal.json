@@ -71,6 +71,20 @@
       "when": 1785129114213,
       "tag": "0009_dark_robin_chapel",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1785144845962,
+      "tag": "0010_steep_reavers",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1785234227909,
+      "tag": "0011_flawless_viper",
+      "breakpoints": true
     }
   ]
 }

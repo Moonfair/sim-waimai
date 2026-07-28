@@ -10,6 +10,7 @@ import { users } from '../db/schema';
 import { env } from '../env';
 import { isAdmin } from '../lib/admin';
 import { issueCaptcha, verifyCaptcha } from '../lib/captcha';
+import { isDeviceBanned, recordDeviceSeen } from '../lib/deviceTracking';
 import { signToken } from '../lib/jwt';
 import { moderateTextSync } from '../lib/moderationProvider';
 import { hashPassword, verifyPassword } from '../lib/password';
@@ -27,6 +28,7 @@ const credentialsSchema = z.object({
     .max(20, '用户名最多20个字符')
     .regex(/^[\w一-龥-]+$/, '用户名只能包含中英文、数字、下划线'),
   password: z.string().min(6, '密码至少6位').max(72, '密码过长'),
+  deviceId: z.string().min(16, '参数错误').max(128, '参数错误'),
 });
 
 const registerSchema = credentialsSchema.extend({
@@ -76,9 +78,12 @@ async function findByUsername(username: string) {
 export const authRoutes = new Hono()
   .get('/captcha', async (c) => c.json(await issueCaptcha()))
   .post('/register', registerRateLimit, validateRegister, async (c) => {
-    const { username, password, captchaToken, captchaAnswer } = c.req.valid('json');
+    const { username, password, deviceId, captchaToken, captchaAnswer } = c.req.valid('json');
     if (!(await verifyCaptcha(captchaToken, captchaAnswer))) {
       return c.json({ error: '验证码错误或已过期' }, 400);
+    }
+    if (await isDeviceBanned(deviceId)) {
+      return c.json({ error: '该设备已被限制注册' }, 403);
     }
     if (await findByUsername(username)) {
       return c.json({ error: '用户名已存在' }, 409);
@@ -100,15 +105,20 @@ export const authRoutes = new Hono()
       }
       throw err;
     }
+    await recordDeviceSeen(row!.id, deviceId);
     await setAuthCookie(c, row!);
     return c.json(toUserDto(row!));
   })
   .post('/login', loginRateLimit, validateCredentials, async (c) => {
-    const { username, password } = c.req.valid('json');
+    const { username, password, deviceId } = c.req.valid('json');
+    if (await isDeviceBanned(deviceId)) {
+      return c.json({ error: '该设备已被限制登录' }, 403);
+    }
     const row = await findByUsername(username);
     if (!row || !(await verifyPassword(password, row.passwordHash))) {
       return c.json({ error: '用户名或密码错误' }, 401);
     }
+    await recordDeviceSeen(row.id, deviceId);
     await setAuthCookie(c, row);
     return c.json(toUserDto(row));
   })

@@ -8,6 +8,8 @@ import type {
   Restaurant,
   RestaurantSummary,
   ReviewDto,
+  RiderHallOrderPreviewDto,
+  RiderHallOrderSummary,
   SearchMenuItemDto,
 } from '@sim-waimai/shared';
 import type { menuItems, orders, restaurants, reviews } from '../db/schema';
@@ -108,9 +110,38 @@ export function toOrderDto(row: OrderRow, review?: ReviewDto | null): OrderDto {
     totalCalories: row.totalCalories,
     address: row.addressSnapshot,
     rider: row.riderSnapshot ?? null,
+    deliveryType: row.deliveryType,
+    riderUserId: row.riderUserId,
+    grabbedAt: row.grabbedAt?.toISOString() ?? null,
     createdAt: row.createdAt.toISOString(),
     completedAt: row.completedAt?.toISOString() ?? null,
     review: review ?? null,
+  };
+}
+
+export function toRiderHallOrderSummary(row: OrderRow): RiderHallOrderSummary {
+  return {
+    id: row.id,
+    restaurantName: row.restaurantSnapshot.name,
+    restaurantEmoji: row.restaurantSnapshot.emoji,
+    deliveryFee: fenToYuan(row.deliveryFeeFen),
+    createdAt: row.createdAt.toISOString(),
+  };
+}
+
+/** Preview shown to a would-be rider before they accept — deliberately excludes
+ *  the buyer's recipient name/phone/address (row.addressSnapshot is never read here). */
+export function toRiderHallPreviewDto(row: OrderRow, buyerUsername: string): RiderHallOrderPreviewDto {
+  return {
+    id: row.id,
+    buyerUsername,
+    restaurantName: row.restaurantSnapshot.name,
+    restaurantEmoji: row.restaurantSnapshot.emoji,
+    items: row.items.map((i) => ({ name: i.name, emoji: i.emoji, quantity: i.quantity })),
+    subtotal: fenToYuan(row.subtotalFen),
+    deliveryFee: fenToYuan(row.deliveryFeeFen),
+    total: fenToYuan(row.totalFen),
+    createdAt: row.createdAt.toISOString(),
   };
 }
 
