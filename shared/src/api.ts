@@ -50,6 +50,8 @@ export interface RestaurantSummary {
   tags: string[];
   /** 玩家自制商家(ownerId 非空);系统种子商家为 false。 */
   isPlayerMade: boolean;
+  /** 店铺是否营业中;false = 已打烊(仍可查看详情,但不可下单)。 */
+  isActive: boolean;
   bannerImage?: string;
   /** Present only when the request is authenticated. */
   isFavorite?: boolean;

@@ -55,6 +55,7 @@ export interface Restaurant {
   emoji: string;
   bgColor: string;
   tags: string[];
+  isActive: boolean;
   menuCategories: string[];
   menu: MenuItem[];
   /** Tencent COS object key (resolved via VITE_COS_BASE_URL), absolute COS URL, or

@@ -256,14 +256,23 @@ describe('menu item management', () => {
     expect(((await relist.json()) as MerchantMenuItemDto).isListed).toBe(true);
   });
 
-  it('closing the shop (isActive=false) hides it from the public list and detail', async () => {
+  it('closing the shop (isActive=false) keeps it visible but flags it as closed', async () => {
     await req(`/api/merchant/restaurants/${shopId}`, ownerCookie, {
       method: 'PATCH',
       body: { isActive: false },
     });
+
     const publicList = (await (await app.request('/api/restaurants')).json()) as RestaurantSummary[];
-    expect(publicList.some((r) => r.id === shopId)).toBe(false);
-    expect((await app.request(`/api/restaurants/${shopId}`)).status).toBe(404);
+    const listed = publicList.find((r) => r.id === shopId);
+    expect(listed).toBeDefined();
+    expect(listed!.isActive).toBe(false);
+
+    const detailRes = await app.request(`/api/restaurants/${shopId}`);
+    expect(detailRes.status).toBe(200);
+    const detail = (await detailRes.json()) as Restaurant;
+    expect(detail.isActive).toBe(false);
+    expect(detail.menu.length).toBeGreaterThan(0);
+
     // merchant still sees it
     const mine = (await (await req('/api/merchant/restaurants', ownerCookie)).json()) as Array<
       RestaurantSummary & { isActive: boolean }

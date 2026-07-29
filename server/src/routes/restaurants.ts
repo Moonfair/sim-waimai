@@ -19,7 +19,7 @@ async function favoriteIdSet(userId: string | undefined, restaurantIds: string[]
 export const restaurantRoutes = new Hono()
   .get('/', optionalAuth, async (c) => {
     const category = c.req.query('category');
-    const filters = [eq(restaurants.isActive, true), eq(restaurants.reviewStatus, 'approved')];
+    const filters = [eq(restaurants.reviewStatus, 'approved')];
     if (category && category !== '全部') {
       filters.push(eq(restaurants.category, category));
     }
@@ -78,7 +78,7 @@ export const restaurantRoutes = new Hono()
     // Owner can preview their own shop before it's approved (e.g. "查看顾客视角" from the
     // merchant dashboard); everyone else only ever sees approved, active shops.
     const isOwner = !!user && row?.ownerId === user.sub;
-    if (!row || !row.isActive || (row.reviewStatus !== 'approved' && !isOwner)) {
+    if (!row || (row.reviewStatus !== 'approved' && !isOwner)) {
       return c.json({ error: '餐厅不存在' }, 404);
     }
     const itemFilters = [eq(menuItems.restaurantId, id), eq(menuItems.isListed, true)];

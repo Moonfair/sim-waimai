@@ -58,6 +58,7 @@ describe('GET /api/restaurants', () => {
     expect(kfc!.deliveryFee).toBe(5);
     expect(kfc).not.toHaveProperty('menu');
     expect(kfc!.isPlayerMade).toBe(false);
+    expect(kfc!.isActive).toBe(true);
   });
 
   it('filters by category', async () => {
