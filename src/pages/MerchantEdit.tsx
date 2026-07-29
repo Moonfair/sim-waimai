@@ -21,6 +21,8 @@ export default function MerchantEdit() {
   const [savingInfo, setSavingInfo] = useState(false);
   const [infoMsg, setInfoMsg] = useState<string | null>(null);
   const [togglingActive, setTogglingActive] = useState(false);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [editorItem, setEditorItem] = useState<MerchantMenuItemDto | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [uploadingBanner, setUploadingBanner] = useState(false);
@@ -122,6 +124,17 @@ export default function MerchantEdit() {
       await api.patch(`/merchant/restaurants/${shop.id}/items/${item.id}`, { isListed: true });
     }
     reload();
+  };
+
+  const handleDeleteItem = async (item: MerchantMenuItemDto) => {
+    setDeletingId(item.id);
+    try {
+      await api.del(`/merchant/restaurants/${shop.id}/items/${item.id}/permanent`);
+      setDeleteConfirmId(null);
+      reload();
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
@@ -317,6 +330,30 @@ export default function MerchantEdit() {
                   >
                     {item.isListed ? '下架' : '上架'}
                   </button>
+                  {deleteConfirmId === item.id ? (
+                    <>
+                      <button
+                        className="text-xs text-gray-400 px-2 py-1"
+                        onClick={() => setDeleteConfirmId(null)}
+                      >
+                        取消
+                      </button>
+                      <button
+                        className="text-xs text-red-500 px-2 py-1 disabled:opacity-50"
+                        disabled={deletingId === item.id}
+                        onClick={() => handleDeleteItem(item)}
+                      >
+                        {deletingId === item.id ? '删除中…' : '确认删除'}
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className="text-xs text-red-500 px-2 py-1"
+                      onClick={() => setDeleteConfirmId(item.id)}
+                    >
+                      删除
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
