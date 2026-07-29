@@ -8,10 +8,11 @@ interface Props {
 
 export default function RestaurantCard({ restaurant }: Props) {
   const navigate = useNavigate();
+  const closed = !restaurant.isActive;
 
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform"
+      className={`bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm cursor-pointer active:scale-95 transition-transform ${closed ? 'opacity-60' : ''}`}
       onClick={() => navigate(`/restaurant/${restaurant.id}`)}
     >
       <div
@@ -19,9 +20,18 @@ export default function RestaurantCard({ restaurant }: Props) {
         style={!restaurant.bannerImage ? { background: `linear-gradient(135deg, ${restaurant.bgColor}dd, ${restaurant.bgColor}88)` } : undefined}
       >
         {restaurant.bannerImage ? (
-          <img src={assetUrl(restaurant.bannerImage)} alt={restaurant.name} className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={assetUrl(restaurant.bannerImage)}
+            alt={restaurant.name}
+            className={`absolute inset-0 w-full h-full object-cover ${closed ? 'grayscale' : ''}`}
+          />
         ) : (
           <span className="drop-shadow-lg">{restaurant.emoji}</span>
+        )}
+        {closed && (
+          <span className="absolute top-2 left-3 text-xs px-2 py-0.5 rounded-full bg-gray-900/70 text-white font-medium backdrop-blur-sm">
+            已打烊
+          </span>
         )}
         <div className="absolute bottom-2 left-3 flex gap-1">
           {restaurant.tags.slice(0, 2).map(tag => (
