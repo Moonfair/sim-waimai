@@ -158,6 +158,12 @@ export default function Restaurant() {
         ))}
       </div>
 
+      {restaurant.isActive === false && (
+        <div className="mx-4 mt-3 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-xs rounded-2xl px-4 py-3">
+          🌙 该店铺已打烊，暂不可下单
+        </div>
+      )}
+
       {/* Menu area */}
       <div className="flex bg-white dark:bg-gray-800" style={{ minHeight: 'calc(100vh - 280px)' }}>
         {/* Left category nav */}
@@ -184,7 +190,12 @@ export default function Restaurant() {
             <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
           ) : (
             filteredMenu.map(item => (
-              <MenuItemComponent key={item.id} item={item} restaurant={restaurant} />
+              <MenuItemComponent
+                key={item.id}
+                item={item}
+                restaurant={restaurant}
+                purchasable={restaurant.isActive}
+              />
             ))
           )}
         </div>

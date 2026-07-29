@@ -13,9 +13,10 @@ import MenuItemOptionsSheet from './MenuItemOptionsSheet';
 interface Props {
   item: MenuItemType;
   restaurant: Restaurant;
+  purchasable?: boolean;
 }
 
-export default function MenuItem({ item, restaurant }: Props) {
+export default function MenuItem({ item, restaurant, purchasable = true }: Props) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { items, addItem, updateQuantity } = useCart();
@@ -119,7 +120,11 @@ export default function MenuItem({ item, restaurant }: Props) {
         </div>
 
         <div className="flex items-center justify-end mt-1">
-          {hasOptions ? (
+          {!purchasable ? (
+            <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-base font-bold leading-none text-gray-400 dark:text-gray-500">
+              +
+            </div>
+          ) : hasOptions ? (
             <div className="relative">
               <button
                 className="px-2.5 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs font-bold leading-none shadow-sm whitespace-nowrap"
