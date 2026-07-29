@@ -138,4 +138,35 @@ describe('GET /api/search', () => {
       await db.delete(users).where(eq(users.id, ownerBId));
     }
   });
+
+  it('includes a closed (isActive=false) shop and its items, flagged as inactive', async () => {
+    const shopName = `搜索测试打烊店_${stamp}`;
+    const itemName = `搜索测试打烊菜_${stamp}`;
+    const { shop, item, userId: ownerId } = await createShopWithItem(
+      `t_search_c_${stamp}`,
+      shopName,
+      itemName,
+    );
+
+    await db
+      .update(restaurants)
+      .set({ reviewStatus: 'approved', isActive: false })
+      .where(eq(restaurants.id, shop.id));
+    await db
+      .update(menuItems)
+      .set({ reviewStatus: 'approved' })
+      .where(and(eq(menuItems.restaurantId, shop.id), eq(menuItems.id, item.id)));
+
+    try {
+      const shopHit = await getJson<SearchResultDto>(`/api/search?q=${encodeURIComponent(shopName)}`);
+      expect(shopHit.body.restaurants.map((r) => r.id)).toEqual([shop.id]);
+      expect(shopHit.body.restaurants[0]!.isActive).toBe(false);
+
+      const itemHit = await getJson<SearchResultDto>(`/api/search?q=${encodeURIComponent(itemName)}`);
+      expect(itemHit.body.items.map((i) => i.id)).toEqual([item.id]);
+    } finally {
+      await db.delete(restaurants).where(eq(restaurants.id, shop.id));
+      await db.delete(users).where(eq(users.id, ownerId));
+    }
+  });
 });

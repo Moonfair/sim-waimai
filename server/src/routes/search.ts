@@ -27,13 +27,7 @@ export const searchRoutes = new Hono().get('/', optionalAuth, async (c) => {
   const shopRows = await db
     .select()
     .from(restaurants)
-    .where(
-      and(
-        ilike(restaurants.name, `%${q}%`),
-        eq(restaurants.isActive, true),
-        eq(restaurants.reviewStatus, 'approved'),
-      ),
-    )
+    .where(and(ilike(restaurants.name, `%${q}%`), eq(restaurants.reviewStatus, 'approved')))
     .orderBy(asc(restaurants.sortOrder), asc(restaurants.createdAt))
     .limit(RESULT_LIMIT);
 
@@ -49,7 +43,6 @@ export const searchRoutes = new Hono().get('/', optionalAuth, async (c) => {
         ilike(menuItems.name, `%${q}%`),
         eq(menuItems.isListed, true),
         eq(menuItems.reviewStatus, 'approved'),
-        eq(restaurants.isActive, true),
         eq(restaurants.reviewStatus, 'approved'),
       ),
     )
