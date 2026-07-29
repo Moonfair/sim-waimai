@@ -453,4 +453,14 @@ export const merchantRoutes = new Hono()
       .returning();
     if (!row) return c.json({ error: '菜品不存在' }, 404);
     return c.json({ ok: true });
+  })
+  .delete('/restaurants/:id/items/:itemId/permanent', requireAuth, async (c) => {
+    const owned = await ownedRestaurant(c.get('user'), c.req.param('id'));
+    if ('error' in owned) return c.json({ error: owned.error }, owned.status);
+    const [row] = await db
+      .delete(menuItems)
+      .where(and(eq(menuItems.restaurantId, owned.row.id), eq(menuItems.id, c.req.param('itemId'))))
+      .returning();
+    if (!row) return c.json({ error: '菜品不存在' }, 404);
+    return c.json({ ok: true });
   });

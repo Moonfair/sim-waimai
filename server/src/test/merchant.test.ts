@@ -256,6 +256,41 @@ describe('menu item management', () => {
     expect(((await relist.json()) as MerchantMenuItemDto).isListed).toBe(true);
   });
 
+  it('permanently deletes an item regardless of its listed state', async () => {
+    const created = await req(`/api/merchant/restaurants/${shopId}/items`, ownerCookie, {
+      method: 'POST',
+      body: { name: '待删除测试菜', price: 9, emoji: '🍚', menuCategory: '招牌' },
+    });
+    const toDelete = (await created.json()) as MerchantMenuItemDto;
+
+    expect(
+      (
+        await req(`/api/merchant/restaurants/${shopId}/items/${toDelete.id}/permanent`, randoCookie, {
+          method: 'DELETE',
+        })
+      ).status,
+    ).toBe(403);
+
+    const res = await req(
+      `/api/merchant/restaurants/${shopId}/items/${toDelete.id}/permanent`,
+      ownerCookie,
+      { method: 'DELETE' },
+    );
+    expect(res.status).toBe(200);
+
+    const merchantView = (await (
+      await req(`/api/merchant/restaurants/${shopId}`, ownerCookie)
+    ).json()) as MerchantRestaurantDto;
+    expect(merchantView.menu.some((m) => m.id === toDelete.id)).toBe(false);
+
+    const notFound = await req(
+      `/api/merchant/restaurants/${shopId}/items/${toDelete.id}/permanent`,
+      ownerCookie,
+      { method: 'DELETE' },
+    );
+    expect(notFound.status).toBe(404);
+  });
+
   it('closing the shop (isActive=false) keeps it visible but flags it as closed', async () => {
     await req(`/api/merchant/restaurants/${shopId}`, ownerCookie, {
       method: 'PATCH',
