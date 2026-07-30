@@ -24,10 +24,16 @@ export default function Home() {
   const { data: restaurants, loading, error } = useApi<RestaurantSummary[]>('/restaurants');
   const { data: recommended } = useApi<RestaurantSummary[]>('/recommendations');
 
-  const shuffled = useMemo(
-    () => interleaveRestaurants(restaurants ?? [], HOME_SHUFFLE_SEED),
-    [restaurants]
-  );
+  const shuffled = useMemo(() => {
+    const list = restaurants ?? [];
+    const active = list.filter(r => !r.lowActivity);
+    const lowActivity = list.filter(r => r.lowActivity);
+    // 低活跃店铺各自组内仍打散,但整体沉到活跃店铺之后
+    return [
+      ...interleaveRestaurants(active, HOME_SHUFFLE_SEED),
+      ...interleaveRestaurants(lowActivity, HOME_SHUFFLE_SEED),
+    ];
+  }, [restaurants]);
   const filtered = shuffled.filter(
     r => activeCategory === '全部' || r.category === activeCategory
   );

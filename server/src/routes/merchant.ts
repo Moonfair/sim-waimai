@@ -352,6 +352,7 @@ export const merchantRoutes = new Hono()
       if (body.isActive !== undefined) patch.isActive = body.isActive;
       if (body.bannerImage !== undefined) patch.bannerImage = body.bannerImage;
       if (Object.keys(patch).length === 0) return c.json({ error: '没有需要更新的内容' }, 400);
+      patch.updatedAt = new Date();
       const needsReview = RESTAURANT_MODERATED_FIELDS.some((f) => body[f] !== undefined);
       if (needsReview) Object.assign(patch, await initialReviewFields(owned.row.ownerId!));
       const [row] = await db
@@ -427,6 +428,7 @@ export const merchantRoutes = new Hono()
       }
       if (body.isListed !== undefined) patch.isListed = body.isListed;
       if (Object.keys(patch).length === 0) return c.json({ error: '没有需要更新的内容' }, 400);
+      patch.updatedAt = new Date();
       const needsReview = ITEM_MODERATED_FIELDS.some((f) => body[f] !== undefined);
       if (needsReview) Object.assign(patch, await initialReviewFields(owned.row.ownerId!));
       const [row] = await db
@@ -448,7 +450,7 @@ export const merchantRoutes = new Hono()
     if ('error' in owned) return c.json({ error: owned.error }, owned.status);
     const [row] = await db
       .update(menuItems)
-      .set({ isListed: false })
+      .set({ isListed: false, updatedAt: new Date() })
       .where(and(eq(menuItems.restaurantId, owned.row.id), eq(menuItems.id, c.req.param('itemId'))))
       .returning();
     if (!row) return c.json({ error: '菜品不存在' }, 404);

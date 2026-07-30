@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import { db } from '../db/client';
 import { favorites, menuItems, restaurants, reviews, users } from '../db/schema';
 import { decodeCursor, encodeCursor } from '../lib/cursor';
+import { lowActivityCondition } from '../lib/lowActivity';
 import { toRestaurant, toRestaurantSummary, toReviewDto } from '../lib/mappers';
 import { optionalAuth } from '../middleware/auth';
 
@@ -23,16 +24,21 @@ export const restaurantRoutes = new Hono()
     if (category && category !== '全部') {
       filters.push(eq(restaurants.category, category));
     }
+    const lowActivity = lowActivityCondition();
     const rows = await db
-      .select()
+      .select({ restaurant: restaurants, lowActivity })
       .from(restaurants)
       .where(and(...filters))
-      .orderBy(asc(restaurants.sortOrder), asc(restaurants.createdAt));
+      .orderBy(asc(lowActivity), asc(restaurants.sortOrder), asc(restaurants.createdAt));
 
     const user = c.get('user');
-    if (!user) return c.json(rows.map((r) => toRestaurantSummary(r)));
-    const favs = await favoriteIdSet(user.sub, rows.map((r) => r.id));
-    return c.json(rows.map((r) => toRestaurantSummary(r, favs.has(r.id))));
+    if (!user) {
+      return c.json(rows.map((r) => toRestaurantSummary(r.restaurant, undefined, r.lowActivity)));
+    }
+    const favs = await favoriteIdSet(user.sub, rows.map((r) => r.restaurant.id));
+    return c.json(
+      rows.map((r) => toRestaurantSummary(r.restaurant, favs.has(r.restaurant.id), r.lowActivity)),
+    );
   })
   .get('/:id/reviews', optionalAuth, async (c) => {
     const id = c.req.param('id');

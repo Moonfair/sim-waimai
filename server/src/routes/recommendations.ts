@@ -1,9 +1,10 @@
-import { and, desc, eq, sql } from 'drizzle-orm';
+import { and, desc, eq, not, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { db } from '../db/client';
 import { menuItems, orders, restaurants } from '../db/schema';
 import { ttlCache } from '../lib/cache';
 import { imageBoostFactor } from '../lib/imageBoost';
+import { lowActivityCondition } from '../lib/lowActivity';
 import { toRestaurantSummary } from '../lib/mappers';
 import { weightedSample } from '../lib/weightedSample';
 import { optionalAuth } from '../middleware/auth';
@@ -24,7 +25,13 @@ const activeRestaurants = ttlCache(30_000, () =>
     })
     .from(restaurants)
     .leftJoin(menuItems, eq(menuItems.restaurantId, restaurants.id))
-    .where(and(eq(restaurants.isActive, true), eq(restaurants.reviewStatus, 'approved')))
+    .where(
+      and(
+        eq(restaurants.isActive, true),
+        eq(restaurants.reviewStatus, 'approved'),
+        not(lowActivityCondition()),
+      ),
+    )
     .groupBy(restaurants.id),
 );
 

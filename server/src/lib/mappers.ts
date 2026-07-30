@@ -19,7 +19,11 @@ export type MenuItemRow = typeof menuItems.$inferSelect;
 export type OrderRow = typeof orders.$inferSelect;
 export type ReviewRow = typeof reviews.$inferSelect;
 
-export function toRestaurantSummary(row: RestaurantRow, isFavorite?: boolean): RestaurantSummary {
+export function toRestaurantSummary(
+  row: RestaurantRow,
+  isFavorite?: boolean,
+  lowActivity?: boolean,
+): RestaurantSummary {
   const summary: RestaurantSummary = {
     id: row.id,
     name: row.name,
@@ -38,6 +42,7 @@ export function toRestaurantSummary(row: RestaurantRow, isFavorite?: boolean): R
   };
   if (row.bannerImage) summary.bannerImage = row.bannerImage;
   if (isFavorite !== undefined) summary.isFavorite = isFavorite;
+  if (lowActivity !== undefined) summary.lowActivity = lowActivity;
   return summary;
 }
 

@@ -1,0 +1,2 @@
+ALTER TABLE "menu_items" ADD COLUMN "updated_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
+ALTER TABLE "restaurants" ADD COLUMN "updated_at" timestamp with time zone DEFAULT now() NOT NULL;
