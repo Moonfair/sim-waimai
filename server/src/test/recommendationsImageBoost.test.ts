@@ -3,7 +3,7 @@ import { eq, inArray } from 'drizzle-orm';
 import type { MerchantRestaurantDto, RestaurantSummary, UserDto } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
-import { restaurants, users } from '../db/schema';
+import { menuItems, restaurants, users } from '../db/schema';
 import { FULL_IMAGE_BOOST_COUNT } from '../lib/imageBoost';
 import { registerTestUser } from './testHelpers';
 
@@ -76,6 +76,20 @@ async function createItemWithImage(shopId: string, ownerCookie: string, index: n
   expect(res.status).toBe(200);
 }
 
+// Low-activity shops (<=10 products, see server/src/lib/lowActivity.ts) are excluded from
+// recommendations entirely, so both fixture shops below need more than 10 to stay eligible —
+// pictureId already gets FULL_IMAGE_BOOST_COUNT (10) image dishes, so one plain item is enough.
+async function giveShopEnoughProductsToBeEligible(shopId: string, ownerCookie: string, count: number) {
+  for (let i = 0; i < count; i++) {
+    const res = await req(`/api/merchant/restaurants/${shopId}/items`, ownerCookie, {
+      method: 'POST',
+      body: { name: `菜品${i}`, price: 18, emoji: '🍜', menuCategory: '招牌' },
+    });
+    expect(res.status).toBe(200);
+  }
+  await db.update(menuItems).set({ reviewStatus: 'approved' }).where(eq(menuItems.restaurantId, shopId));
+}
+
 beforeAll(async () => {
   savedAdmins = process.env.ADMIN_USERNAMES;
   process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
@@ -92,6 +106,8 @@ beforeAll(async () => {
   for (let i = 0; i < FULL_IMAGE_BOOST_COUNT; i++) {
     await createItemWithImage(pictureId, o.cookie, i);
   }
+  await giveShopEnoughProductsToBeEligible(pictureId, o.cookie, 1);
+  await giveShopEnoughProductsToBeEligible(baselineId, o.cookie, 11);
 });
 
 afterAll(async () => {

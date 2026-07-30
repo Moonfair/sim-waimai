@@ -3,7 +3,7 @@ import { eq, inArray } from 'drizzle-orm';
 import type { MerchantRestaurantDto, RestaurantSummary, UserDto } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
-import { orders, restaurants, users } from '../db/schema';
+import { menuItems, orders, restaurants, users } from '../db/schema';
 import { registerTestUser } from './testHelpers';
 
 // Own file so the recommendations route's module-level 30s TTL cache starts fresh:
@@ -65,6 +65,19 @@ async function createApprovedShop(name: string, category: string, ownerCred: str
   return shop.id;
 }
 
+// Low-activity shops (<=10 products, see server/src/lib/lowActivity.ts) are excluded from
+// recommendations entirely, so every fixture shop below needs more than 10 to stay eligible.
+async function giveShopEnoughProductsToBeEligible(shopId: string, ownerCred: string) {
+  for (let i = 0; i < 11; i++) {
+    const res = await req(`/api/merchant/restaurants/${shopId}/items`, ownerCred, {
+      method: 'POST',
+      body: { name: `菜品${i}`, price: 18, emoji: '🍜', menuCategory: '招牌' },
+    });
+    expect(res.status).toBe(200);
+  }
+  await db.update(menuItems).set({ reviewStatus: 'approved' }).where(eq(menuItems.restaurantId, shopId));
+}
+
 /**
  * Runs GET /api/recommendations 100 times and counts how often each given id shows up.
  * Each call carries a unique X-Forwarded-For so the global per-IP rate limiter (300 req/60s,
@@ -107,10 +120,13 @@ beforeAll(async () => {
   lowRatingId = await createApprovedShop(`低分店_${stamp}`, '中式快餐', ownerCookie, a.cookie);
   await db.update(restaurants).set({ rating: 5 }).where(eq(restaurants.id, highRatingId));
   await db.update(restaurants).set({ rating: 1 }).where(eq(restaurants.id, lowRatingId));
+  await giveShopEnoughProductsToBeEligible(highRatingId, ownerCookie);
+  await giveShopEnoughProductsToBeEligible(lowRatingId, ownerCookie);
 
   // A mediocre 汉堡炸鸡 shop that needs the personalization boost to compete.
   tasteShopId = await createApprovedShop(`口味店_${stamp}`, '汉堡炸鸡', ownerCookie, a.cookie);
   await db.update(restaurants).set({ rating: 3 }).where(eq(restaurants.id, tasteShopId));
+  await giveShopEnoughProductsToBeEligible(tasteShopId, ownerCookie);
 
   // history heavily biased to 汉堡炸鸡
   await db.insert(orders).values(

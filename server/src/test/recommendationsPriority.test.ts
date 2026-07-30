@@ -3,7 +3,7 @@ import { eq, inArray } from 'drizzle-orm';
 import type { MerchantRestaurantDto, RestaurantSummary, UserDto } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
-import { restaurants, users } from '../db/schema';
+import { menuItems, restaurants, users } from '../db/schema';
 import { registerTestUser } from './testHelpers';
 
 // Own file so the recommendations route's module-level 30s TTL cache starts fresh:
@@ -61,6 +61,19 @@ async function createApprovedShop(name: string, ownerCookie: string, adminCookie
   return shop.id;
 }
 
+// Low-activity shops (<=10 products, see server/src/lib/lowActivity.ts) are excluded from
+// recommendations entirely, so both fixture shops below need more than 10 to stay eligible.
+async function giveShopEnoughProductsToBeEligible(shopId: string, ownerCookie: string) {
+  for (let i = 0; i < 11; i++) {
+    const res = await req(`/api/merchant/restaurants/${shopId}/items`, ownerCookie, {
+      method: 'POST',
+      body: { name: `菜品${i}`, price: 18, emoji: '🍜', menuCategory: '招牌' },
+    });
+    expect(res.status).toBe(200);
+  }
+  await db.update(menuItems).set({ reviewStatus: 'approved' }).where(eq(menuItems.restaurantId, shopId));
+}
+
 beforeAll(async () => {
   savedAdmins = process.env.ADMIN_USERNAMES;
   process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
@@ -72,6 +85,8 @@ beforeAll(async () => {
   // difference in weight comes from recommendPriority, isolating the priority effect.
   boostedId = await createApprovedShop(`置顶店_${stamp}`, o.cookie, a.cookie);
   baselineId = await createApprovedShop(`普通店_${stamp}`, o.cookie, a.cookie);
+  await giveShopEnoughProductsToBeEligible(boostedId, o.cookie);
+  await giveShopEnoughProductsToBeEligible(baselineId, o.cookie);
 
   const priorityRes = await req(`/api/admin/shops/${boostedId}/priority`, a.cookie, {
     method: 'POST',

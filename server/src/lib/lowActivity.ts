@@ -15,10 +15,11 @@ function qualified(column: PgColumn): SQL {
 }
 
 /**
- * True when a shop hasn't touched its info or menu in LOW_ACTIVITY_DAYS days and lists at most
- * LOW_ACTIVITY_MAX_PRODUCTS customer-visible products. Correlates against whichever `restaurants`
- * row is in scope in the enclosing query via subqueries, so it needs no join/groupBy of its own
- * and can be dropped into a `.select()`, `.where()`, or `.orderBy()` on any restaurants query.
+ * True when a shop hasn't touched its info or menu in LOW_ACTIVITY_DAYS days, OR lists at most
+ * LOW_ACTIVITY_MAX_PRODUCTS customer-visible products — either alone is enough to flag it.
+ * Correlates against whichever `restaurants` row is in scope in the enclosing query via
+ * subqueries, so it needs no join/groupBy of its own and can be dropped into a `.select()`,
+ * `.where()`, or `.orderBy()` on any restaurants query.
  */
 export function lowActivityCondition(): SQL<boolean> {
   const rId = qualified(restaurants.id);
@@ -36,7 +37,7 @@ export function lowActivityCondition(): SQL<boolean> {
         ${rUpdatedAt}
       )
     ) < now() - interval '1 day' * ${LOW_ACTIVITY_DAYS}
-    and (
+    or (
       select count(*) from ${menuItems}
       where ${mRestaurantId} = ${rId}
         and ${mIsListed} = true
