@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,6 +34,55 @@ export default function Restaurant() {
   useEffect(() => {
     if (restaurant) setIsFav(!!restaurant.isFavorite);
   }, [restaurant]);
+
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const suppressObserver = useRef(false);
+  const observerTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!restaurant) return;
+    const categories = restaurant.menuCategories.filter(cat =>
+      restaurant.menu.some(item => item.menuCategory === cat)
+    );
+    if (categories.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (suppressObserver.current) return;
+        const visible = entries.filter(entry => entry.isIntersecting);
+        if (visible.length === 0) return;
+        const topMost = visible.reduce((a, b) =>
+          a.boundingClientRect.top <= b.boundingClientRect.top ? a : b
+        );
+        const cat = topMost.target.getAttribute('data-category');
+        if (cat) setActiveMenuCat(cat);
+      },
+      { rootMargin: '-64px 0px -70% 0px', threshold: 0 }
+    );
+
+    categories.forEach(cat => {
+      const el = sectionRefs.current[cat];
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [restaurant]);
+
+  useEffect(() => {
+    return () => {
+      if (observerTimeoutRef.current) window.clearTimeout(observerTimeoutRef.current);
+    };
+  }, []);
+
+  const handleCategoryClick = (cat: string) => {
+    setActiveMenuCat(cat);
+    suppressObserver.current = true;
+    if (observerTimeoutRef.current) window.clearTimeout(observerTimeoutRef.current);
+    sectionRefs.current[cat]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    observerTimeoutRef.current = window.setTimeout(() => {
+      suppressObserver.current = false;
+    }, 600);
+  };
 
   const toggleFavorite = async () => {
     if (!id) return;
@@ -169,7 +218,7 @@ export default function Restaurant() {
       {/* Menu area */}
       <div className="flex bg-white dark:bg-gray-800" style={{ minHeight: 'calc(100vh - 280px)' }}>
         {/* Left category nav */}
-        <div className="w-20 flex-shrink-0 bg-gray-50 dark:bg-gray-900 border-r border-gray-100 dark:border-gray-700">
+        <div className="w-20 flex-shrink-0 self-start sticky top-0 max-h-screen overflow-y-auto bg-gray-50 dark:bg-gray-900 border-r border-gray-100 dark:border-gray-700">
           {restaurant.menuCategories.map(cat => (
             <button
               key={cat}
@@ -178,7 +227,7 @@ export default function Restaurant() {
                   ? 'border-orange-500 bg-white dark:bg-gray-800 text-orange-500 dark:text-orange-400'
                   : 'border-transparent text-gray-500 dark:text-gray-400'
               }`}
-              onClick={() => setActiveMenuCat(cat)}
+              onClick={() => handleCategoryClick(cat)}
             >
               {cat}
             </button>
@@ -191,7 +240,12 @@ export default function Restaurant() {
             <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
           ) : (
             menuByCategory.map(({ cat, items }) => (
-              <section key={cat} id={`menu-cat-${cat}`} data-category={cat}>
+              <section
+                key={cat}
+                id={`menu-cat-${cat}`}
+                data-category={cat}
+                ref={el => { sectionRefs.current[cat] = el; }}
+              >
                 <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{cat}</h3>
                 {items.map(item => (
                   <MenuItemComponent
