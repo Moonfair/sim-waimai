@@ -93,7 +93,9 @@ export default function Restaurant() {
     );
   }
 
-  const filteredMenu = restaurant.menu.filter(item => item.menuCategory === activeMenuCat);
+  const menuByCategory = restaurant.menuCategories
+    .map(cat => ({ cat, items: restaurant.menu.filter(item => item.menuCategory === cat) }))
+    .filter(group => group.items.length > 0);
 
   return (
     <div className="app-container">
@@ -185,17 +187,21 @@ export default function Restaurant() {
 
         {/* Right menu items */}
         <div className="flex-1 px-3 pb-8">
-          <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{activeMenuCat}</h3>
-          {filteredMenu.length === 0 ? (
+          {menuByCategory.length === 0 ? (
             <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
           ) : (
-            filteredMenu.map(item => (
-              <MenuItemComponent
-                key={item.id}
-                item={item}
-                restaurant={restaurant}
-                purchasable={restaurant.isActive}
-              />
+            menuByCategory.map(({ cat, items }) => (
+              <section key={cat} id={`menu-cat-${cat}`} data-category={cat}>
+                <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{cat}</h3>
+                {items.map(item => (
+                  <MenuItemComponent
+                    key={item.id}
+                    item={item}
+                    restaurant={restaurant}
+                    purchasable={restaurant.isActive}
+                  />
+                ))}
+              </section>
             ))
           )}
         </div>
