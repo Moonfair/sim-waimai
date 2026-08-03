@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { RestaurantSummary } from '@sim-waimai/shared';
 import { assetUrl } from '../lib/assetUrl';
+import { formatCount, getDisplayStats } from '../lib/displayStats';
 
 interface Props {
   restaurant: RestaurantSummary;
@@ -9,6 +10,7 @@ interface Props {
 export default function RestaurantCard({ restaurant }: Props) {
   const navigate = useNavigate();
   const closed = !restaurant.isActive;
+  const { displaySales, displayReviews } = getDisplayStats(restaurant.id, restaurant.monthlyOrders, restaurant.ratingCount);
 
   return (
     <div
@@ -56,9 +58,10 @@ export default function RestaurantCard({ restaurant }: Props) {
           <div className="flex items-center gap-0.5">
             <span className="text-yellow-400 text-xs">★</span>
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{restaurant.rating}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">({formatCount(displayReviews)}+)</span>
           </div>
           <span className="text-gray-300 dark:text-gray-600 text-xs">|</span>
-          <span className="text-xs text-gray-400 dark:text-gray-500">月售{restaurant.monthlyOrders > 10000 ? `${(restaurant.monthlyOrders / 10000).toFixed(1)}万` : restaurant.monthlyOrders}+</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">月售{formatCount(displaySales)}+</span>
           <span className="text-gray-300 dark:text-gray-600 text-xs">|</span>
           <span className="text-xs text-gray-400 dark:text-gray-500">起送¥{restaurant.minOrder}</span>
         </div>
