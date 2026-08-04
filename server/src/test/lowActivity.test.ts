@@ -9,19 +9,15 @@ import { registerTestUser } from './testHelpers';
 // Own file so the recommendations route's module-level 30s TTL cache starts fresh and bakes in
 // the fixtures below on its first load — see recommendations.test.ts for the same note.
 //
-// Low-activity = stale (shop & menu untouched for 3+ days) OR small menu (<=10 products) — an
-// OR, so only a shop that is BOTH freshly updated AND has more than 10 products escapes the flag.
+// Low-activity = <=10 customer-visible products, full stop.
 const app = createApp();
 const stamp = Date.now().toString(36);
 const admin = { username: `t_lowa_a_${stamp}`, password: 'secret123' };
 const owner = { username: `t_lowa_o_${stamp}`, password: 'secret123' };
-const STALE = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000); // older than the 3-day threshold
 
 let ownerId = '';
-let freshSmallMenuShopId = '';
-let staleSmallMenuShopId = '';
-let staleBigMenuShopId = '';
-let freshBigMenuShopId = '';
+let smallMenuShopId = '';
+let bigMenuShopId = '';
 let savedAdmins: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
@@ -103,22 +99,10 @@ beforeAll(async () => {
   const o = await register(owner);
   ownerId = o.user.id;
 
-  // Fresh + zero products: small menu alone must trigger the flag even though nothing is stale.
-  freshSmallMenuShopId = await createApprovedShop(`新鲜小菜单店_${stamp}`, o.cookie, a.cookie);
+  smallMenuShopId = await createApprovedShop(`小菜单店_${stamp}`, o.cookie, a.cookie);
 
-  // Stale + zero products: both clauses true.
-  staleSmallMenuShopId = await createApprovedShop(`冷门店_${stamp}`, o.cookie, a.cookie);
-  await db.update(restaurants).set({ updatedAt: STALE }).where(eq(restaurants.id, staleSmallMenuShopId));
-
-  // Stale + 11 products: staleness alone must trigger the flag even with a big menu.
-  staleBigMenuShopId = await createApprovedShop(`冷门大菜单店_${stamp}`, o.cookie, a.cookie);
-  await addApprovedItems(staleBigMenuShopId, o.cookie, 11);
-  await db.update(restaurants).set({ updatedAt: STALE }).where(eq(restaurants.id, staleBigMenuShopId));
-  await db.update(menuItems).set({ updatedAt: STALE }).where(eq(menuItems.restaurantId, staleBigMenuShopId));
-
-  // Fresh + 11 products: the only combination that should NOT be flagged.
-  freshBigMenuShopId = await createApprovedShop(`新鲜大菜单店_${stamp}`, o.cookie, a.cookie);
-  await addApprovedItems(freshBigMenuShopId, o.cookie, 11);
+  bigMenuShopId = await createApprovedShop(`大菜单店_${stamp}`, o.cookie, a.cookie);
+  await addApprovedItems(bigMenuShopId, o.cookie, 11);
 });
 
 afterAll(async () => {
@@ -129,48 +113,34 @@ afterAll(async () => {
   await pool.end();
 });
 
-describe('GET /api/restaurants — low-activity sink (stale OR small menu)', () => {
-  it('flags a fresh shop with <=10 products as lowActivity', async () => {
+describe('GET /api/restaurants — low-activity sink (<=10 products)', () => {
+  it('flags a shop with <=10 products', async () => {
     const res = await app.request('/api/restaurants');
     const body = (await res.json()) as RestaurantSummary[];
-    const shop = body.find((r) => r.id === freshSmallMenuShopId);
+    const shop = body.find((r) => r.id === smallMenuShopId);
     expect(shop!.lowActivity).toBe(true);
   });
 
-  it('flags a stale shop with <=10 products as lowActivity', async () => {
+  it('does not flag a shop with more than 10 products', async () => {
     const res = await app.request('/api/restaurants');
     const body = (await res.json()) as RestaurantSummary[];
-    const shop = body.find((r) => r.id === staleSmallMenuShopId);
-    expect(shop!.lowActivity).toBe(true);
-  });
-
-  it('flags a stale shop with more than 10 products as lowActivity (staleness alone is enough)', async () => {
-    const res = await app.request('/api/restaurants');
-    const body = (await res.json()) as RestaurantSummary[];
-    const shop = body.find((r) => r.id === staleBigMenuShopId);
-    expect(shop!.lowActivity).toBe(true);
-  });
-
-  it('does not flag a fresh shop with more than 10 products', async () => {
-    const res = await app.request('/api/restaurants');
-    const body = (await res.json()) as RestaurantSummary[];
-    const shop = body.find((r) => r.id === freshBigMenuShopId);
+    const shop = body.find((r) => r.id === bigMenuShopId);
     expect(shop!.lowActivity).toBe(false);
   });
 
-  it('sorts a flagged shop after the one unflagged shop', async () => {
+  it('sorts a flagged shop after an unflagged one', async () => {
     const res = await app.request('/api/restaurants');
     const body = (await res.json()) as RestaurantSummary[];
-    const flaggedIdx = body.findIndex((r) => r.id === staleSmallMenuShopId);
-    const unflaggedIdx = body.findIndex((r) => r.id === freshBigMenuShopId);
+    const flaggedIdx = body.findIndex((r) => r.id === smallMenuShopId);
+    const unflaggedIdx = body.findIndex((r) => r.id === bigMenuShopId);
     expect(flaggedIdx).toBeGreaterThan(unflaggedIdx);
   });
 });
 
 describe('GET /api/recommendations — low-activity exclusion', () => {
-  it('never recommends a low-activity shop even with a top rating, but does recommend the unflagged one', async () => {
-    const counts = await sampleInclusionCounts([staleBigMenuShopId, freshBigMenuShopId]);
-    expect(counts.get(staleBigMenuShopId)).toBe(0);
-    expect(counts.get(freshBigMenuShopId)).toBeGreaterThan(0);
+  it('recommends a shop with more than 10 products, but never a small-menu shop', async () => {
+    const counts = await sampleInclusionCounts([smallMenuShopId, bigMenuShopId]);
+    expect(counts.get(smallMenuShopId)).toBe(0);
+    expect(counts.get(bigMenuShopId)).toBeGreaterThan(0);
   });
 });

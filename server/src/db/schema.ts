@@ -105,8 +105,6 @@ export const restaurants = pgTable(
     aiReason: text('ai_reason'),
     aiConfidence: real('ai_confidence'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
-    /** Bumped on every shop-info edit; feeds the low-activity check alongside menuItems.updatedAt. */
-    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     check('restaurants_review_status_check', sql`${t.reviewStatus} IN ('pending', 'approved', 'rejected')`),
@@ -148,8 +146,6 @@ export const menuItems = pgTable(
     aiReason: text('ai_reason'),
     aiConfidence: real('ai_confidence'),
     sortOrder: integer('sort_order').notNull().default(0),
-    /** Bumped on every create/edit/delist; feeds the shop's low-activity check. */
-    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     primaryKey({ columns: [t.restaurantId, t.id] }),

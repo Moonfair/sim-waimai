@@ -55,7 +55,7 @@ export interface RestaurantSummary {
   bannerImage?: string;
   /** Present only when the request is authenticated. */
   isFavorite?: boolean;
-  /** 低活跃店铺:3天内未更新店铺或商品、或商品数不多于10个(满足其一即可)。首页排序沉底、不进入推荐列表。 */
+  /** 低活跃店铺:商品数不多于10个。首页排序沉底、不进入推荐列表。 */
   lowActivity?: boolean;
 }
 
