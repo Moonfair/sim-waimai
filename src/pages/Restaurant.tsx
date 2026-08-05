@@ -13,6 +13,7 @@ import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
 import PosterShareSheet from '../components/PosterShareSheet';
 import { restaurantUrl } from '../lib/share';
+import { getDisplayStats } from '../lib/displayStats';
 
 export default function Restaurant() {
   const { id } = useParams<{ id: string }>();
@@ -146,6 +147,9 @@ export default function Restaurant() {
     .map(cat => ({ cat, items: restaurant.menu.filter(item => item.menuCategory === cat) }))
     .filter(group => group.items.length > 0);
 
+  // 与首页卡片展示口径一致(放大后的销量/评论数),而不是数据库里的真实值。
+  const { displaySales, displayReviews } = getDisplayStats(restaurant.id, restaurant.monthlyOrders, restaurant.ratingCount);
+
   return (
     <div className="app-container">
       {/* Header */}
@@ -263,7 +267,7 @@ export default function Restaurant() {
 
       {/* Reviews */}
       {id && (
-        <ReviewList restaurantId={id} rating={restaurant.rating} ratingCount={restaurant.ratingCount} />
+        <ReviewList restaurantId={id} rating={restaurant.rating} ratingCount={displayReviews} />
       )}
 
       <CartBar deliveryFee={restaurant.deliveryFee} />
@@ -292,8 +296,8 @@ export default function Restaurant() {
               bgColor: restaurant.bgColor,
               bannerImage: restaurant.bannerImage,
               rating: restaurant.rating,
-              ratingCount: restaurant.ratingCount,
-              monthlyOrders: restaurant.monthlyOrders,
+              ratingCount: displayReviews,
+              monthlyOrders: displaySales,
               tags: restaurant.tags,
             },
           }}

@@ -5,12 +5,14 @@ import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import type { Page, ReviewDto } from '@sim-waimai/shared';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../lib/api';
+import { formatCount } from '../lib/displayStats';
 import ReportSheet from './ReportSheet';
 import ZoomableImage from './ZoomableImage';
 
 interface Props {
   restaurantId: string;
   rating: number;
+  /** 展示用的评论数(调用方已按首页卡片口径放大),不是数据库里的真实值。 */
   ratingCount: number;
 }
 
@@ -69,7 +71,7 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
         <h3 className="text-gray-900 dark:text-gray-100 font-bold text-base">用户评价</h3>
         <span className="text-sm">
           <span className="text-orange-500 font-bold">⭐ {rating}</span>
-          <span className="text-gray-400 dark:text-gray-500 text-xs ml-1">({ratingCount}条)</span>
+          <span className="text-gray-400 dark:text-gray-500 text-xs ml-1">({formatCount(ratingCount)}条)</span>
         </span>
       </div>
 

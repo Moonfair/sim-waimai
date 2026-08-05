@@ -1,4 +1,5 @@
 import { assetUrl } from '../../lib/assetUrl';
+import { formatCount } from '../../lib/displayStats';
 
 export interface RestaurantPosterData {
   name: string;
@@ -6,6 +7,7 @@ export interface RestaurantPosterData {
   bgColor: string;
   bannerImage?: string;
   rating: number;
+  /** 展示用的评论数/月售(调用方已按首页卡片口径放大),不是数据库里的真实值。 */
   ratingCount: number;
   monthlyOrders: number;
   tags: string[];
@@ -45,9 +47,9 @@ export default function RestaurantPosterTemplate({
       <div className="p-4">
         <p className="text-gray-900 font-black text-lg">{name}</p>
         <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-          <span>⭐ {rating}（{ratingCount}）</span>
+          <span>⭐ {rating}（{formatCount(ratingCount)}）</span>
           <span>·</span>
-          <span>月售 {monthlyOrders}</span>
+          <span>月售 {formatCount(monthlyOrders)}</span>
         </div>
 
         {tags.length > 0 && (
