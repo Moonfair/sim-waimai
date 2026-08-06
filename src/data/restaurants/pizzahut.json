@@ -5,7 +5,7 @@
   "category": "披萨",
   "rating": 4.6,
   "ratingCount": 4200,
-  "monthlyOrders": 9000,
+  "monthlyOrders": 100,
   "deliveryFee": 6,
   "deliveryTime": 40,
   "minOrder": 35,
