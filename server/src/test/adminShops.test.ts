@@ -87,6 +87,8 @@ describe('GET /api/admin/shops', () => {
     expect(mine).toBeDefined();
     expect(mine!.ownerUsername).toBe(owner.username);
     expect(mine!.recommendPriority).toBe(0);
+    // Freshly created shop has no menu items yet, so it's flagged low-activity.
+    expect(mine!.lowActivity).toBe(true);
   });
 });
 

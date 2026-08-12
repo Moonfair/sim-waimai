@@ -387,6 +387,8 @@ export interface AdminShopDto {
   isActive: boolean;
   reviewStatus: ReviewStatus;
   recommendPriority: number;
+  /** <=10 listed+approved menu items — excluded from recommendations unless recommendPriority > 0. */
+  lowActivity: boolean;
 }
 
 /** Paginated response for GET /admin/shops. */

@@ -121,6 +121,11 @@ export default function AdminShops() {
                             已下架
                           </span>
                         )}
+                        {shop.lowActivity && (
+                          <span className="text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0 bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                            低活跃（商品数≤10）
+                          </span>
+                        )}
                       </div>
                       <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
                         店主：{shop.ownerUsername} · {shop.category}
@@ -128,6 +133,13 @@ export default function AdminShops() {
                       <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
                         评分 {shop.rating.toFixed(1)} · 月销 {shop.monthlyOrders}
                       </p>
+                      {shop.lowActivity && (
+                        <p className="text-amber-600 dark:text-amber-400 text-xs mt-1">
+                          {shop.recommendPriority > 0
+                            ? '商品数≤10，已设置优先级豁免低活跃限制，仍会参与推荐'
+                            : '商品数≤10，不会进入首页推荐（设为"较高"或"置顶"可豁免）'}
+                        </p>
+                      )}
                       <button
                         type="button"
                         className="block mt-1.5 text-xs text-orange-500"

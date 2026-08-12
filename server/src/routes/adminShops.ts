@@ -5,6 +5,7 @@ import type { AdminShopDto, AdminShopListDto } from '@sim-waimai/shared';
 import { SHOP_PRIORITY_LEVELS } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { restaurants, users } from '../db/schema';
+import { lowActivityCondition } from '../lib/lowActivity';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 
@@ -58,6 +59,7 @@ export const adminShopsRoutes = new Hono()
         isActive: restaurants.isActive,
         reviewStatus: restaurants.reviewStatus,
         recommendPriority: restaurants.recommendPriority,
+        lowActivity: lowActivityCondition(),
       })
       .from(restaurants)
       .innerJoin(users, eq(users.id, restaurants.ownerId))
@@ -76,25 +78,30 @@ export const adminShopsRoutes = new Hono()
     if (!row.ownerId) return c.json({ error: '仅玩家自建店铺可调整推荐优先级' }, 400);
 
     const { priority } = c.req.valid('json');
-    const [updated] = await db
-      .update(restaurants)
-      .set({ recommendPriority: priority })
-      .where(eq(restaurants.id, row.id))
-      .returning();
+    await db.update(restaurants).set({ recommendPriority: priority }).where(eq(restaurants.id, row.id));
 
-    const [owner] = await db.select({ username: users.username }).from(users).where(eq(users.id, updated.ownerId!));
+    const [updated] = await db
+      .select({ restaurant: restaurants, lowActivity: lowActivityCondition() })
+      .from(restaurants)
+      .where(eq(restaurants.id, row.id));
+
+    const [owner] = await db
+      .select({ username: users.username })
+      .from(users)
+      .where(eq(users.id, updated.restaurant.ownerId!));
     const dto: AdminShopDto = {
-      id: updated.id,
-      name: updated.name,
-      emoji: updated.emoji,
-      bgColor: updated.bgColor,
-      category: updated.category,
+      id: updated.restaurant.id,
+      name: updated.restaurant.name,
+      emoji: updated.restaurant.emoji,
+      bgColor: updated.restaurant.bgColor,
+      category: updated.restaurant.category,
       ownerUsername: owner?.username ?? null,
-      rating: updated.rating,
-      monthlyOrders: updated.monthlyOrders,
-      isActive: updated.isActive,
-      reviewStatus: updated.reviewStatus,
-      recommendPriority: updated.recommendPriority,
+      rating: updated.restaurant.rating,
+      monthlyOrders: updated.restaurant.monthlyOrders,
+      isActive: updated.restaurant.isActive,
+      reviewStatus: updated.restaurant.reviewStatus,
+      recommendPriority: updated.restaurant.recommendPriority,
+      lowActivity: updated.lowActivity,
     };
     return c.json(dto);
   });

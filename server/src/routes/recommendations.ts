@@ -1,4 +1,4 @@
-import { and, desc, eq, not, sql } from 'drizzle-orm';
+import { and, desc, eq, gt, not, or, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { db } from '../db/client';
 import { menuItems, orders, restaurants } from '../db/schema';
@@ -17,6 +17,9 @@ const RECENT_ORDERS_WINDOW = 50;
 // 30s TTL means moderation flips can lag here by up to 30s — acceptable for recommendations.
 // validImageCount feeds imageBoostFactor below (grouped by the restaurants PK, so Postgres's
 // functional-dependency rule lets us select the rest of the restaurant row unaggregated).
+// recommendPriority > 0 is an explicit admin override, so it exempts a shop from the low-activity
+// exclusion too — otherwise an admin-boosted shop with <=10 products would never even reach the
+// weighting step below and the boost would silently do nothing.
 const activeRestaurants = ttlCache(30_000, () =>
   db
     .select({
@@ -29,7 +32,7 @@ const activeRestaurants = ttlCache(30_000, () =>
       and(
         eq(restaurants.isActive, true),
         eq(restaurants.reviewStatus, 'approved'),
-        not(lowActivityCondition()),
+        or(not(lowActivityCondition()), gt(restaurants.recommendPriority, 0)),
       ),
     )
     .groupBy(restaurants.id),

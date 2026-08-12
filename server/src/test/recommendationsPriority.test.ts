@@ -15,6 +15,8 @@ const owner = { username: `t_recp_o_${stamp}`, password: 'secret123' };
 let ownerId = '';
 let boostedId = '';
 let baselineId = '';
+let boostedLowActivityId = '';
+let baselineLowActivityId = '';
 let savedAdmins: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
@@ -93,6 +95,17 @@ beforeAll(async () => {
     body: { priority: 100 },
   });
   expect(priorityRes.status).toBe(200);
+
+  // Low-activity shops (<=10 products) normally never appear in recommendations at all. A boosted
+  // one (recommendPriority>0) should be treated as an admin override and stay eligible anyway; an
+  // un-boosted low-activity shop should remain excluded as before.
+  boostedLowActivityId = await createApprovedShop(`置顶低活跃店_${stamp}`, o.cookie, a.cookie);
+  baselineLowActivityId = await createApprovedShop(`普通低活跃店_${stamp}`, o.cookie, a.cookie);
+  const lowActivityPriorityRes = await req(`/api/admin/shops/${boostedLowActivityId}/priority`, a.cookie, {
+    method: 'POST',
+    body: { priority: 100 },
+  });
+  expect(lowActivityPriorityRes.status).toBe(200);
 });
 
 afterAll(async () => {
@@ -125,5 +138,21 @@ describe('GET /api/recommendations honors admin-set recommendPriority as a weigh
     expect(boostedCount).toBeGreaterThan(baselineCount);
     // Priority tilts the odds; it must not be a disguised hard sort that always wins position 1.
     expect(boostedAlwaysFirst).toBe(false);
+  });
+
+  it('a boosted low-activity (<=10 products) shop is eligible despite the low-activity exclusion, but an un-boosted one stays excluded', async () => {
+    let boostedLowActivitySeen = false;
+
+    for (let i = 0; i < 100; i++) {
+      const res = await app.request('/api/recommendations', {
+        headers: { 'X-Forwarded-For': `test-priority-lowactivity-${stamp}-${i}-${Math.random()}` },
+      });
+      const items = (await res.json()) as RestaurantSummary[];
+      const ids = items.map((it) => it.id);
+      if (ids.includes(boostedLowActivityId)) boostedLowActivitySeen = true;
+      expect(ids.includes(baselineLowActivityId)).toBe(false);
+    }
+
+    expect(boostedLowActivitySeen).toBe(true);
   });
 });
