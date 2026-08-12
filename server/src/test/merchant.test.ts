@@ -291,6 +291,65 @@ describe('menu item management', () => {
     expect(notFound.status).toBe(404);
   });
 
+  it('reorders items via PATCH .../items/reorder', async () => {
+    const created = await req(`/api/merchant/restaurants/${shopId}/items`, ownerCookie, {
+      method: 'POST',
+      body: { name: '排序测试菜', price: 12, emoji: '🍱', menuCategory: '招牌' },
+    });
+    const extra = (await created.json()) as MerchantMenuItemDto;
+
+    const before = (await (
+      await req(`/api/merchant/restaurants/${shopId}`, ownerCookie)
+    ).json()) as MerchantRestaurantDto;
+    const ids = before.menu.map((m) => m.id);
+    expect(ids.length).toBeGreaterThanOrEqual(2);
+    const reversed = [...ids].reverse();
+
+    expect(
+      (
+        await req(`/api/merchant/restaurants/${shopId}/items/reorder`, randoCookie, {
+          method: 'PATCH',
+          body: { itemIds: reversed },
+        })
+      ).status,
+    ).toBe(403);
+
+    expect(
+      (
+        await req(`/api/merchant/restaurants/${shopId}/items/reorder`, ownerCookie, {
+          method: 'PATCH',
+          body: { itemIds: ids.slice(1) }, // missing one id
+        })
+      ).status,
+    ).toBe(400);
+
+    expect(
+      (
+        await req(`/api/merchant/restaurants/${shopId}/items/reorder`, ownerCookie, {
+          method: 'PATCH',
+          body: { itemIds: [...ids, 'not-a-real-item-id'] }, // extra bogus id
+        })
+      ).status,
+    ).toBe(400);
+
+    const res = await req(`/api/merchant/restaurants/${shopId}/items/reorder`, ownerCookie, {
+      method: 'PATCH',
+      body: { itemIds: reversed },
+    });
+    expect(res.status).toBe(200);
+    const reordered = (await res.json()) as MerchantMenuItemDto[];
+    expect(reordered.map((m) => m.id)).toEqual(reversed);
+
+    const after = (await (
+      await req(`/api/merchant/restaurants/${shopId}`, ownerCookie)
+    ).json()) as MerchantRestaurantDto;
+    expect(after.menu.map((m) => m.id)).toEqual(reversed);
+
+    await req(`/api/merchant/restaurants/${shopId}/items/${extra.id}/permanent`, ownerCookie, {
+      method: 'DELETE',
+    });
+  });
+
   it('closing the shop (isActive=false) keeps it visible but flags it as closed', async () => {
     await req(`/api/merchant/restaurants/${shopId}`, ownerCookie, {
       method: 'PATCH',

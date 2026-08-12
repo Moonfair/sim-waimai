@@ -117,6 +117,10 @@ const itemBaseSchema = z.object({
 
 const reviewHiddenSchema = z.object({ hidden: z.boolean() });
 
+const itemReorderSchema = z.object({
+  itemIds: z.array(z.string().min(1)).min(1),
+});
+
 const itemPatchSchema = itemBaseSchema.partial().extend({
   description: z.string().max(100).optional(),
   calories: z.number().int().min(0).max(10000).optional(),
@@ -402,6 +406,40 @@ export const merchantRoutes = new Hono()
     queueReview({ table: 'menuItems', restaurantId: owned.row.id, itemId: row!.id }, itemContent(row!));
     return c.json(toMerchantMenuItem(row!));
   })
+  .patch(
+    '/restaurants/:id/items/reorder',
+    requireAuth,
+    validateJson(itemReorderSchema),
+    async (c) => {
+      const owned = await ownedRestaurant(c.get('user'), c.req.param('id'));
+      if ('error' in owned) return c.json({ error: owned.error }, owned.status);
+      const { itemIds } = c.req.valid('json');
+      const existing = await db
+        .select({ id: menuItems.id })
+        .from(menuItems)
+        .where(eq(menuItems.restaurantId, owned.row.id));
+      const existingIds = new Set(existing.map((r) => r.id));
+      if (itemIds.length !== existingIds.size || itemIds.some((itemId) => !existingIds.has(itemId))) {
+        return c.json({ error: '菜品列表不匹配，请刷新后重试' }, 400);
+      }
+      await db.transaction(async (tx) => {
+        await Promise.all(
+          itemIds.map((itemId, index) =>
+            tx
+              .update(menuItems)
+              .set({ sortOrder: index })
+              .where(and(eq(menuItems.restaurantId, owned.row.id), eq(menuItems.id, itemId))),
+          ),
+        );
+      });
+      const rows = await db
+        .select()
+        .from(menuItems)
+        .where(eq(menuItems.restaurantId, owned.row.id))
+        .orderBy(asc(menuItems.sortOrder));
+      return c.json(rows.map(toMerchantMenuItem));
+    },
+  )
   .patch(
     '/restaurants/:id/items/:itemId',
     requireAuth,

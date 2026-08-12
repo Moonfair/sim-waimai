@@ -1,5 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import {
+  DndContext,
+  PointerSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  arrayMove,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
 import MenuItemEditor from '../components/MenuItemEditor';
 import { useApi } from '../hooks/useApi';
@@ -27,7 +43,12 @@ export default function MerchantEdit() {
   const [editorOpen, setEditorOpen] = useState(false);
   const [uploadingBanner, setUploadingBanner] = useState(false);
   const [shareState, setShareState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [menuOrder, setMenuOrder] = useState<MerchantMenuItemDto[]>([]);
   const bannerFileRef = useRef<HTMLInputElement>(null);
+  const dragSensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 5 } }),
+  );
 
   const handlePickBanner = async (file: File | undefined) => {
     if (!file || !id) return;
@@ -54,6 +75,7 @@ export default function MerchantEdit() {
         menuCategories: shop.menuCategories.join(','),
         tags: shop.tags.join(','),
       });
+      setMenuOrder(shop.menu);
     }
   }, [shop]);
 
@@ -134,6 +156,25 @@ export default function MerchantEdit() {
       reload();
     } finally {
       setDeletingId(null);
+    }
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    const oldIndex = menuOrder.findIndex((i) => i.id === active.id);
+    const newIndex = menuOrder.findIndex((i) => i.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+    const reordered = arrayMove(menuOrder, oldIndex, newIndex);
+    setMenuOrder(reordered);
+    try {
+      await api.patch(`/merchant/restaurants/${shop.id}/items/reorder`, {
+        itemIds: reordered.map((i) => i.id),
+      });
+    } catch (err) {
+      setMenuOrder(shop.menu);
+      setInfoMsg(err instanceof Error ? err.message : '排序保存失败');
+      setTimeout(() => setInfoMsg(null), 2500);
     }
   };
 
@@ -284,79 +325,33 @@ export default function MerchantEdit() {
               + 添加菜品
             </button>
           </div>
-          {shop.menu.length === 0 ? (
+          {menuOrder.length === 0 ? (
             <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-6">
               还没有菜品，点击右上角添加第一道菜
             </p>
           ) : (
-            <div className="divide-y divide-gray-50 dark:divide-gray-700">
-              {shop.menu.map((item) => (
-                <div key={item.id} className={`py-3 flex items-center gap-3 ${item.isListed ? '' : 'opacity-50'}`}>
-                  <span className="text-2xl">{item.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{item.name}</span>
-                      {item.popular && <span className="text-xs">🔥</span>}
-                      {!item.isListed && (
-                        <span className="text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded-full flex-shrink-0">已下架</span>
-                      )}
-                      {item.reviewStatus === 'pending' && (
-                        <span className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-500/10 px-1.5 py-0.5 rounded-full flex-shrink-0">审核中</span>
-                      )}
-                      {item.reviewStatus === 'rejected' && (
-                        <span className="text-xs text-red-500 bg-red-50 dark:bg-red-500/10 px-1.5 py-0.5 rounded-full flex-shrink-0">已驳回</span>
-                      )}
-                    </div>
-                    <p className="text-xs text-gray-400 dark:text-gray-500">
-                      ¥{item.price} · {item.menuCategory}
-                      {item.optionGroups?.length ? ` · ${item.optionGroups.length}个规格组` : ''}
-                    </p>
-                    {item.reviewStatus === 'rejected' && item.rejectReason && (
-                      <p className="text-xs text-red-500 mt-0.5">驳回原因：{item.rejectReason}</p>
-                    )}
-                  </div>
-                  <button
-                    className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1"
-                    onClick={() => {
-                      setEditorItem(item);
-                      setEditorOpen(true);
-                    }}
-                  >
-                    编辑
-                  </button>
-                  <button
-                    className={`text-xs px-2 py-1 ${item.isListed ? 'text-red-400' : 'text-green-500'}`}
-                    onClick={() => handleToggleListed(item)}
-                  >
-                    {item.isListed ? '下架' : '上架'}
-                  </button>
-                  {deleteConfirmId === item.id ? (
-                    <>
-                      <button
-                        className="text-xs text-gray-400 px-2 py-1"
-                        onClick={() => setDeleteConfirmId(null)}
-                      >
-                        取消
-                      </button>
-                      <button
-                        className="text-xs text-red-500 px-2 py-1 disabled:opacity-50"
-                        disabled={deletingId === item.id}
-                        onClick={() => handleDeleteItem(item)}
-                      >
-                        {deletingId === item.id ? '删除中…' : '确认删除'}
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      className="text-xs text-red-500 px-2 py-1"
-                      onClick={() => setDeleteConfirmId(item.id)}
-                    >
-                      删除
-                    </button>
-                  )}
+            <DndContext sensors={dragSensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+              <SortableContext items={menuOrder.map((i) => i.id)} strategy={verticalListSortingStrategy}>
+                <div className="divide-y divide-gray-50 dark:divide-gray-700">
+                  {menuOrder.map((item) => (
+                    <SortableMenuRow
+                      key={item.id}
+                      item={item}
+                      deleteConfirmId={deleteConfirmId}
+                      deletingId={deletingId}
+                      onEdit={() => {
+                        setEditorItem(item);
+                        setEditorOpen(true);
+                      }}
+                      onToggleListed={() => handleToggleListed(item)}
+                      onRequestDelete={() => setDeleteConfirmId(item.id)}
+                      onCancelDelete={() => setDeleteConfirmId(null)}
+                      onConfirmDelete={() => handleDeleteItem(item)}
+                    />
+                  ))}
                 </div>
-              ))}
-            </div>
+              </SortableContext>
+            </DndContext>
           )}
         </div>
       </div>
@@ -371,6 +366,100 @@ export default function MerchantEdit() {
             reload();
           }}
         />
+      )}
+    </div>
+  );
+}
+
+function SortableMenuRow({
+  item,
+  deleteConfirmId,
+  deletingId,
+  onEdit,
+  onToggleListed,
+  onRequestDelete,
+  onCancelDelete,
+  onConfirmDelete,
+}: {
+  item: MerchantMenuItemDto;
+  deleteConfirmId: string | null;
+  deletingId: string | null;
+  onEdit: () => void;
+  onToggleListed: () => void;
+  onRequestDelete: () => void;
+  onCancelDelete: () => void;
+  onConfirmDelete: () => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: item.id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 10 : undefined,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`py-3 flex items-center gap-3 bg-white dark:bg-gray-800 ${item.isListed ? '' : 'opacity-50'}`}
+    >
+      <button
+        className="text-gray-300 dark:text-gray-600 cursor-grab active:cursor-grabbing touch-none px-1 flex-shrink-0"
+        aria-label="拖动排序"
+        {...attributes}
+        {...listeners}
+      >
+        ⠿
+      </button>
+      <span className="text-2xl">{item.emoji}</span>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5">
+          <span className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{item.name}</span>
+          {item.popular && <span className="text-xs">🔥</span>}
+          {!item.isListed && (
+            <span className="text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded-full flex-shrink-0">已下架</span>
+          )}
+          {item.reviewStatus === 'pending' && (
+            <span className="text-xs text-amber-600 bg-amber-50 dark:bg-amber-500/10 px-1.5 py-0.5 rounded-full flex-shrink-0">审核中</span>
+          )}
+          {item.reviewStatus === 'rejected' && (
+            <span className="text-xs text-red-500 bg-red-50 dark:bg-red-500/10 px-1.5 py-0.5 rounded-full flex-shrink-0">已驳回</span>
+          )}
+        </div>
+        <p className="text-xs text-gray-400 dark:text-gray-500">
+          ¥{item.price} · {item.menuCategory}
+          {item.optionGroups?.length ? ` · ${item.optionGroups.length}个规格组` : ''}
+        </p>
+        {item.reviewStatus === 'rejected' && item.rejectReason && (
+          <p className="text-xs text-red-500 mt-0.5">驳回原因：{item.rejectReason}</p>
+        )}
+      </div>
+      <button className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1" onClick={onEdit}>
+        编辑
+      </button>
+      <button
+        className={`text-xs px-2 py-1 ${item.isListed ? 'text-red-400' : 'text-green-500'}`}
+        onClick={onToggleListed}
+      >
+        {item.isListed ? '下架' : '上架'}
+      </button>
+      {deleteConfirmId === item.id ? (
+        <>
+          <button className="text-xs text-gray-400 px-2 py-1" onClick={onCancelDelete}>
+            取消
+          </button>
+          <button
+            className="text-xs text-red-500 px-2 py-1 disabled:opacity-50"
+            disabled={deletingId === item.id}
+            onClick={onConfirmDelete}
+          >
+            {deletingId === item.id ? '删除中…' : '确认删除'}
+          </button>
+        </>
+      ) : (
+        <button className="text-xs text-red-500 px-2 py-1" onClick={onRequestDelete}>
+          删除
+        </button>
       )}
     </div>
   );
