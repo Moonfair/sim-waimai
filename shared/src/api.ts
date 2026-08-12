@@ -366,9 +366,13 @@ export interface ModerationListDto {
   pageSize: number;
 }
 
+/** The 置顶 preset's recommendPriority value — the only tier that guarantees inclusion and front
+ *  placement in GET /api/recommendations (see recommendations.ts); other tiers only tilt the odds. */
+export const TOP_PIN_PRIORITY = 100;
+
 /** Preset levels for admin-set homepage recommendation priority; shared by the UI buttons and server validation. */
 export const SHOP_PRIORITY_LEVELS = [
-  { label: '置顶', value: 100 },
+  { label: '置顶', value: TOP_PIN_PRIORITY },
   { label: '较高', value: 10 },
   { label: '普通', value: 0 },
   { label: '较低', value: -10 },

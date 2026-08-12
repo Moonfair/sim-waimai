@@ -76,10 +76,11 @@ export const restaurants = pgTable(
     /** NULL = platform-seeded restaurant with no owning user. */
     ownerId: uuid('owner_id').references(() => users.id),
     sortOrder: integer('sort_order').notNull().default(0),
-    /** Manual override for homepage recommendation weighting (admin-set for player shops); higher
-     *  tilts the odds of being drawn into "为你推荐" (see recommendations.ts's weightedSample) —
-     *  it is not a hard sort. A value >0 also exempts the shop from the low-activity exclusion
-     *  (see lowActivity.ts), since an explicit boost is treated as an admin override. */
+    /** Manual override for homepage recommendation placement (admin-set for player shops), see
+     *  recommendations.ts. The top preset (TOP_PIN_PRIORITY=100, "置顶") guarantees a slot and
+     *  front placement; lower positive values only tilt weightedSample's odds, not a hard sort.
+     *  Any value >0 also exempts the shop from the low-activity exclusion (see lowActivity.ts),
+     *  since an explicit boost is treated as an admin override. */
     recommendPriority: integer('recommend_priority').notNull().default(0),
     name: text('name').notNull(),
     category: text('category').notNull(),

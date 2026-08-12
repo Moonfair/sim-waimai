@@ -13,9 +13,10 @@ const stamp = Date.now().toString(36);
 const admin = { username: `t_recp_a_${stamp}`, password: 'secret123' };
 const owner = { username: `t_recp_o_${stamp}`, password: 'secret123' };
 let ownerId = '';
-let boostedId = '';
+let tiltedId = '';
 let baselineId = '';
-let boostedLowActivityId = '';
+let pinnedId = '';
+let pinnedLowActivityId = '';
 let baselineLowActivityId = '';
 let savedAdmins: string | undefined;
 
@@ -83,25 +84,32 @@ beforeAll(async () => {
   const o = await register(owner);
   ownerId = o.user.id;
 
-  // Two otherwise-identical shops (same defaults: rating 5, monthlyOrders 0) so the only
-  // difference in weight comes from recommendPriority, isolating the priority effect.
-  boostedId = await createApprovedShop(`置顶店_${stamp}`, o.cookie, a.cookie);
+  // Otherwise-identical shops (same defaults: rating 5, monthlyOrders 0) so the only difference
+  // in weight/placement comes from recommendPriority, isolating the priority effect.
+  tiltedId = await createApprovedShop(`较高店_${stamp}`, o.cookie, a.cookie);
   baselineId = await createApprovedShop(`普通店_${stamp}`, o.cookie, a.cookie);
-  await giveShopEnoughProductsToBeEligible(boostedId, o.cookie);
+  pinnedId = await createApprovedShop(`置顶店_${stamp}`, o.cookie, a.cookie);
+  await giveShopEnoughProductsToBeEligible(tiltedId, o.cookie);
   await giveShopEnoughProductsToBeEligible(baselineId, o.cookie);
+  await giveShopEnoughProductsToBeEligible(pinnedId, o.cookie);
 
-  const priorityRes = await req(`/api/admin/shops/${boostedId}/priority`, a.cookie, {
+  const tiltedPriorityRes = await req(`/api/admin/shops/${tiltedId}/priority`, a.cookie, {
+    method: 'POST',
+    body: { priority: 10 },
+  });
+  expect(tiltedPriorityRes.status).toBe(200);
+  const pinnedPriorityRes = await req(`/api/admin/shops/${pinnedId}/priority`, a.cookie, {
     method: 'POST',
     body: { priority: 100 },
   });
-  expect(priorityRes.status).toBe(200);
+  expect(pinnedPriorityRes.status).toBe(200);
 
-  // Low-activity shops (<=10 products) normally never appear in recommendations at all. A boosted
-  // one (recommendPriority>0) should be treated as an admin override and stay eligible anyway; an
-  // un-boosted low-activity shop should remain excluded as before.
-  boostedLowActivityId = await createApprovedShop(`置顶低活跃店_${stamp}`, o.cookie, a.cookie);
+  // Low-activity shops (<=10 products) normally never appear in recommendations at all. A 置顶
+  // (recommendPriority=100) one should be treated as an admin override and stay eligible anyway;
+  // an un-boosted low-activity shop should remain excluded as before.
+  pinnedLowActivityId = await createApprovedShop(`置顶低活跃店_${stamp}`, o.cookie, a.cookie);
   baselineLowActivityId = await createApprovedShop(`普通低活跃店_${stamp}`, o.cookie, a.cookie);
-  const lowActivityPriorityRes = await req(`/api/admin/shops/${boostedLowActivityId}/priority`, a.cookie, {
+  const lowActivityPriorityRes = await req(`/api/admin/shops/${pinnedLowActivityId}/priority`, a.cookie, {
     method: 'POST',
     body: { priority: 100 },
   });
@@ -116,11 +124,11 @@ afterAll(async () => {
   await pool.end();
 });
 
-describe('GET /api/recommendations honors admin-set recommendPriority as a weight, not a hard sort', () => {
-  it('a boosted shop is selected into the top 6 more often than an identical unboosted one', async () => {
-    let boostedCount = 0;
+describe('GET /api/recommendations: recommendPriority=10 (较高) tilts odds but is not a hard sort', () => {
+  it('a tilted shop is selected into the top 6 more often than an identical untilted one, without ever being guaranteed', async () => {
+    let tiltedCount = 0;
     let baselineCount = 0;
-    let boostedAlwaysFirst = true;
+    let tiltedAlwaysFirst = true;
 
     for (let i = 0; i < 200; i++) {
       // Unique X-Forwarded-For per call so the global per-IP rate limiter (300 req/60s, keyed by
@@ -130,29 +138,50 @@ describe('GET /api/recommendations honors admin-set recommendPriority as a weigh
       });
       const items = (await res.json()) as RestaurantSummary[];
       const ids = items.map((it) => it.id);
-      if (ids.includes(boostedId)) boostedCount++;
+      if (ids.includes(tiltedId)) tiltedCount++;
       if (ids.includes(baselineId)) baselineCount++;
-      if (items[0]?.id !== boostedId) boostedAlwaysFirst = false;
+      if (items[0]?.id !== tiltedId) tiltedAlwaysFirst = false;
     }
 
-    expect(boostedCount).toBeGreaterThan(baselineCount);
-    // Priority tilts the odds; it must not be a disguised hard sort that always wins position 1.
-    expect(boostedAlwaysFirst).toBe(false);
+    expect(tiltedCount).toBeGreaterThan(baselineCount);
+    // 较高 only tilts the odds; it must not be a disguised hard sort that always wins position 1
+    // or always gets included — that guarantee is reserved for the 置顶 (100) tier below.
+    expect(tiltedAlwaysFirst).toBe(false);
+    expect(tiltedCount).toBeLessThan(200);
   });
+});
 
-  it('a boosted low-activity (<=10 products) shop is eligible despite the low-activity exclusion, but an un-boosted one stays excluded', async () => {
-    let boostedLowActivitySeen = false;
+describe('GET /api/recommendations: recommendPriority=100 (置顶) guarantees inclusion and front placement', () => {
+  it('a pinned shop is always included and always ranks ahead of an ordinary shop it appears alongside', async () => {
+    let pinnedSeenCount = 0;
 
     for (let i = 0; i < 100; i++) {
+      const res = await app.request('/api/recommendations', {
+        headers: { 'X-Forwarded-For': `test-priority-pinned-${stamp}-${i}-${Math.random()}` },
+      });
+      const items = (await res.json()) as RestaurantSummary[];
+      const ids = items.map((it) => it.id);
+      const pinnedIndex = ids.indexOf(pinnedId);
+      const baselineIndex = ids.indexOf(baselineId);
+      expect(pinnedIndex).not.toBe(-1); // guaranteed inclusion, every single call
+      pinnedSeenCount++;
+      if (baselineIndex !== -1) {
+        expect(pinnedIndex).toBeLessThan(baselineIndex); // pinned always ranks ahead of non-pinned
+      }
+    }
+
+    expect(pinnedSeenCount).toBe(100);
+  });
+
+  it('a pinned low-activity (<=10 products) shop is eligible despite the low-activity exclusion, but an un-boosted one stays excluded', async () => {
+    for (let i = 0; i < 30; i++) {
       const res = await app.request('/api/recommendations', {
         headers: { 'X-Forwarded-For': `test-priority-lowactivity-${stamp}-${i}-${Math.random()}` },
       });
       const items = (await res.json()) as RestaurantSummary[];
       const ids = items.map((it) => it.id);
-      if (ids.includes(boostedLowActivityId)) boostedLowActivitySeen = true;
-      expect(ids.includes(baselineLowActivityId)).toBe(false);
+      expect(ids).toContain(pinnedLowActivityId); // guaranteed, so every call, not just "eventually"
+      expect(ids).not.toContain(baselineLowActivityId);
     }
-
-    expect(boostedLowActivitySeen).toBe(true);
   });
 });

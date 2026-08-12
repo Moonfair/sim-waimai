@@ -64,7 +64,7 @@ export default function AdminShops() {
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">店铺管理</h1>
         </div>
         <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">
-          调整玩家自建店铺的推荐优先级，优先级越高越优先出现在首页推荐
+          调整玩家自建店铺的推荐优先级："置顶"保证出现在首页推荐最前面，其余档位只是提高出现概率
         </p>
         <div className="mt-3">
           <input
