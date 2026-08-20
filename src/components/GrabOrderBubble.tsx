@@ -7,8 +7,9 @@ import { useRiderHall } from '../context/RiderHallContext';
 import RiderHallPreviewSheet from './RiderHallPreviewSheet';
 
 /** Floating "抢单" bubble, visible on every page whenever 抢单大厅 has orders waiting.
- *  Positioned against the app's centered 480px "phone screen" column (see BottomNav),
- *  not the raw browser viewport edge, so it lines up with the rest of the UI on wide screens. */
+ *  Positioned against the app's centered content column (480px on mobile/tablet,
+ *  1200px on desktop — see .app-container in index.css), not the raw browser
+ *  viewport edge, so it lines up with the rest of the UI on wide screens. */
 export default function GrabOrderBubble() {
   const { pendingCount, cooldownActive, previewLatest, acceptOrder } = useRiderHall();
   const [toast, setToast] = useState<string | null>(null);
@@ -54,7 +55,7 @@ export default function GrabOrderBubble() {
 
   return (
     <>
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-full pointer-events-none z-40">
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] lg:max-w-[1200px] h-full pointer-events-none z-40">
         <button
           className="pointer-events-auto absolute right-3 bottom-28 w-14 h-14 rounded-full bg-orange-500 text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform disabled:opacity-50"
           disabled={previewLoading}

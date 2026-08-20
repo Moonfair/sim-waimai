@@ -68,7 +68,7 @@ export default function Home() {
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
           <button
-            className="w-9 h-9 flex-shrink-0 rounded-full bg-white/20 flex items-center justify-center text-base"
+            className="lg:hidden w-9 h-9 flex-shrink-0 rounded-full bg-white/20 flex items-center justify-center text-base"
             onClick={() => navigate(user ? '/profile' : '/login')}
             aria-label="个人中心"
           >
@@ -162,7 +162,7 @@ export default function Home() {
           <span className="text-gray-400 dark:text-gray-500 text-xs">{filtered.length}家</span>
         </div>
         {loading ? (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {Array.from({ length: 6 }, (_, i) => (
               <div key={i} className="bg-white dark:bg-gray-800 rounded-xl h-56 animate-pulse" />
             ))}
@@ -173,7 +173,7 @@ export default function Home() {
             <p className="text-sm">{error}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {filtered.map(restaurant => (
               <RestaurantCard key={restaurant.id} restaurant={restaurant} />
             ))}
@@ -183,7 +183,7 @@ export default function Home() {
 
       {/* Bottom cart bar if items — floats just above the tab bar */}
       {totalItems > 0 && cartRestaurant && (
-        <div className="fixed bottom-16 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-2 z-40">
+        <div className="fixed-shell bottom-16 px-4 pb-2 z-40">
           <div
             className="bg-gray-900 rounded-2xl flex items-center justify-between px-4 py-3 shadow-2xl cursor-pointer"
             onClick={() => navigate('/cart')}

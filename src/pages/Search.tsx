@@ -75,7 +75,7 @@ export default function Search() {
             <p className="text-sm">输入关键词搜索商家或商品</p>
           </div>
         ) : loading ? (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {Array.from({ length: 4 }, (_, i) => (
               <div key={i} className="bg-white dark:bg-gray-800 rounded-xl h-56 animate-pulse" />
             ))}
@@ -87,7 +87,7 @@ export default function Search() {
               <p className="text-sm">没有找到相关商家</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {restaurants.map((r) => (
                 <RestaurantCard key={r.id} restaurant={r} />
               ))}

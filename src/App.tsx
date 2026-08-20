@@ -5,6 +5,7 @@ import { AddressProvider } from './context/AddressContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { RiderHallProvider } from './context/RiderHallContext';
 import GrabOrderBubble from './components/GrabOrderBubble';
+import TopNav from './components/TopNav';
 import RequireAdmin from './components/RequireAdmin';
 import RequireAuth from './components/RequireAuth';
 import Home from './pages/Home';
@@ -41,6 +42,7 @@ export default function App() {
           <AddressProvider>
             <CartProvider>
               <RiderHallProvider>
+                <TopNav />
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/restaurant/:id" element={<Restaurant />} />

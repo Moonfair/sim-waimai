@@ -58,7 +58,7 @@ export default function Orders() {
         </div>
       </div>
 
-      <div className="px-4 pb-24">
+      <div className="px-4 pb-24 lg:max-w-2xl lg:mx-auto">
         {loading ? (
           <div className="space-y-3 mt-4">
             {Array.from({ length: 5 }, (_, i) => (

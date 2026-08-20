@@ -241,7 +241,7 @@ export default function MerchantEdit() {
         </div>
       )}
 
-      <div className="px-4 space-y-3 mt-4">
+      <div className="px-4 space-y-3 mt-4 lg:max-w-2xl lg:mx-auto">
         {/* Banner */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4">
           <div className="flex items-center justify-between mb-2">

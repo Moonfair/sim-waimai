@@ -335,7 +335,7 @@ export default function AdminReview() {
                 )}
               </label>
             )}
-            <div className="space-y-3 mt-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
             {items!.map((item) => {
               const key = itemKey(item);
               const badge = STATUS_BADGE[item.reviewStatus];
@@ -504,7 +504,7 @@ export default function AdminReview() {
       </div>
 
       {showBatchBar && (
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-3 space-y-2">
+        <div className="fixed-shell bottom-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-3 space-y-2">
           {batchRejecting && (
             <input
               className="w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-red-400 text-sm"

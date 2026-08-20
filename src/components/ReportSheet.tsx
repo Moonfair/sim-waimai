@@ -46,7 +46,7 @@ export default function ReportSheet({ target, onClose, onSubmitted }: Props) {
   return (
     <>
       <div className="fixed inset-0 z-50 bg-black/40" onClick={onClose} />
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50 bg-white dark:bg-gray-800 rounded-t-2xl flex flex-col">
+      <div className="fixed-shell bottom-0 z-50 bg-white dark:bg-gray-800 rounded-t-2xl flex flex-col">
         <div className="flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-50 dark:border-gray-700">
           <span className="font-bold text-gray-900 dark:text-gray-100 text-sm">
             {TITLE_BY_TARGET_TYPE[target.targetType]}

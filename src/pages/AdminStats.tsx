@@ -139,7 +139,7 @@ export default function AdminStats() {
         ) : error || !stats ? (
           <p className="text-center text-sm text-gray-400 dark:text-gray-500 py-10">{error ?? '加载失败'}</p>
         ) : (
-          <div className="space-y-3 mt-4">
+          <div className="space-y-3 mt-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-3 lg:items-start">
             {/* 核心概览 */}
             <SectionCard title="核心概览">
               <div className="grid grid-cols-3 gap-2">

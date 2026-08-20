@@ -104,7 +104,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
         <p className="text-center text-xs text-orange-500 py-2 bg-orange-50 dark:bg-orange-500/10">{message}</p>
       )}
 
-      <div className="px-4 pt-4 space-y-3">
+      <div className="px-4 pt-4 space-y-3 lg:max-w-2xl lg:mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 space-y-2">
           <span className={`inline-block text-xs px-2 py-0.5 rounded-full font-medium ${badge.className}`}>
             {badge.label}
@@ -230,7 +230,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-4">
+      <div className="fixed-shell bottom-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-4">
         {rejecting ? (
           <div className="space-y-2">
             <input

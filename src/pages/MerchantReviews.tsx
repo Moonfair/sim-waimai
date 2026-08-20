@@ -88,7 +88,7 @@ export default function MerchantReviews() {
         </div>
       </div>
 
-      <div className="px-4 mt-4">
+      <div className="px-4 mt-4 lg:max-w-2xl lg:mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4">
           {error && (
             <div className="mb-3 bg-red-50 dark:bg-red-500/10 text-red-500 text-xs rounded-xl px-3 py-2">

@@ -100,7 +100,7 @@ export default function MerchantHome() {
         </div>
       </div>
 
-      <div className="px-4">
+      <div className="px-4 lg:max-w-2xl lg:mx-auto">
         {loading ? (
           <div className="space-y-3 mt-4">
             {Array.from({ length: 2 }, (_, i) => (

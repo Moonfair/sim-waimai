@@ -25,7 +25,7 @@ export default function RiderStats() {
         </div>
       </div>
 
-      <div className="px-4 pb-10 mt-4">
+      <div className="px-4 pb-10 mt-4 lg:max-w-2xl lg:mx-auto">
         {loading ? (
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4 space-y-3">
             <div className="grid grid-cols-2 gap-2">

@@ -24,7 +24,7 @@ export default function Favorites() {
 
       <div className="px-4 pb-10">
         {loading ? (
-          <div className="grid grid-cols-2 gap-3 mt-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
             {Array.from({ length: 4 }, (_, i) => (
               <div key={i} className="bg-white dark:bg-gray-800 rounded-xl h-56 animate-pulse" />
             ))}
@@ -43,7 +43,7 @@ export default function Favorites() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 mt-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
             {restaurants.map((r) => (
               <RestaurantCard key={r.id} restaurant={r} />
             ))}

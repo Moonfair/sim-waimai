@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
+import DesktopCartPanel from '../components/DesktopCartPanel';
 import ReportSheet from '../components/ReportSheet';
 import ReviewList from '../components/ReviewList';
 import { useAuth } from '../context/AuthContext';
@@ -219,50 +220,54 @@ export default function Restaurant() {
         </div>
       )}
 
-      {/* Menu area */}
-      <div className="flex bg-white dark:bg-gray-800" style={{ minHeight: 'calc(100vh - 280px)' }}>
-        {/* Left category nav */}
-        <div className="w-20 flex-shrink-0 self-start sticky top-0 max-h-screen overflow-y-auto bg-gray-50 dark:bg-gray-900 border-r border-gray-100 dark:border-gray-700">
-          {restaurant.menuCategories.map(cat => (
-            <button
-              key={cat}
-              className={`w-full py-4 text-center text-xs font-medium transition-colors border-l-2 ${
-                activeMenuCat === cat
-                  ? 'border-orange-500 bg-white dark:bg-gray-800 text-orange-500 dark:text-orange-400'
-                  : 'border-transparent text-gray-500 dark:text-gray-400'
-              }`}
-              onClick={() => handleCategoryClick(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+      {/* Menu area, with a persistent cart sidebar alongside it on desktop */}
+      <div className="lg:flex lg:gap-6 lg:items-start lg:px-4">
+        <div className="flex-1 flex bg-white dark:bg-gray-800" style={{ minHeight: 'calc(100vh - 280px)' }}>
+          {/* Left category nav */}
+          <div className="w-20 flex-shrink-0 self-start sticky top-0 max-h-screen overflow-y-auto bg-gray-50 dark:bg-gray-900 border-r border-gray-100 dark:border-gray-700">
+            {restaurant.menuCategories.map(cat => (
+              <button
+                key={cat}
+                className={`w-full py-4 text-center text-xs font-medium transition-colors border-l-2 ${
+                  activeMenuCat === cat
+                    ? 'border-orange-500 bg-white dark:bg-gray-800 text-orange-500 dark:text-orange-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400'
+                }`}
+                onClick={() => handleCategoryClick(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Right menu items */}
+          <div className="flex-1 px-3 pb-8">
+            {menuByCategory.length === 0 ? (
+              <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
+            ) : (
+              menuByCategory.map(({ cat, items }) => (
+                <section
+                  key={cat}
+                  id={`menu-cat-${cat}`}
+                  data-category={cat}
+                  ref={el => { sectionRefs.current[cat] = el; }}
+                >
+                  <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{cat}</h3>
+                  {items.map(item => (
+                    <MenuItemComponent
+                      key={item.id}
+                      item={item}
+                      restaurant={restaurant}
+                      purchasable={restaurant.isActive}
+                    />
+                  ))}
+                </section>
+              ))
+            )}
+          </div>
         </div>
 
-        {/* Right menu items */}
-        <div className="flex-1 px-3 pb-8">
-          {menuByCategory.length === 0 ? (
-            <p className="text-gray-300 dark:text-gray-600 text-sm text-center py-8">暂无菜品</p>
-          ) : (
-            menuByCategory.map(({ cat, items }) => (
-              <section
-                key={cat}
-                id={`menu-cat-${cat}`}
-                data-category={cat}
-                ref={el => { sectionRefs.current[cat] = el; }}
-              >
-                <h3 className="text-gray-500 dark:text-gray-400 text-xs font-medium pt-3 pb-1">{cat}</h3>
-                {items.map(item => (
-                  <MenuItemComponent
-                    key={item.id}
-                    item={item}
-                    restaurant={restaurant}
-                    purchasable={restaurant.isActive}
-                  />
-                ))}
-              </section>
-            ))
-          )}
-        </div>
+        <DesktopCartPanel deliveryFee={restaurant.deliveryFee} />
       </div>
 
       {/* Reviews */}

@@ -81,7 +81,7 @@ export default function RiderDone() {
       ))}
 
       <div
-        className="flex flex-col items-center justify-start pt-20 px-6 pb-10 flex-1"
+        className="flex flex-col items-center justify-start pt-20 px-6 pb-10 flex-1 lg:max-w-lg lg:mx-auto"
         style={{
           opacity: showContent ? 1 : 0,
           transform: showContent ? 'translateY(0)' : 'translateY(20px)',

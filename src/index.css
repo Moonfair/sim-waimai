@@ -29,9 +29,30 @@ html.dark .app-container {
   background: #18181b;
 }
 
-@media (min-width: 481px) {
+/* 平板宽度：仍是放大版手机模拟器 */
+@media (min-width: 481px) and (max-width: 1023px) {
   .app-container {
     box-shadow: 0 0 24px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* 桌面：真正的加宽网站容器，不再伪装手机屏幕 */
+@media (min-width: 1024px) {
+  .app-container {
+    max-width: 1200px;
+    box-shadow: none;
+  }
+  body {
+    background-color: #f5f5f5;
+  }
+  html.dark body {
+    background-color: #18181b;
+  }
+}
+
+@layer components {
+  .fixed-shell {
+    @apply fixed left-1/2 -translate-x-1/2 w-full max-w-[480px];
   }
 }
 

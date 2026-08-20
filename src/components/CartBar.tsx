@@ -12,7 +12,7 @@ export default function CartBar({ deliveryFee }: Props) {
   if (totalItems === 0) return null;
 
   return (
-    <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-6 pointer-events-none">
+    <div className="lg:hidden fixed-shell bottom-0 px-4 pb-6 pointer-events-none">
       <div className="bg-gray-900 rounded-2xl flex items-center justify-between px-4 py-3 shadow-2xl pointer-events-auto">
         <div className="flex items-center gap-3">
           <div className="relative">

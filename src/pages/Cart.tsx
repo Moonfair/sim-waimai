@@ -85,7 +85,7 @@ export default function Cart() {
         </div>
       </div>
 
-      <div className="px-4 pb-40">
+      <div className="px-4 pb-40 lg:max-w-2xl lg:mx-auto">
         {/* Delivery address */}
         <div
           className="bg-white dark:bg-gray-800 rounded-xl mt-4 p-4 cursor-pointer"
@@ -217,7 +217,7 @@ export default function Cart() {
       </div>
 
       {/* Bottom CTA */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-8 pt-4 bg-gradient-to-t from-gray-50 via-gray-50 dark:from-gray-900 dark:via-gray-900">
+      <div className="fixed-shell bottom-0 px-4 pb-8 pt-4 bg-gradient-to-t from-gray-50 via-gray-50 dark:from-gray-900 dark:via-gray-900">
         {submitError && (
           <p className="text-center text-red-500 text-xs mb-2">{submitError}</p>
         )}

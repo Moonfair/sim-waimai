@@ -97,7 +97,7 @@ export default function AdminUsers() {
             <p className="text-sm">暂无用户</p>
           </div>
         ) : (
-          <div className="space-y-3 mt-3">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
             {users!.map((user) => {
               const busy = submittingId === user.id;
               return (

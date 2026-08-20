@@ -66,23 +66,24 @@ export default function AuthForm({ mode }: Props) {
 
   return (
     <div className="app-container min-h-screen">
-      <div className="bg-orange-500 pt-10 pb-8 px-4 relative">
-        <button
-          className="absolute top-10 left-4 w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white"
-          onClick={() => navigate(-1)}
-          aria-label="返回"
-        >
-          ←
-        </button>
-        <div className="text-center">
-          <div className="text-5xl">🥡</div>
-          <h1 className="text-white text-2xl font-black mt-2">吃了嘛外卖</h1>
-          <p className="text-orange-100 text-xs mt-1">{title}后开启省钱省卡路里之旅</p>
+      <div className="lg:max-w-md lg:mx-auto lg:mt-16 lg:rounded-3xl lg:overflow-hidden lg:shadow-xl lg:border lg:border-gray-100 dark:lg:border-gray-700">
+        <div className="bg-orange-500 pt-10 pb-8 px-4 relative">
+          <button
+            className="absolute top-10 left-4 w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-white"
+            onClick={() => navigate(-1)}
+            aria-label="返回"
+          >
+            ←
+          </button>
+          <div className="text-center">
+            <div className="text-5xl">🥡</div>
+            <h1 className="text-white text-2xl font-black mt-2">吃了嘛外卖</h1>
+            <p className="text-orange-100 text-xs mt-1">{title}后开启省钱省卡路里之旅</p>
+          </div>
         </div>
-      </div>
 
-      <form className="px-6 mt-4" onSubmit={handleSubmit}>
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-5 space-y-3">
+        <form className="px-6 mt-4 lg:bg-white dark:lg:bg-gray-800 lg:pb-6" onSubmit={handleSubmit}>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-5 space-y-3 lg:shadow-none">
           <h2 className="text-gray-800 dark:text-gray-100 font-bold text-lg">{title}</h2>
           <input
             className={inputClass}
@@ -152,7 +153,8 @@ export default function AuthForm({ mode }: Props) {
             </>
           )}
         </p>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

@@ -137,7 +137,7 @@ export default function AdminReports() {
                 </span>
               )}
             </label>
-            <div className="space-y-3 mt-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
               {reportList!.map((r) => {
                 const busy = submittingId === r.id;
                 return (
@@ -220,7 +220,7 @@ export default function AdminReports() {
       </div>
 
       {selectedIds.size > 0 && (
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-3">
+        <div className="fixed-shell bottom-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 p-3">
           <div className="flex gap-2">
             <button
               className="flex-1 border border-red-200 dark:border-red-500/30 text-red-500 py-2.5 rounded-xl text-sm disabled:opacity-50"

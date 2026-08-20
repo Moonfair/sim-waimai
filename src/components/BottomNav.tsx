@@ -15,7 +15,7 @@ const TABS: Tab[] = [
 /** Fixed bottom tab bar shown on the three root pages (Home/Orders/Profile). */
 export default function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-16 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 flex z-30">
+    <nav className="lg:hidden fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-16 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 flex z-30">
       {TABS.map((tab) => (
         <NavLink
           key={tab.to}

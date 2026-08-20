@@ -95,7 +95,7 @@ export default function AdminShops() {
             <p className="text-sm">暂无玩家自建店铺</p>
           </div>
         ) : (
-          <div className="space-y-3 mt-3">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
             {list!.map((shop) => {
               const badge = STATUS_BADGE[shop.reviewStatus];
               const busy = busyId === shop.id;

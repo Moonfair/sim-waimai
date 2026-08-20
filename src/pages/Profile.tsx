@@ -79,13 +79,13 @@ export default function Profile() {
 
       {/* Stats dashboard */}
       {user && (
-        <div className="px-4 mt-4">
+        <div className="px-4 mt-4 lg:max-w-2xl lg:mx-auto">
           <UserStatsPanel />
         </div>
       )}
 
       {/* Menu */}
-      <div className="px-4 mt-4">
+      <div className="px-4 mt-4 lg:max-w-2xl lg:mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm divide-y divide-gray-50 dark:divide-gray-700">
           {menuRows.map((row) => (
             <button
