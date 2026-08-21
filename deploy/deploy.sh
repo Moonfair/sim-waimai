@@ -113,7 +113,7 @@ DIST_JS=$(remote "ls $APP_DIR/dist/assets/ | grep -o '^index-[A-Za-z0-9_-]*\.js'
 [ -n "$ORIGIN_JS" ] && [ "$ORIGIN_JS" = "$DIST_JS" ] || die "源站 index.html 引用 ($ORIGIN_JS) 与 dist 产物 ($DIST_JS) 不一致"
 CDN_JS=$(curl -s -m 20 "https://$DOMAIN/" | grep -o 'index-[A-Za-z0-9_-]*\.js' | head -1 || true)
 if [ "$CDN_JS" != "$DIST_JS" ]; then
-  echo "  ⚠ CDN 返回的还是旧版（$CDN_JS ≠ $DIST_JS）——EdgeOne 缓存了 index.html，"
+  echo "  ⚠ CDN 返回的还是旧版（${CDN_JS} ≠ ${DIST_JS}）——EdgeOne 缓存了 index.html，"
   echo "    去 EdgeOne 控制台刷新缓存后再验证。源站本身已是新版。"
 else
   curl -sf -o /dev/null -m 20 "https://$DOMAIN/assets/$DIST_JS" || die "CDN 上新 JS 资产拉不到"
