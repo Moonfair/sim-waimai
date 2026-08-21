@@ -44,7 +44,7 @@ describe('auth round-trip', () => {
   it('rejects duplicate username with 409 (case-insensitive)', async () => {
     const res = await registerTestUser(app, { username: username.toUpperCase(), password });
     expect(res.status).toBe(409);
-    expect(((await res.json()) as { error: string }).error).toBe('用户名已存在');
+    expect(((await res.json()) as { error: string }).error).toBe('这个用户名已经被抢注啦，换一个再试试');
   });
 
   it('rejects short username/password with 400', async () => {
@@ -55,7 +55,7 @@ describe('auth round-trip', () => {
   it('login with wrong password fails 401', async () => {
     const res = await postJson('/api/auth/login', { username, password: 'wrong-pass', deviceId: testDeviceId() });
     expect(res.status).toBe(401);
-    expect(((await res.json()) as { error: string }).error).toBe('用户名或密码错误');
+    expect(((await res.json()) as { error: string }).error).toBe('用户名或密码不对，请检查后重试');
   });
 
   it('login → me → logout → me=401', async () => {

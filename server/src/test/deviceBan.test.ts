@@ -78,7 +78,7 @@ describe('封禁用户后按设备指纹拦截重新注册/登录', () => {
       deviceId: sharedDeviceId,
     });
     expect(res.status).toBe(403);
-    expect(((await res.json()) as { error: string }).error).toBe('该设备已被限制注册');
+    expect(((await res.json()) as { error: string }).error).toBe('这台设备暂时无法注册，如有疑问请联系客服');
   });
 
   it('同设备无法登录（即使账号密码正确）', async () => {
@@ -87,7 +87,7 @@ describe('封禁用户后按设备指纹拦截重新注册/登录', () => {
       body: { username: offender.username, password: offender.password, deviceId: sharedDeviceId },
     });
     expect(res.status).toBe(403);
-    expect(((await res.json()) as { error: string }).error).toBe('该设备已被限制登录');
+    expect(((await res.json()) as { error: string }).error).toBe('这台设备暂时无法登录，如有疑问请联系客服');
   });
 
   it('换一个设备指纹仍可正常注册/登录', async () => {

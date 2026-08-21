@@ -39,7 +39,7 @@ describe('captcha-gated registration', () => {
       }),
     });
     expect(res.status).toBe(400);
-    expect(((await res.json()) as { error: string }).error).toBe('验证码错误或已过期');
+    expect(((await res.json()) as { error: string }).error).toBe('验证码填错啦，已经换一道，再试一次');
   });
 
   it('rejects register missing captcha fields entirely', async () => {

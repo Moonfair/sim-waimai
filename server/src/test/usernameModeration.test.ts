@@ -30,7 +30,7 @@ describe('注册用户名 AI 审核（fail-open）', () => {
     __setReviewer(async () => ({ verdict: 'reject', reason: '文本命中「辱骂」', confidence: 0.98 }));
     const res = await registerTestUser(app, cred('rej'));
     expect(res.status).toBe(400);
-    expect(((await res.json()) as { error: string }).error).toContain('违规');
+    expect(((await res.json()) as { error: string }).error).toContain('不太合适');
   });
 
   it('AI 通过或存疑 → 正常注册', async () => {
