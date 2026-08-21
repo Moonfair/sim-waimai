@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import type { RestaurantSummary } from '@sim-waimai/shared';
 import { assetUrl } from '../lib/assetUrl';
 import { formatCount, getDisplayStats } from '../lib/displayStats';
@@ -56,7 +58,7 @@ export default function RestaurantCard({ restaurant }: Props) {
 
         <div className="flex items-center gap-2 mt-1">
           <div className="flex items-center gap-0.5">
-            <span className="text-yellow-400 text-xs">★</span>
+            <FontAwesomeIcon icon={faStar} className="text-yellow-400 text-xs" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{restaurant.rating}</span>
             <span className="text-xs text-gray-400 dark:text-gray-500">({formatCount(displayReviews)}+)</span>
           </div>

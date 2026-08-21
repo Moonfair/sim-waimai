@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { SiteStatsDto, SiteStatsTopRestaurantDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const TREND_RANGES = [7, 30] as const;
 type TrendRange = (typeof TREND_RANGES)[number];
@@ -127,7 +129,7 @@ export default function AdminStats() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">网站统计</h1>
         </div>

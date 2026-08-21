@@ -1,15 +1,17 @@
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faClipboardList, faUser, type IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 interface Tab {
   to: string;
   label: string;
-  icon: string;
+  icon: IconDefinition;
 }
 
 const TABS: Tab[] = [
-  { to: '/', label: '首页', icon: '🏠' },
-  { to: '/orders', label: '订单', icon: '📋' },
-  { to: '/profile', label: '我的', icon: '👤' },
+  { to: '/', label: '首页', icon: faHouse },
+  { to: '/orders', label: '订单', icon: faClipboardList },
+  { to: '/profile', label: '我的', icon: faUser },
 ];
 
 /** Fixed bottom tab bar shown on the three root pages (Home/Orders/Profile). */
@@ -27,7 +29,7 @@ export default function BottomNav() {
             }`
           }
         >
-          <span className="text-xl leading-none">{tab.icon}</span>
+          <FontAwesomeIcon icon={tab.icon} className="text-lg" />
           <span>{tab.label}</span>
         </NavLink>
       ))}

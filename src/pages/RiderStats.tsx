@@ -4,6 +4,8 @@ import type { RiderStatsDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import PosterShareSheet from '../components/PosterShareSheet';
 import { homeUrl } from '../lib/share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faShareNodes, faMedal } from '@fortawesome/free-solid-svg-icons';
 
 export default function RiderStats() {
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ export default function RiderStats() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">骑手统计</h1>
         </div>
@@ -57,7 +59,7 @@ export default function RiderStats() {
                 onClick={() => setPosterOpen(true)}
                 aria-label="分享战绩"
               >
-                🔗
+                <FontAwesomeIcon icon={faShareNodes} />
               </button>
             </div>
 
@@ -75,7 +77,7 @@ export default function RiderStats() {
             </div>
 
             <div className="mt-3 flex items-center gap-2.5 bg-gray-50 dark:bg-gray-900 rounded-xl px-3 py-3">
-              <span className="text-lg">🏅</span>
+              <FontAwesomeIcon icon={faMedal} className="text-lg text-amber-500" />
               <div className="flex-1 min-w-0">
                 <p className="text-gray-800 dark:text-gray-100 text-sm font-bold">{stats.tier}</p>
                 {stats.nextTierThreshold !== null && (

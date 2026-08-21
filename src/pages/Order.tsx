@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { api } from '../lib/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate, faCircleCheck, faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 
 const steps = [
-  { icon: '🔄', text: '正在联系商家...', subtext: '商家确认中，请稍候' },
-  { icon: '✅', text: '商家已接单！', subtext: '商家开始为您精心备餐' },
-  { icon: '🏍️', text: '骑手已接单', subtext: '骑手马上出发，即将到您门口' },
+  { icon: faArrowsRotate, text: '正在联系商家...', subtext: '商家确认中，请稍候' },
+  { icon: faCircleCheck, text: '商家已接单！', subtext: '商家开始为您精心备餐' },
+  { icon: faMotorcycle, text: '骑手已接单', subtext: '骑手马上出发，即将到您门口' },
 ];
 
 export default function Order() {
@@ -60,10 +62,10 @@ export default function Order() {
       {/* Icon */}
       <div
         key={step}
-        className="text-8xl mb-6 fade-in-up"
+        className="text-8xl mb-6 text-orange-500 fade-in-up"
         style={{ animation: 'fade-in-up 0.4s ease-out' }}
       >
-        {current.icon}
+        <FontAwesomeIcon icon={current.icon} />
       </div>
 
       {/* Text */}

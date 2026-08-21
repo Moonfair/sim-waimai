@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import type { AdminReportDto, ResolveReportsResultDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
@@ -85,7 +85,7 @@ export default function AdminReports() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">举报管理</h1>
         </div>

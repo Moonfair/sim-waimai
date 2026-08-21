@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { assetUrl } from '../lib/assetUrl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface ZoomableImageProps {
   /** 原始图片 path（COS key、绝对 URL、blob:/data: 或 /api/ 路径），内部用 assetUrl() 解析 */
@@ -51,7 +53,7 @@ export default function ZoomableImage({ src, alt, className }: ZoomableImageProp
               className="absolute top-10 right-4 w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white text-lg"
               aria-label="关闭预览"
             >
-              ✕
+              <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>,
           document.body,

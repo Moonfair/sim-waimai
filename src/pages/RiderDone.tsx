@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSackDollar } from '@fortawesome/free-solid-svg-icons';
 
 interface Confetti {
   id: number;
@@ -101,7 +103,7 @@ export default function RiderDone() {
 
         <div className="w-full mt-8">
           <div className="bg-orange-50 dark:bg-orange-500/10 rounded-2xl p-6 text-center border border-orange-100 dark:border-orange-500/20">
-            <div className="text-3xl mb-2">💰</div>
+            <div className="text-3xl mb-2 text-orange-500"><FontAwesomeIcon icon={faSackDollar} /></div>
             <div className="text-orange-500 font-black text-3xl">
               {showContent && <NumberCounter target={deliveryFee} prefix="¥" decimals={2} />}
             </div>

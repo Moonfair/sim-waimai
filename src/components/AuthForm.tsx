@@ -4,6 +4,8 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import type { CaptchaChallenge } from '@sim-waimai/shared';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../lib/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   mode: 'login' | 'register';
@@ -73,7 +75,7 @@ export default function AuthForm({ mode }: Props) {
             onClick={() => navigate(-1)}
             aria-label="返回"
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="text-center">
             <div className="text-5xl">🥡</div>

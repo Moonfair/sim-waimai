@@ -3,6 +3,8 @@ import type { ReviewDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
 import ZoomableImage from './ZoomableImage';
 import { uploadImage } from '../lib/upload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark, faStar, faCamera } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   orderId: string;
@@ -60,12 +62,12 @@ export default function ReviewForm({ orderId, onSubmitted }: Props) {
             <button
               key={n}
               className={`text-2xl transition-transform active:scale-125 ${
-                n <= rating ? '' : 'grayscale opacity-40'
+                n <= rating ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-600'
               }`}
               onClick={() => setRating(n)}
               aria-label={`${n}星`}
             >
-              ⭐
+              <FontAwesomeIcon icon={faStar} />
             </button>
           ))}
         </div>
@@ -89,7 +91,7 @@ export default function ReviewForm({ orderId, onSubmitted }: Props) {
               onClick={() => setPhotos((p) => p.filter((x) => x !== photo))}
               aria-label="删除图片"
             >
-              ✕
+              <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
         ))}
@@ -100,7 +102,7 @@ export default function ReviewForm({ orderId, onSubmitted }: Props) {
             onClick={() => fileRef.current?.click()}
             aria-label="添加图片"
           >
-            {uploading ? '…' : '📷'}
+            {uploading ? '…' : <FontAwesomeIcon icon={faCamera} />}
           </button>
         )}
         <input

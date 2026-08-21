@@ -1,7 +1,20 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag, faTruckFast } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFlag,
+  faTruckFast,
+  faClipboardList,
+  faHeart,
+  faStore,
+  faShieldHalved,
+  faChartLine,
+  faShop,
+  faUserSlash,
+  faSun,
+  faMoon,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import BottomNav from '../components/BottomNav';
 import UserStatsPanel from '../components/UserStatsPanel';
 import { useAuth } from '../context/AuthContext';
@@ -14,10 +27,10 @@ interface MenuRow {
 }
 
 const MENU_ROWS: MenuRow[] = [
-  { emoji: '📋', label: '我的订单', to: '/orders' },
-  { emoji: '❤️', label: '我的收藏', to: '/favorites' },
+  { emoji: <FontAwesomeIcon icon={faClipboardList} />, label: '我的订单', to: '/orders' },
+  { emoji: <FontAwesomeIcon icon={faHeart} />, label: '我的收藏', to: '/favorites' },
   { emoji: <FontAwesomeIcon icon={faTruckFast} />, label: '骑手统计', to: '/rider-stats' },
-  { emoji: '🏪', label: '商家中心', to: '/merchant' },
+  { emoji: <FontAwesomeIcon icon={faStore} />, label: '商家中心', to: '/merchant' },
 ];
 
 export default function Profile() {
@@ -37,11 +50,11 @@ export default function Profile() {
   const menuRows = user?.isAdmin
     ? [
         ...MENU_ROWS,
-        { emoji: '🛡️', label: '审核管理', to: '/admin/review' },
-        { emoji: '📈', label: '网站统计', to: '/admin/stats' },
-        { emoji: '🏬', label: '店铺管理', to: '/admin/shops' },
+        { emoji: <FontAwesomeIcon icon={faShieldHalved} />, label: '审核管理', to: '/admin/review' },
+        { emoji: <FontAwesomeIcon icon={faChartLine} />, label: '网站统计', to: '/admin/stats' },
+        { emoji: <FontAwesomeIcon icon={faShop} />, label: '店铺管理', to: '/admin/shops' },
         { emoji: <FontAwesomeIcon icon={faFlag} />, label: '举报管理', to: '/admin/reports' },
-        { emoji: '🚫', label: '用户管理', to: '/admin/users' },
+        { emoji: <FontAwesomeIcon icon={faUserSlash} />, label: '用户管理', to: '/admin/users' },
       ]
     : MENU_ROWS;
 
@@ -54,14 +67,14 @@ export default function Profile() {
           onClick={toggleTheme}
           aria-label="切换深色模式"
         >
-          {theme === 'dark' ? '☀️' : '🌙'}
+          <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} className="text-white" />
         </button>
         <div
           className={`flex items-center gap-4 mt-6 ${user || loading ? '' : 'cursor-pointer'}`}
           onClick={user || loading ? undefined : goToLogin}
         >
-          <div className="w-16 h-16 bg-white/25 rounded-full flex items-center justify-center text-4xl">
-            👤
+          <div className="w-16 h-16 bg-white/25 rounded-full flex items-center justify-center text-white text-2xl">
+            <FontAwesomeIcon icon={faUser} />
           </div>
           {user ? (
             <div>

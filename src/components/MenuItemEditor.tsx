@@ -3,6 +3,8 @@ import type { MenuItemOptionGroup, MerchantMenuItemDto, MerchantRestaurantDto } 
 import { api } from '../lib/api';
 import ZoomableImage from './ZoomableImage';
 import { uploadImage } from '../lib/upload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark, faFire, faCamera, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   restaurant: MerchantRestaurantDto;
@@ -122,7 +124,7 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
             {item ? '编辑菜品' : '添加菜品'}
           </h2>
           <button className="text-gray-400 text-xl leading-none" onClick={onClose} aria-label="关闭">
-            ✕
+            <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
 
@@ -152,7 +154,7 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
           </div>
           <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
             <input type="checkbox" checked={popular} onChange={(e) => setPopular(e.target.checked)} className="accent-orange-500" />
-            标记为 🔥 热销
+            标记为 <FontAwesomeIcon icon={faFire} className="text-orange-500" /> 热销
           </label>
 
           {/* Item photo */}
@@ -160,8 +162,8 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
             {image ? (
               <ZoomableImage src={image} alt="菜品图" className="w-16 h-16 rounded-xl object-cover" />
             ) : (
-              <div className="w-16 h-16 rounded-xl bg-gray-50 dark:bg-gray-900 border border-dashed border-gray-200 dark:border-gray-700 flex items-center justify-center text-2xl">
-                📷
+              <div className="w-16 h-16 rounded-xl bg-gray-50 dark:bg-gray-900 border border-dashed border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-300 dark:text-gray-600 text-xl">
+                <FontAwesomeIcon icon={faCamera} />
               </div>
             )}
             <div className="flex flex-col gap-1">
@@ -221,7 +223,7 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
                         <option value="multi">多选·可选</option>
                       </select>
                       <button className="text-gray-300 dark:text-gray-600" onClick={() => setGroups((gs) => gs.filter((_, i) => i !== gi))} aria-label="删除规格组">
-                        🗑️
+                        <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </div>
                   </div>
@@ -266,7 +268,7 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
                           }
                         />
                         <button className="text-gray-300 dark:text-gray-600 flex-shrink-0" onClick={() => removeOption(gi, oi)} aria-label="删除选项">
-                          ✕
+                          <FontAwesomeIcon icon={faXmark} />
                         </button>
                       </div>
                     </div>

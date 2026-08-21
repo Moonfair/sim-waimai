@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 
 interface Props {
@@ -16,8 +18,8 @@ export default function CartBar({ deliveryFee }: Props) {
       <div className="bg-gray-900 rounded-2xl flex items-center justify-between px-4 py-3 shadow-2xl pointer-events-auto">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-2xl">
-              🛒
+            <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white text-xl">
+              <FontAwesomeIcon icon={faCartShopping} />
             </div>
             <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
               <span className="text-white text-xs font-bold">{totalItems}</span>

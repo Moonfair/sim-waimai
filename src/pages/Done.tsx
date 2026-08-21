@@ -5,6 +5,8 @@ import { useCart } from '../context/CartContext';
 import { useApi } from '../hooks/useApi';
 import PosterShareSheet from '../components/PosterShareSheet';
 import { homeUrl } from '../lib/share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSackDollar, faFire } from '@fortawesome/free-solid-svg-icons';
 
 interface Confetti {
   id: number;
@@ -128,14 +130,14 @@ export default function Done() {
         {/* Savings cards */}
         <div className="w-full mt-8 grid grid-cols-2 gap-3">
           <div className="bg-orange-50 dark:bg-orange-500/10 rounded-2xl p-5 text-center border border-orange-100 dark:border-orange-500/20">
-            <div className="text-3xl mb-2">💰</div>
+            <div className="text-3xl mb-2 text-orange-500"><FontAwesomeIcon icon={faSackDollar} /></div>
             <div className="text-orange-500 font-black text-2xl">
               {showContent && <NumberCounter target={savedPrice} prefix="¥" decimals={2} />}
             </div>
             <p className="text-orange-400 text-xs mt-1 font-medium">省下的钱</p>
           </div>
           <div className="bg-red-50 dark:bg-red-500/10 rounded-2xl p-5 text-center border border-red-100 dark:border-red-500/20">
-            <div className="text-3xl mb-2">🔥</div>
+            <div className="text-3xl mb-2 text-red-500"><FontAwesomeIcon icon={faFire} /></div>
             <div className="text-red-500 font-black text-2xl">
               {showContent && <NumberCounter target={savedCalories} suffix=" kcal" />}
             </div>

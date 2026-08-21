@@ -5,6 +5,8 @@ import RestaurantCard from '../components/RestaurantCard';
 import { useApi } from '../hooks/useApi';
 import { useDebounce } from '../hooks/useDebounce';
 import { assetUrl } from '../lib/assetUrl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 type Tab = 'shop' | 'item';
 
@@ -29,10 +31,10 @@ export default function Search() {
             className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="flex-1 flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-xl px-3 py-2.5">
-            <span className="text-gray-400">🔍</span>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="text-gray-400" />
             <input
               autoFocus
               type="text"

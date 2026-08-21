@@ -6,6 +6,8 @@ import { useApi } from '../hooks/useApi';
 import { useDebounce } from '../hooks/useDebounce';
 import { api } from '../lib/api';
 import { STATUS_BADGE } from '../lib/reviewBadges';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const PAGE_SIZE = 50;
 
@@ -59,7 +61,7 @@ export default function AdminShops() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">店铺管理</h1>
         </div>

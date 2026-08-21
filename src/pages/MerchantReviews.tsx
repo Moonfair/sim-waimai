@@ -4,6 +4,8 @@ import type { MerchantRestaurantDto, MerchantReviewDto, Page } from '@sim-waimai
 import ZoomableImage from '../components/ZoomableImage';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 
 export default function MerchantReviews() {
   const { id } = useParams<{ id: string }>();
@@ -75,13 +77,13 @@ export default function MerchantReviews() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">评价管理</h1>
             {shop && (
               <p className="text-xs text-gray-400 dark:text-gray-500 truncate">
-                {shop.emoji} {shop.name} · ⭐ {shop.rating}（{shop.ratingCount}条）
+                {shop.emoji} {shop.name} · <FontAwesomeIcon icon={faStar} className="text-yellow-400" /> {shop.rating}（{shop.ratingCount}条）
               </p>
             )}
           </div>
@@ -129,9 +131,14 @@ export default function MerchantReviews() {
                       {new Date(review.createdAt).toLocaleDateString('zh-CN')}
                     </span>
                   </div>
-                  <div className="text-yellow-400 text-xs mt-0.5">
-                    {'★'.repeat(review.rating)}
-                    <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - review.rating)}</span>
+                  <div className="flex gap-0.5 mt-0.5">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <FontAwesomeIcon
+                        key={i}
+                        icon={faStar}
+                        className={i < review.rating ? 'text-yellow-400 text-xs' : 'text-gray-200 dark:text-gray-600 text-xs'}
+                      />
+                    ))}
                   </div>
                   {review.content && (
                     <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">{review.content}</p>

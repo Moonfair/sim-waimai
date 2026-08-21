@@ -8,6 +8,8 @@ import AddressEditSheet from '../components/AddressEditSheet';
 import CartLineItem from '../components/CartLineItem';
 import { api, ApiError } from '../lib/api';
 import { reportOrder } from '../lib/analytics';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faLocationDot, faBicycle } from '@fortawesome/free-solid-svg-icons';
 
 export default function Cart() {
   const { items, restaurant, totalPrice, totalCalories, updateQuantity, clearCart } = useCart();
@@ -79,7 +81,7 @@ export default function Cart() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">确认订单</h1>
         </div>
@@ -92,7 +94,7 @@ export default function Cart() {
           onClick={() => setAddressSheetOpen(true)}
         >
           <div className="flex items-start gap-3">
-            <span className="text-orange-500 text-lg mt-0.5">📍</span>
+            <FontAwesomeIcon icon={faLocationDot} className="text-orange-500 text-lg mt-0.5" />
             <div className="flex-1">
               {addressInfo.recipientName && addressInfo.phone ? (
                 <>
@@ -127,7 +129,7 @@ export default function Cart() {
           className="bg-white dark:bg-gray-800 rounded-xl mt-3 p-4 flex items-center gap-3 cursor-pointer"
           onClick={() => setRealPersonDelivery((v) => !v)}
         >
-          <span className="text-orange-500 text-lg">🚴</span>
+          <FontAwesomeIcon icon={faBicycle} className="text-orange-500 text-lg" />
           <div className="flex-1">
             <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">真人配送</p>
             <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5">

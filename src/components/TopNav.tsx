@@ -1,4 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
@@ -64,15 +66,15 @@ export default function TopNav() {
             onClick={toggleTheme}
             aria-label="切换深色模式"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
           </button>
           {user ? (
             <button
               className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
               onClick={() => navigate('/profile')}
             >
-              <span className="w-7 h-7 rounded-full bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center text-sm">
-                👤
+              <span className="w-7 h-7 rounded-full bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center text-orange-500 text-xs">
+                <FontAwesomeIcon icon={faUser} />
               </span>
               <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{user.username}</span>
             </button>

@@ -23,6 +23,8 @@ import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
 import { copyRestaurantLink } from '../lib/share';
 import { uploadImage } from '../lib/upload';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faCommentDots, faShareNodes, faFire } from '@fortawesome/free-solid-svg-icons';
 
 const inputClass =
   'w-full px-3 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm';
@@ -184,7 +186,7 @@ export default function MerchantEdit() {
       <div className="bg-white dark:bg-gray-800 px-4 pt-10 pb-4 border-b border-gray-100 dark:border-gray-700">
         <div className="flex items-center gap-3">
           <button className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300" onClick={() => navigate(-1)}>
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg truncate">
@@ -219,11 +221,17 @@ export default function MerchantEdit() {
             查看顾客视角 ›
           </button>
           <button className="text-xs text-orange-500" onClick={() => navigate(`/merchant/${shop.id}/reviews`)}>
-            💬 评价管理
+            <FontAwesomeIcon icon={faCommentDots} /> 评价管理
           </button>
           {shop.reviewStatus === 'approved' && (
             <button className="text-xs text-orange-500" onClick={handleShare}>
-              {shareState === 'copied' ? '已复制 ✓' : shareState === 'failed' ? '复制失败' : '🔗 分享店铺'}
+              {shareState === 'copied' ? (
+                '已复制 ✓'
+              ) : shareState === 'failed' ? (
+                '复制失败'
+              ) : (
+                <><FontAwesomeIcon icon={faShareNodes} /> 分享店铺</>
+              )}
             </button>
           )}
         </div>
@@ -415,7 +423,7 @@ function SortableMenuRow({
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5">
           <span className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{item.name}</span>
-          {item.popular && <span className="text-xs">🔥</span>}
+          {item.popular && <FontAwesomeIcon icon={faFire} className="text-xs text-orange-500" />}
           {!item.isListed && (
             <span className="text-xs text-gray-400 bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded-full flex-shrink-0">已下架</span>
           )}

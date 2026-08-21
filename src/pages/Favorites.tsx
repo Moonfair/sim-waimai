@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import type { RestaurantSummary } from '@sim-waimai/shared';
 import RestaurantCard from '../components/RestaurantCard';
 import { useApi } from '../hooks/useApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function Favorites() {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ export default function Favorites() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">我的收藏</h1>
         </div>

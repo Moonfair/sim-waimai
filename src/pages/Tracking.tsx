@@ -6,6 +6,8 @@ import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { getRandomRider } from '../data/riders';
 import { formatWaitDuration } from '../lib/duration';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faCheck, faStar, faPhone, faCommentDots } from '@fortawesome/free-solid-svg-icons';
 
 const TOTAL_SECONDS = 30;
 const GRAB_POLL_MS = 3000;
@@ -185,7 +187,9 @@ export default function Tracking() {
         ))}
 
         {/* Destination pin */}
-        <div className="absolute text-2xl" style={{ left: '12%', top: '32%' }}>📍</div>
+        <div className="absolute text-2xl text-orange-500" style={{ left: '12%', top: '32%' }}>
+          <FontAwesomeIcon icon={faLocationDot} />
+        </div>
 
         {/* Rider */}
         <div
@@ -212,7 +216,7 @@ export default function Tracking() {
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
                   s.done ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500'
                 }`}>
-                  {s.done ? '✓' : i + 1}
+                  {s.done ? <FontAwesomeIcon icon={faCheck} /> : i + 1}
                 </div>
                 <span className={`text-xs mt-1 font-medium ${s.done ? 'text-orange-500' : 'text-gray-400 dark:text-gray-500'}`}>
                   {s.label}
@@ -238,7 +242,9 @@ export default function Tracking() {
             <div>
               <p className="font-bold text-gray-900 dark:text-gray-100">{rider.name}</p>
               <div className="flex items-center gap-1">
-                <span className="text-yellow-400 text-xs">★★★★★</span>
+                <span className="text-yellow-400 text-xs flex gap-0.5">
+                  {Array.from({ length: 5 }, (_, i) => <FontAwesomeIcon key={i} icon={faStar} />)}
+                </span>
                 <span className="text-gray-400 dark:text-gray-500 text-xs">
                   {isRealPerson && order?.grabbedAt
                     ? `真人骑手 · 接单用时 ${formatWaitDuration(order.createdAt, order.grabbedAt)}`
@@ -248,11 +254,11 @@ export default function Tracking() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl">
-              📞
+            <button className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg">
+              <FontAwesomeIcon icon={faPhone} />
             </button>
-            <button className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-xl">
-              💬
+            <button className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg">
+              <FontAwesomeIcon icon={faCommentDots} />
             </button>
           </div>
         </div>

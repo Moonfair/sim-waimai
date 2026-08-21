@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { getRandomRider } from '../data/riders';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const TOTAL_SECONDS = 30;
 
@@ -125,7 +127,9 @@ export default function RiderTracking() {
           />
         ))}
 
-        <div className="absolute text-2xl" style={{ left: '12%', top: '32%' }}>📍</div>
+        <div className="absolute text-2xl text-orange-500" style={{ left: '12%', top: '32%' }}>
+          <FontAwesomeIcon icon={faLocationDot} />
+        </div>
 
         <div
           ref={riderRef}
@@ -150,7 +154,7 @@ export default function RiderTracking() {
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
                   s.done ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500'
                 }`}>
-                  {s.done ? '✓' : i + 1}
+                  {s.done ? <FontAwesomeIcon icon={faCheck} /> : i + 1}
                 </div>
                 <span className={`text-xs mt-1 font-medium ${s.done ? 'text-orange-500' : 'text-gray-400 dark:text-gray-500'}`}>
                   {s.label}

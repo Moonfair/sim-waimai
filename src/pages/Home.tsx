@@ -12,6 +12,17 @@ import { useCart } from '../context/CartContext';
 import { useAddress } from '../context/AddressContext';
 import { useTheme } from '../context/ThemeContext';
 import AddressEditSheet from '../components/AddressEditSheet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faLocationDot,
+  faSun,
+  faMoon,
+  faUser,
+  faMagnifyingGlass,
+  faWandMagicSparkles,
+  faStar,
+  faCartShopping,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<Category>('全部');
@@ -56,7 +67,7 @@ export default function Home() {
             className="flex-1 bg-white/20 rounded-xl px-3 py-2.5 flex items-center gap-2 cursor-pointer"
             onClick={() => setAddressSheetOpen(true)}
           >
-            <span className="text-white text-sm">📍</span>
+            <FontAwesomeIcon icon={faLocationDot} className="text-white text-sm" />
             <span className="text-white text-sm font-medium">{addressInfo.address}</span>
             <span className="text-white/60 text-xs ml-auto">预计25-40分钟</span>
           </div>
@@ -65,14 +76,14 @@ export default function Home() {
             onClick={toggleTheme}
             aria-label="切换深色模式"
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} className="text-white" />
           </button>
           <button
             className="lg:hidden w-9 h-9 flex-shrink-0 rounded-full bg-white/20 flex items-center justify-center text-base"
             onClick={() => navigate(user ? '/profile' : '/login')}
             aria-label="个人中心"
           >
-            👤
+            <FontAwesomeIcon icon={faUser} className="text-white" />
           </button>
         </div>
       </div>
@@ -83,7 +94,7 @@ export default function Home() {
           className="w-full flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-xl px-3 py-2.5 text-left"
           onClick={() => navigate('/search')}
         >
-          <span className="text-gray-400">🔍</span>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="text-gray-400" />
           <span className="text-sm text-gray-400 dark:text-gray-500">搜索商家或商品</span>
         </button>
       </div>
@@ -101,7 +112,7 @@ export default function Home() {
       {recommended && recommended.length > 0 && (
         <div className="mt-4">
           <div className="px-4 flex items-center gap-1.5 mb-2">
-            <span className="text-base">✨</span>
+            <FontAwesomeIcon icon={faWandMagicSparkles} className="text-base text-amber-400" />
             <h2 className="text-gray-800 dark:text-gray-100 font-bold text-base">为你推荐</h2>
             <span className="text-gray-300 dark:text-gray-600 text-xs">{user ? '根据你的口味' : '大家都在吃'}</span>
           </div>
@@ -125,7 +136,7 @@ export default function Home() {
                 <div className="p-2">
                   <p className="text-xs font-bold text-gray-900 dark:text-gray-100 truncate">{r.name}</p>
                   <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">
-                    ⭐{r.rating} · {r.deliveryTime}分钟
+                    <FontAwesomeIcon icon={faStar} className="text-yellow-400" /> {r.rating} · {r.deliveryTime}分钟
                   </p>
                 </div>
               </div>
@@ -190,7 +201,9 @@ export default function Home() {
           >
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-2xl">🛒</div>
+                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white text-xl">
+                  <FontAwesomeIcon icon={faCartShopping} />
+                </div>
                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs font-bold">{totalItems}</span>
                 </div>

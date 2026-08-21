@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import type { OrderSummaryDto, Page } from '@sim-waimai/shared';
 import BottomNav from '../components/BottomNav';
 import { api } from '../lib/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const STATUS_LABEL: Record<OrderSummaryDto['status'], { text: string; className: string }> = {
   pending: { text: '待配送', className: 'text-orange-500 bg-orange-50 dark:bg-orange-500/10' },
@@ -52,7 +54,7 @@ export default function Orders() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">我的订单</h1>
         </div>

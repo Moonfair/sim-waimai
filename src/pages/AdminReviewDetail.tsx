@@ -9,6 +9,8 @@ import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faStar, faRobot } from '@fortawesome/free-solid-svg-icons';
 
 type Detail = ModerationRestaurantDetailDto | ModerationItemDetailDto | ModerationUserReviewDetailDto;
 
@@ -93,7 +95,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
           className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
           onClick={goBack}
         >
-          ←
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg truncate">
           {emoji} {name}
@@ -146,9 +148,14 @@ export default function AdminReviewDetail({ targetType }: Props) {
           ) : data.targetType === 'review' ? (
             <>
               <p className="text-sm text-gray-500 dark:text-gray-400">所属店铺：{data.restaurantName}</p>
-              <p className="text-sm text-orange-500">
-                {'★'.repeat(data.review.rating)}
-                <span className="text-gray-300 dark:text-gray-600">{'★'.repeat(5 - data.review.rating)}</span>
+              <p className="text-sm text-orange-500 flex items-center gap-0.5">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <FontAwesomeIcon
+                    key={i}
+                    icon={faStar}
+                    className={i < data.review.rating ? 'text-orange-500' : 'text-gray-300 dark:text-gray-600'}
+                  />
+                ))}
                 <span className="text-gray-500 dark:text-gray-400 ml-1">{data.review.rating}星</span>
               </p>
               {data.review.content && (
@@ -211,7 +218,9 @@ export default function AdminReviewDetail({ targetType }: Props) {
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 space-y-2">
-          <p className="font-bold text-sm text-gray-900 dark:text-gray-100">🤖 AI 审核建议</p>
+          <p className="font-bold text-sm text-gray-900 dark:text-gray-100">
+            <FontAwesomeIcon icon={faRobot} /> AI 审核建议
+          </p>
           {data.aiVerdict ? (
             <>
               <span

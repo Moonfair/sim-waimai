@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faStar } from '@fortawesome/free-solid-svg-icons';
 import type { Page, ReviewDto } from '@sim-waimai/shared';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../lib/api';
@@ -70,7 +70,10 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-gray-900 dark:text-gray-100 font-bold text-base">用户评价</h3>
         <span className="text-sm">
-          <span className="text-orange-500 font-bold">⭐ {rating}</span>
+          <span className="text-orange-500 font-bold">
+            <FontAwesomeIcon icon={faStar} className="text-xs mr-1" />
+            {rating}
+          </span>
           <span className="text-gray-400 dark:text-gray-500 text-xs ml-1">({formatCount(ratingCount)}条)</span>
         </span>
       </div>
@@ -122,9 +125,14 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
               {review.reviewStatus === 'rejected' && review.rejectReason && (
                 <p className="text-red-500 text-xs mt-0.5">未通过原因：{review.rejectReason}</p>
               )}
-              <div className="text-yellow-400 text-xs mt-0.5">
-                {'★'.repeat(review.rating)}
-                <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - review.rating)}</span>
+              <div className="flex gap-0.5 mt-0.5">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <FontAwesomeIcon
+                    key={i}
+                    icon={faStar}
+                    className={i < review.rating ? 'text-yellow-400 text-xs' : 'text-gray-200 dark:text-gray-600 text-xs'}
+                  />
+                ))}
               </div>
               {review.content && (
                 <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">{review.content}</p>

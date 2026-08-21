@@ -11,6 +11,8 @@ import { api } from '../lib/api';
 import { uploadImage } from '../lib/upload';
 import ZoomableImage from '../components/ZoomableImage';
 import MerchantStatsPanel from '../components/MerchantStatsPanel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const SHOP_CATEGORIES = CATEGORIES.filter((c) => c !== '全部');
 
@@ -94,7 +96,7 @@ export default function MerchantHome() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">商家中心</h1>
         </div>
@@ -161,7 +163,7 @@ export default function MerchantHome() {
                             </span>
                           </div>
                           <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5">
-                            {shop.category} · ⭐{shop.rating} · 月售{shop.monthlyOrders}
+                            {shop.category} · <FontAwesomeIcon icon={faStar} className="text-yellow-400" /> {shop.rating} · 月售{shop.monthlyOrders}
                           </p>
                         </div>
                         <button

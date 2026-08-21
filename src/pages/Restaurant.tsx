@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { Restaurant as RestaurantData } from '@sim-waimai/shared';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faChevronLeft, faShareNodes, faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import MenuItemComponent from '../components/MenuItem';
 import CartBar from '../components/CartBar';
 import DesktopCartPanel from '../components/DesktopCartPanel';
@@ -169,7 +169,7 @@ export default function Restaurant() {
           className="absolute top-10 left-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white z-10"
           onClick={() => navigate(-1)}
         >
-          ←
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <button
           className="absolute top-10 right-28 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg text-white z-10"
@@ -183,20 +183,24 @@ export default function Restaurant() {
           onClick={() => setPosterOpen(true)}
           aria-label="分享餐厅"
         >
-          🔗
+          <FontAwesomeIcon icon={faShareNodes} />
         </button>
         <button
-          className="absolute top-10 right-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg z-10"
+          className={`absolute top-10 right-4 w-9 h-9 bg-black/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg z-10 ${
+            isFav ? 'text-red-500' : 'text-white'
+          }`}
           onClick={toggleFavorite}
           aria-label={isFav ? '取消收藏' : '收藏餐厅'}
         >
-          {isFav ? '❤️' : '🤍'}
+          <FontAwesomeIcon icon={faHeart} />
         </button>
         <div className="relative z-10 flex flex-col items-center">
           {!restaurant.bannerImage && <div className="text-6xl drop-shadow-lg">{restaurant.emoji}</div>}
           <h1 className="text-white font-black text-2xl mt-2 drop-shadow">{restaurant.name}</h1>
           <div className="flex items-center gap-3 mt-1">
-            <span className="text-white/90 text-sm">⭐ {restaurant.rating}</span>
+            <span className="text-white/90 text-sm">
+              <FontAwesomeIcon icon={faStar} className="text-yellow-300" /> {restaurant.rating}
+            </span>
             <span className="text-white/60 text-xs">|</span>
             <span className="text-white/90 text-sm">配送费¥{restaurant.deliveryFee}</span>
             <span className="text-white/60 text-xs">|</span>

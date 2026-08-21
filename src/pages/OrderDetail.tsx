@@ -4,11 +4,21 @@ import ReviewForm from '../components/ReviewForm';
 import { useApi } from '../hooks/useApi';
 import ZoomableImage from '../components/ZoomableImage';
 import { formatWaitDuration } from '../lib/duration';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faKitchenSet,
+  faMotorcycle,
+  faCircleCheck,
+  faLocationDot,
+  faStar,
+  type IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
 
-const STATUS_HEADER: Record<OrderDto['status'], { emoji: string; title: string; sub: string }> = {
-  pending: { emoji: '🍳', title: '商家备餐中', sub: '商家正在为您精心准备' },
-  delivering: { emoji: '🛵', title: '骑手配送中', sub: '美食正在飞奔向您' },
-  completed: { emoji: '✅', title: '订单已完成', sub: '感谢使用吃了嘛外卖（省钱版）' },
+const STATUS_HEADER: Record<OrderDto['status'], { icon: IconDefinition; title: string; sub: string }> = {
+  pending: { icon: faKitchenSet, title: '商家备餐中', sub: '商家正在为您精心准备' },
+  delivering: { icon: faMotorcycle, title: '骑手配送中', sub: '美食正在飞奔向您' },
+  completed: { icon: faCircleCheck, title: '订单已完成', sub: '感谢使用吃了嘛外卖（省钱版）' },
 };
 
 export default function OrderDetail() {
@@ -51,10 +61,12 @@ export default function OrderDetail() {
           onClick={() => navigate(-1)}
           aria-label="返回"
         >
-          ←
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <div className="text-center mt-4">
-          <div className="text-4xl">{header.emoji}</div>
+          <div className="text-4xl text-white">
+            <FontAwesomeIcon icon={header.icon} />
+          </div>
           <h1 className="text-white font-black text-xl mt-1">{header.title}</h1>
           <p className="text-orange-100 text-xs mt-0.5">{header.sub}</p>
         </div>
@@ -128,7 +140,7 @@ export default function OrderDetail() {
               <p className="text-gray-400 dark:text-gray-500 text-xs">
                 {order.deliveryType === 'real_person' && order.grabbedAt
                   ? `真人骑手 · 接单用时 ${formatWaitDuration(order.createdAt, order.grabbedAt)}`
-                  : `★ ${order.rider.rating} · 送单${order.rider.deliveryCount}`}
+                  : <><FontAwesomeIcon icon={faStar} className="text-yellow-400" /> {order.rider.rating} · 送单{order.rider.deliveryCount}</>}
               </p>
             </div>
             <span className="ml-auto text-2xl">{order.rider.vehicleEmoji}</span>
@@ -139,7 +151,7 @@ export default function OrderDetail() {
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm">
           <h3 className="font-bold text-gray-900 dark:text-gray-100 text-sm mb-2">配送信息</h3>
           <p className="text-gray-600 dark:text-gray-300 text-sm">
-            📍 {order.address.address}
+            <FontAwesomeIcon icon={faLocationDot} className="text-orange-500" /> {order.address.address}
           </p>
           {(order.address.recipientName || order.address.phone) && (
             <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">
@@ -165,9 +177,14 @@ export default function OrderDetail() {
                   </span>
                 )}
               </div>
-              <div className="text-yellow-400 text-sm">
-                {'★'.repeat(order.review.rating)}
-                <span className="text-gray-200 dark:text-gray-600">{'★'.repeat(5 - order.review.rating)}</span>
+              <div className="flex gap-0.5 text-sm">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <FontAwesomeIcon
+                    key={i}
+                    icon={faStar}
+                    className={i < order.review!.rating ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-600'}
+                  />
+                ))}
               </div>
               {order.review.content && (
                 <p className="text-gray-600 dark:text-gray-300 text-sm mt-1.5">{order.review.content}</p>

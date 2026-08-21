@@ -12,6 +12,8 @@ import { useDebounce } from '../hooks/useDebounce';
 import { api } from '../lib/api';
 import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faRobot } from '@fortawesome/free-solid-svg-icons';
 
 const STATUS_TABS: { value: ReviewStatus; label: string }[] = [
   { value: 'pending', label: '待审核' },
@@ -206,7 +208,7 @@ export default function AdminReview() {
             className="w-8 h-8 flex items-center justify-center text-gray-600 dark:text-gray-300"
             onClick={() => navigate(-1)}
           >
-            ←
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">审核管理</h1>
         </div>
@@ -405,7 +407,7 @@ export default function AdminReview() {
                         <span
                           className={`mt-1.5 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium ${AI_VERDICT_BADGE[item.aiVerdict].className}`}
                         >
-                          🤖 {AI_VERDICT_BADGE[item.aiVerdict].label}
+                          <FontAwesomeIcon icon={faRobot} /> {AI_VERDICT_BADGE[item.aiVerdict].label}
                           {item.aiConfidence != null && ` · ${Math.round(item.aiConfidence * 100)}%`}
                         </span>
                       )}
