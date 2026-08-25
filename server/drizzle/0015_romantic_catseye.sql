@@ -1,0 +1,1 @@
+ALTER TABLE "changelog_entries" ADD COLUMN "title" text DEFAULT '更新公告' NOT NULL;

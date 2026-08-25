@@ -11,15 +11,29 @@ import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
 
+/** ISO datetime -> "YYYY-MM-DD" for an `<input type="date">` value. */
+function toDateInputValue(iso: string): string {
+  return iso.slice(0, 10);
+}
+
+const inputClass =
+  'px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm';
+
 export default function AdminChangelog() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { data, loading, error, reload } = useApi<ChangelogListDto>('/changelog');
   const items = data?.items ?? [];
 
+  const [newTitle, setNewTitle] = useState('');
+  const [newVersion, setNewVersion] = useState('');
+  const [newDate, setNewDate] = useState('');
   const [newContent, setNewContent] = useState('');
   const [creating, setCreating] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editVersion, setEditVersion] = useState('');
+  const [editDate, setEditDate] = useState('');
   const [editContent, setEditContent] = useState('');
   const [busyId, setBusyId] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -33,7 +47,15 @@ export default function AdminChangelog() {
     if (!newContent.trim()) return;
     setCreating(true);
     try {
-      await api.post<ChangelogEntryDto>('/admin/changelog', { content: newContent.trim() });
+      await api.post<ChangelogEntryDto>('/admin/changelog', {
+        title: newTitle,
+        version: newVersion,
+        date: newDate,
+        content: newContent.trim(),
+      });
+      setNewTitle('');
+      setNewVersion('');
+      setNewDate('');
       setNewContent('');
       flash('已发布 ✓');
       reload();
@@ -46,6 +68,9 @@ export default function AdminChangelog() {
 
   const startEdit = (entry: ChangelogEntryDto) => {
     setEditingId(entry.id);
+    setEditTitle(entry.title);
+    setEditVersion(String(entry.version));
+    setEditDate(toDateInputValue(entry.createdAt));
     setEditContent(entry.content);
   };
 
@@ -53,7 +78,12 @@ export default function AdminChangelog() {
     if (!editContent.trim()) return;
     setBusyId(id);
     try {
-      await api.patch<ChangelogEntryDto>(`/admin/changelog/${id}`, { content: editContent.trim() });
+      await api.patch<ChangelogEntryDto>(`/admin/changelog/${id}`, {
+        title: editTitle,
+        version: editVersion,
+        date: editDate,
+        content: editContent.trim(),
+      });
       setEditingId(null);
       flash('已更新 ✓');
       reload();
@@ -89,7 +119,9 @@ export default function AdminChangelog() {
           </button>
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">更新日志管理</h1>
         </div>
-        <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">日期和版本号自动生成，内容为必填项</p>
+        <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">
+          标题/日期/版本号可手动填写，留空时分别取默认标题「更新公告」、当前日期、当前最大版本号+1；内容为必填项
+        </p>
       </div>
 
       {message && (
@@ -98,8 +130,31 @@ export default function AdminChangelog() {
 
       <div className="px-4">
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 mt-4">
+          <input
+            className={`w-full ${inputClass}`}
+            placeholder="标题（留空则用「更新公告」）"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <div className="flex gap-2 mt-2">
+            <input
+              className={`flex-1 ${inputClass}`}
+              type="number"
+              min={1}
+              placeholder="版本号（留空自动递增）"
+              value={newVersion}
+              onChange={(e) => setNewVersion(e.target.value)}
+            />
+            <input
+              className={`flex-1 ${inputClass}`}
+              type="date"
+              placeholder="日期（留空用今天）"
+              value={newDate}
+              onChange={(e) => setNewDate(e.target.value)}
+            />
+          </div>
           <textarea
-            className="w-full h-24 px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm resize-none"
+            className={`w-full h-24 mt-2 resize-none ${inputClass}`}
             placeholder="填写本次更新的公告内容…"
             value={newContent}
             onChange={(e) => setNewContent(e.target.value)}
@@ -163,8 +218,31 @@ export default function AdminChangelog() {
 
                   {editingId === entry.id ? (
                     <div className="mt-3">
+                      <input
+                        className={`w-full ${inputClass}`}
+                        placeholder="标题（留空保留原标题）"
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                      />
+                      <div className="flex gap-2 mt-2">
+                        <input
+                          className={`flex-1 ${inputClass}`}
+                          type="number"
+                          min={1}
+                          placeholder="版本号（留空保留原版本号）"
+                          value={editVersion}
+                          onChange={(e) => setEditVersion(e.target.value)}
+                        />
+                        <input
+                          className={`flex-1 ${inputClass}`}
+                          type="date"
+                          placeholder="日期（留空保留原日期）"
+                          value={editDate}
+                          onChange={(e) => setEditDate(e.target.value)}
+                        />
+                      </div>
                       <textarea
-                        className="w-full h-20 px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-orange-400 text-sm resize-none"
+                        className={`w-full h-20 mt-2 resize-none ${inputClass}`}
                         value={editContent}
                         onChange={(e) => setEditContent(e.target.value)}
                       />
@@ -187,9 +265,12 @@ export default function AdminChangelog() {
                       </div>
                     </div>
                   ) : (
-                    <p className="mt-2 text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
-                      {entry.content}
-                    </p>
+                    <>
+                      <h3 className="mt-2 font-bold text-sm text-gray-900 dark:text-gray-100">{entry.title}</h3>
+                      <p className="mt-1 text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
+                        {entry.content}
+                      </p>
+                    </>
                   )}
                   {entry.updatedAt && (
                     <p className="mt-1 text-gray-300 dark:text-gray-600 text-xs">

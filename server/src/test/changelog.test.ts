@@ -100,7 +100,7 @@ describe('POST /api/admin/changelog', () => {
     expect(res.status).toBe(400);
   });
 
-  it('sets createdBy to the acting admin and auto-generates date/version', async () => {
+  it('sets createdBy and defaults title/date/version when left blank', async () => {
     const res = await req('/api/admin/changelog', adminCookie, {
       method: 'POST',
       body: { content: `created_${stamp}` },
@@ -108,9 +108,83 @@ describe('POST /api/admin/changelog', () => {
     expect(res.status).toBe(200);
     const entry = (await res.json()) as ChangelogEntryDto;
     expect(entry.createdBy).toBe(admin.username);
+    expect(entry.title).toBe('更新公告');
     expect(entry.version).toBeGreaterThan(0);
     expect(entry.createdAt).toBeTruthy();
     expect(entry.updatedAt).toBeNull();
+  });
+
+  it('honors an explicitly provided title/version/date', async () => {
+    const explicitVersion = Math.floor(Date.now() / 1000); // huge vs. auto-incremented versions, won't collide
+    const res = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { title: `自定义标题_${stamp}`, content: `explicit_${stamp}`, version: explicitVersion, date: '2020-01-01' },
+    });
+    expect(res.status).toBe(200);
+    const entry = (await res.json()) as ChangelogEntryDto;
+    expect(entry.title).toBe(`自定义标题_${stamp}`);
+    expect(entry.version).toBe(explicitVersion);
+    expect(entry.createdAt.slice(0, 10)).toBe('2020-01-01');
+  });
+
+  it('rejects reusing an already-taken version number', async () => {
+    const explicitVersion = Math.floor(Date.now() / 1000) + 1;
+    const first = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `dup1_${stamp}`, version: explicitVersion },
+    });
+    expect(first.status).toBe(200);
+    const second = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `dup2_${stamp}`, version: explicitVersion },
+    });
+    expect(second.status).toBe(409);
+  });
+
+  it('rejects a non-positive version and a malformed date', async () => {
+    const badVersion = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `x_${stamp}`, version: 0 },
+    });
+    expect(badVersion.status).toBe(400);
+
+    const badDate = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `x_${stamp}`, date: 'not-a-date' },
+    });
+    expect(badDate.status).toBe(400);
+  });
+});
+
+describe('PATCH /api/admin/changelog/:id — 留空保留原值', () => {
+  it('blank title/version/date keep the existing value; explicit ones overwrite it', async () => {
+    const created = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { title: `原标题_${stamp}`, content: `patch_base_${stamp}` },
+    });
+    const entry = (await created.json()) as ChangelogEntryDto;
+
+    const blankPatch = await req(`/api/admin/changelog/${entry.id}`, adminCookie, {
+      method: 'PATCH',
+      body: { content: `patch_updated_${stamp}` },
+    });
+    expect(blankPatch.status).toBe(200);
+    const afterBlank = (await blankPatch.json()) as ChangelogEntryDto;
+    expect(afterBlank.title).toBe(`原标题_${stamp}`);
+    expect(afterBlank.version).toBe(entry.version);
+    expect(afterBlank.createdAt).toBe(entry.createdAt);
+    expect(afterBlank.content).toBe(`patch_updated_${stamp}`);
+
+    const newVersion = Math.floor(Date.now() / 1000) + 2;
+    const explicitPatch = await req(`/api/admin/changelog/${entry.id}`, adminCookie, {
+      method: 'PATCH',
+      body: { title: `新标题_${stamp}`, content: `patch_updated_${stamp}`, version: newVersion, date: '2021-06-15' },
+    });
+    expect(explicitPatch.status).toBe(200);
+    const afterExplicit = (await explicitPatch.json()) as ChangelogEntryDto;
+    expect(afterExplicit.title).toBe(`新标题_${stamp}`);
+    expect(afterExplicit.version).toBe(newVersion);
+    expect(afterExplicit.createdAt.slice(0, 10)).toBe('2021-06-15');
   });
 });
 

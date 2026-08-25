@@ -426,9 +426,11 @@ export interface AdminUserListDto {
   pageSize: number;
 }
 
-/** One 更新日志 entry. Version and date are server-generated, never client-editable. */
+/** One 更新日志 entry. title/version/date can be set manually; left blank they default to
+ *  '更新公告', max(version)+1, and the current time respectively. */
 export interface ChangelogEntryDto {
   id: string;
+  title: string;
   version: number;
   content: string;
   createdAt: string;

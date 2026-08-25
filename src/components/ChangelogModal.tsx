@@ -45,7 +45,8 @@ export default function ChangelogModal({ onClose }: Props) {
                 {new Date(current.createdAt).toLocaleDateString('zh-CN')}
               </span>
             </div>
-            <p className="flex-1 overflow-y-auto mt-3 text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
+            <h3 className="mt-1 font-bold text-base text-gray-900 dark:text-gray-100">{current.title}</h3>
+            <p className="flex-1 overflow-y-auto mt-2 text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
               {current.content}
             </p>
 

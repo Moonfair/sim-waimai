@@ -292,11 +292,12 @@ export const reports = pgTable(
   ],
 );
 
-/** 更新日志公告，版本号在插入时按 max(version)+1 顺序生成。 */
+/** 更新日志公告。title/version/date 都可手动填写，留空时分别取默认标题、max(version)+1、当前时间。 */
 export const changelogEntries = pgTable(
   'changelog_entries',
   {
     id: uuid('id').primaryKey().defaultRandom(),
+    title: text('title').notNull().default('更新公告'),
     version: integer('version').notNull(),
     content: text('content').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
