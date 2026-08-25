@@ -31,6 +31,16 @@ const REQUEST_TIMEOUT_MS = 15_000;
 export function createApp() {
   const app = new Hono().basePath('/api');
 
+  // Origin never set Cache-Control on /api responses, so the EdgeOne CDN in front of prod was
+  // free to cache them at its own discretion — including a since-stale CORS preflight/response
+  // pair from before an origin was added to CORS_ALLOWED_ORIGINS, and (worse) potentially
+  // user-specific JSON like /auth/me across different visitors. Responses here are all dynamic
+  // and often per-session; never let a shared CDN cache them.
+  app.use('*', async (c, next) => {
+    await next();
+    c.header('Cache-Control', 'no-store');
+  });
+
   // Cross-origin static hosts (e.g. the Toy build) authenticate via Bearer token, not the
   // cookie, so this doesn't need credentials:true. Off entirely unless explicitly configured.
   const corsOrigins = (env.CORS_ALLOWED_ORIGINS ?? '')
