@@ -14,7 +14,7 @@ import { toRiderHallOrderSummary, toRiderHallPreviewDto } from '../lib/mappers';
 import { computeRiderTier } from '../lib/riderTier';
 import { buildRealPersonRider } from '../lib/riders';
 import { emitHallChanged, subscribeHallChanged } from '../lib/riderHallEvents';
-import { requireAuth } from '../middleware/auth';
+import { requireAuth, requireAuthAllowQueryToken } from '../middleware/auth';
 import { UUID_RE, validateJson } from '../lib/validate';
 
 const grabSchema = z.object({ orderId: z.string().regex(UUID_RE, '订单不存在') });
@@ -61,7 +61,7 @@ export const riderHallRoutes = new Hono()
     return c.json(toRiderHallPreviewDto(row.order, row.buyerUsername ?? ''));
   })
 
-  .get('/stream', requireAuth, (c) =>
+  .get('/stream', requireAuthAllowQueryToken, (c) =>
     streamSSE(c, async (stream) => {
       let closed = false;
       const push = () => {

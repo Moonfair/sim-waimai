@@ -6,7 +6,7 @@ import type {
   RiderHallPendingDto,
 } from '@sim-waimai/shared';
 import { useAuth } from './AuthContext';
-import { api, ApiError } from '../lib/api';
+import { api, apiUrl, ApiError, CROSS_ORIGIN, getStoredToken } from '../lib/api';
 
 const GRAB_COOLDOWN_MS = 10_000;
 
@@ -46,7 +46,12 @@ export function RiderHallProvider({ children }: { children: ReactNode }) {
       return;
     }
     refetch();
-    const es = new EventSource('/api/rider-hall/stream', { withCredentials: true });
+    // EventSource can't send custom headers, so the cross-origin (Toy) build passes the
+    // Bearer token as a query param instead of relying on the (unusable, third-party) cookie.
+    const streamUrl = CROSS_ORIGIN
+      ? `${apiUrl('/rider-hall/stream')}?token=${encodeURIComponent(getStoredToken() ?? '')}`
+      : apiUrl('/rider-hall/stream');
+    const es = new EventSource(streamUrl, { withCredentials: !CROSS_ORIGIN });
     es.addEventListener('changed', refetch);
     es.onerror = () => {}; // EventSource auto-reconnects on its own
     return () => es.close();

@@ -59,14 +59,26 @@ async function toUserDto(row: { id: string; username: string; createdAt: Date })
   };
 }
 
-async function setAuthCookie(c: Context, user: { id: string; username: string }) {
-  setCookie(c, AUTH_COOKIE, await signToken(user), {
+/** Sets the httpOnly session cookie (used by same-origin deploys) and returns the raw JWT
+ *  so callers can also hand it to a cross-origin client (the Toy build) as a Bearer token. */
+async function issueSession(c: Context, user: { id: string; username: string }): Promise<string> {
+  const token = await signToken(user);
+  setCookie(c, AUTH_COOKIE, token, {
     httpOnly: true,
     sameSite: 'Lax',
     path: '/',
     secure: env.NODE_ENV === 'production',
     maxAge: 7 * 24 * 3600,
   });
+  return token;
+}
+
+/** The cross-origin Toy build can't rely on the cookie (third-party cookie blocking), so it
+ *  flags itself with this header to also get the raw JWT back in the response body. Gated
+ *  behind an explicit opt-in so the normal site's login/register response — read by page JS —
+ *  never carries the token, preserving the httpOnly cookie's XSS protection there. */
+function wantsBearerToken(c: Context): boolean {
+  return c.req.header('X-Client') === 'toy-bearer';
 }
 
 async function findByUsername(username: string) {
@@ -108,8 +120,9 @@ export const authRoutes = new Hono()
       throw err;
     }
     await recordDeviceSeen(row!.id, deviceId);
-    await setAuthCookie(c, row!);
-    return c.json(await toUserDto(row!));
+    const token = await issueSession(c, row!);
+    const dto = await toUserDto(row!);
+    return c.json(wantsBearerToken(c) ? { ...dto, token } : dto);
   })
   .post('/login', loginRateLimit, validateCredentials, async (c) => {
     const { username, password, deviceId } = c.req.valid('json');
@@ -121,8 +134,9 @@ export const authRoutes = new Hono()
       return c.json({ error: '用户名或密码不对，请检查后重试' }, 401);
     }
     await recordDeviceSeen(row.id, deviceId);
-    await setAuthCookie(c, row);
-    return c.json(await toUserDto(row));
+    const token = await issueSession(c, row);
+    const dto = await toUserDto(row);
+    return c.json(wantsBearerToken(c) ? { ...dto, token } : dto);
   })
   .post('/logout', requireAuth, (c) => {
     deleteCookie(c, AUTH_COOKIE, { path: '/' });

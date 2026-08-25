@@ -1,7 +1,9 @@
 import { Hono } from 'hono';
 import { bodyLimit } from 'hono/body-limit';
+import { cors } from 'hono/cors';
 import { HTTPException } from 'hono/http-exception';
 import { timeout } from 'hono/timeout';
+import { env } from './env';
 import { logEvent } from './lib/logger';
 import { rateLimit } from './middleware/rateLimit';
 import { adminRoutes } from './routes/admin';
@@ -28,6 +30,23 @@ const REQUEST_TIMEOUT_MS = 15_000;
 
 export function createApp() {
   const app = new Hono().basePath('/api');
+
+  // Cross-origin static hosts (e.g. the Toy build) authenticate via Bearer token, not the
+  // cookie, so this doesn't need credentials:true. Off entirely unless explicitly configured.
+  const corsOrigins = (env.CORS_ALLOWED_ORIGINS ?? '')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+  if (corsOrigins.length > 0) {
+    app.use(
+      '*',
+      cors({
+        origin: corsOrigins,
+        allowHeaders: ['Content-Type', 'Authorization', 'X-Client'],
+        allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      }),
+    );
+  }
 
   // Cap request latency, then shed per-IP floods before we buffer any body.
   // Exempt the 抢单大厅 SSE stream: it's a deliberately long-lived connection, not a slow request.

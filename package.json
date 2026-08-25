@@ -11,6 +11,7 @@
     "dev": "concurrently -n web,api -c blue,green \"vite\" \"npm -w server run dev\"",
     "dev:client": "vite",
     "build": "tsc -b && vite build",
+    "build:toy": "tsc -b && vite build --mode toy",
     "lint": "oxlint",
     "preview": "vite preview",
     "db:up": "docker compose up -d db",

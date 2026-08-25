@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { AddressProvider } from './context/AddressContext';
@@ -36,9 +36,15 @@ import RiderStats from './pages/RiderStats';
 import RiderTracking from './pages/RiderTracking';
 import RiderDone from './pages/RiderDone';
 
+// The Toy build has no server-side rewrite for deep links (static hosting), so history-mode
+// routes 404 on refresh/direct nav there — it opts into hash routing instead (see vite.config.ts
+// / .env.toy). The normal site keeps history mode with its existing basename.
+const isHashRouting = import.meta.env.VITE_ROUTER_MODE === 'hash';
+const Router = isHashRouting ? HashRouter : BrowserRouter;
+
 export default function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <Router {...(isHashRouting ? {} : { basename: import.meta.env.BASE_URL })}>
       <ThemeProvider>
         <AuthProvider>
           <AddressProvider>
@@ -109,6 +115,6 @@ export default function App() {
           </AddressProvider>
         </AuthProvider>
       </ThemeProvider>
-    </BrowserRouter>
+    </Router>
   );
 }

@@ -41,6 +41,9 @@ const envSchema = z.object({
   MODERATION_ALERT_COOLDOWN_MINUTES: z.coerce.number().default(120),
   /** 可选：邮件里拼审核页链接用，不填就不放链接。 */
   APP_PUBLIC_URL: z.string().optional(),
+  /** 允许跨域调用 /api 的来源，逗号分隔（如 Toy 静态托管域名）。留空则不启用 CORS，
+   *  行为与之前完全一致（仅同源前端可用）。 */
+  CORS_ALLOWED_ORIGINS: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);

@@ -1,8 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { UserDto } from '@sim-waimai/shared';
-import { api } from '../lib/api';
+import { api, setStoredToken } from '../lib/api';
 import { getDeviceId } from '../lib/deviceFingerprint';
+
+/** Present only when the API responded to a cross-origin (Toy) client — see api.ts. */
+type AuthResponse = UserDto & { token?: string };
 
 interface AuthContextType {
   user: UserDto | null;
@@ -34,7 +37,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (username: string, password: string) => {
     const deviceId = await getDeviceId();
-    setUser(await api.post<UserDto>('/auth/login', { username, password, deviceId }));
+    const res = await api.post<AuthResponse>('/auth/login', { username, password, deviceId });
+    setStoredToken(res.token ?? null);
+    setUser(res);
   };
 
   const register = async (
@@ -44,19 +49,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     captchaAnswer: number,
   ) => {
     const deviceId = await getDeviceId();
-    setUser(
-      await api.post<UserDto>('/auth/register', {
-        username,
-        password,
-        captchaToken,
-        captchaAnswer,
-        deviceId,
-      }),
-    );
+    const res = await api.post<AuthResponse>('/auth/register', {
+      username,
+      password,
+      captchaToken,
+      captchaAnswer,
+      deviceId,
+    });
+    setStoredToken(res.token ?? null);
+    setUser(res);
   };
 
   const logout = async () => {
     await api.post('/auth/logout');
+    setStoredToken(null);
     setUser(null);
   };
 
