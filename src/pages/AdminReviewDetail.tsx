@@ -7,6 +7,7 @@ import type {
 } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -130,7 +131,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
               </div>
               {data.restaurant.bannerImage && (
                 <ZoomableImage
-                  src={data.restaurant.bannerImage}
+                  src={assetUrl(data.restaurant.bannerImage)}
                   alt="横幅"
                   className="w-full h-32 object-cover rounded-xl"
                 />
@@ -166,7 +167,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
                   {data.review.photos.map((photo) => (
                     <ZoomableImage
                       key={photo}
-                      src={photo}
+                      src={assetUrl(photo)}
                       alt="评价图片"
                       className="w-full aspect-square object-cover rounded-xl"
                     />
@@ -189,7 +190,7 @@ export default function AdminReviewDetail({ targetType }: Props) {
               </p>
               {data.item.image && (
                 <ZoomableImage
-                  src={data.item.image}
+                  src={assetUrl(data.item.image)}
                   alt={data.item.name}
                   className="w-32 h-32 object-cover rounded-xl"
                 />

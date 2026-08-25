@@ -5,6 +5,7 @@ import { faFlag, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import type { AdminReportDto, ResolveReportsResultDto } from '@sim-waimai/shared';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import ZoomableImage from '../components/ZoomableImage';
 
 const TARGET_TYPE_LABEL = { restaurant: '店铺', menuItem: '菜品', review: '评价' } as const;
@@ -151,7 +152,7 @@ export default function AdminReports() {
                       />
                       {r.image ? (
                         <ZoomableImage
-                          src={r.image}
+                          src={assetUrl(r.image)}
                           alt={r.name}
                           className="w-12 h-12 rounded-xl object-cover flex-shrink-0"
                         />
@@ -181,7 +182,7 @@ export default function AdminReports() {
                             {r.photos.map((photo) => (
                               <ZoomableImage
                                 key={photo}
-                                src={photo}
+                                src={assetUrl(photo)}
                                 alt="评价图片"
                                 className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
                               />

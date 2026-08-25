@@ -5,6 +5,7 @@ import { faEllipsisVertical, faFlag } from '@fortawesome/free-solid-svg-icons';
 import type { MenuItem as MenuItemType, Restaurant } from '../data/restaurants';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { assetUrl } from '../lib/assetUrl';
 import ReportSheet from './ReportSheet';
 import ZoomableImage from './ZoomableImage';
 import { useLongPressStep } from '../hooks/useLongPressStep';
@@ -86,7 +87,7 @@ export default function MenuItem({ item, restaurant, purchasable = true }: Props
 
       {item.image ? (
         <ZoomableImage
-          src={item.image}
+          src={assetUrl(item.image)}
           alt={item.name}
           className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
         />

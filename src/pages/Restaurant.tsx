@@ -11,6 +11,7 @@ import ReviewList from '../components/ReviewList';
 import { useAuth } from '../context/AuthContext';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import ZoomableImage from '../components/ZoomableImage';
 import PosterShareSheet from '../components/PosterShareSheet';
 import { restaurantUrl } from '../lib/share';
@@ -160,7 +161,7 @@ export default function Restaurant() {
       >
         {restaurant.bannerImage && (
           <ZoomableImage
-            src={restaurant.bannerImage}
+            src={assetUrl(restaurant.bannerImage)}
             alt={restaurant.name}
             className="absolute inset-0 w-full h-full object-cover z-0"
           />

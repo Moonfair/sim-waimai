@@ -4,6 +4,7 @@ import type { MerchantRestaurantDto, MerchantReviewDto, Page } from '@sim-waimai
 import ZoomableImage from '../components/ZoomableImage';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 
@@ -148,7 +149,7 @@ export default function MerchantReviews() {
                       {review.photos.map((photo) => (
                         <ZoomableImage
                           key={photo}
-                          src={photo}
+                          src={assetUrl(photo)}
                           alt="评价图片"
                           className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
                         />

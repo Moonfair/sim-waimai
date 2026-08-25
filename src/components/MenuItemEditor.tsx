@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import type { MenuItemOptionGroup, MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import ZoomableImage from './ZoomableImage';
 import { uploadImage } from '../lib/upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -160,7 +161,7 @@ export default function MenuItemEditor({ restaurant, item, onClose, onSaved }: P
           {/* Item photo */}
           <div className="flex items-center gap-3">
             {image ? (
-              <ZoomableImage src={image} alt="菜品图" className="w-16 h-16 rounded-xl object-cover" />
+              <ZoomableImage src={assetUrl(image)} alt="菜品图" className="w-16 h-16 rounded-xl object-cover" />
             ) : (
               <div className="w-16 h-16 rounded-xl bg-gray-50 dark:bg-gray-900 border border-dashed border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-300 dark:text-gray-600 text-xl">
                 <FontAwesomeIcon icon={faCamera} />

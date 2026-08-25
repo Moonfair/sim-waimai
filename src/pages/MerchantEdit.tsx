@@ -17,6 +17,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { MerchantMenuItemDto, MerchantRestaurantDto } from '@sim-waimai/shared';
+import { assetUrl } from '../lib/assetUrl';
 import MenuItemEditor from '../components/MenuItemEditor';
 import { useApi } from '../hooks/useApi';
 import { api } from '../lib/api';
@@ -263,7 +264,7 @@ export default function MerchantEdit() {
             </button>
           </div>
           {shop.bannerImage ? (
-            <ZoomableImage src={shop.bannerImage} alt="店铺横幅" className="w-full h-28 object-cover rounded-xl" />
+            <ZoomableImage src={assetUrl(shop.bannerImage)} alt="店铺横幅" className="w-full h-28 object-cover rounded-xl" />
           ) : (
             <div
               className="w-full h-28 rounded-xl flex items-center justify-center text-5xl"

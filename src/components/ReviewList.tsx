@@ -5,6 +5,7 @@ import { faFlag, faStar } from '@fortawesome/free-solid-svg-icons';
 import type { Page, ReviewDto } from '@sim-waimai/shared';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import { formatCount } from '../lib/displayStats';
 import ReportSheet from './ReportSheet';
 import ZoomableImage from './ZoomableImage';
@@ -142,7 +143,7 @@ export default function ReviewList({ restaurantId, rating, ratingCount }: Props)
                   {review.photos.map((photo) => (
                     <ZoomableImage
                       key={photo}
-                      src={photo}
+                      src={assetUrl(photo)}
                       alt="评价图片"
                       className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
                     />

@@ -10,6 +10,7 @@ import type {
 import { useApi } from '../hooks/useApi';
 import { useDebounce } from '../hooks/useDebounce';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import ZoomableImage from '../components/ZoomableImage';
 import { AI_VERDICT_BADGE, STATUS_BADGE } from '../lib/reviewBadges';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -355,7 +356,7 @@ export default function AdminReview() {
                     )}
                     {item.image ? (
                       <ZoomableImage
-                        src={item.image}
+                        src={assetUrl(item.image)}
                         alt={item.name}
                         className="w-12 h-12 rounded-xl object-cover flex-shrink-0"
                       />
@@ -389,7 +390,7 @@ export default function AdminReview() {
                           {item.photos.map((photo) => (
                             <ZoomableImage
                               key={photo}
-                              src={photo}
+                              src={assetUrl(photo)}
                               alt="评价图片"
                               className="w-12 h-12 object-cover rounded-lg flex-shrink-0"
                             />

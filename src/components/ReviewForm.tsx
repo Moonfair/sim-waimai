@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import type { ReviewDto } from '@sim-waimai/shared';
 import { api } from '../lib/api';
+import { assetUrl } from '../lib/assetUrl';
 import ZoomableImage from './ZoomableImage';
 import { uploadImage } from '../lib/upload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -85,7 +86,7 @@ export default function ReviewForm({ orderId, onSubmitted }: Props) {
       <div className="flex items-center gap-2 mt-3 flex-wrap">
         {photos.map((photo) => (
           <div key={photo} className="relative">
-            <ZoomableImage src={photo} alt="评价图片" className="w-14 h-14 rounded-lg object-cover" />
+            <ZoomableImage src={assetUrl(photo)} alt="评价图片" className="w-14 h-14 rounded-lg object-cover" />
             <button
               className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-gray-800/80 text-white rounded-full text-[10px] leading-none flex items-center justify-center"
               onClick={() => setPhotos((p) => p.filter((x) => x !== photo))}
