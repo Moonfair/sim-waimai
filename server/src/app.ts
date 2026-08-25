@@ -10,6 +10,7 @@ import { adminShopsRoutes } from './routes/adminShops';
 import { adminStatsRoutes } from './routes/adminStats';
 import { adminUsersRoutes } from './routes/adminUsers';
 import { authRoutes } from './routes/auth';
+import { adminChangelogRoutes, changelogRoutes } from './routes/changelog';
 import { favoriteRoutes } from './routes/favorites';
 import { merchantRoutes } from './routes/merchant';
 import { recommendationRoutes } from './routes/recommendations';
@@ -62,11 +63,13 @@ export function createApp() {
   app.route('/uploads', uploadRoutes);
   app.route('/recommendations', recommendationRoutes);
   app.route('/reports', reportRoutes);
+  app.route('/changelog', changelogRoutes);
   app.route('/admin', adminRoutes);
   app.route('/admin', adminStatsRoutes);
   app.route('/admin', adminShopsRoutes);
   app.route('/admin', adminReportsRoutes);
   app.route('/admin', adminUsersRoutes);
+  app.route('/admin', adminChangelogRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
 

@@ -8,6 +8,7 @@ import GrabOrderBubble from './components/GrabOrderBubble';
 import TopNav from './components/TopNav';
 import RequireAdmin from './components/RequireAdmin';
 import RequireAuth from './components/RequireAuth';
+import RequireChangelogEditor from './components/RequireChangelogEditor';
 import Home from './pages/Home';
 import Restaurant from './pages/Restaurant';
 import Cart from './pages/Cart';
@@ -30,6 +31,7 @@ import AdminStats from './pages/AdminStats';
 import AdminShops from './pages/AdminShops';
 import AdminReports from './pages/AdminReports';
 import AdminUsers from './pages/AdminUsers';
+import AdminChangelog from './pages/AdminChangelog';
 import RiderStats from './pages/RiderStats';
 import RiderTracking from './pages/RiderTracking';
 import RiderDone from './pages/RiderDone';
@@ -92,6 +94,14 @@ export default function App() {
                   <Route path="/admin/shops" element={<RequireAdmin><AdminShops /></RequireAdmin>} />
                   <Route path="/admin/reports" element={<RequireAdmin><AdminReports /></RequireAdmin>} />
                   <Route path="/admin/users" element={<RequireAdmin><AdminUsers /></RequireAdmin>} />
+                  <Route
+                    path="/admin/changelog"
+                    element={
+                      <RequireChangelogEditor>
+                        <AdminChangelog />
+                      </RequireChangelogEditor>
+                    }
+                  />
                 </Routes>
                 <GrabOrderBubble />
               </RiderHallProvider>

@@ -10,6 +10,7 @@ import { users } from '../db/schema';
 import { env } from '../env';
 import { isAdmin } from '../lib/admin';
 import { issueCaptcha, verifyCaptcha } from '../lib/captcha';
+import { canManageChangelog } from '../lib/changelogAccess';
 import { isDeviceBanned, recordDeviceSeen } from '../lib/deviceTracking';
 import { signToken } from '../lib/jwt';
 import { moderateTextSync } from '../lib/moderationProvider';
@@ -48,12 +49,13 @@ const validateRegister = zValidator('json', registerSchema, (result, c) => {
   }
 });
 
-function toUserDto(row: { id: string; username: string; createdAt: Date }): UserDto {
+async function toUserDto(row: { id: string; username: string; createdAt: Date }): Promise<UserDto> {
   return {
     id: row.id,
     username: row.username,
     createdAt: row.createdAt.toISOString(),
     isAdmin: isAdmin(row.username),
+    canManageChangelog: await canManageChangelog(row.username),
   };
 }
 
@@ -107,7 +109,7 @@ export const authRoutes = new Hono()
     }
     await recordDeviceSeen(row!.id, deviceId);
     await setAuthCookie(c, row!);
-    return c.json(toUserDto(row!));
+    return c.json(await toUserDto(row!));
   })
   .post('/login', loginRateLimit, validateCredentials, async (c) => {
     const { username, password, deviceId } = c.req.valid('json');
@@ -120,7 +122,7 @@ export const authRoutes = new Hono()
     }
     await recordDeviceSeen(row.id, deviceId);
     await setAuthCookie(c, row);
-    return c.json(toUserDto(row));
+    return c.json(await toUserDto(row));
   })
   .post('/logout', requireAuth, (c) => {
     deleteCookie(c, AUTH_COOKIE, { path: '/' });
@@ -131,5 +133,5 @@ export const authRoutes = new Hono()
     if (!payload) return c.json({ error: '请先登录' }, 401);
     const [row] = await db.select().from(users).where(eq(users.id, payload.sub));
     if (!row) return c.json({ error: '请先登录' }, 401);
-    return c.json(toUserDto(row));
+    return c.json(await toUserDto(row));
   });

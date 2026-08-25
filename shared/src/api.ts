@@ -12,6 +12,8 @@ export interface UserDto {
   createdAt: string;
   /** True when the username is in the server's ADMIN_USERNAMES list. */
   isAdmin?: boolean;
+  /** True when the user can manage 更新日志 entries: isAdmin, or designated via changelog_editors. */
+  canManageChangelog?: boolean;
 }
 
 /** Moderation state for user-published restaurants and menu items. */
@@ -422,6 +424,34 @@ export interface AdminUserListDto {
   total: number;
   page: number;
   pageSize: number;
+}
+
+/** One 更新日志 entry. Version and date are server-generated, never client-editable. */
+export interface ChangelogEntryDto {
+  id: string;
+  version: number;
+  content: string;
+  createdAt: string;
+  createdBy: string;
+  updatedAt: string | null;
+  updatedBy: string | null;
+}
+
+/** Response for GET /changelog — newest version first. */
+export interface ChangelogListDto {
+  items: ChangelogEntryDto[];
+}
+
+/** One username an admin has designated as a 更新日志 editor. */
+export interface ChangelogEditorDto {
+  username: string;
+  addedBy: string;
+  addedAt: string;
+}
+
+/** Response for GET /admin/changelog-editors. */
+export interface ChangelogEditorListDto {
+  items: ChangelogEditorDto[];
 }
 
 /** Response for POST /admin/users/:id/ban — how much of the user's historical content got auto-rejected. */

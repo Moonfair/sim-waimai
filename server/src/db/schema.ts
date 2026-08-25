@@ -291,3 +291,29 @@ export const reports = pgTable(
     index('reports_created_idx').on(t.createdAt.desc()),
   ],
 );
+
+/** 更新日志公告，版本号在插入时按 max(version)+1 顺序生成。 */
+export const changelogEntries = pgTable(
+  'changelog_entries',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    version: integer('version').notNull(),
+    content: text('content').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    /** 发布者 username（管理员或被授权的编辑用户）。 */
+    createdBy: text('created_by').notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }),
+    /** 最近一次编辑者 username；未编辑过则为 null。 */
+    updatedBy: text('updated_by'),
+  },
+  (t) => [uniqueIndex('changelog_entries_version_idx').on(t.version)],
+);
+
+/** 被管理员额外授权、可编辑更新日志的普通用户名单（管理员本身无需在此表中）。 */
+export const changelogEditors = pgTable('changelog_editors', {
+  /** 小写 username，与 users_username_lower_idx 的大小写不敏感比较口径一致。 */
+  username: text('username').primaryKey(),
+  /** 授权操作的管理员 username. */
+  addedBy: text('added_by').notNull(),
+  addedAt: timestamp('added_at', { withTimezone: true }).notNull().defaultNow(),
+});

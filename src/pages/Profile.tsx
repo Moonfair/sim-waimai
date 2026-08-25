@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -11,11 +11,13 @@ import {
   faChartLine,
   faShop,
   faUserSlash,
+  faClockRotateLeft,
   faSun,
   faMoon,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import BottomNav from '../components/BottomNav';
+import ChangelogModal from '../components/ChangelogModal';
 import UserStatsPanel from '../components/UserStatsPanel';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -37,6 +39,7 @@ export default function Profile() {
   const { user, loading, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const [changelogOpen, setChangelogOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -47,16 +50,22 @@ export default function Profile() {
 
   const joined = user ? new Date(user.createdAt).toLocaleDateString('zh-CN') : '';
 
-  const menuRows = user?.isAdmin
-    ? [
-        ...MENU_ROWS,
-        { emoji: <FontAwesomeIcon icon={faShieldHalved} />, label: '审核管理', to: '/admin/review' },
-        { emoji: <FontAwesomeIcon icon={faChartLine} />, label: '网站统计', to: '/admin/stats' },
-        { emoji: <FontAwesomeIcon icon={faShop} />, label: '店铺管理', to: '/admin/shops' },
-        { emoji: <FontAwesomeIcon icon={faFlag} />, label: '举报管理', to: '/admin/reports' },
-        { emoji: <FontAwesomeIcon icon={faUserSlash} />, label: '用户管理', to: '/admin/users' },
-      ]
-    : MENU_ROWS;
+  const menuRows: MenuRow[] = [
+    ...MENU_ROWS,
+    ...(user?.isAdmin
+      ? [
+          { emoji: <FontAwesomeIcon icon={faShieldHalved} />, label: '审核管理', to: '/admin/review' },
+          { emoji: <FontAwesomeIcon icon={faChartLine} />, label: '网站统计', to: '/admin/stats' },
+          { emoji: <FontAwesomeIcon icon={faShop} />, label: '店铺管理', to: '/admin/shops' },
+          { emoji: <FontAwesomeIcon icon={faFlag} />, label: '举报管理', to: '/admin/reports' },
+          { emoji: <FontAwesomeIcon icon={faUserSlash} />, label: '用户管理', to: '/admin/users' },
+        ]
+      : []),
+    // 全站管理员 + 管理员指定的编辑者都能看到，普通用户不可见
+    ...(user?.canManageChangelog
+      ? [{ emoji: <FontAwesomeIcon icon={faClockRotateLeft} />, label: '更新日志管理', to: '/admin/changelog' }]
+      : []),
+  ];
 
   return (
     <div className="app-container min-h-screen pb-24">
@@ -130,7 +139,17 @@ export default function Profile() {
             </button>
           )
         )}
+
+        <button
+          type="button"
+          className="block w-full text-center mt-6 text-orange-500 text-xs font-medium"
+          onClick={() => setChangelogOpen(true)}
+        >
+          更新日志
+        </button>
       </div>
+
+      {changelogOpen && <ChangelogModal onClose={() => setChangelogOpen(false)} />}
 
       <BottomNav />
     </div>
