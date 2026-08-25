@@ -14,6 +14,7 @@ import { adminUsersRoutes } from './routes/adminUsers';
 import { authRoutes } from './routes/auth';
 import { adminChangelogRoutes, changelogRoutes } from './routes/changelog';
 import { favoriteRoutes } from './routes/favorites';
+import { imageProxyRoutes } from './routes/imageProxy';
 import { merchantRoutes } from './routes/merchant';
 import { recommendationRoutes } from './routes/recommendations';
 import { orderRoutes } from './routes/orders';
@@ -38,7 +39,9 @@ export function createApp() {
   // and often per-session; never let a shared CDN cache them.
   app.use('*', async (c, next) => {
     await next();
-    c.header('Cache-Control', 'no-store');
+    // Image proxy responses set their own long-lived Cache-Control; everything else is
+    // dynamic/per-session and must never be cached by a shared CDN.
+    if (!c.req.path.startsWith('/api/image-proxy')) c.header('Cache-Control', 'no-store');
   });
 
   // Cross-origin static hosts (e.g. the Toy build) authenticate via Bearer token, not the
@@ -88,6 +91,7 @@ export function createApp() {
   app.route('/orders', reviewRoutes);
   app.route('/rider-hall', riderHallRoutes);
   app.route('/favorites', favoriteRoutes);
+  app.route('/image-proxy', imageProxyRoutes);
   app.route('/merchant', merchantRoutes);
   app.route('/uploads', uploadRoutes);
   app.route('/recommendations', recommendationRoutes);

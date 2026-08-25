@@ -1,4 +1,4 @@
-import { apiUrl } from './api';
+import { apiUrl, CROSS_ORIGIN } from './api';
 
 /** Resolves a restaurant image's COS object key (e.g. "restaurants/burgerking/banner.jpg")
  *  to a loadable URL. Already-absolute URLs and local-upload API paths pass through unchanged. */
@@ -7,6 +7,9 @@ export function assetUrl(path: string): string {
   if (/^(https?:\/\/|blob:|data:)/.test(path)) return path;
   // Dev-fallback upload served by the API (proxied), not a COS key.
   if (path.startsWith('/api/')) return apiUrl(path.slice('/api'.length));
+  // Cross-origin (Toy) build: the browser's Private Network Access check blocks a direct
+  // <img> fetch to the COS domain from that origin, so route it through our own /api instead.
+  if (CROSS_ORIGIN) return apiUrl(`/image-proxy?key=${encodeURIComponent(path)}`);
   // Seed restaurant images: COS object key, resolved against VITE_COS_BASE_URL.
   const base = import.meta.env.VITE_COS_BASE_URL ?? '';
   return `${base.replace(/\/$/, '')}/${path}`;
