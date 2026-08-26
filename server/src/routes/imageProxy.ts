@@ -8,11 +8,20 @@ const KEY_RE = /^(restaurants|uploads)\/[\w-]+(\/[\w-]+)*\.(jpg|jpeg|png|webp)$/
 /** Streams a COS object through our own origin. Only needed by the cross-origin (Toy) build:
  *  the browser's Private Network Access check blocks direct <img> fetches to the COS domain
  *  from that origin, but same-origin /api requests aren't subject to it. */
+const UPSTREAM_TIMEOUT_MS = 20_000;
+
 export const imageProxyRoutes = new Hono().get('/', async (c) => {
   const key = c.req.query('key');
   if (!key || !KEY_RE.test(key)) return c.json({ error: '无效的图片路径' }, 400);
 
-  const upstream = await fetch(publicUrlFor(key));
+  let upstream: Response;
+  try {
+    upstream = await fetch(publicUrlFor(key), { signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS) });
+  } catch {
+    // Times out (or otherwise fails) before any response headers/bytes reach the client, so this
+    // always fails cleanly — unlike a mid-stream abort, which corrupts the HTTP/2 response.
+    return c.json({ error: '图片加载超时' }, 504);
+  }
   if (!upstream.ok || !upstream.body) {
     return c.json({ error: '图片不存在' }, upstream.status === 404 ? 404 : 502);
   }

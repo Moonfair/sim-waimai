@@ -62,11 +62,15 @@ export function createApp() {
   }
 
   // Cap request latency, then shed per-IP floods before we buffer any body.
-  // Exempt the 抢单大厅 SSE stream: it's a deliberately long-lived connection, not a slow request.
+  // Exempt the 抢单大厅 SSE stream (a deliberately long-lived connection, not a slow request)
+  // and the image proxy: this middleware firing mid-stream — after headers/some body bytes
+  // are already flushed — truncates the HTTP/2 response instead of cleanly erroring, which
+  // showed up as net::ERR_HTTP2_PROTOCOL_ERROR for slow concurrent image loads. The proxy
+  // bounds its own upstream fetch instead (see routes/imageProxy.ts), which fails before any
+  // bytes are sent.
   const requestTimeout = timeout(REQUEST_TIMEOUT_MS);
-  app.use('*', (c, next) =>
-    c.req.path === '/api/rider-hall/stream' ? next() : requestTimeout(c, next),
-  );
+  const timeoutExempt = new Set(['/api/rider-hall/stream', '/api/image-proxy']);
+  app.use('*', (c, next) => (timeoutExempt.has(c.req.path) ? next() : requestTimeout(c, next)));
   app.use('*', rateLimit({ windowMs: 60_000, max: 300, message: '请求过于频繁，请稍后再试' }));
 
   // Bound how much we buffer per request. Uploads carry raw image bytes, so they get a wider cap;
