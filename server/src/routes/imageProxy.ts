@@ -5,10 +5,11 @@ import { publicUrlFor } from '../lib/cos';
  *  (restaurants/<id>/...). No `..` or absolute paths — this builds the COS fetch URL itself. */
 const KEY_RE = /^(restaurants|uploads)\/[\w-]+(\/[\w-]+)*\.(jpg|jpeg|png|webp)$/i;
 
-/** Streams a COS object through our own origin. Only needed by the cross-origin (Toy) build:
+/** Proxies a COS object through our own origin. Only needed by the cross-origin (Toy) build:
  *  the browser's Private Network Access check blocks direct <img> fetches to the COS domain
  *  from that origin, but same-origin /api requests aren't subject to it. */
 const UPSTREAM_TIMEOUT_MS = 20_000;
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 
 export const imageProxyRoutes = new Hono().get('/', async (c) => {
   const key = c.req.query('key');
@@ -25,7 +26,24 @@ export const imageProxyRoutes = new Hono().get('/', async (c) => {
   if (!upstream.ok || !upstream.body) {
     return c.json({ error: '图片不存在' }, upstream.status === 404 ? 404 : 502);
   }
+  const declaredLength = Number(upstream.headers.get('content-length') ?? NaN);
+  if (declaredLength > MAX_IMAGE_BYTES) return c.json({ error: '图片过大' }, 502);
+
+  // Buffer fully rather than pipe upstream.body straight through: streaming a Node/undici
+  // ReadableStream via c.body() with no declared Content-Length produced malformed HTTP/2
+  // responses under EdgeOne's HTTP/1.1-to-HTTP/2 translation (net::ERR_HTTP2_PROTOCOL_ERROR,
+  // status still reported 200). These are small images, so buffering is cheap and — because the
+  // Content-Length we send is measured from the exact bytes we send — can't drift from reality.
+  let bytes: ArrayBuffer;
+  try {
+    bytes = await upstream.arrayBuffer();
+  } catch {
+    return c.json({ error: '图片加载失败' }, 502);
+  }
+  if (bytes.byteLength > MAX_IMAGE_BYTES) return c.json({ error: '图片过大' }, 502);
+
   c.header('Content-Type', upstream.headers.get('content-type') ?? 'application/octet-stream');
+  c.header('Content-Length', String(bytes.byteLength));
   c.header('Cache-Control', 'public, max-age=86400, immutable');
-  return c.body(upstream.body);
+  return c.body(bytes);
 });
