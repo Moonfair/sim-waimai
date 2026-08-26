@@ -427,11 +427,14 @@ export interface AdminUserListDto {
 }
 
 /** One 更新日志 entry. title/version/date can be set manually; left blank they default to
- *  '更新公告', max(version)+1, and the current time respectively. */
+ *  '更新公告', a semver-style bump off the latest entry, and the current time respectively.
+ *  Version is 大版本(重大更新).中版本(主要特性更新).小版本(修复优化). */
 export interface ChangelogEntryDto {
   id: string;
   title: string;
-  version: number;
+  versionMajor: number;
+  versionMinor: number;
+  versionPatch: number;
   content: string;
   createdAt: string;
   createdBy: string;

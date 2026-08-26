@@ -16,6 +16,10 @@ function toDateInputValue(iso: string): string {
   return iso.slice(0, 10);
 }
 
+function formatVersion(entry: ChangelogEntryDto): string {
+  return `${entry.versionMajor}.${entry.versionMinor}.${entry.versionPatch}`;
+}
+
 const inputClass =
   'px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-orange-400 text-sm';
 
@@ -26,13 +30,17 @@ export default function AdminChangelog() {
   const items = data?.items ?? [];
 
   const [newTitle, setNewTitle] = useState('');
-  const [newVersion, setNewVersion] = useState('');
+  const [newMajor, setNewMajor] = useState('');
+  const [newMinor, setNewMinor] = useState('');
+  const [newPatch, setNewPatch] = useState('');
   const [newDate, setNewDate] = useState('');
   const [newContent, setNewContent] = useState('');
   const [creating, setCreating] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState('');
-  const [editVersion, setEditVersion] = useState('');
+  const [editMajor, setEditMajor] = useState('');
+  const [editMinor, setEditMinor] = useState('');
+  const [editPatch, setEditPatch] = useState('');
   const [editDate, setEditDate] = useState('');
   const [editContent, setEditContent] = useState('');
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -49,12 +57,16 @@ export default function AdminChangelog() {
     try {
       await api.post<ChangelogEntryDto>('/admin/changelog', {
         title: newTitle,
-        version: newVersion,
+        versionMajor: newMajor,
+        versionMinor: newMinor,
+        versionPatch: newPatch,
         date: newDate,
         content: newContent.trim(),
       });
       setNewTitle('');
-      setNewVersion('');
+      setNewMajor('');
+      setNewMinor('');
+      setNewPatch('');
       setNewDate('');
       setNewContent('');
       flash('已发布 ✓');
@@ -69,7 +81,9 @@ export default function AdminChangelog() {
   const startEdit = (entry: ChangelogEntryDto) => {
     setEditingId(entry.id);
     setEditTitle(entry.title);
-    setEditVersion(String(entry.version));
+    setEditMajor(String(entry.versionMajor));
+    setEditMinor(String(entry.versionMinor));
+    setEditPatch(String(entry.versionPatch));
     setEditDate(toDateInputValue(entry.createdAt));
     setEditContent(entry.content);
   };
@@ -80,7 +94,9 @@ export default function AdminChangelog() {
     try {
       await api.patch<ChangelogEntryDto>(`/admin/changelog/${id}`, {
         title: editTitle,
-        version: editVersion,
+        versionMajor: editMajor,
+        versionMinor: editMinor,
+        versionPatch: editPatch,
         date: editDate,
         content: editContent.trim(),
       });
@@ -120,7 +136,8 @@ export default function AdminChangelog() {
           <h1 className="text-gray-900 dark:text-gray-100 font-bold text-lg">更新日志管理</h1>
         </div>
         <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">
-          标题/日期/版本号可手动填写，留空时分别取默认标题「更新公告」、当前日期、当前最大版本号+1；内容为必填项
+          标题/日期/版本号可手动填写，留空时分别取默认标题「更新公告」、当前日期、在上一版本基础上自动递增；内容为必填项。
+          版本号为大版本(重大更新).中版本(主要特性更新).小版本(修复优化)：只填大版本会把中/小版本清零，只填中版本会沿用当前大版本并清零小版本
         </p>
       </div>
 
@@ -138,12 +155,30 @@ export default function AdminChangelog() {
           />
           <div className="flex gap-2 mt-2">
             <input
-              className={`flex-1 ${inputClass}`}
+              className={`w-16 text-center ${inputClass}`}
               type="number"
-              min={1}
-              placeholder="版本号（留空自动递增）"
-              value={newVersion}
-              onChange={(e) => setNewVersion(e.target.value)}
+              min={0}
+              placeholder="大版本"
+              value={newMajor}
+              onChange={(e) => setNewMajor(e.target.value)}
+            />
+            <span className="self-center text-gray-300 dark:text-gray-600">.</span>
+            <input
+              className={`w-16 text-center ${inputClass}`}
+              type="number"
+              min={0}
+              placeholder="中版本"
+              value={newMinor}
+              onChange={(e) => setNewMinor(e.target.value)}
+            />
+            <span className="self-center text-gray-300 dark:text-gray-600">.</span>
+            <input
+              className={`w-16 text-center ${inputClass}`}
+              type="number"
+              min={0}
+              placeholder="小版本"
+              value={newPatch}
+              onChange={(e) => setNewPatch(e.target.value)}
             />
             <input
               className={`flex-1 ${inputClass}`}
@@ -189,7 +224,7 @@ export default function AdminChangelog() {
                 <div key={entry.id} className="bg-white dark:bg-gray-800 rounded-2xl p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-orange-500 font-bold text-sm">v{entry.version}</span>
+                      <span className="text-orange-500 font-bold text-sm">v{formatVersion(entry)}</span>
                       <span className="text-gray-400 dark:text-gray-500 text-xs">
                         {new Date(entry.createdAt).toLocaleDateString('zh-CN')} · {entry.createdBy}
                       </span>
@@ -226,12 +261,30 @@ export default function AdminChangelog() {
                       />
                       <div className="flex gap-2 mt-2">
                         <input
-                          className={`flex-1 ${inputClass}`}
+                          className={`w-16 text-center ${inputClass}`}
                           type="number"
-                          min={1}
-                          placeholder="版本号（留空保留原版本号）"
-                          value={editVersion}
-                          onChange={(e) => setEditVersion(e.target.value)}
+                          min={0}
+                          placeholder="大版本"
+                          value={editMajor}
+                          onChange={(e) => setEditMajor(e.target.value)}
+                        />
+                        <span className="self-center text-gray-300 dark:text-gray-600">.</span>
+                        <input
+                          className={`w-16 text-center ${inputClass}`}
+                          type="number"
+                          min={0}
+                          placeholder="中版本"
+                          value={editMinor}
+                          onChange={(e) => setEditMinor(e.target.value)}
+                        />
+                        <span className="self-center text-gray-300 dark:text-gray-600">.</span>
+                        <input
+                          className={`w-16 text-center ${inputClass}`}
+                          type="number"
+                          min={0}
+                          placeholder="小版本"
+                          value={editPatch}
+                          onChange={(e) => setEditPatch(e.target.value)}
                         />
                         <input
                           className={`flex-1 ${inputClass}`}

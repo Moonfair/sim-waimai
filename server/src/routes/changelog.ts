@@ -20,10 +20,18 @@ const DEFAULT_TITLE = '更新公告';
 /** Blank strings from a form (title/version/date left empty) mean "use the default", not "invalid". */
 const emptyToUndefined = (v: unknown) => (typeof v === 'string' && v.trim() === '' ? undefined : v);
 
+/** 大版本(重大更新)/中版本(主要特性更新)/小版本(修复优化) 三段式版本号，每段独立可选。 */
+const versionPartSchema = z.preprocess(
+  emptyToUndefined,
+  z.coerce.number().int().min(0, '版本号不能为负数').optional(),
+);
+
 const entryInputSchema = z.object({
   title: z.preprocess(emptyToUndefined, z.string().trim().max(100, '标题太长啦，最多100字').optional()),
   content: z.string().trim().min(1, '内容不能为空').max(4000, '内容太长啦，最多4000字'),
-  version: z.preprocess(emptyToUndefined, z.coerce.number().int().positive('版本号必须是正整数').optional()),
+  versionMajor: versionPartSchema,
+  versionMinor: versionPartSchema,
+  versionPatch: versionPartSchema,
   date: z.preprocess(
     emptyToUndefined,
     z
@@ -33,6 +41,7 @@ const entryInputSchema = z.object({
   ),
 });
 type EntryInput = z.infer<typeof entryInputSchema>;
+type VersionParts = { versionMajor: number; versionMinor: number; versionPatch: number };
 
 const editorUsernameSchema = z.object({
   username: z.string().trim().min(1, '请输入用户名'),
@@ -44,7 +53,9 @@ function toEntryDto(row: EntryRow): ChangelogEntryDto {
   return {
     id: row.id,
     title: row.title,
-    version: row.version,
+    versionMajor: row.versionMajor,
+    versionMinor: row.versionMinor,
+    versionPatch: row.versionPatch,
     content: row.content,
     createdAt: row.createdAt.toISOString(),
     createdBy: row.createdBy,
@@ -65,44 +76,76 @@ function isUniqueViolation(err: unknown): boolean {
   return code === '23505';
 }
 
-async function nextAutoVersion(): Promise<number> {
-  const [{ nextVersion }] = await db
-    .select({ nextVersion: sql<number>`coalesce(max(${changelogEntries.version}), 0)::int + 1` })
-    .from(changelogEntries);
-  return nextVersion;
+async function latestVersion(): Promise<VersionParts | null> {
+  const [row] = await db
+    .select({
+      versionMajor: changelogEntries.versionMajor,
+      versionMinor: changelogEntries.versionMinor,
+      versionPatch: changelogEntries.versionPatch,
+    })
+    .from(changelogEntries)
+    .orderBy(desc(changelogEntries.versionMajor), desc(changelogEntries.versionMinor), desc(changelogEntries.versionPatch))
+    .limit(1);
+  return row ?? null;
 }
 
-/** Blank version -> max(version)+1 (retried on a rare concurrent-insert race); explicit version ->
- *  used as-is, conflict reported rather than silently reassigned. Blank date -> now(). */
+/**
+ * 语义化版本默认规则：
+ * - 显式给了大版本号 -> 中/小版本号缺省的部分清零（例如只填大版本 2 -> 2.0.0）。
+ * - 只给了中版本号 -> 沿用当前最新大版本号，小版本号缺省则清零。
+ * - 只给了小版本号 -> 沿用当前最新大/中版本号。
+ * - 三者都留空 -> 在当前最新版本基础上小版本+1；从未发布过公告则从 1.0.0 开始。
+ */
+async function resolveVersionParts(
+  input: Pick<EntryInput, 'versionMajor' | 'versionMinor' | 'versionPatch'>,
+): Promise<VersionParts> {
+  if (input.versionMajor !== undefined) {
+    return {
+      versionMajor: input.versionMajor,
+      versionMinor: input.versionMinor ?? 0,
+      versionPatch: input.versionPatch ?? 0,
+    };
+  }
+  const latest = await latestVersion();
+  if (input.versionMinor !== undefined) {
+    return {
+      versionMajor: latest?.versionMajor ?? 1,
+      versionMinor: input.versionMinor,
+      versionPatch: input.versionPatch ?? 0,
+    };
+  }
+  if (input.versionPatch !== undefined) {
+    return {
+      versionMajor: latest?.versionMajor ?? 1,
+      versionMinor: latest?.versionMinor ?? 0,
+      versionPatch: input.versionPatch,
+    };
+  }
+  if (!latest) return { versionMajor: 1, versionMinor: 0, versionPatch: 0 };
+  return { versionMajor: latest.versionMajor, versionMinor: latest.versionMinor, versionPatch: latest.versionPatch + 1 };
+}
+
+/** Blank version parts -> semver-style bump off the latest entry (retried on a rare concurrent-insert
+ *  race); any explicit part -> used as-is, conflict reported rather than silently reassigned. Blank date -> now(). */
 async function insertEntry(input: EntryInput, createdBy: string): Promise<EntryRow | 'conflict'> {
   const title = input.title ?? DEFAULT_TITLE;
   const createdAt = input.date ? new Date(input.date) : new Date();
-
-  if (input.version !== undefined) {
-    try {
-      const [row] = await db
-        .insert(changelogEntries)
-        .values({ version: input.version, title, content: input.content, createdAt, createdBy })
-        .returning();
-      return row!;
-    } catch (err) {
-      if (isUniqueViolation(err)) return 'conflict';
-      throw err;
-    }
-  }
+  const explicitVersionGiven =
+    input.versionMajor !== undefined || input.versionMinor !== undefined || input.versionPatch !== undefined;
 
   for (let attempt = 0; attempt < MAX_INSERT_ATTEMPTS; attempt++) {
-    const version = await nextAutoVersion();
+    const parts = await resolveVersionParts(input);
     try {
       const [row] = await db
         .insert(changelogEntries)
-        .values({ version, title, content: input.content, createdAt, createdBy })
+        .values({ ...parts, title, content: input.content, createdAt, createdBy })
         .returning();
       return row!;
     } catch (err) {
+      if (!isUniqueViolation(err)) throw err;
       const isLastAttempt = attempt === MAX_INSERT_ATTEMPTS - 1;
-      if (isUniqueViolation(err) && !isLastAttempt) continue;
-      throw err;
+      if (explicitVersionGiven || isLastAttempt) return 'conflict';
+      // Fully-auto bump: loop again, resolveVersionParts will recompute off the new max.
     }
   }
   throw new Error('unreachable');
@@ -113,7 +156,7 @@ export const changelogRoutes = new Hono().get('/', async (c) => {
   const rows = await db
     .select()
     .from(changelogEntries)
-    .orderBy(desc(changelogEntries.version))
+    .orderBy(desc(changelogEntries.versionMajor), desc(changelogEntries.versionMinor), desc(changelogEntries.versionPatch))
     .limit(LIST_LIMIT);
   const result: ChangelogListDto = { items: rows.map(toEntryDto) };
   return c.json(result);
@@ -137,7 +180,9 @@ export const adminChangelogRoutes = new Hono()
       updatedBy: c.get('user').username,
     };
     if (input.title !== undefined) set.title = input.title;
-    if (input.version !== undefined) set.version = input.version;
+    if (input.versionMajor !== undefined) set.versionMajor = input.versionMajor;
+    if (input.versionMinor !== undefined) set.versionMinor = input.versionMinor;
+    if (input.versionPatch !== undefined) set.versionPatch = input.versionPatch;
     if (input.date !== undefined) set.createdAt = new Date(input.date);
 
     try {

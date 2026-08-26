@@ -13,6 +13,8 @@ import { registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
+// Huge vs. any other test's default-bumped versions, so explicit-major tests here never collide.
+const baseMajor = Math.floor(Date.now() / 1000);
 const admin = { username: `t_chlog_a_${stamp}`, password: 'secret123' };
 const editor = { username: `t_chlog_e_${stamp}`, password: 'secret123' };
 const plain = { username: `t_chlog_p_${stamp}`, password: 'secret123' };
@@ -67,11 +69,20 @@ afterAll(async () => {
 
 describe('GET /api/changelog', () => {
   it('is public and lists newest version first', async () => {
-    const c1 = await req('/api/admin/changelog', adminCookie, { method: 'POST', body: { content: `v1_${stamp}` } });
+    const c1 = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `v1_${stamp}`, versionMajor: baseMajor },
+    });
     const e1 = (await c1.json()) as ChangelogEntryDto;
+    expect(e1.versionMajor).toBe(baseMajor);
+    expect(e1.versionMinor).toBe(0);
+    expect(e1.versionPatch).toBe(0);
+
     const c2 = await req('/api/admin/changelog', adminCookie, { method: 'POST', body: { content: `v2_${stamp}` } });
     const e2 = (await c2.json()) as ChangelogEntryDto;
-    expect(e2.version).toBe(e1.version + 1);
+    expect(e2.versionMajor).toBe(baseMajor);
+    expect(e2.versionMinor).toBe(0);
+    expect(e2.versionPatch).toBe(1); // fully blank -> patch bump off e1
 
     const res = await req('/api/changelog', '');
     expect(res.status).toBe(200);
@@ -109,42 +120,85 @@ describe('POST /api/admin/changelog', () => {
     const entry = (await res.json()) as ChangelogEntryDto;
     expect(entry.createdBy).toBe(admin.username);
     expect(entry.title).toBe('更新公告');
-    expect(entry.version).toBeGreaterThan(0);
+    expect(entry.versionMajor).toBeGreaterThan(0);
     expect(entry.createdAt).toBeTruthy();
     expect(entry.updatedAt).toBeNull();
   });
 
-  it('honors an explicitly provided title/version/date', async () => {
-    const explicitVersion = Math.floor(Date.now() / 1000); // huge vs. auto-incremented versions, won't collide
+  it('honors a fully explicit major.minor.patch and date', async () => {
     const res = await req('/api/admin/changelog', adminCookie, {
       method: 'POST',
-      body: { title: `自定义标题_${stamp}`, content: `explicit_${stamp}`, version: explicitVersion, date: '2020-01-01' },
+      body: {
+        title: `自定义标题_${stamp}`,
+        content: `explicit_${stamp}`,
+        versionMajor: baseMajor + 1,
+        versionMinor: 5,
+        versionPatch: 2,
+        date: '2020-01-01',
+      },
     });
     expect(res.status).toBe(200);
     const entry = (await res.json()) as ChangelogEntryDto;
     expect(entry.title).toBe(`自定义标题_${stamp}`);
-    expect(entry.version).toBe(explicitVersion);
+    expect(entry.versionMajor).toBe(baseMajor + 1);
+    expect(entry.versionMinor).toBe(5);
+    expect(entry.versionPatch).toBe(2);
     expect(entry.createdAt.slice(0, 10)).toBe('2020-01-01');
   });
 
-  it('rejects reusing an already-taken version number', async () => {
-    const explicitVersion = Math.floor(Date.now() / 1000) + 1;
-    const first = await req('/api/admin/changelog', adminCookie, {
+  it('zeroes out omitted lower parts: major alone -> x.0.0', async () => {
+    const res = await req('/api/admin/changelog', adminCookie, {
       method: 'POST',
-      body: { content: `dup1_${stamp}`, version: explicitVersion },
+      body: { content: `major_only_${stamp}`, versionMajor: baseMajor + 2 },
     });
+    expect(res.status).toBe(200);
+    const entry = (await res.json()) as ChangelogEntryDto;
+    expect(entry.versionMajor).toBe(baseMajor + 2);
+    expect(entry.versionMinor).toBe(0);
+    expect(entry.versionPatch).toBe(0);
+  });
+
+  it('minor alone keeps the current latest major, zeroes patch', async () => {
+    // Latest is now (baseMajor+2, 0, 0) from the previous test.
+    const res = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `minor_only_${stamp}`, versionMinor: 3 },
+    });
+    expect(res.status).toBe(200);
+    const entry = (await res.json()) as ChangelogEntryDto;
+    expect(entry.versionMajor).toBe(baseMajor + 2);
+    expect(entry.versionMinor).toBe(3);
+    expect(entry.versionPatch).toBe(0);
+  });
+
+  it('patch alone keeps the current latest major and minor', async () => {
+    // Latest is now (baseMajor+2, 3, 0) from the previous test.
+    const res = await req('/api/admin/changelog', adminCookie, {
+      method: 'POST',
+      body: { content: `patch_only_${stamp}`, versionPatch: 9 },
+    });
+    expect(res.status).toBe(200);
+    const entry = (await res.json()) as ChangelogEntryDto;
+    expect(entry.versionMajor).toBe(baseMajor + 2);
+    expect(entry.versionMinor).toBe(3);
+    expect(entry.versionPatch).toBe(9);
+  });
+
+  it('rejects reusing an already-taken version triple', async () => {
+    const body = { content: `dup_${stamp}`, versionMajor: baseMajor + 3, versionMinor: 1, versionPatch: 1 };
+    const first = await req('/api/admin/changelog', adminCookie, { method: 'POST', body });
     expect(first.status).toBe(200);
     const second = await req('/api/admin/changelog', adminCookie, {
       method: 'POST',
-      body: { content: `dup2_${stamp}`, version: explicitVersion },
+      body: { ...body, content: `dup2_${stamp}` },
     });
     expect(second.status).toBe(409);
   });
 
-  it('rejects a non-positive version and a malformed date', async () => {
+  it('rejects a negative version part and a malformed date', async () => {
     const badVersion = await req('/api/admin/changelog', adminCookie, {
       method: 'POST',
-      body: { content: `x_${stamp}`, version: 0 },
+      body: { content: `x_${stamp}`, versionMajor: -1 },
     });
     expect(badVersion.status).toBe(400);
 
@@ -160,7 +214,13 @@ describe('PATCH /api/admin/changelog/:id — 留空保留原值', () => {
   it('blank title/version/date keep the existing value; explicit ones overwrite it', async () => {
     const created = await req('/api/admin/changelog', adminCookie, {
       method: 'POST',
-      body: { title: `原标题_${stamp}`, content: `patch_base_${stamp}` },
+      body: {
+        title: `原标题_${stamp}`,
+        content: `patch_base_${stamp}`,
+        versionMajor: baseMajor + 4,
+        versionMinor: 0,
+        versionPatch: 0,
+      },
     });
     const entry = (await created.json()) as ChangelogEntryDto;
 
@@ -171,19 +231,24 @@ describe('PATCH /api/admin/changelog/:id — 留空保留原值', () => {
     expect(blankPatch.status).toBe(200);
     const afterBlank = (await blankPatch.json()) as ChangelogEntryDto;
     expect(afterBlank.title).toBe(`原标题_${stamp}`);
-    expect(afterBlank.version).toBe(entry.version);
+    expect(afterBlank.versionMajor).toBe(entry.versionMajor);
+    expect(afterBlank.versionMinor).toBe(entry.versionMinor);
+    expect(afterBlank.versionPatch).toBe(entry.versionPatch);
     expect(afterBlank.createdAt).toBe(entry.createdAt);
     expect(afterBlank.content).toBe(`patch_updated_${stamp}`);
 
-    const newVersion = Math.floor(Date.now() / 1000) + 2;
+    // Editing a single part (minor) leaves major/patch alone — PATCH never applies the
+    // create-time "reset lower parts to 0" convention.
     const explicitPatch = await req(`/api/admin/changelog/${entry.id}`, adminCookie, {
       method: 'PATCH',
-      body: { title: `新标题_${stamp}`, content: `patch_updated_${stamp}`, version: newVersion, date: '2021-06-15' },
+      body: { title: `新标题_${stamp}`, content: `patch_updated_${stamp}`, versionMinor: 7, date: '2021-06-15' },
     });
     expect(explicitPatch.status).toBe(200);
     const afterExplicit = (await explicitPatch.json()) as ChangelogEntryDto;
     expect(afterExplicit.title).toBe(`新标题_${stamp}`);
-    expect(afterExplicit.version).toBe(newVersion);
+    expect(afterExplicit.versionMajor).toBe(entry.versionMajor);
+    expect(afterExplicit.versionMinor).toBe(7);
+    expect(afterExplicit.versionPatch).toBe(entry.versionPatch);
     expect(afterExplicit.createdAt.slice(0, 10)).toBe('2021-06-15');
   });
 });
@@ -217,7 +282,10 @@ describe('更新日志编辑者授权', () => {
     const updated = (await patch.json()) as ChangelogEntryDto;
     expect(updated.content).toBe(`edited_${stamp}`);
     expect(updated.updatedBy).toBe(editor.username);
-    expect(updated.version).toBe(entry.version); // editing content never bumps version
+    // editing content never bumps the version
+    expect(updated.versionMajor).toBe(entry.versionMajor);
+    expect(updated.versionMinor).toBe(entry.versionMinor);
+    expect(updated.versionPatch).toBe(entry.versionPatch);
 
     const del = await req(`/api/admin/changelog/${entry.id}`, editorCookie, { method: 'DELETE' });
     expect(del.status).toBe(200);

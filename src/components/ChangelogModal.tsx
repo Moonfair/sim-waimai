@@ -40,7 +40,9 @@ export default function ChangelogModal({ onClose }: Props) {
         ) : (
           <>
             <div className="flex items-baseline gap-2 mt-4">
-              <span className="text-orange-500 font-bold text-sm">v{current.version}</span>
+              <span className="text-orange-500 font-bold text-sm">
+                v{current.versionMajor}.{current.versionMinor}.{current.versionPatch}
+              </span>
               <span className="text-gray-400 dark:text-gray-500 text-xs">
                 {new Date(current.createdAt).toLocaleDateString('zh-CN')}
               </span>

@@ -292,13 +292,16 @@ export const reports = pgTable(
   ],
 );
 
-/** 更新日志公告。title/version/date 都可手动填写，留空时分别取默认标题、max(version)+1、当前时间。 */
+/** 更新日志公告。title/版本号/date 都可手动填写，留空时分别取默认标题、按语义化版本规则派生、当前时间。
+ *  版本号是大版本(重大更新).中版本(主要特性更新).小版本(修复优化) 三段式，见 resolveVersionParts。 */
 export const changelogEntries = pgTable(
   'changelog_entries',
   {
     id: uuid('id').primaryKey().defaultRandom(),
     title: text('title').notNull().default('更新公告'),
-    version: integer('version').notNull(),
+    versionMajor: integer('version_major').notNull(),
+    versionMinor: integer('version_minor').notNull(),
+    versionPatch: integer('version_patch').notNull(),
     content: text('content').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     /** 发布者 username（管理员或被授权的编辑用户）。 */
@@ -307,7 +310,9 @@ export const changelogEntries = pgTable(
     /** 最近一次编辑者 username；未编辑过则为 null。 */
     updatedBy: text('updated_by'),
   },
-  (t) => [uniqueIndex('changelog_entries_version_idx').on(t.version)],
+  (t) => [
+    uniqueIndex('changelog_entries_version_parts_idx').on(t.versionMajor, t.versionMinor, t.versionPatch),
+  ],
 );
 
 /** 被管理员额外授权、可编辑更新日志的普通用户名单（管理员本身无需在此表中）。 */
