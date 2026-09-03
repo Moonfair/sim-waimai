@@ -9,6 +9,7 @@ import type {
 } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { changelogEditors, changelogEntries, users } from '../db/schema';
+import { logAdminAction } from '../lib/auditLog';
 import { validateJson } from '../lib/validate';
 import { requireAdmin, requireChangelogEditor } from '../middleware/auth';
 
@@ -66,6 +67,10 @@ function toEntryDto(row: EntryRow): ChangelogEntryDto {
 
 function toEditorDto(row: typeof changelogEditors.$inferSelect): ChangelogEditorDto {
   return { username: row.username, addedBy: row.addedBy, addedAt: row.addedAt.toISOString() };
+}
+
+function versionLabel(row: { title: string; versionMajor: number; versionMinor: number; versionPatch: number }): string {
+  return `${row.title} v${row.versionMajor}.${row.versionMinor}.${row.versionPatch}`;
 }
 
 /** drizzle-orm wraps pg errors in a DrizzleQueryError with the original error on `.cause`,
@@ -168,6 +173,13 @@ export const adminChangelogRoutes = new Hono()
     const input = c.req.valid('json');
     const result = await insertEntry(input, c.get('user').username);
     if (result === 'conflict') return c.json({ error: '该版本号已被使用' }, 409);
+    await logAdminAction({
+      actorUsername: c.get('user').username,
+      action: 'changelog.create',
+      targetType: 'changelogEntry',
+      targetId: result.id,
+      targetLabel: versionLabel(result),
+    });
     return c.json(toEntryDto(result));
   })
   .patch('/changelog/:id', requireChangelogEditor, validateJson(entryInputSchema), async (c) => {
@@ -192,6 +204,13 @@ export const adminChangelogRoutes = new Hono()
         .where(eq(changelogEntries.id, c.req.param('id')))
         .returning();
       if (!row) return c.json({ error: '公告不存在' }, 404);
+      await logAdminAction({
+        actorUsername: c.get('user').username,
+        action: 'changelog.update',
+        targetType: 'changelogEntry',
+        targetId: row.id,
+        targetLabel: versionLabel(row),
+      });
       return c.json(toEntryDto(row));
     } catch (err) {
       if (isUniqueViolation(err)) return c.json({ error: '该版本号已被使用' }, 409);
@@ -202,8 +221,15 @@ export const adminChangelogRoutes = new Hono()
     const [row] = await db
       .delete(changelogEntries)
       .where(eq(changelogEntries.id, c.req.param('id')))
-      .returning({ id: changelogEntries.id });
+      .returning();
     if (!row) return c.json({ error: '公告不存在' }, 404);
+    await logAdminAction({
+      actorUsername: c.get('user').username,
+      action: 'changelog.delete',
+      targetType: 'changelogEntry',
+      targetId: row.id,
+      targetLabel: versionLabel(row),
+    });
     return c.json({ ok: true });
   })
   .get('/changelog-editors', requireAdmin, async (c) => {
@@ -227,6 +253,13 @@ export const adminChangelogRoutes = new Hono()
       .insert(changelogEditors)
       .values({ username: lower, addedBy: c.get('user').username })
       .returning();
+    await logAdminAction({
+      actorUsername: c.get('user').username,
+      action: 'changelog_editor.grant',
+      targetType: 'changelogEditor',
+      targetId: row!.username,
+      targetLabel: row!.username,
+    });
     return c.json(toEditorDto(row!));
   })
   .delete('/changelog-editors/:username', requireAdmin, async (c) => {
@@ -235,5 +268,12 @@ export const adminChangelogRoutes = new Hono()
       .where(eq(changelogEditors.username, c.req.param('username').toLowerCase()))
       .returning({ username: changelogEditors.username });
     if (!row) return c.json({ error: '该用户不是更新日志编辑者' }, 404);
+    await logAdminAction({
+      actorUsername: c.get('user').username,
+      action: 'changelog_editor.revoke',
+      targetType: 'changelogEditor',
+      targetId: row.username,
+      targetLabel: row.username,
+    });
     return c.json({ ok: true });
   });

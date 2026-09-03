@@ -11,8 +11,10 @@ import type {
   ModerationUserReviewDetailDto,
   ReviewStatus,
 } from '@sim-waimai/shared';
+import { randomUUID } from 'node:crypto';
 import { db } from '../db/client';
 import { menuItems, restaurants, reviews, users } from '../db/schema';
+import { logAdminAction } from '../lib/auditLog';
 import { toMenuItem, toRestaurant, toReviewDto } from '../lib/mappers';
 import { applyRatingDelta } from '../lib/ratings';
 import { UUID_RE, validateJson } from '../lib/validate';
@@ -175,17 +177,30 @@ function reviewerCondition(reviewedByColumn: AnyColumn, reviewer: 'ai' | 'human'
   return undefined;
 }
 
-/** 店铺审批核心。不加 WHERE pending：管理员可覆盖任何状态（含推翻 AI 结论）。目标不存在返回 null。 */
+/** 店铺审批核心。不加 WHERE pending：管理员可覆盖任何状态（含推翻 AI 结论）。目标不存在返回 null。
+ *  batchId：批量审核/封禁级联/举报处理等场景传入，把同一次调用产生的多条审计日志关联起来。 */
 export async function applyRestaurantDecision(
   restaurantId: string,
   body: ReviewDecision,
   adminUsername: string,
+  batchId?: string,
 ): Promise<RestaurantRow | null> {
   const [row] = await db
     .update(restaurants)
     .set(decisionFields(body, adminUsername))
     .where(eq(restaurants.id, restaurantId))
     .returning();
+  if (row) {
+    await logAdminAction({
+      actorUsername: adminUsername,
+      action: 'moderation.review',
+      targetType: 'restaurant',
+      targetId: row.id,
+      targetLabel: row.name,
+      detail: { decision: body.decision, reason: body.reason },
+      batchId,
+    });
+  }
   return row ?? null;
 }
 
@@ -195,12 +210,24 @@ export async function applyMenuItemDecision(
   itemId: string,
   body: ReviewDecision,
   adminUsername: string,
+  batchId?: string,
 ): Promise<MenuItemRow | null> {
   const [row] = await db
     .update(menuItems)
     .set(decisionFields(body, adminUsername))
     .where(and(eq(menuItems.restaurantId, restaurantId), eq(menuItems.id, itemId)))
     .returning();
+  if (row) {
+    await logAdminAction({
+      actorUsername: adminUsername,
+      action: 'moderation.review',
+      targetType: 'menuItem',
+      targetId: `${row.restaurantId}:${row.id}`,
+      targetLabel: row.name,
+      detail: { decision: body.decision, reason: body.reason },
+      batchId,
+    });
+  }
   return row ?? null;
 }
 
@@ -212,6 +239,7 @@ export async function applyUserReviewDecision(
   reviewId: string,
   body: ReviewDecision,
   adminUsername: string,
+  batchId?: string,
 ): Promise<UserReviewRow | null> {
   if (!UUID_RE.test(reviewId)) return null;
   return await db.transaction(async (tx) => {
@@ -227,6 +255,20 @@ export async function applyUserReviewDecision(
     const nowCounted = body.decision === 'approved' && old.hiddenAt === null;
     if (!wasCounted && nowCounted) await applyRatingDelta(tx, old.restaurantId, old.rating, 1);
     else if (wasCounted && !nowCounted) await applyRatingDelta(tx, old.restaurantId, -old.rating, -1);
+    if (updated) {
+      await logAdminAction(
+        {
+          actorUsername: adminUsername,
+          action: 'moderation.review',
+          targetType: 'review',
+          targetId: updated.id,
+          targetLabel: updated.content?.slice(0, 50) || null,
+          detail: { decision: body.decision, reason: body.reason },
+          batchId,
+        },
+        tx,
+      );
+    }
     return updated ?? null;
   });
 }
@@ -394,6 +436,7 @@ export const adminRoutes = new Hono()
   .post('/moderation/review', requireAdmin, validateJson(batchReviewSchema), async (c) => {
     const admin = c.get('user');
     const body = c.req.valid('json');
+    const batchId = randomUUID();
     // 逐条独立处理（非整体原子）：单条失败不影响其余，符合清空审核队列场景。
     const failed: BatchReviewResultDto['failed'] = [];
     let succeeded = 0;
@@ -401,13 +444,14 @@ export const adminRoutes = new Hono()
       let ok = false;
       let error = '';
       if (target.targetType === 'restaurant') {
-        ok = (await applyRestaurantDecision(target.restaurantId, body, admin.username)) !== null;
+        ok = (await applyRestaurantDecision(target.restaurantId, body, admin.username, batchId)) !== null;
         error = '店铺不存在';
       } else if (target.targetType === 'menuItem') {
-        ok = (await applyMenuItemDecision(target.restaurantId, target.itemId, body, admin.username)) !== null;
+        ok =
+          (await applyMenuItemDecision(target.restaurantId, target.itemId, body, admin.username, batchId)) !== null;
         error = '菜品不存在';
       } else {
-        ok = (await applyUserReviewDecision(target.reviewId, body, admin.username)) !== null;
+        ok = (await applyUserReviewDecision(target.reviewId, body, admin.username, batchId)) !== null;
         error = '评价不存在';
       }
       if (ok) succeeded += 1;

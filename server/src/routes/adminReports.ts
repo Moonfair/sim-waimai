@@ -1,9 +1,11 @@
+import { randomUUID } from 'node:crypto';
 import { and, desc, eq } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import type { AdminReportDto, ResolveReportsResultDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { menuItems, reports, restaurants, reviews, users } from '../db/schema';
+import { logAdminAction } from '../lib/auditLog';
 import { applyMenuItemDecision, applyRestaurantDecision, applyUserReviewDecision } from './admin';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
@@ -123,6 +125,7 @@ export const adminReportsRoutes = new Hono()
   .post('/reports/resolve', requireAdmin, validateJson(resolveReportsSchema), async (c) => {
     const admin = c.get('user');
     const { reportIds, decision } = c.req.valid('json');
+    const batchId = randomUUID();
 
     const failed: ResolveReportsResultDto['failed'] = [];
     let succeeded = 0;
@@ -138,19 +141,43 @@ export const adminReportsRoutes = new Hono()
         const targetDecision = { decision: 'rejected' as const, reason: report.reason };
         let targetOk = true;
         if (report.targetType === 'restaurant') {
-          targetOk = (await applyRestaurantDecision(report.restaurantId, targetDecision, admin.username)) !== null;
+          targetOk =
+            (await applyRestaurantDecision(report.restaurantId, targetDecision, admin.username, batchId)) !== null;
         } else if (report.targetType === 'menuItem') {
           targetOk =
-            (await applyMenuItemDecision(report.restaurantId, report.itemId!, targetDecision, admin.username)) !==
-            null;
+            (await applyMenuItemDecision(
+              report.restaurantId,
+              report.itemId!,
+              targetDecision,
+              admin.username,
+              batchId,
+            )) !== null;
         } else {
-          targetOk = (await applyUserReviewDecision(report.reviewId!, targetDecision, admin.username)) !== null;
+          targetOk =
+            (await applyUserReviewDecision(report.reviewId!, targetDecision, admin.username, batchId)) !== null;
         }
         if (!targetOk) {
           failed.push({ reportId, error: '目标已不存在' });
           continue;
         }
       }
+
+      // 举报行本身随后被删除（不保留历史），这条审计日志就是它唯一留下的记录。
+      await logAdminAction({
+        actorUsername: admin.username,
+        action: 'report.resolve',
+        targetType: 'report',
+        targetId: report.id,
+        targetLabel: report.reason.slice(0, 50),
+        detail: {
+          decision,
+          reportTargetType: report.targetType,
+          restaurantId: report.restaurantId,
+          itemId: report.itemId,
+          reviewId: report.reviewId,
+        },
+        batchId,
+      });
 
       await db.delete(reports).where(eq(reports.id, reportId));
       succeeded += 1;

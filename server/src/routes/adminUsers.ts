@@ -1,9 +1,11 @@
+import { randomUUID } from 'node:crypto';
 import { and, desc, eq, ilike, ne, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
 import type { AdminUserDto, AdminUserListDto, BanUserResultDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { bannedDevices, menuItems, restaurants, reviews, userDevices, users } from '../db/schema';
+import { logAdminAction } from '../lib/auditLog';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
 import { applyMenuItemDecision, applyRestaurantDecision, applyUserReviewDecision } from './admin';
@@ -74,6 +76,8 @@ export const adminUsersRoutes = new Hono()
     if (target.isBanned) return c.json({ error: '该用户已被封禁' }, 400);
 
     const { reason } = c.req.valid('json');
+    // 封禁本身 + 级联驳回的所有内容共享一个 batchId，便于在操作日志里按这次封禁串起来看。
+    const batchId = randomUUID();
     const [updated] = await db
       .update(users)
       .set({
@@ -84,6 +88,15 @@ export const adminUsersRoutes = new Hono()
       })
       .where(eq(users.id, id))
       .returning();
+    await logAdminAction({
+      actorUsername: admin.username,
+      action: 'user.ban',
+      targetType: 'user',
+      targetId: id,
+      targetLabel: target.username,
+      detail: { reason: reason?.trim() || null },
+      batchId,
+    });
 
     // 批量驳回该用户名下历史内容；只处理尚未驳回的行，已驳回的跳过。
     const decision = { decision: 'rejected' as const, reason: BAN_REJECT_REASON };
@@ -92,7 +105,7 @@ export const adminUsersRoutes = new Hono()
     let restaurantCount = 0;
     for (const shop of ownedShops) {
       if (shop.reviewStatus === 'rejected') continue;
-      if (await applyRestaurantDecision(shop.id, decision, admin.username)) restaurantCount += 1;
+      if (await applyRestaurantDecision(shop.id, decision, admin.username, batchId)) restaurantCount += 1;
     }
 
     let itemCount = 0;
@@ -102,7 +115,7 @@ export const adminUsersRoutes = new Hono()
         .from(menuItems)
         .where(and(eq(menuItems.restaurantId, shop.id), ne(menuItems.reviewStatus, 'rejected')));
       for (const item of itemRows) {
-        if (await applyMenuItemDecision(shop.id, item.id, decision, admin.username)) itemCount += 1;
+        if (await applyMenuItemDecision(shop.id, item.id, decision, admin.username, batchId)) itemCount += 1;
       }
     }
 
@@ -112,7 +125,7 @@ export const adminUsersRoutes = new Hono()
       .where(and(eq(reviews.userId, id), ne(reviews.reviewStatus, 'rejected')));
     let reviewCount = 0;
     for (const review of reviewRows) {
-      if (await applyUserReviewDecision(review.id, decision, admin.username)) reviewCount += 1;
+      if (await applyUserReviewDecision(review.id, decision, admin.username, batchId)) reviewCount += 1;
     }
 
     // 该用户历史登录/注册过的设备一并拉黑，避免换个用户名重新注册或直接登录。

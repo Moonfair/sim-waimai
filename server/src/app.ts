@@ -7,9 +7,11 @@ import { env } from './env';
 import { logEvent } from './lib/logger';
 import { rateLimit } from './middleware/rateLimit';
 import { adminRoutes } from './routes/admin';
+import { adminAuditRoutes } from './routes/adminAudit';
 import { adminReportsRoutes } from './routes/adminReports';
 import { adminShopsRoutes } from './routes/adminShops';
 import { adminStatsRoutes } from './routes/adminStats';
+import { adminRolesRoutes } from './routes/adminRoles';
 import { adminUsersRoutes } from './routes/adminUsers';
 import { authRoutes } from './routes/auth';
 import { adminChangelogRoutes, changelogRoutes } from './routes/changelog';
@@ -107,6 +109,8 @@ export function createApp() {
   app.route('/admin', adminReportsRoutes);
   app.route('/admin', adminUsersRoutes);
   app.route('/admin', adminChangelogRoutes);
+  app.route('/admin', adminRolesRoutes);
+  app.route('/admin', adminAuditRoutes);
 
   app.notFound((c) => c.json({ error: '接口不存在' }, 404));
 

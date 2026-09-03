@@ -5,6 +5,7 @@ import type { AdminShopDto, AdminShopListDto } from '@sim-waimai/shared';
 import { SHOP_PRIORITY_LEVELS } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { restaurants, users } from '../db/schema';
+import { logAdminAction } from '../lib/auditLog';
 import { lowActivityCondition } from '../lib/lowActivity';
 import { validateJson } from '../lib/validate';
 import { requireAdmin } from '../middleware/auth';
@@ -79,6 +80,14 @@ export const adminShopsRoutes = new Hono()
 
     const { priority } = c.req.valid('json');
     await db.update(restaurants).set({ recommendPriority: priority }).where(eq(restaurants.id, row.id));
+    await logAdminAction({
+      actorUsername: c.get('user').username,
+      action: 'shop.priority_change',
+      targetType: 'restaurant',
+      targetId: row.id,
+      targetLabel: row.name,
+      detail: { from: row.recommendPriority, to: priority },
+    });
 
     const [updated] = await db
       .select({ restaurant: restaurants, lowActivity: lowActivityCondition() })
