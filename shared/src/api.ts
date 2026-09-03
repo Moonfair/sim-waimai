@@ -10,8 +10,10 @@ export interface UserDto {
   id: string;
   username: string;
   createdAt: string;
-  /** True when the username is in the server's ADMIN_USERNAMES list. */
+  /** True for role 'admin' or 'superadmin'. */
   isAdmin?: boolean;
+  /** True only for role 'superadmin' — can grant/revoke the admin/superadmin role itself. */
+  isSuperAdmin?: boolean;
   /** True when the user can manage 更新日志 entries: isAdmin, or designated via changelog_editors. */
   canManageChangelog?: boolean;
 }
@@ -21,6 +23,9 @@ export type ReviewStatus = 'pending' | 'approved' | 'rejected';
 
 /** AI moderation's own verdict, persisted regardless of whether it auto-resolved the item. */
 export type AiVerdict = 'approve' | 'reject' | 'uncertain';
+
+/** 'admin' = 日常运营全部权限；'superadmin' = 额外可管理其他管理员的角色。 */
+export type AdminRole = 'admin' | 'superadmin';
 
 /** Search hit for a menu item: item fields + which restaurant it belongs to. */
 export interface SearchMenuItemDto extends MenuItem {
@@ -566,6 +571,74 @@ export interface ResolveReportsRequestDto {
 export interface ResolveReportsResultDto {
   succeeded: number;
   failed: { reportId: string; error: string }[];
+}
+
+/** admin_audit_log 里记录的操作类型。 */
+export type AdminAuditAction =
+  | 'moderation.review'
+  | 'shop.priority_change'
+  | 'user.ban'
+  | 'report.resolve'
+  | 'changelog.create'
+  | 'changelog.update'
+  | 'changelog.delete'
+  | 'changelog_editor.grant'
+  | 'changelog_editor.revoke'
+  | 'admin_role.grant'
+  | 'admin_role.revoke';
+
+export type AdminAuditTargetType =
+  | 'restaurant'
+  | 'menuItem'
+  | 'review'
+  | 'user'
+  | 'report'
+  | 'changelogEntry'
+  | 'changelogEditor';
+
+/** 管理端「操作日志」列表一行 (GET /admin/audit-log)。 */
+export interface AdminAuditLogEntryDto {
+  id: string;
+  actorUsername: string;
+  action: AdminAuditAction;
+  targetType: AdminAuditTargetType | null;
+  targetId: string | null;
+  /** 操作发生时的目标名称快照（店铺名/用户名/公告标题等），目标改名/删除后仍可读。 */
+  targetLabel: string | null;
+  detail: Record<string, unknown> | null;
+  /** 同一次批量调用产生的多行共享同一个 batchId；单个操作为 null。 */
+  batchId: string | null;
+  createdAt: string;
+}
+
+/** Paginated response for GET /admin/audit-log. */
+export interface AdminAuditLogListDto {
+  items: AdminAuditLogEntryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+/** 管理端「管理员管理」列表一行 (GET /admin/admins) — 仅超级管理员可见。 */
+export interface AdminRoleUserDto {
+  id: string;
+  username: string;
+  role: AdminRole;
+  createdAt: string;
+}
+
+/** Paginated response for GET /admin/admins. */
+export interface AdminRoleListDto {
+  items: AdminRoleUserDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+/** POST /admin/admins 请求体：按 username 授予/变更角色。 */
+export interface GrantAdminRoleRequestDto {
+  username: string;
+  role: AdminRole;
 }
 
 export type UploadKind = 'banner' | 'item' | 'review';

@@ -16,6 +16,9 @@ import {
 } from 'drizzle-orm/pg-core';
 import type {
   AddressSnapshot,
+  AdminAuditAction,
+  AdminAuditTargetType,
+  AdminRole,
   AiVerdict,
   MenuItemOptionGroup,
   OrderItemSnapshot,
@@ -36,8 +39,14 @@ export const users = pgTable(
     bannedReason: text('banned_reason'),
     /** 执行封禁的管理员 username. */
     bannedBy: text('banned_by'),
+    /** null = 普通用户；'admin' 拥有全部日常管理权限；'superadmin' 额外可管理其他管理员角色。 */
+    role: text('role').$type<AdminRole>(),
   },
-  (t) => [uniqueIndex('users_username_lower_idx').on(sql`lower(${t.username})`)],
+  (t) => [
+    uniqueIndex('users_username_lower_idx').on(sql`lower(${t.username})`),
+    check('users_role_check', sql`${t.role} IN ('admin', 'superadmin')`),
+    index('users_role_idx').on(t.role),
+  ],
 );
 
 /** 记录某用户历史上用过的设备指纹，用于封禁时定位其关联设备。 */
@@ -323,3 +332,32 @@ export const changelogEditors = pgTable('changelog_editors', {
   addedBy: text('added_by').notNull(),
   addedAt: timestamp('added_at', { withTimezone: true }).notNull().defaultNow(),
 });
+
+/** 中心化管理端操作审计日志：每一次写操作一行（批量操作按目标拆成多行，用 batchId 关联）。 */
+export const adminAuditLog = pgTable(
+  'admin_audit_log',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    /** 操作者 username（非 FK，账号被删也保留记录，与 reviewedBy/bannedBy 同风格）. */
+    actorUsername: text('actor_username').notNull(),
+    action: text('action').$type<AdminAuditAction>().notNull(),
+    targetType: text('target_type').$type<AdminAuditTargetType>(),
+    /** 目标行 id：普通表用其主键；menuItem 用 "restaurantId:itemId"（对应复合主键）。 */
+    targetId: text('target_id'),
+    /** 操作发生时的目标名称快照，目标改名/删除后日志仍然可读。 */
+    targetLabel: text('target_label'),
+    /** 结构化补充信息：处理原因、变更前后的值等。 */
+    detail: jsonb('detail').$type<Record<string, unknown>>(),
+    /** 同一次批量调用（如批量审核/封禁级联/举报批量处理）产生的多行共享一个 batchId；单次操作为 null。
+     *  由业务代码生成并显式传入，不能用列默认值（那样每行会各自生成不同的值）。 */
+    batchId: uuid('batch_id'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index('admin_audit_log_created_idx').on(t.createdAt.desc()),
+    index('admin_audit_log_actor_idx').on(t.actorUsername, t.createdAt.desc()),
+    index('admin_audit_log_action_idx').on(t.action, t.createdAt.desc()),
+    index('admin_audit_log_target_idx').on(t.targetType, t.targetId),
+    index('admin_audit_log_batch_idx').on(t.batchId),
+  ],
+);
