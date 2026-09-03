@@ -9,6 +9,7 @@ import TopNav from './components/TopNav';
 import RequireAdmin from './components/RequireAdmin';
 import RequireAuth from './components/RequireAuth';
 import RequireChangelogEditor from './components/RequireChangelogEditor';
+import RequireSuperAdmin from './components/RequireSuperAdmin';
 import Home from './pages/Home';
 import Restaurant from './pages/Restaurant';
 import Cart from './pages/Cart';
@@ -32,6 +33,8 @@ import AdminShops from './pages/AdminShops';
 import AdminReports from './pages/AdminReports';
 import AdminUsers from './pages/AdminUsers';
 import AdminChangelog from './pages/AdminChangelog';
+import AdminAdmins from './pages/AdminAdmins';
+import AdminAuditLog from './pages/AdminAuditLog';
 import RiderStats from './pages/RiderStats';
 import RiderTracking from './pages/RiderTracking';
 import RiderDone from './pages/RiderDone';
@@ -106,6 +109,15 @@ export default function App() {
                       <RequireChangelogEditor>
                         <AdminChangelog />
                       </RequireChangelogEditor>
+                    }
+                  />
+                  <Route path="/admin/audit-log" element={<RequireAdmin><AdminAuditLog /></RequireAdmin>} />
+                  <Route
+                    path="/admin/admins"
+                    element={
+                      <RequireSuperAdmin>
+                        <AdminAdmins />
+                      </RequireSuperAdmin>
                     }
                   />
                 </Routes>

@@ -15,6 +15,8 @@ import {
   faSun,
   faMoon,
   faUser,
+  faListCheck,
+  faUserShield,
 } from '@fortawesome/free-solid-svg-icons';
 import BottomNav from '../components/BottomNav';
 import ChangelogModal from '../components/ChangelogModal';
@@ -59,11 +61,16 @@ export default function Profile() {
           { emoji: <FontAwesomeIcon icon={faShop} />, label: '店铺管理', to: '/admin/shops' },
           { emoji: <FontAwesomeIcon icon={faFlag} />, label: '举报管理', to: '/admin/reports' },
           { emoji: <FontAwesomeIcon icon={faUserSlash} />, label: '用户管理', to: '/admin/users' },
+          { emoji: <FontAwesomeIcon icon={faListCheck} />, label: '操作日志', to: '/admin/audit-log' },
         ]
       : []),
     // 全站管理员 + 管理员指定的编辑者都能看到，普通用户不可见
     ...(user?.canManageChangelog
       ? [{ emoji: <FontAwesomeIcon icon={faClockRotateLeft} />, label: '更新日志管理', to: '/admin/changelog' }]
+      : []),
+    // 仅超级管理员可见：管理其他人的管理员/超管角色
+    ...(user?.isSuperAdmin
+      ? [{ emoji: <FontAwesomeIcon icon={faUserShield} />, label: '管理员管理', to: '/admin/admins' }]
       : []),
   ];
 
