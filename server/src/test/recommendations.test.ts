@@ -4,7 +4,7 @@ import type { MerchantRestaurantDto, RestaurantSummary, UserDto } from '@sim-wai
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { menuItems, orders, restaurants, users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 // Own file so the recommendations route's module-level 30s TTL cache starts fresh:
 // the shops created below must be visible on the first /api/recommendations call this process makes.
@@ -19,7 +19,6 @@ let cookie = '';
 let highRatingId = '';
 let lowRatingId = '';
 let tasteShopId = '';
-let savedAdmins: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
   const res = await registerTestUser(app, cred);
@@ -103,9 +102,8 @@ async function sampleInclusionCounts(
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
   const a = await register(admin);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -148,8 +146,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   await db.delete(orders).where(eq(orders.userId, historyOwnerId));
   await db.delete(restaurants).where(eq(restaurants.ownerId, ownerId));
   await db.delete(users).where(inArray(users.username, [admin.username, owner.username, `t_rec_h_${stamp}`]));

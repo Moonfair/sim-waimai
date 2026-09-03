@@ -4,7 +4,7 @@ import type { AdminShopDto, AdminShopListDto, MerchantRestaurantDto, UserDto } f
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { restaurants, users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -14,7 +14,6 @@ let adminCookie = '';
 let ownerCookie = '';
 let ownerId = '';
 let shopId = '';
-let savedAdmins: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
   const res = await registerTestUser(app, cred);
@@ -36,11 +35,9 @@ function req(path: string, cookie: string, init?: { method?: string; body?: unkn
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -65,8 +62,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   await db.delete(restaurants).where(eq(restaurants.ownerId, ownerId));
   await db.delete(users).where(inArray(users.username, [admin.username, owner.username]));
   await pool.end();

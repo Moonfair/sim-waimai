@@ -8,7 +8,7 @@ import type { UserDto } from '@sim-waimai/shared';
 import { db } from '../db/client';
 import { users } from '../db/schema';
 import { env } from '../env';
-import { isAdmin } from '../lib/admin';
+import { getRole } from '../lib/admin';
 import { issueCaptcha, verifyCaptcha } from '../lib/captcha';
 import { canManageChangelog } from '../lib/changelogAccess';
 import { isDeviceBanned, recordDeviceSeen } from '../lib/deviceTracking';
@@ -50,11 +50,13 @@ const validateRegister = zValidator('json', registerSchema, (result, c) => {
 });
 
 async function toUserDto(row: { id: string; username: string; createdAt: Date }): Promise<UserDto> {
+  const role = await getRole(row.username);
   return {
     id: row.id,
     username: row.username,
     createdAt: row.createdAt.toISOString(),
-    isAdmin: isAdmin(row.username),
+    isAdmin: role !== null,
+    isSuperAdmin: role === 'superadmin',
     canManageChangelog: await canManageChangelog(row.username),
   };
 }

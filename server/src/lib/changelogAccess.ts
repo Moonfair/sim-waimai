@@ -15,5 +15,5 @@ export async function isChangelogEditor(username: string): Promise<boolean> {
 
 /** Full admins, plus anyone an admin has designated via changelog_editors. */
 export async function canManageChangelog(username: string): Promise<boolean> {
-  return isAdmin(username) || (await isChangelogEditor(username));
+  return (await isAdmin(username)) || (await isChangelogEditor(username));
 }

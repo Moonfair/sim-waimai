@@ -14,7 +14,7 @@ import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { orders, restaurants, reviews, users } from '../db/schema';
 import { __awaitReviews } from '../lib/moderation';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -28,7 +28,6 @@ let customerCookie = '';
 let ownerId = '';
 let customerId = '';
 
-let savedAdmins: string | undefined;
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
 
@@ -108,17 +107,15 @@ async function placeReview(rating: number, content: string): Promise<ReviewDto> 
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
   savedSecretId = process.env.TENCENT_MODERATION_SECRET_ID;
   savedSecretKey = process.env.TENCENT_MODERATION_SECRET_KEY;
   // 无凭证：新建的店铺/商品/评价都保持 pending，避免测试触网计费、也避免异步 AI 审核抢跑改状态。
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
 
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -128,8 +125,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
   await db.delete(reviews).where(eq(reviews.userId, customerId));

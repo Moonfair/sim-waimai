@@ -13,7 +13,7 @@ import { db, pool } from '../db/client';
 import { menuItems, restaurants, users } from '../db/schema';
 import { __awaitReviews } from '../lib/moderation';
 import { __setReviewer } from '../lib/moderationProvider';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -25,7 +25,6 @@ let ownerCookie = '';
 let randoCookie = '';
 let ownerId = '';
 
-let savedAdmins: string | undefined;
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
 
@@ -107,18 +106,16 @@ async function merchantShop(shopId: string): Promise<MerchantRestaurantDto> {
 }
 
 beforeAll(async () => {
-  // lib/admin.ts 与 lib/moderationProvider.ts 都在调用时惰性读 process.env，运行期设置即可生效。
-  savedAdmins = process.env.ADMIN_USERNAMES;
+  // lib/moderationProvider.ts 在调用时惰性读 process.env，运行期设置即可生效。
   savedSecretId = process.env.TENCENT_MODERATION_SECRET_ID;
   savedSecretKey = process.env.TENCENT_MODERATION_SECRET_KEY;
   // 无凭证：默认走人工队列，避免测试触网计费
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
 
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -127,8 +124,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
   await db.delete(restaurants).where(eq(restaurants.ownerId, ownerId)); // cascades menu_items

@@ -7,7 +7,7 @@ import { orders, reviews, users } from '../db/schema';
 import { __awaitReviews } from '../lib/moderation';
 import { __setReviewer } from '../lib/moderationProvider';
 import { applyRatingDelta } from '../lib/ratings';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -22,7 +22,6 @@ const RATING = 5;
 
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
-let savedAdmins: string | undefined;
 
 function req(path: string, init?: { method?: string; body?: unknown }) {
   return app.request(path, {
@@ -78,22 +77,18 @@ beforeAll(async () => {
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
 
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, adminCred.username].filter(Boolean).join(',');
-
   const res = await registerTestUser(app, cred);
   cookie = (res.headers.get('set-cookie') ?? '').split(';')[0];
   userId = ((await res.json()) as { id: string }).id;
   const adminRes = await registerTestUser(app, adminCred);
   adminCookie = (adminRes.headers.get('set-cookie') ?? '').split(';')[0];
   adminId = ((await adminRes.json()) as { id: string }).id;
+  await grantRole(adminCred.username, 'admin');
 });
 
 afterAll(async () => {
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   // undo the aggregate bumps (only approved reviews were counted) so reruns don't drift kfc's rating
   const mine = await db.select().from(reviews).where(eq(reviews.userId, userId));
   await db.transaction(async (tx) => {

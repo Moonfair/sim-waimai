@@ -12,7 +12,7 @@ import { db, pool } from '../db/client';
 import { menuItems, orders, restaurants, reviews, users } from '../db/schema';
 import { __awaitReviews } from '../lib/moderation';
 import { __setReviewer } from '../lib/moderationProvider';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -24,7 +24,6 @@ let ownerCookie = '';
 let customerCookie = '';
 let randoCookie = '';
 let adminCookie = '';
-let savedAdmins: string | undefined;
 let shopId = '';
 let orderId = '';
 let reviewId = '';
@@ -80,13 +79,11 @@ beforeAll(async () => {
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
 
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
-
   ownerCookie = (await register(owner)).cookie;
   customerCookie = (await register(customer)).cookie;
   randoCookie = (await register(rando)).cookie;
   adminCookie = (await register(admin)).cookie;
+  await grantRole(admin.username, 'admin');
 
   // 店主开店 + 加菜；新内容默认待审核，直接在 DB 里批准（同 merchant.test.ts 的做法）
   const shopRes = await req('/api/merchant/restaurants', ownerCookie, {
@@ -137,8 +134,6 @@ beforeAll(async () => {
 afterAll(async () => {
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   await db.delete(reviews).where(eq(reviews.restaurantId, shopId));
   await db.delete(orders).where(eq(orders.restaurantId, shopId));
   await db.delete(restaurants).where(eq(restaurants.id, shopId));

@@ -4,7 +4,7 @@ import type { MerchantRestaurantDto, SiteStatsDto, UserDto } from '@sim-waimai/s
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { orders, restaurants, users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -13,7 +13,6 @@ const owner = { username: `t_stats_o_${stamp}`, password: 'secret123' };
 let adminCookie = '';
 let ownerCookie = '';
 let ownerId = '';
-let savedAdmins: string | undefined;
 
 async function register(cred: { username: string; password: string }) {
   const res = await registerTestUser(app, cred);
@@ -80,11 +79,9 @@ function makeOrder(shop: MerchantRestaurantDto, totalFen: number, status: 'pendi
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -92,8 +89,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   await db.delete(orders).where(eq(orders.userId, ownerId));
   await db.delete(restaurants).where(eq(restaurants.ownerId, ownerId));
   await db.delete(users).where(inArray(users.username, [admin.username, owner.username]));

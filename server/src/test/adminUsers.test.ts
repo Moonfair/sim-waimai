@@ -14,7 +14,7 @@ import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { menuItems, orders, restaurants, reviews, users } from '../db/schema';
 import { __awaitReviews } from '../lib/moderation';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -28,7 +28,6 @@ let userACookie = '';
 let targetCookie = '';
 let targetId = '';
 
-let savedAdmins: string | undefined;
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
 
@@ -56,16 +55,14 @@ function adminReq(path: string, init?: { method?: string; body?: unknown }) {
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
   savedSecretId = process.env.TENCENT_MODERATION_SECRET_ID;
   savedSecretKey = process.env.TENCENT_MODERATION_SECRET_KEY;
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
 
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const u1 = await register(userA);
   userACookie = u1.cookie;
   await register(userB);
@@ -75,8 +72,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
   await db.delete(reviews).where(eq(reviews.userId, targetId));

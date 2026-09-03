@@ -11,7 +11,7 @@ import type {
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { menuItems, orders, restaurants, reviews, users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -24,7 +24,6 @@ let customerCookie = '';
 let ownerId = '';
 let customerId = '';
 
-let savedAdmins: string | undefined;
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
 
@@ -130,17 +129,15 @@ async function shopAggregate(shopId: string): Promise<{ ratingSum: number; ratin
 }
 
 beforeAll(async () => {
-  // 无凭证：默认走人工队列，避免测试触网计费；ADMIN_USERNAMES 运行期设置即可生效
-  savedAdmins = process.env.ADMIN_USERNAMES;
+  // 无凭证：默认走人工队列，避免测试触网计费
   savedSecretId = process.env.TENCENT_MODERATION_SECRET_ID;
   savedSecretKey = process.env.TENCENT_MODERATION_SECRET_KEY;
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
 
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -150,8 +147,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
   await db.delete(reviews).where(eq(reviews.userId, customerId));

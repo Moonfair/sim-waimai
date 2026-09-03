@@ -1,7 +1,7 @@
 import { getCookie } from 'hono/cookie';
 import { createMiddleware } from 'hono/factory';
 import type { Context } from 'hono';
-import { isAdmin } from '../lib/admin';
+import { isAdmin, isSuperAdmin } from '../lib/admin';
 import { canManageChangelog } from '../lib/changelogAccess';
 import { verifyToken, type AuthPayload } from '../lib/jwt';
 
@@ -36,13 +36,26 @@ export const requireAuth = createMiddleware<{ Variables: { user: AuthPayload } }
   },
 );
 
-/** Like requireAuth, but additionally 403s unless the username is in ADMIN_USERNAMES. */
+/** Like requireAuth, but additionally 403s unless the user's role is 'admin' or 'superadmin'. */
 export const requireAdmin = createMiddleware<{ Variables: { user: AuthPayload } }>(
   async (c, next) => {
     const token = extractToken(c);
     const payload = token ? await verifyToken(token) : null;
     if (!payload) return c.json({ error: '请先登录' }, 401);
-    if (!isAdmin(payload.username)) return c.json({ error: '无权访问' }, 403);
+    if (!(await isAdmin(payload.username))) return c.json({ error: '无权访问' }, 403);
+    c.set('user', payload);
+    await next();
+  },
+);
+
+/** Like requireAuth, but additionally 403s unless the user's role is 'superadmin' —
+ *  reserved for managing other admins' roles. */
+export const requireSuperAdmin = createMiddleware<{ Variables: { user: AuthPayload } }>(
+  async (c, next) => {
+    const token = extractToken(c);
+    const payload = token ? await verifyToken(token) : null;
+    if (!payload) return c.json({ error: '请先登录' }, 401);
+    if (!(await isSuperAdmin(payload.username))) return c.json({ error: '无权访问' }, 403);
     c.set('user', payload);
     await next();
   },

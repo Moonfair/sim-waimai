@@ -4,7 +4,7 @@ import type { BanUserResultDto, UserDto } from '@sim-waimai/shared';
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { bannedDevices, users } from '../db/schema';
-import { registerTestUser, testDeviceId } from './testHelpers';
+import { grantRole, registerTestUser, testDeviceId } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -13,8 +13,6 @@ const offender = { username: `t_dban_off_${stamp}`, password: 'secret123' };
 const sharedDeviceId = testDeviceId();
 let adminCookie = '';
 let offenderId = '';
-
-let savedAdmins: string | undefined;
 
 function req(path: string, cookie: string, init?: { method?: string; body?: unknown }) {
   return app.request(path, {
@@ -28,12 +26,9 @@ function req(path: string, cookie: string, init?: { method?: string; body?: unkn
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
-
   const adminRes = await registerTestUser(app, admin);
   adminCookie = (adminRes.headers.get('set-cookie') ?? '').split(';')[0];
-  expect(((await adminRes.json()) as UserDto).isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
 
   const offenderRes = await registerTestUser(app, { ...offender, deviceId: sharedDeviceId });
   expect(offenderRes.status).toBe(200);
@@ -41,8 +36,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   await db.delete(bannedDevices).where(eq(bannedDevices.deviceId, sharedDeviceId));
   await db.delete(users).where(inArray(users.username, [admin.username, offender.username]));
   await pool.end();

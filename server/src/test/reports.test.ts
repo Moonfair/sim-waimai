@@ -12,7 +12,7 @@ import type {
 import { createApp } from '../app';
 import { db, pool } from '../db/client';
 import { orders, reports, restaurants, reviews, users } from '../db/schema';
-import { registerTestUser } from './testHelpers';
+import { grantRole, registerTestUser } from './testHelpers';
 
 const app = createApp();
 const stamp = Date.now().toString(36);
@@ -25,7 +25,6 @@ let customerCookie = '';
 let ownerId = '';
 let customerId = '';
 
-let savedAdmins: string | undefined;
 let savedSecretId: string | undefined;
 let savedSecretKey: string | undefined;
 
@@ -133,16 +132,14 @@ async function shopAggregate(shopId: string): Promise<{ ratingSum: number; ratin
 }
 
 beforeAll(async () => {
-  savedAdmins = process.env.ADMIN_USERNAMES;
   savedSecretId = process.env.TENCENT_MODERATION_SECRET_ID;
   savedSecretKey = process.env.TENCENT_MODERATION_SECRET_KEY;
   delete process.env.TENCENT_MODERATION_SECRET_ID;
   delete process.env.TENCENT_MODERATION_SECRET_KEY;
-  process.env.ADMIN_USERNAMES = [savedAdmins, admin.username].filter(Boolean).join(',');
 
   const a = await register(admin);
   adminCookie = a.cookie;
-  expect(a.user.isAdmin).toBe(true);
+  await grantRole(admin.username, 'admin');
   const o = await register(owner);
   ownerCookie = o.cookie;
   ownerId = o.user.id;
@@ -152,8 +149,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  if (savedAdmins === undefined) delete process.env.ADMIN_USERNAMES;
-  else process.env.ADMIN_USERNAMES = savedAdmins;
   if (savedSecretId !== undefined) process.env.TENCENT_MODERATION_SECRET_ID = savedSecretId;
   if (savedSecretKey !== undefined) process.env.TENCENT_MODERATION_SECRET_KEY = savedSecretKey;
   await db.delete(reports).where(eq(reports.reporterId, customerId));
